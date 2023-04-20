@@ -12,6 +12,7 @@ public class User
     {
         FullName = fullName;
         UserName = userName;
+        
         Password = password;
         Card = card;
     }
