@@ -2,15 +2,14 @@ package entity;
 
 public class User {
   private Long userId;
-  private String firstName;
-  private String lastName;
+  private String fullName;
   private String userName;
   private String password;
   private DebitCard card;
 
-  public User(String firstName, String lastName, String userName, String password, DebitCard card) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+  public User(String fullName, String userName, String password, DebitCard card) {
+    this.fullName = fullName;
+
     this.userName = userName;
     this.password = password;
     this.card = card;
@@ -24,20 +23,12 @@ public class User {
     this.userId = userId;
   }
 
-  public String getFirstName() {
-    return firstName;
+  public String getFullName() {
+    return fullName;
   }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
   }
 
   public String getUserName() {
