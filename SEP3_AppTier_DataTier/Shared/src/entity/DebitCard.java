@@ -1,8 +1,5 @@
 package entity;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 public class DebitCard {
   private Long cardId;
   private Long cardNumber;
