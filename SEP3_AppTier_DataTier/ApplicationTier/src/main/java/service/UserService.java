@@ -9,6 +9,6 @@ public interface UserService {
   List<User> fetchUsers();
   User fetchUserById(Long id);
   User fetchUserByUsername(String username);
-  User updateUser(User user);
+  User updateUser(Long id, User user);
   void deleteUser(Long id);
 }
