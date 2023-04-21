@@ -1,4 +1,4 @@
-package applicationtier.service.card;
+package applicationtier.service.serviceInterfaces;
 
 import entity.DebitCard;
 

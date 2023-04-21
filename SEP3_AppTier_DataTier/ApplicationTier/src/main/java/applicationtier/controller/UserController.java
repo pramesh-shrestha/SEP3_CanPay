@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import applicationtier.service.user.IUserService;
+import applicationtier.service.serviceInterfaces.IUserService;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package controller;
+package applicationtier.controller;
 
 import entity.DebitCard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import applicationtier.service.card.ICardService;
+import applicationtier.service.serviceInterfaces.ICardService;
 
 @RestController
 public class CardController {
