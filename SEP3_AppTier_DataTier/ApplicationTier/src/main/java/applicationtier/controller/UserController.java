@@ -1,22 +1,21 @@
-package controller;
+package applicationtier.controller;
 
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.UserService;
+import applicationtier.service.IUserService;
 
-import java.io.Console;
 import java.util.List;
 
 @RestController
 public class UserController {
 
-    private final UserService userService;
+    private final IUserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(IUserService userService) {
         this.userService = userService;
     }
 
@@ -34,6 +33,7 @@ public class UserController {
     //get all users
     @GetMapping("/user")
     public ResponseEntity<List<User>> fetchUsers() {
+        System.out.println("here");
         try {
             return new ResponseEntity<>(userService.fetchUsers(), HttpStatus.OK);
         } catch (Exception e) {
