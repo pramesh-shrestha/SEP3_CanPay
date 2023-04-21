@@ -14,4 +14,34 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>3.0.5</version>
+            <scope>test</scope>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+    </build>
+
+
 </project>

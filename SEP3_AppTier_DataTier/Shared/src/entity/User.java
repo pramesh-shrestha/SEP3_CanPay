@@ -1,66 +1,60 @@
 package entity;
 
+
 public class User {
-  private Long userId;
-  private String firstName;
-  private String lastName;
-  private String userName;
-  private String password;
-  private DebitCard card;
+    private Long userId;
+    private String fullName;
+    private String userName;
+    private String password;
+    private DebitCard card;
 
-  public User(String firstName, String lastName, String userName, String password, DebitCard card) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.userName = userName;
-    this.password = password;
-    this.card = card;
-  }
+    public User(String fullName, String userName, String password, DebitCard card) {
+        this.fullName = fullName;
+        this.userName = userName;
+        this.password = password;
+        this.card = card;
+    }
 
-  public Long getUserId() {
-    return userId;
-  }
+    public User() {
+    }
 
-  public void setUserId(Long userId) {
-    this.userId = userId;
-  }
+    public Long getUserId() {
+        return userId;
+    }
 
-  public String getFirstName() {
-    return firstName;
-  }
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
+    public String getUserName() {
+        return userName;
+    }
 
-  public String getLastName() {
-    return lastName;
-  }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public String getUserName() {
-    return userName;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
+    public DebitCard getCard() {
+        return card;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public void setCard(DebitCard card) {
+        this.card = card;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public String getFullName() {
+        return fullName;
+    }
 
-  public DebitCard getCard() {
-    return card;
-  }
-
-  public void setCard(DebitCard card) {
-    this.card = card;
-  }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 }

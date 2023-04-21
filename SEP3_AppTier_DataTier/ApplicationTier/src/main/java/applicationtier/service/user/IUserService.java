@@ -1,4 +1,4 @@
-package applicationtier.service;
+package applicationtier.service.user;
 
 import entity.User;
 

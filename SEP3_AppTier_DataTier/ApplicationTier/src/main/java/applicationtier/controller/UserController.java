@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import applicationtier.service.IUserService;
+import applicationtier.service.user.IUserService;
 
 import java.util.List;
 
@@ -23,8 +23,10 @@ public class UserController {
     @PostMapping("/user/create")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         try {
-            System.out.println("here");
-            return new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
+            ResponseEntity<User> response = new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
+            System.out.println(response);
+            return response;
+
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
