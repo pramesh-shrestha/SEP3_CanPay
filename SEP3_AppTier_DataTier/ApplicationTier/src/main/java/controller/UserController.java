@@ -5,19 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.UserService;
+import service.IUserService;
 
-import java.io.Console;
 import java.util.List;
 
 @RestController
 public class UserController {
 
-    private final UserService userService;
+    private final IUserService IUserService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(IUserService IUserService) {
+        this.IUserService = IUserService;
     }
 
     //create user
@@ -25,7 +24,7 @@ public class UserController {
     public ResponseEntity<User> createUser(@RequestBody User user) {
         try {
             System.out.println("here");
-            return new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
+            return new ResponseEntity<>(IUserService.createUser(user), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -35,7 +34,7 @@ public class UserController {
     @GetMapping("/user")
     public ResponseEntity<List<User>> fetchUsers() {
         try {
-            return new ResponseEntity<>(userService.fetchUsers(), HttpStatus.OK);
+            return new ResponseEntity<>(IUserService.fetchUsers(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -45,7 +44,7 @@ public class UserController {
     @GetMapping("/user/{id}")
     public ResponseEntity<User> fetchUserById(@PathVariable("id") Long id) {
         try {
-            return new ResponseEntity<>(userService.fetchUserById(id), HttpStatus.OK);
+            return new ResponseEntity<>(IUserService.fetchUserById(id), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -55,7 +54,7 @@ public class UserController {
     @GetMapping("/user/{username}")
     public ResponseEntity<User> fetchUserByUsername(@PathVariable("username") String username) {
         try {
-            return new ResponseEntity<>(userService.fetchUserByUsername(username), HttpStatus.OK);
+            return new ResponseEntity<>(IUserService.fetchUserByUsername(username), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -65,7 +64,7 @@ public class UserController {
     @PutMapping("/user/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         try {
-            return new ResponseEntity<>(userService.updateUser(id, updatedUser), HttpStatus.OK);
+            return new ResponseEntity<>(IUserService.updateUser(id, updatedUser), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -75,7 +74,7 @@ public class UserController {
     @DeleteMapping("/user/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long id) {
         try {
-            userService.deleteUser(id);
+            IUserService.deleteUser(id);
             return new ResponseEntity<>("User has been deleted", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

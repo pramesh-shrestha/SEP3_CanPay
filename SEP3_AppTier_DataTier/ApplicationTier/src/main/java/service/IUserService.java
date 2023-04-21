@@ -4,7 +4,7 @@ import entity.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface IUserService {
   User createUser(User user);
   List<User> fetchUsers();
   User fetchUserById(Long id);
