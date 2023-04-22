@@ -7,7 +7,7 @@
 
 using grpc = global::Grpc.Core;
 
-namespace SEP3_Data_Tier {
+namespace SEP3_DataTier {
   /// <summary>
   /// The greeting service definition.
   /// </summary>
@@ -49,12 +49,12 @@ namespace SEP3_Data_Tier {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::SEP3_Data_Tier.HelloRequest> __Marshaller_greet_HelloRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_Data_Tier.HelloRequest.Parser));
+    static readonly grpc::Marshaller<global::SEP3_DataTier.HelloRequest> __Marshaller_greet_HelloRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.HelloRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::SEP3_Data_Tier.HelloReply> __Marshaller_greet_HelloReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_Data_Tier.HelloReply.Parser));
+    static readonly grpc::Marshaller<global::SEP3_DataTier.HelloReply> __Marshaller_greet_HelloReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.HelloReply.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::SEP3_Data_Tier.HelloRequest, global::SEP3_Data_Tier.HelloReply> __Method_SayHello = new grpc::Method<global::SEP3_Data_Tier.HelloRequest, global::SEP3_Data_Tier.HelloReply>(
+    static readonly grpc::Method<global::SEP3_DataTier.HelloRequest, global::SEP3_DataTier.HelloReply> __Method_SayHello = new grpc::Method<global::SEP3_DataTier.HelloRequest, global::SEP3_DataTier.HelloReply>(
         grpc::MethodType.Unary,
         __ServiceName,
         "SayHello",
@@ -64,7 +64,7 @@ namespace SEP3_Data_Tier {
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::SEP3_Data_Tier.GreetReflection.Descriptor.Services[0]; }
+      get { return global::SEP3_DataTier.GreetReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of Greeter</summary>
@@ -78,7 +78,7 @@ namespace SEP3_Data_Tier {
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::SEP3_Data_Tier.HelloReply> SayHello(global::SEP3_Data_Tier.HelloRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.HelloReply> SayHello(global::SEP3_DataTier.HelloRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -101,7 +101,7 @@ namespace SEP3_Data_Tier {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, GreeterBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_SayHello, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_Data_Tier.HelloRequest, global::SEP3_Data_Tier.HelloReply>(serviceImpl.SayHello));
+      serviceBinder.AddMethod(__Method_SayHello, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.HelloRequest, global::SEP3_DataTier.HelloReply>(serviceImpl.SayHello));
     }
 
   }

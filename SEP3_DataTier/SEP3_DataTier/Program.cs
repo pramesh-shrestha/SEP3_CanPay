@@ -1,4 +1,4 @@
-using SEP3_Data_Tier.Services;
+using SEP3_DataTier.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

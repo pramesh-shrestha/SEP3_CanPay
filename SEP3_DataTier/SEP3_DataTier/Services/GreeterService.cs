@@ -1,7 +1,7 @@
 using Grpc.Core;
-using SEP3_Data_Tier;
+using SEP3_DataTier;
 
-namespace SEP3_Data_Tier.Services;
+namespace SEP3_DataTier.Services;
 
 public class GreeterService : Greeter.GreeterBase
 {
