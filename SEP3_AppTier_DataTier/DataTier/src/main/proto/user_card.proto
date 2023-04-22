@@ -1,4 +1,3 @@
-
 syntax = "proto3";
 
 option java_multiple_files = true;
@@ -6,13 +5,9 @@ option java_package = "datatier.protobuf";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
+import "debit_card.proto";
 
-message DebitCard {
-  int64 cardId = 1;
-  int64 cardNumber = 2;
-  string expiryDate = 3;
-  int32 cvv = 4;
-}
+
 
 message User{
   int64 userId = 1;
@@ -20,6 +15,10 @@ message User{
   string userName = 3;
   string password = 4;
   DebitCard card = 5;
+}
+
+message UserList{
+  repeated User user = 1;
 }
 
 message UpdateUserWithId {
@@ -35,7 +34,7 @@ message UpdateCardWithId {
 
 service UserService {
   rpc createUser (User) returns (User);
-  rpc fetchAllUsers (google.protobuf.Empty) returns (stream User);
+  rpc fetchAllUsers (google.protobuf.Empty) returns (User);
   rpc fetchUserById(google.protobuf.Int64Value) returns (User);
   rpc deleteUserById(google.protobuf.Int64Value) returns (google.protobuf.Empty);
   rpc updateUser(UpdateUserWithId) returns (User);
