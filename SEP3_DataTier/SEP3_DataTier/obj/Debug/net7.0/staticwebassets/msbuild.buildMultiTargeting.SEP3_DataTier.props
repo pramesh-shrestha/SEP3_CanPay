@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SEP3_DataTier.props" />
+</Project>
