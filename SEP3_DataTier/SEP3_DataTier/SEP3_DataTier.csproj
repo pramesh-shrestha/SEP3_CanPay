@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Entity\" />
+      <ProjectReference Include="..\EFCDataAccess\EFCDataAccess.csproj" />
     </ItemGroup>
 
 </Project>
