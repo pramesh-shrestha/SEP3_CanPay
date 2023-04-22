@@ -12,8 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddGrpc();
 builder.Services.AddScoped<IUserDao, UserDaoImpl>();
-builder.Services.AddDbContext<CanPayDbAccess>(
-    o => o.UseNpgsql(builder.Configuration.GetConnectionString("Sep3Db")));
+builder.Services.AddDbContext<CanPayDbAccess>();
 
 var app = builder.Build();
 
