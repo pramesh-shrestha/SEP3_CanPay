@@ -24,14 +24,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
             UserEntity toAddUser = UserEntityMapper.FromProtoToEntity(request);
             UserEntity addedUser = await userDao.CreateUserAsync(toAddUser);
 
-            UserProtoObj userProtoObj = new UserProtoObj
-            {
-                UserId = addedUser.Id,
-                FullName = addedUser.Fullname,
-                Password = addedUser.Password,
-                UserName = addedUser.Username,
-                Card = DebitCardMapper.FromEntityToProto(addedUser.Card)
-            };
+            UserProtoObj userProtoObj = UserEntityMapper.FromEntityToProto(addedUser);
             return userProtoObj;
         }
         catch (Exception e)
@@ -101,14 +94,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
             UserEntity userUpdate = UserEntityMapper.FromProtoToEntity(request.ToUpdateUser);
             UserEntity updatedUser = await userDao.UpdateUserAsync(userUpdate);
 
-            UserProtoObj userProtoObj = new UserProtoObj
-            {
-                UserId = updatedUser.Id,
-                FullName = updatedUser.Fullname,
-                Password = updatedUser.Password,
-                UserName = updatedUser.Username,
-                Card = DebitCardMapper.FromEntityToProto(updatedUser.Card)
-            };
+            UserProtoObj userProtoObj = UserEntityMapper.FromEntityToProto(updatedUser);
             return userProtoObj;
         }
         catch (Exception e)
