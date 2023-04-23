@@ -6,13 +6,17 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EFCDataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class User_CardEntityAdded : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "CanPay");
+
             migrationBuilder.CreateTable(
                 name: "Cards",
+                schema: "CanPay",
                 columns: table => new
                 {
                     CardId = table.Column<long>(type: "bigint", nullable: false)
@@ -28,6 +32,7 @@ namespace EFCDataAccess.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Users",
+                schema: "CanPay",
                 columns: table => new
                 {
                     Username = table.Column<string>(type: "text", nullable: false),
@@ -43,6 +48,7 @@ namespace EFCDataAccess.Migrations
                     table.ForeignKey(
                         name: "FK_Users_Cards_CardId",
                         column: x => x.CardId,
+                        principalSchema: "CanPay",
                         principalTable: "Cards",
                         principalColumn: "CardId",
                         onDelete: ReferentialAction.Cascade);
@@ -50,6 +56,7 @@ namespace EFCDataAccess.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_CardId",
+                schema: "CanPay",
                 table: "Users",
                 column: "CardId");
         }
@@ -58,10 +65,12 @@ namespace EFCDataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Users",
+                schema: "CanPay");
 
             migrationBuilder.DropTable(
-                name: "Cards");
+                name: "Cards",
+                schema: "CanPay");
         }
     }
 }

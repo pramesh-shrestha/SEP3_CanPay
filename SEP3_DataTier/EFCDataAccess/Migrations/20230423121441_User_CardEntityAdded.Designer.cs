@@ -11,20 +11,21 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EFCDataAccess.Migrations
 {
     [DbContext(typeof(CanPayDbAccess))]
-    [Migration("20230422205622_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230423121441_User_CardEntityAdded")]
+    partial class User_CardEntityAdded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("CanPay")
                 .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Entity.Model.DebitCard", b =>
+            modelBuilder.Entity("Entity.Model.DebitCardEntity", b =>
                 {
                     b.Property<long>("CardId")
                         .ValueGeneratedOnAdd()
@@ -45,10 +46,10 @@ namespace EFCDataAccess.Migrations
 
                     b.HasKey("CardId");
 
-                    b.ToTable("Cards");
+                    b.ToTable("Cards", "CanPay");
                 });
 
-            modelBuilder.Entity("Entity.Model.User", b =>
+            modelBuilder.Entity("Entity.Model.UserEntity", b =>
                 {
                     b.Property<string>("Username")
                         .HasColumnType("text");
@@ -74,12 +75,12 @@ namespace EFCDataAccess.Migrations
 
                     b.HasIndex("CardId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", "CanPay");
                 });
 
-            modelBuilder.Entity("Entity.Model.User", b =>
+            modelBuilder.Entity("Entity.Model.UserEntity", b =>
                 {
-                    b.HasOne("Entity.Model.DebitCard", "Card")
+                    b.HasOne("Entity.Model.DebitCardEntity", "Card")
                         .WithMany()
                         .HasForeignKey("CardId")
                         .OnDelete(DeleteBehavior.Cascade)
