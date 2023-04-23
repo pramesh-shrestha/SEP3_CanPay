@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Model; 
 
-public class User {
+public class UserEntity {
     [Key]
     public string Username { get; set; }
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -13,5 +13,5 @@ public class User {
     public string Password { get; set; }
     [Required]
     public string Fullname { get; set; }
-    public DebitCard Card { get; set; }
+    public DebitCardEntity Card { get; set; }
 }

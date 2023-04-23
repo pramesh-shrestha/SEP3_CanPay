@@ -1,4 +1,4 @@
-syntax = "proto3";
+ syntax = "proto3";
 
 option csharp_namespace = "SEP3_DataTier";
 
@@ -12,10 +12,10 @@ message DebitCard {
 }
 
 service DebitCardProtoService {
-  rpc GetDebitCard(google.protobuf.Int64Value) returns (DebitCard) {}
-  rpc CreateDebitCard(DebitCard) returns (google.protobuf.BoolValue) {}
-  rpc UpdateDebitCard(UpdateCard) returns (DebitCard) {}
-  rpc DeleteDebitCard(google.protobuf.Int64Value) returns (google.protobuf.BoolValue) {}
+  rpc CreateCard(DebitCard) returns (google.protobuf.BoolValue) {}
+  rpc FetchCardByUsername(google.protobuf.Int64Value) returns (DebitCard) {}
+  rpc UpdateCardDetails(UpdateCard) returns (DebitCard) {}
+  rpc DeleteCard(google.protobuf.Int64Value) returns (google.protobuf.BoolValue) {}
 }
 
 message UpdateCard {

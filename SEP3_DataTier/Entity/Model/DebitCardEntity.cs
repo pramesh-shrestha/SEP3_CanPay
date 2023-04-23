@@ -2,7 +2,7 @@
 
 namespace Entity.Model; 
 
-public class DebitCard {
+public class DebitCardEntity {
     [Key]
     public long CardId { get; set; }
     [Required]

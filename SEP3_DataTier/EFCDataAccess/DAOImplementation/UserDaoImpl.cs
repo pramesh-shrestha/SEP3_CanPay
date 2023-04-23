@@ -15,9 +15,9 @@ public class UserDaoImpl : IUserDao {
     }
 
     //create user
-    public async Task<User> CreateUserAsync(User user) {
+    public async Task<UserEntity> CreateUserAsync(UserEntity userEntity) {
         try {
-            EntityEntry<User> userToAdd = await context.Users.AddAsync(user);
+            EntityEntry<UserEntity> userToAdd = await context.Users.AddAsync(userEntity);
             await context.SaveChangesAsync();
             return userToAdd.Entity;
         }
@@ -27,9 +27,9 @@ public class UserDaoImpl : IUserDao {
     }
 
     //get user by username
-    public async Task<User> FetchUserByUsernameAsync(string username) {
+    public async Task<UserEntity> FetchUserByUsernameAsync(string username) {
         //username is a primary key so we can use FindAsync
-        User? user = await context.Users.FindAsync(username);
+        UserEntity? user = await context.Users.FindAsync(username);
         if (user == null) {
             throw new Exception("Username does not exists");
         }
@@ -38,8 +38,8 @@ public class UserDaoImpl : IUserDao {
     }
 
     //get user by id
-    public async Task<User> FetchUserByIdAsync(long id) {
-        User? user = await context.Users.FirstOrDefaultAsync(u => u.Id == id);
+    public async Task<UserEntity> FetchUserByIdAsync(long id) {
+        UserEntity? user = await context.Users.FirstOrDefaultAsync(u => u.Id == id);
         if (user == null) {
             throw new Exception("Username does not exists");
         }
@@ -47,9 +47,9 @@ public class UserDaoImpl : IUserDao {
     }
 
     //get all users
-    public async Task<ICollection<User>> FetchUsersAsync() {
+    public async Task<ICollection<UserEntity>> FetchUsersAsync() {
         if (context.Users.Any()) {
-            ICollection<User> users = await context.Users.ToListAsync();
+            ICollection<UserEntity> users = await context.Users.ToListAsync();
             return users;
         }
 
@@ -57,19 +57,19 @@ public class UserDaoImpl : IUserDao {
     }
 
     //update user
-    public async Task<User> UpdateUserAsync(User user) {
-        context.Users.Update(user);
+    public async Task<UserEntity> UpdateUserAsync(UserEntity userEntity) {
+        context.Users.Update(userEntity);
         await context.SaveChangesAsync();
-        return user;
+        return userEntity;
     }
 
     //delete user
     public async Task DeleteUserAsync(long id) {
-        User existingUser = await FetchUserByIdAsync(id);
-        if (existingUser == null) {
+        UserEntity existingUserEntity = await FetchUserByIdAsync(id);
+        if (existingUserEntity == null) {
             throw new Exception($"Username with id {id} does not exists");
         }
-        context.Users.Remove(existingUser);
+        context.Users.Remove(existingUserEntity);
         await context.SaveChangesAsync();
     }
     

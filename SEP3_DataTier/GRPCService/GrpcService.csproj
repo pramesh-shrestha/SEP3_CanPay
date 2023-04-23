@@ -8,13 +8,17 @@
     
 
     <ItemGroup>
-        <Protobuf Include="Protos\greet.proto" GrpcServices="Server"/>
-        <Protobuf Include="Protos\user.proto" OutputDir="GeneratedFiles" Namespace="GrpcService" GrpcServices="Server"/>
-        <Protobuf Include="Protos\debitcard.proto" OutputDir="GeneratedFiles" Namespace="GrpcService" GrpcServices="Server"/>
+        <Protobuf Include="Protos\user.proto" OutputDir="GeneratedFiles" Namespace="GrpcService" GrpcServices="Server" />
+        <Protobuf Include="Protos\debitcard.proto" OutputDir="GeneratedFiles" Namespace="GrpcService" GrpcServices="Server" />
     </ItemGroup>
     
     <ItemGroup>
-        <PackageReference Include="Grpc.AspNetCore" Version="2.49.0"/>
+        <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\EFCDataAccess\EFCDataAccess.csproj" />
+      <ProjectReference Include="..\Entity\Entity.csproj" />
     </ItemGroup>
 
 </Project>

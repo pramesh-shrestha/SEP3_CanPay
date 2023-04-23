@@ -25,37 +25,44 @@ namespace SEP3_DataTier {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChFQcm90b3MvdXNlci5wcm90bxoeZ29vZ2xlL3Byb3RvYnVmL3dyYXBwZXJz",
-            "LnByb3RvGhZQcm90b3MvZGViaXRjYXJkLnByb3RvImkKBFVzZXISDwoHdXNl",
-            "cl9pZBgBIAEoAxIRCglmdWxsX25hbWUYAiABKAkSEQoJdXNlcl9uYW1lGAMg",
-            "ASgJEhAKCHBhc3N3b3JkGAQgASgJEhgKBGNhcmQYBSABKAsyCi5EZWJpdENh",
-            "cmQiIQoRVXBkYXRlVXNlclJlcXVlc3QSDAoEbmFtZRgBIAEoCTLqAQoQVXNl",
-            "clByb3RvU2VydmljZRJECgdHZXRVc2VyEhsuZ29vZ2xlLnByb3RvYnVmLklu",
-            "dDY0VmFsdWUaGi5nb29nbGUucHJvdG9idWYuQm9vbFZhbHVlIgASHAoKQ3Jl",
-            "YXRlVXNlchIFLlVzZXIaBS5Vc2VyIgASKQoKVXBkYXRlVXNlchISLlVwZGF0",
-            "ZVVzZXJSZXF1ZXN0GgUuVXNlciIAEkcKCkRlbGV0ZVVzZXISGy5nb29nbGUu",
-            "cHJvdG9idWYuSW50NjRWYWx1ZRoaLmdvb2dsZS5wcm90b2J1Zi5Cb29sVmFs",
-            "dWUiAEIQqgINU0VQM19EYXRhVGllcmIGcHJvdG8z"));
+            "LnByb3RvGhZQcm90b3MvZGViaXRjYXJkLnByb3RvGhtnb29nbGUvcHJvdG9i",
+            "dWYvZW1wdHkucHJvdG8icQoMVXNlclByb3RvT2JqEg8KB3VzZXJfaWQYASAB",
+            "KAMSEQoJZnVsbF9uYW1lGAIgASgJEhEKCXVzZXJfbmFtZRgDIAEoCRIQCghw",
+            "YXNzd29yZBgEIAEoCRIYCgRjYXJkGAUgASgLMgouRGViaXRDYXJkIkoKEVVw",
+            "ZGF0ZVVzZXJSZXF1ZXN0EhAKCHVzZXJuYW1lGAEgASgJEiMKDHRvVXBkYXRl",
+            "VXNlchgCIAEoCzINLlVzZXJQcm90b09iaiIzChBVc2VyTGlzdFJlc3BvbnNl",
+            "Eh8KCGFsbFVzZXJzGAEgAygLMg0uVXNlclByb3RvT2JqMv4CChBVc2VyUHJv",
+            "dG9TZXJ2aWNlEiwKCkNyZWF0ZVVzZXISDS5Vc2VyUHJvdG9PYmoaDS5Vc2Vy",
+            "UHJvdG9PYmoiABI7CgxGZXRjaEFsbFVzZXISFi5nb29nbGUucHJvdG9idWYu",
+            "RW1wdHkaES5Vc2VyTGlzdFJlc3BvbnNlIgASRAoTRmV0Y2hVc2VyQnlVc2Vy",
+            "bmFtZRIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRoNLlVzZXJQcm90",
+            "b09iaiIAEj0KDUZldGNoVXNlckJ5SWQSGy5nb29nbGUucHJvdG9idWYuSW50",
+            "MzJWYWx1ZRoNLlVzZXJQcm90b09iaiIAEjEKClVwZGF0ZVVzZXISEi5VcGRh",
+            "dGVVc2VyUmVxdWVzdBoNLlVzZXJQcm90b09iaiIAEkcKCkRlbGV0ZVVzZXIS",
+            "Gy5nb29nbGUucHJvdG9idWYuSW50NjRWYWx1ZRoaLmdvb2dsZS5wcm90b2J1",
+            "Zi5Cb29sVmFsdWUiAEIQqgINU0VQM19EYXRhVGllcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::SEP3_DataTier.DebitcardReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::SEP3_DataTier.DebitcardReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.User), global::SEP3_DataTier.User.Parser, new[]{ "UserId", "FullName", "UserName", "Password", "Card" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.UpdateUserRequest), global::SEP3_DataTier.UpdateUserRequest.Parser, new[]{ "Name" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.UserProtoObj), global::SEP3_DataTier.UserProtoObj.Parser, new[]{ "UserId", "FullName", "UserName", "Password", "Card" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.UpdateUserRequest), global::SEP3_DataTier.UpdateUserRequest.Parser, new[]{ "Username", "ToUpdateUser" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.UserListResponse), global::SEP3_DataTier.UserListResponse.Parser, new[]{ "AllUsers" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class User : pb::IMessage<User>
+  public sealed partial class UserProtoObj : pb::IMessage<UserProtoObj>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<User> _parser = new pb::MessageParser<User>(() => new User());
+    private static readonly pb::MessageParser<UserProtoObj> _parser = new pb::MessageParser<UserProtoObj>(() => new UserProtoObj());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<User> Parser { get { return _parser; } }
+    public static pb::MessageParser<UserProtoObj> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -71,7 +78,7 @@ namespace SEP3_DataTier {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public User() {
+    public UserProtoObj() {
       OnConstruction();
     }
 
@@ -79,7 +86,7 @@ namespace SEP3_DataTier {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public User(User other) : this() {
+    public UserProtoObj(UserProtoObj other) : this() {
       userId_ = other.userId_;
       fullName_ = other.fullName_;
       userName_ = other.userName_;
@@ -90,8 +97,8 @@ namespace SEP3_DataTier {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public User Clone() {
-      return new User(this);
+    public UserProtoObj Clone() {
+      return new UserProtoObj(this);
     }
 
     /// <summary>Field number for the "user_id" field.</summary>
@@ -157,12 +164,12 @@ namespace SEP3_DataTier {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as User);
+      return Equals(other as UserProtoObj);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(User other) {
+    public bool Equals(UserProtoObj other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -287,7 +294,7 @@ namespace SEP3_DataTier {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(User other) {
+    public void MergeFrom(UserProtoObj other) {
       if (other == null) {
         return;
       }
@@ -426,7 +433,8 @@ namespace SEP3_DataTier {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public UpdateUserRequest(UpdateUserRequest other) : this() {
-      name_ = other.name_;
+      username_ = other.username_;
+      toUpdateUser_ = other.toUpdateUser_ != null ? other.toUpdateUser_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -436,15 +444,27 @@ namespace SEP3_DataTier {
       return new UpdateUserRequest(this);
     }
 
-    /// <summary>Field number for the "name" field.</summary>
-    public const int NameFieldNumber = 1;
-    private string name_ = "";
+    /// <summary>Field number for the "username" field.</summary>
+    public const int UsernameFieldNumber = 1;
+    private string username_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Name {
-      get { return name_; }
+    public string Username {
+      get { return username_; }
       set {
-        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        username_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "toUpdateUser" field.</summary>
+    public const int ToUpdateUserFieldNumber = 2;
+    private global::SEP3_DataTier.UserProtoObj toUpdateUser_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::SEP3_DataTier.UserProtoObj ToUpdateUser {
+      get { return toUpdateUser_; }
+      set {
+        toUpdateUser_ = value;
       }
     }
 
@@ -463,7 +483,8 @@ namespace SEP3_DataTier {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Name != other.Name) return false;
+      if (Username != other.Username) return false;
+      if (!object.Equals(ToUpdateUser, other.ToUpdateUser)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -471,7 +492,8 @@ namespace SEP3_DataTier {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Username.Length != 0) hash ^= Username.GetHashCode();
+      if (toUpdateUser_ != null) hash ^= ToUpdateUser.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -490,9 +512,13 @@ namespace SEP3_DataTier {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Name.Length != 0) {
+      if (Username.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(Name);
+        output.WriteString(Username);
+      }
+      if (toUpdateUser_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(ToUpdateUser);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -504,9 +530,13 @@ namespace SEP3_DataTier {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Name.Length != 0) {
+      if (Username.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(Name);
+        output.WriteString(Username);
+      }
+      if (toUpdateUser_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(ToUpdateUser);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -518,8 +548,11 @@ namespace SEP3_DataTier {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      if (Username.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Username);
+      }
+      if (toUpdateUser_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ToUpdateUser);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -533,8 +566,14 @@ namespace SEP3_DataTier {
       if (other == null) {
         return;
       }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
+      if (other.Username.Length != 0) {
+        Username = other.Username;
+      }
+      if (other.toUpdateUser_ != null) {
+        if (toUpdateUser_ == null) {
+          ToUpdateUser = new global::SEP3_DataTier.UserProtoObj();
+        }
+        ToUpdateUser.MergeFrom(other.ToUpdateUser);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -552,7 +591,14 @@ namespace SEP3_DataTier {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            Name = input.ReadString();
+            Username = input.ReadString();
+            break;
+          }
+          case 18: {
+            if (toUpdateUser_ == null) {
+              ToUpdateUser = new global::SEP3_DataTier.UserProtoObj();
+            }
+            input.ReadMessage(ToUpdateUser);
             break;
           }
         }
@@ -571,7 +617,192 @@ namespace SEP3_DataTier {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            Name = input.ReadString();
+            Username = input.ReadString();
+            break;
+          }
+          case 18: {
+            if (toUpdateUser_ == null) {
+              ToUpdateUser = new global::SEP3_DataTier.UserProtoObj();
+            }
+            input.ReadMessage(ToUpdateUser);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class UserListResponse : pb::IMessage<UserListResponse>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<UserListResponse> _parser = new pb::MessageParser<UserListResponse>(() => new UserListResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<UserListResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::SEP3_DataTier.UserReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public UserListResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public UserListResponse(UserListResponse other) : this() {
+      allUsers_ = other.allUsers_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public UserListResponse Clone() {
+      return new UserListResponse(this);
+    }
+
+    /// <summary>Field number for the "allUsers" field.</summary>
+    public const int AllUsersFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::SEP3_DataTier.UserProtoObj> _repeated_allUsers_codec
+        = pb::FieldCodec.ForMessage(10, global::SEP3_DataTier.UserProtoObj.Parser);
+    private readonly pbc::RepeatedField<global::SEP3_DataTier.UserProtoObj> allUsers_ = new pbc::RepeatedField<global::SEP3_DataTier.UserProtoObj>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::SEP3_DataTier.UserProtoObj> AllUsers {
+      get { return allUsers_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as UserListResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(UserListResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!allUsers_.Equals(other.allUsers_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= allUsers_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      allUsers_.WriteTo(output, _repeated_allUsers_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      allUsers_.WriteTo(ref output, _repeated_allUsers_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      size += allUsers_.CalculateSize(_repeated_allUsers_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(UserListResponse other) {
+      if (other == null) {
+        return;
+      }
+      allUsers_.Add(other.allUsers_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            allUsers_.AddEntriesFrom(input, _repeated_allUsers_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            allUsers_.AddEntriesFrom(ref input, _repeated_allUsers_codec);
             break;
           }
         }

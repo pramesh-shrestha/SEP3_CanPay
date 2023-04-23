@@ -4,8 +4,10 @@ option csharp_namespace = "SEP3_DataTier";
 
 import "google/protobuf/wrappers.proto";
 import "Protos/debitcard.proto";
+import "google/protobuf/empty.proto";
 
-message User {
+
+message UserProtoObj {
   int64 user_id = 1;
   string full_name = 2;
   string user_name = 3;
@@ -14,12 +16,19 @@ message User {
 }
 
 service UserProtoService {
-  rpc GetUser(google.protobuf.Int64Value) returns (google.protobuf.BoolValue) {}
-  rpc CreateUser(User) returns (User) {}
-  rpc UpdateUser(UpdateUserRequest) returns (User) {}
+  rpc CreateUser(UserProtoObj) returns (UserProtoObj) {}
+  rpc FetchAllUser(google.protobuf.Empty) returns (UserListResponse) {}
+  rpc FetchUserByUsername(google.protobuf.StringValue) returns (UserProtoObj) {}
+  rpc FetchUserById(google.protobuf.Int32Value) returns (UserProtoObj) {}
+  rpc UpdateUser(UpdateUserRequest) returns (UserProtoObj) {}
   rpc DeleteUser(google.protobuf.Int64Value) returns (google.protobuf.BoolValue) {}
 }
 
 message UpdateUserRequest {
-  string name = 1;
+  string username = 1;
+  UserProtoObj toUpdateUser = 2;
+}
+
+message UserListResponse {
+  repeated UserProtoObj allUsers = 1;
 }

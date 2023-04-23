@@ -46,37 +46,61 @@ namespace SEP3_DataTier {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::SEP3_DataTier.UserProtoObj> __Marshaller_UserProtoObj = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.UserProtoObj.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Empty> __Marshaller_google_protobuf_Empty = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Empty.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::SEP3_DataTier.UserListResponse> __Marshaller_UserListResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.UserListResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.StringValue> __Marshaller_google_protobuf_StringValue = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.StringValue.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Int32Value> __Marshaller_google_protobuf_Int32Value = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Int32Value.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::SEP3_DataTier.UpdateUserRequest> __Marshaller_UpdateUserRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.UpdateUserRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Int64Value> __Marshaller_google_protobuf_Int64Value = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Int64Value.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.BoolValue> __Marshaller_google_protobuf_BoolValue = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.BoolValue.Parser));
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::SEP3_DataTier.User> __Marshaller_User = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.User.Parser));
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::SEP3_DataTier.UpdateUserRequest> __Marshaller_UpdateUserRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.UpdateUserRequest.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Int64Value, global::Google.Protobuf.WellKnownTypes.BoolValue> __Method_GetUser = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Int64Value, global::Google.Protobuf.WellKnownTypes.BoolValue>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "GetUser",
-        __Marshaller_google_protobuf_Int64Value,
-        __Marshaller_google_protobuf_BoolValue);
-
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::SEP3_DataTier.User, global::SEP3_DataTier.User> __Method_CreateUser = new grpc::Method<global::SEP3_DataTier.User, global::SEP3_DataTier.User>(
+    static readonly grpc::Method<global::SEP3_DataTier.UserProtoObj, global::SEP3_DataTier.UserProtoObj> __Method_CreateUser = new grpc::Method<global::SEP3_DataTier.UserProtoObj, global::SEP3_DataTier.UserProtoObj>(
         grpc::MethodType.Unary,
         __ServiceName,
         "CreateUser",
-        __Marshaller_User,
-        __Marshaller_User);
+        __Marshaller_UserProtoObj,
+        __Marshaller_UserProtoObj);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::SEP3_DataTier.UpdateUserRequest, global::SEP3_DataTier.User> __Method_UpdateUser = new grpc::Method<global::SEP3_DataTier.UpdateUserRequest, global::SEP3_DataTier.User>(
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::SEP3_DataTier.UserListResponse> __Method_FetchAllUser = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::SEP3_DataTier.UserListResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "FetchAllUser",
+        __Marshaller_google_protobuf_Empty,
+        __Marshaller_UserListResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.StringValue, global::SEP3_DataTier.UserProtoObj> __Method_FetchUserByUsername = new grpc::Method<global::Google.Protobuf.WellKnownTypes.StringValue, global::SEP3_DataTier.UserProtoObj>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "FetchUserByUsername",
+        __Marshaller_google_protobuf_StringValue,
+        __Marshaller_UserProtoObj);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Int32Value, global::SEP3_DataTier.UserProtoObj> __Method_FetchUserById = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Int32Value, global::SEP3_DataTier.UserProtoObj>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "FetchUserById",
+        __Marshaller_google_protobuf_Int32Value,
+        __Marshaller_UserProtoObj);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::SEP3_DataTier.UpdateUserRequest, global::SEP3_DataTier.UserProtoObj> __Method_UpdateUser = new grpc::Method<global::SEP3_DataTier.UpdateUserRequest, global::SEP3_DataTier.UserProtoObj>(
         grpc::MethodType.Unary,
         __ServiceName,
         "UpdateUser",
         __Marshaller_UpdateUserRequest,
-        __Marshaller_User);
+        __Marshaller_UserProtoObj);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Int64Value, global::Google.Protobuf.WellKnownTypes.BoolValue> __Method_DeleteUser = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Int64Value, global::Google.Protobuf.WellKnownTypes.BoolValue>(
@@ -97,19 +121,31 @@ namespace SEP3_DataTier {
     public abstract partial class UserProtoServiceBase
     {
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.BoolValue> GetUser(global::Google.Protobuf.WellKnownTypes.Int64Value request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.UserProtoObj> CreateUser(global::SEP3_DataTier.UserProtoObj request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.User> CreateUser(global::SEP3_DataTier.User request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.UserListResponse> FetchAllUser(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.User> UpdateUser(global::SEP3_DataTier.UpdateUserRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.UserProtoObj> FetchUserByUsername(global::Google.Protobuf.WellKnownTypes.StringValue request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.UserProtoObj> FetchUserById(global::Google.Protobuf.WellKnownTypes.Int32Value request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.UserProtoObj> UpdateUser(global::SEP3_DataTier.UpdateUserRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -128,8 +164,10 @@ namespace SEP3_DataTier {
     public static grpc::ServerServiceDefinition BindService(UserProtoServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_GetUser, serviceImpl.GetUser)
           .AddMethod(__Method_CreateUser, serviceImpl.CreateUser)
+          .AddMethod(__Method_FetchAllUser, serviceImpl.FetchAllUser)
+          .AddMethod(__Method_FetchUserByUsername, serviceImpl.FetchUserByUsername)
+          .AddMethod(__Method_FetchUserById, serviceImpl.FetchUserById)
           .AddMethod(__Method_UpdateUser, serviceImpl.UpdateUser)
           .AddMethod(__Method_DeleteUser, serviceImpl.DeleteUser).Build();
     }
@@ -141,9 +179,11 @@ namespace SEP3_DataTier {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, UserProtoServiceBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_GetUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Int64Value, global::Google.Protobuf.WellKnownTypes.BoolValue>(serviceImpl.GetUser));
-      serviceBinder.AddMethod(__Method_CreateUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.User, global::SEP3_DataTier.User>(serviceImpl.CreateUser));
-      serviceBinder.AddMethod(__Method_UpdateUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.UpdateUserRequest, global::SEP3_DataTier.User>(serviceImpl.UpdateUser));
+      serviceBinder.AddMethod(__Method_CreateUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.UserProtoObj, global::SEP3_DataTier.UserProtoObj>(serviceImpl.CreateUser));
+      serviceBinder.AddMethod(__Method_FetchAllUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Empty, global::SEP3_DataTier.UserListResponse>(serviceImpl.FetchAllUser));
+      serviceBinder.AddMethod(__Method_FetchUserByUsername, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.StringValue, global::SEP3_DataTier.UserProtoObj>(serviceImpl.FetchUserByUsername));
+      serviceBinder.AddMethod(__Method_FetchUserById, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Int32Value, global::SEP3_DataTier.UserProtoObj>(serviceImpl.FetchUserById));
+      serviceBinder.AddMethod(__Method_UpdateUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.UpdateUserRequest, global::SEP3_DataTier.UserProtoObj>(serviceImpl.UpdateUser));
       serviceBinder.AddMethod(__Method_DeleteUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Int64Value, global::Google.Protobuf.WellKnownTypes.BoolValue>(serviceImpl.DeleteUser));
     }
 

@@ -1011,11 +1011,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
+      "projectUniqueName": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
       "projectName": "EFCDataAccess",
-      "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
+      "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
       "packagesPath": "C:\\Users\\pdlra\\.nuget\\packages\\",
-      "outputPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\obj\\",
+      "outputPath": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pdlra\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1032,8 +1032,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj": {
-              "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj"
+            "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj": {
+              "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj"
             }
           }
         }
