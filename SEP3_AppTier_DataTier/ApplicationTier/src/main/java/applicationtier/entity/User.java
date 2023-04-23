@@ -1,5 +1,4 @@
-package entity;
-
+package applicationtier.entity;
 
 
 public class User {

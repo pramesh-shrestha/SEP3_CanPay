@@ -1,7 +1,7 @@
 package applicationtier.service.serviceImplementations;
 
+import applicationtier.entity.User;
 import applicationtier.service.serviceInterfaces.IUserService;
-import entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,6 +1,7 @@
 package applicationtier.service.serviceInterfaces;
 
-import entity.DebitCard;
+
+import applicationtier.entity.DebitCard;
 
 public interface ICardService {
     DebitCard CreateCard(DebitCard card);

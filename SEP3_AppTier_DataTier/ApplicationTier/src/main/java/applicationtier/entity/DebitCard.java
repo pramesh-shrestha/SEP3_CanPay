@@ -1,4 +1,4 @@
-package entity;
+package applicationtier.entity;
 
 public class DebitCard {
     private Long cardId;

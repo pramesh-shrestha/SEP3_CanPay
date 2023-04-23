@@ -1,6 +1,7 @@
 package applicationtier.service.serviceInterfaces;
 
-import entity.User;
+
+import applicationtier.entity.User;
 
 import java.util.List;
 

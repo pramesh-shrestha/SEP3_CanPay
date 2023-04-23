@@ -1,6 +1,6 @@
 package applicationtier.controller;
 
-import entity.DebitCard;
+import applicationtier.entity.DebitCard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
