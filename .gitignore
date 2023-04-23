@@ -8,6 +8,8 @@
 .idea/
 /*/obj/
 /*/bin/
+SEP3_DataTier/GrpcService/obj
+SEP3_DataTier/GrpcService/bin
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml
