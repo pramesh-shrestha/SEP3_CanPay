@@ -1,20 +1,95 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\SEP3_DataTier\\SEP3_DataTier.csproj": {}
+    "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\SEP3_DataTier\\SEP3_DataTier.csproj": {}
   },
   "projects": {
-    "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\SEP3_DataTier\\SEP3_DataTier.csproj": {
+    "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\SEP3_DataTier\\SEP3_DataTier.csproj",
-        "projectName": "SEP3_DataTier",
-        "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\SEP3_DataTier\\SEP3_DataTier.csproj",
-        "packagesPath": "C:\\Users\\pdlra\\.nuget\\packages\\",
-        "outputPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\SEP3_DataTier\\obj\\",
+        "projectUniqueName": "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
+        "projectName": "EFCDataAccess",
+        "projectPath": "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
+        "packagesPath": "C:\\Users\\prmss\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pdlra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\prmss\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj": {
+                "projectPath": "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj",
+        "projectName": "Entity",
+        "projectPath": "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj",
+        "packagesPath": "C:\\Users\\prmss\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\prmss\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,8 +114,77 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\SEP3_DataTier\\SEP3_DataTier.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\SEP3_DataTier\\SEP3_DataTier.csproj",
+        "projectName": "SEP3_DataTier",
+        "projectPath": "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\SEP3_DataTier\\SEP3_DataTier.csproj",
+        "packagesPath": "C:\\Users\\prmss\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\SEP3_DataTier\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\prmss\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj": {
+                "projectPath": "C:\\Users\\prmss\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
+            "Google.Protobuf": {
+              "target": "Package",
+              "version": "[3.22.3, )"
+            },
             "Grpc.AspNetCore": {
+              "target": "Package",
+              "version": "[2.49.0, )"
+            },
+            "Grpc.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[2.49.0, )"
             }
@@ -64,7 +208,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

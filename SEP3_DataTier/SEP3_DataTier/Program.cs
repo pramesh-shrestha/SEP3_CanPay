@@ -1,3 +1,7 @@
+using EFCDataAccess;
+using EFCDataAccess.DAOImplementation;
+using EFCDataAccess.DAOInterface;
+using Microsoft.EntityFrameworkCore;
 using SEP3_DataTier.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+builder.Services.AddScoped<IUserDao, UserDaoImpl>();
+builder.Services.AddDbContext<CanPayDbAccess>();
 
 var app = builder.Build();
 
