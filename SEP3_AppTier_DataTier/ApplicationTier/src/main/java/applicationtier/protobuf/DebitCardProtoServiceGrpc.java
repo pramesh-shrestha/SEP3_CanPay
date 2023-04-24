@@ -29,13 +29,13 @@ public class DebitCardProtoServiceGrpc {
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<applicationtier.protobuf.Debitcard.DebitCardProtoObj,
-      com.google.protobuf.BoolValue> METHOD_CREATE_CARD =
+      applicationtier.protobuf.Debitcard.DebitCardProtoObj> METHOD_CREATE_CARD =
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
               "DebitCardProtoService", "CreateCard"),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Debitcard.DebitCardProtoObj.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.BoolValue.getDefaultInstance()));
+          io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Debitcard.DebitCardProtoObj.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<com.google.protobuf.Int64Value,
       applicationtier.protobuf.Debitcard.DebitCardProtoObj> METHOD_FETCH_CARD_BY_USERNAME =
@@ -94,7 +94,7 @@ public class DebitCardProtoServiceGrpc {
     /**
      */
     public void createCard(applicationtier.protobuf.Debitcard.DebitCardProtoObj request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue> responseObserver) {
+        io.grpc.stub.StreamObserver<applicationtier.protobuf.Debitcard.DebitCardProtoObj> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_CREATE_CARD, responseObserver);
     }
 
@@ -126,7 +126,7 @@ public class DebitCardProtoServiceGrpc {
             asyncUnaryCall(
               new MethodHandlers<
                 applicationtier.protobuf.Debitcard.DebitCardProtoObj,
-                com.google.protobuf.BoolValue>(
+                applicationtier.protobuf.Debitcard.DebitCardProtoObj>(
                   this, METHODID_CREATE_CARD)))
           .addMethod(
             METHOD_FETCH_CARD_BY_USERNAME,
@@ -174,7 +174,7 @@ public class DebitCardProtoServiceGrpc {
     /**
      */
     public void createCard(applicationtier.protobuf.Debitcard.DebitCardProtoObj request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue> responseObserver) {
+        io.grpc.stub.StreamObserver<applicationtier.protobuf.Debitcard.DebitCardProtoObj> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_CREATE_CARD, getCallOptions()), request, responseObserver);
     }
@@ -224,7 +224,7 @@ public class DebitCardProtoServiceGrpc {
 
     /**
      */
-    public com.google.protobuf.BoolValue createCard(applicationtier.protobuf.Debitcard.DebitCardProtoObj request) {
+    public applicationtier.protobuf.Debitcard.DebitCardProtoObj createCard(applicationtier.protobuf.Debitcard.DebitCardProtoObj request) {
       return blockingUnaryCall(
           getChannel(), METHOD_CREATE_CARD, getCallOptions(), request);
     }
@@ -271,7 +271,7 @@ public class DebitCardProtoServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.BoolValue> createCard(
+    public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.Debitcard.DebitCardProtoObj> createCard(
         applicationtier.protobuf.Debitcard.DebitCardProtoObj request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_CREATE_CARD, getCallOptions()), request);
@@ -326,7 +326,7 @@ public class DebitCardProtoServiceGrpc {
       switch (methodId) {
         case METHODID_CREATE_CARD:
           serviceImpl.createCard((applicationtier.protobuf.Debitcard.DebitCardProtoObj) request,
-              (io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue>) responseObserver);
+              (io.grpc.stub.StreamObserver<applicationtier.protobuf.Debitcard.DebitCardProtoObj>) responseObserver);
           break;
         case METHODID_FETCH_CARD_BY_USERNAME:
           serviceImpl.fetchCardByUsername((com.google.protobuf.Int64Value) request,

@@ -13,6 +13,7 @@ public class UserEntity {
         this.userName = userName;
         this.password = password;
         this.card = card;
+
     }
 
     public UserEntity() {

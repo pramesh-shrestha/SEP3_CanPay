@@ -3,10 +3,12 @@ package applicationtier.GrpcClient.card;
 import applicationtier.entity.DebitCardEntity;
 
 public interface ICardClient {
-    boolean CreateCard(DebitCardEntity debitCardEntity);
-    DebitCardEntity FetchCardByUsername(String username);
-    DebitCardEntity UpdateCardDetails(DebitCardEntity debitCard);
+    DebitCardEntity createCard(DebitCardEntity debitCardEntity);
 
-    DebitCardEntity DeleteCard(int cardId);
+    DebitCardEntity fetchCardByUsername(String username);
+
+    DebitCardEntity updateCardDetails(DebitCardEntity debitCard);
+
+    DebitCardEntity deleteCard(int cardId);
 
 }

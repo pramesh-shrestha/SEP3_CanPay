@@ -1356,15 +1356,15 @@ public final class Debitcard {
       "d\030\001 \001(\003\022\023\n\013card_number\030\002 \001(\003\022\023\n\013expiry_d" +
       "ate\030\003 \001(\t\022\013\n\003cvv\030\004 \001(\005\"?\n\nUpdateCard\022\017\n\007" +
       "card_id\030\001 \001(\003\022 \n\004card\030\002 \001(\0132\022.DebitCardP" +
-      "rotoObj2\242\002\n\025DebitCardProtoService\022>\n\nCre" +
-      "ateCard\022\022.DebitCardProtoObj\032\032.google.pro" +
-      "tobuf.BoolValue\"\000\022H\n\023FetchCardByUsername" +
-      "\022\033.google.protobuf.Int64Value\032\022.DebitCar" +
-      "dProtoObj\"\000\0226\n\021UpdateCardDetails\022\013.Updat",
-      "eCard\032\022.DebitCardProtoObj\"\000\022G\n\nDeleteCar" +
-      "d\022\033.google.protobuf.Int64Value\032\032.google." +
-      "protobuf.BoolValue\"\000B\034\n\030applicationtier." +
-      "protobufP\000b\006proto3"
+      "rotoObj2\232\002\n\025DebitCardProtoService\0226\n\nCre" +
+      "ateCard\022\022.DebitCardProtoObj\032\022.DebitCardP" +
+      "rotoObj\"\000\022H\n\023FetchCardByUsername\022\033.googl" +
+      "e.protobuf.Int64Value\032\022.DebitCardProtoOb" +
+      "j\"\000\0226\n\021UpdateCardDetails\022\013.UpdateCard\032\022.",
+      "DebitCardProtoObj\"\000\022G\n\nDeleteCard\022\033.goog" +
+      "le.protobuf.Int64Value\032\032.google.protobuf" +
+      ".BoolValue\"\000B\034\n\030applicationtier.protobuf" +
+      "P\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

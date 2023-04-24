@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\prmss\\.nuget\\packages\\": {}
+    "C:\\Users\\pdlra\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\prmss\\Sep3\\SEP3_DataTier\\Entity\\Entity.csproj",
+      "projectUniqueName": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj",
       "projectName": "Entity",
-      "projectPath": "C:\\Users\\prmss\\Sep3\\SEP3_DataTier\\Entity\\Entity.csproj",
-      "packagesPath": "C:\\Users\\prmss\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\prmss\\Sep3\\SEP3_DataTier\\Entity\\obj\\",
+      "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj",
+      "packagesPath": "C:\\Users\\pdlra\\.nuget\\packages\\",
+      "outputPath": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\prmss\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pdlra\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

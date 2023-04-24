@@ -14,7 +14,7 @@ message DebitCardProtoObj {
 }
 
 service DebitCardProtoService {
-  rpc CreateCard(DebitCardProtoObj) returns (google.protobuf.BoolValue) {}
+  rpc CreateCard(DebitCardProtoObj) returns (DebitCardProtoObj) {}
   rpc FetchCardByUsername(google.protobuf.Int64Value) returns (DebitCardProtoObj) {}
   rpc UpdateCardDetails(UpdateCard) returns (DebitCardProtoObj) {}
   rpc DeleteCard(google.protobuf.Int64Value) returns (google.protobuf.BoolValue) {}
