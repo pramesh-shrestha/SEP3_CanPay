@@ -72,6 +72,42 @@ public class UserDaoImpl : IUserDao {
         context.Users.Remove(existingUserEntity);
         await context.SaveChangesAsync();
     }
-    
-  
+
+    //update balance
+    public async Task<bool> UpdateBalanceAsync(string sender, string receiver, int balance) {
+        try {
+            int senderAmount = await FetchBalanceByUsername(sender);
+            //sender side
+            if (senderAmount > 0 && senderAmount >= balance) {
+                senderAmount -= balance;
+                UserEntity senderEntity = await FetchUserByUsernameAsync(sender);
+                senderEntity.Balance = senderAmount;
+                
+                //receiver side
+                int receiverAmount = await FetchBalanceByUsername(receiver);
+                receiverAmount += balance;
+                UserEntity receiverEntity = await FetchUserByUsernameAsync(receiver);
+                receiverEntity.Balance = receiverAmount;
+
+                await context.SaveChangesAsync();
+                return true;
+
+            }
+        }
+        catch (Exception e) {
+            throw new Exception(e.Message);
+        }
+
+        return false;
+    }
+
+    //get balance by username
+    public async Task<int> FetchBalanceByUsername(string username) {
+        UserEntity? userEntity = await context.Users.FindAsync(username);
+        if (userEntity == null) {
+            throw new Exception("Username not found");
+        }
+
+        return userEntity.Balance;
+    }
 }
