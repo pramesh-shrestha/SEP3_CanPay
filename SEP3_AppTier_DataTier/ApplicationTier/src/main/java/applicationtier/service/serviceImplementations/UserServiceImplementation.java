@@ -1,7 +1,9 @@
 package applicationtier.service.serviceImplementations;
 
+import applicationtier.GrpcClient.card.CardClientImpl;
 import applicationtier.GrpcClient.user.IUserClient;
 import applicationtier.entity.UserEntity;
+import applicationtier.protobuf.User;
 import applicationtier.service.serviceInterfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,4 +54,5 @@ public class UserServiceImplementation implements IUserService {
   public void deleteUser(Long id) {
 
   }
+
 }

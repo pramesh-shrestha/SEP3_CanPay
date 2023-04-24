@@ -65,6 +65,11 @@ public final class User {
      * <code>optional .DebitCardProtoObj card = 5;</code>
      */
     applicationtier.protobuf.Debitcard.DebitCardProtoObjOrBuilder getCardOrBuilder();
+
+    /**
+     * <code>optional int32 balance = 6;</code>
+     */
+    int getBalance();
   }
   /**
    * Protobuf type {@code UserProtoObj}
@@ -82,6 +87,7 @@ public final class User {
       fullName_ = "";
       userName_ = "";
       password_ = "";
+      balance_ = 0;
     }
 
     @java.lang.Override
@@ -143,6 +149,11 @@ public final class User {
                 card_ = subBuilder.buildPartial();
               }
 
+              break;
+            }
+            case 48: {
+
+              balance_ = input.readInt32();
               break;
             }
           }
@@ -300,6 +311,15 @@ public final class User {
       return getCard();
     }
 
+    public static final int BALANCE_FIELD_NUMBER = 6;
+    private int balance_;
+    /**
+     * <code>optional int32 balance = 6;</code>
+     */
+    public int getBalance() {
+      return balance_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -327,6 +347,9 @@ public final class User {
       if (card_ != null) {
         output.writeMessage(5, getCard());
       }
+      if (balance_ != 0) {
+        output.writeInt32(6, balance_);
+      }
     }
 
     public int getSerializedSize() {
@@ -350,6 +373,10 @@ public final class User {
       if (card_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, getCard());
+      }
+      if (balance_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, balance_);
       }
       memoizedSize = size;
       return size;
@@ -380,6 +407,8 @@ public final class User {
         result = result && getCard()
             .equals(other.getCard());
       }
+      result = result && (getBalance()
+          == other.getBalance());
       return result;
     }
 
@@ -403,6 +432,8 @@ public final class User {
         hash = (37 * hash) + CARD_FIELD_NUMBER;
         hash = (53 * hash) + getCard().hashCode();
       }
+      hash = (37 * hash) + BALANCE_FIELD_NUMBER;
+      hash = (53 * hash) + getBalance();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -535,6 +566,8 @@ public final class User {
           card_ = null;
           cardBuilder_ = null;
         }
+        balance_ = 0;
+
         return this;
       }
 
@@ -566,6 +599,7 @@ public final class User {
         } else {
           result.card_ = cardBuilder_.build();
         }
+        result.balance_ = balance_;
         onBuilt();
         return result;
       }
@@ -624,6 +658,9 @@ public final class User {
         }
         if (other.hasCard()) {
           mergeCard(other.getCard());
+        }
+        if (other.getBalance() != 0) {
+          setBalance(other.getBalance());
         }
         onChanged();
         return this;
@@ -999,6 +1036,32 @@ public final class User {
           card_ = null;
         }
         return cardBuilder_;
+      }
+
+      private int balance_ ;
+      /**
+       * <code>optional int32 balance = 6;</code>
+       */
+      public int getBalance() {
+        return balance_;
+      }
+      /**
+       * <code>optional int32 balance = 6;</code>
+       */
+      public Builder setBalance(int value) {
+        
+        balance_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 balance = 6;</code>
+       */
+      public Builder clearBalance() {
+        
+        balance_ = 0;
+        onChanged();
+        return this;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2507,24 +2570,28 @@ public final class User {
     java.lang.String[] descriptorData = {
       "\n\nuser.proto\032\036google/protobuf/wrappers.p" +
       "roto\032\017debitcard.proto\032\033google/protobuf/e" +
-      "mpty.proto\"y\n\014UserProtoObj\022\017\n\007user_id\030\001 " +
-      "\001(\003\022\021\n\tfull_name\030\002 \001(\t\022\021\n\tuser_name\030\003 \001(" +
-      "\t\022\020\n\010password\030\004 \001(\t\022 \n\004card\030\005 \001(\0132\022.Debi" +
-      "tCardProtoObj\"J\n\021UpdateUserRequest\022\020\n\010us" +
-      "ername\030\001 \001(\t\022#\n\014toUpdateUser\030\002 \001(\0132\r.Use" +
-      "rProtoObj\"3\n\020UserListResponse\022\037\n\010allUser" +
-      "s\030\001 \003(\0132\r.UserProtoObj2\376\002\n\020UserProtoServ" +
-      "ice\022,\n\nCreateUser\022\r.UserProtoObj\032\r.UserP",
-      "rotoObj\"\000\022;\n\014FetchAllUser\022\026.google.proto" +
-      "buf.Empty\032\021.UserListResponse\"\000\022D\n\023FetchU" +
-      "serByUsername\022\034.google.protobuf.StringVa" +
-      "lue\032\r.UserProtoObj\"\000\022=\n\rFetchUserById\022\033." +
-      "google.protobuf.Int32Value\032\r.UserProtoOb" +
-      "j\"\000\0221\n\nUpdateUser\022\022.UpdateUserRequest\032\r." +
-      "UserProtoObj\"\000\022G\n\nDeleteUser\022\033.google.pr" +
-      "otobuf.Int64Value\032\032.google.protobuf.Bool" +
-      "Value\"\000B,\n\030applicationtier.protobufP\000\252\002\r" +
-      "SEP3_DataTierb\006proto3"
+      "mpty.proto\"\212\001\n\014UserProtoObj\022\017\n\007user_id\030\001" +
+      " \001(\003\022\021\n\tfull_name\030\002 \001(\t\022\021\n\tuser_name\030\003 \001" +
+      "(\t\022\020\n\010password\030\004 \001(\t\022 \n\004card\030\005 \001(\0132\022.Deb" +
+      "itCardProtoObj\022\017\n\007balance\030\006 \001(\005\"J\n\021Updat" +
+      "eUserRequest\022\020\n\010username\030\001 \001(\t\022#\n\014toUpda" +
+      "teUser\030\002 \001(\0132\r.UserProtoObj\"3\n\020UserListR" +
+      "esponse\022\037\n\010allUsers\030\001 \003(\0132\r.UserProtoObj" +
+      "2\235\004\n\020UserProtoService\022,\n\nCreateUser\022\r.Us",
+      "erProtoObj\032\r.UserProtoObj\"\000\022;\n\014FetchAllU" +
+      "ser\022\026.google.protobuf.Empty\032\021.UserListRe" +
+      "sponse\"\000\022D\n\023FetchUserByUsername\022\034.google" +
+      ".protobuf.StringValue\032\r.UserProtoObj\"\000\022=" +
+      "\n\rFetchUserById\022\033.google.protobuf.Int32V" +
+      "alue\032\r.UserProtoObj\"\000\0221\n\nUpdateUser\022\022.Up" +
+      "dateUserRequest\032\r.UserProtoObj\"\000\022G\n\nDele" +
+      "teUser\022\033.google.protobuf.Int64Value\032\032.go" +
+      "ogle.protobuf.BoolValue\"\000\022H\n\rUpdateBalan" +
+      "ce\022\033.google.protobuf.Int32Value\032\032.google",
+      ".protobuf.BoolValue\022S\n\026FetchBalanceByUse" +
+      "rname\022\034.google.protobuf.StringValue\032\033.go" +
+      "ogle.protobuf.Int32ValueB,\n\030applicationt" +
+      "ier.protobufP\000\252\002\rSEP3_DataTierb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2546,7 +2613,7 @@ public final class User {
     internal_static_UserProtoObj_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UserProtoObj_descriptor,
-        new java.lang.String[] { "UserId", "FullName", "UserName", "Password", "Card", });
+        new java.lang.String[] { "UserId", "FullName", "UserName", "Password", "Card", "Balance", });
     internal_static_UpdateUserRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_UpdateUserRequest_fieldAccessorTable = new

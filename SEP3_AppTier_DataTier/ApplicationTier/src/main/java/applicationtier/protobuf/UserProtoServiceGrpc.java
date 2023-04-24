@@ -81,6 +81,24 @@ public class UserProtoServiceGrpc {
               "UserProtoService", "DeleteUser"),
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int64Value.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.BoolValue.getDefaultInstance()));
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<com.google.protobuf.Int32Value,
+      com.google.protobuf.BoolValue> METHOD_UPDATE_BALANCE =
+      io.grpc.MethodDescriptor.create(
+          io.grpc.MethodDescriptor.MethodType.UNARY,
+          generateFullMethodName(
+              "UserProtoService", "UpdateBalance"),
+          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int32Value.getDefaultInstance()),
+          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.BoolValue.getDefaultInstance()));
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<com.google.protobuf.StringValue,
+      com.google.protobuf.Int32Value> METHOD_FETCH_BALANCE_BY_USERNAME =
+      io.grpc.MethodDescriptor.create(
+          io.grpc.MethodDescriptor.MethodType.UNARY,
+          generateFullMethodName(
+              "UserProtoService", "FetchBalanceByUsername"),
+          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.StringValue.getDefaultInstance()),
+          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int32Value.getDefaultInstance()));
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -151,6 +169,20 @@ public class UserProtoServiceGrpc {
       asyncUnimplementedUnaryCall(METHOD_DELETE_USER, responseObserver);
     }
 
+    /**
+     */
+    public void updateBalance(com.google.protobuf.Int32Value request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_UPDATE_BALANCE, responseObserver);
+    }
+
+    /**
+     */
+    public void fetchBalanceByUsername(com.google.protobuf.StringValue request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Int32Value> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_FETCH_BALANCE_BY_USERNAME, responseObserver);
+    }
+
     @java.lang.Override public io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -195,6 +227,20 @@ public class UserProtoServiceGrpc {
                 com.google.protobuf.Int64Value,
                 com.google.protobuf.BoolValue>(
                   this, METHODID_DELETE_USER)))
+          .addMethod(
+            METHOD_UPDATE_BALANCE,
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.google.protobuf.Int32Value,
+                com.google.protobuf.BoolValue>(
+                  this, METHODID_UPDATE_BALANCE)))
+          .addMethod(
+            METHOD_FETCH_BALANCE_BY_USERNAME,
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.google.protobuf.StringValue,
+                com.google.protobuf.Int32Value>(
+                  this, METHODID_FETCH_BALANCE_BY_USERNAME)))
           .build();
     }
   }
@@ -264,6 +310,22 @@ public class UserProtoServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(METHOD_DELETE_USER, getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void updateBalance(com.google.protobuf.Int32Value request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_UPDATE_BALANCE, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void fetchBalanceByUsername(com.google.protobuf.StringValue request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Int32Value> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_FETCH_BALANCE_BY_USERNAME, getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -324,6 +386,20 @@ public class UserProtoServiceGrpc {
     public com.google.protobuf.BoolValue deleteUser(com.google.protobuf.Int64Value request) {
       return blockingUnaryCall(
           getChannel(), METHOD_DELETE_USER, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.google.protobuf.BoolValue updateBalance(com.google.protobuf.Int32Value request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_UPDATE_BALANCE, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.google.protobuf.Int32Value fetchBalanceByUsername(com.google.protobuf.StringValue request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_FETCH_BALANCE_BY_USERNAME, getCallOptions(), request);
     }
   }
 
@@ -392,6 +468,22 @@ public class UserProtoServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(METHOD_DELETE_USER, getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.BoolValue> updateBalance(
+        com.google.protobuf.Int32Value request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_UPDATE_BALANCE, getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Int32Value> fetchBalanceByUsername(
+        com.google.protobuf.StringValue request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_FETCH_BALANCE_BY_USERNAME, getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE_USER = 0;
@@ -400,6 +492,8 @@ public class UserProtoServiceGrpc {
   private static final int METHODID_FETCH_USER_BY_ID = 3;
   private static final int METHODID_UPDATE_USER = 4;
   private static final int METHODID_DELETE_USER = 5;
+  private static final int METHODID_UPDATE_BALANCE = 6;
+  private static final int METHODID_FETCH_BALANCE_BY_USERNAME = 7;
 
   private static class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -442,6 +536,14 @@ public class UserProtoServiceGrpc {
           serviceImpl.deleteUser((com.google.protobuf.Int64Value) request,
               (io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue>) responseObserver);
           break;
+        case METHODID_UPDATE_BALANCE:
+          serviceImpl.updateBalance((com.google.protobuf.Int32Value) request,
+              (io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue>) responseObserver);
+          break;
+        case METHODID_FETCH_BALANCE_BY_USERNAME:
+          serviceImpl.fetchBalanceByUsername((com.google.protobuf.StringValue) request,
+              (io.grpc.stub.StreamObserver<com.google.protobuf.Int32Value>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -465,7 +567,9 @@ public class UserProtoServiceGrpc {
         METHOD_FETCH_USER_BY_USERNAME,
         METHOD_FETCH_USER_BY_ID,
         METHOD_UPDATE_USER,
-        METHOD_DELETE_USER);
+        METHOD_DELETE_USER,
+        METHOD_UPDATE_BALANCE,
+        METHOD_FETCH_BALANCE_BY_USERNAME);
   }
 
 }
