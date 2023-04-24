@@ -160,12 +160,6 @@
     {
         try
         {
-    // if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)
-    //     || string.IsNullOrEmpty(repeatPassword) || string.IsNullOrEmpty(cardNumber) || string.IsNullOrEmpty(expiryDate)
-    //     || string.IsNullOrEmpty(cvv))
-    // {
-    //     throw new Exception("Empty Fields Not Allowed!");
-    // }
             if (string.IsNullOrEmpty(name)) throw new Exception("Full Name Cannot Be Empty");
             if (string.IsNullOrEmpty(username)) throw new Exception("Username Cannot Be Empty");
             if (string.IsNullOrEmpty(password)) throw new Exception("Password Cannot Be Empty");
@@ -180,7 +174,7 @@
             if (cvv.ToString().Length != 3) throw new Exception("CVV must be 3 digits long");
 
             DebitCard card = new DebitCard(cardNumber, expiryDate, cvv);
-            User user = new User(name, username, password, card);
+            User user = new User(name, username, password, card, 1000);
             await UserService.CreateAsync(user);
             await CardService.CreateAsync(card);
         }

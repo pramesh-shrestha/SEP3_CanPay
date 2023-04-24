@@ -12,7 +12,8 @@ public class UserEntityMapper
             Fullname = userProtoObj.FullName,
             Username = userProtoObj.UserName,
             Password = userProtoObj.Password,
-            Card = DebitCardMapper.FromProtoToEntity(userProtoObj.Card)
+            Card = DebitCardMapper.FromProtoToEntity(userProtoObj.Card),
+            Balance = userProtoObj.Balance
         };
     }
 
@@ -23,7 +24,8 @@ public class UserEntityMapper
             FullName = userEntity.Fullname,
             UserName = userEntity.Username,
             Password = userEntity.Password,
-            Card = DebitCardMapper.FromEntityToProto(userEntity.Card)
+            Card = DebitCardMapper.FromEntityToProto(userEntity.Card),
+            Balance = userEntity.Balance
         };
     }
 }

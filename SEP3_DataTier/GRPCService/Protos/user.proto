@@ -13,6 +13,7 @@ message UserProtoObj {
   string user_name = 3;
   string password = 4;
   DebitCard card = 5;
+  int32  balance = 6;
 }
 
 service UserProtoService {
@@ -22,6 +23,8 @@ service UserProtoService {
   rpc FetchUserById(google.protobuf.Int32Value) returns (UserProtoObj) {}
   rpc UpdateUser(UpdateUserRequest) returns (UserProtoObj) {}
   rpc DeleteUser(google.protobuf.Int64Value) returns (google.protobuf.BoolValue) {}
+  rpc FetchBalanceByUsername(google.protobuf.StringValue) returns (google.protobuf.Int32Value);
+  rpc UpdateBalance(google.protobuf.Int32Value) returns (google.protobuf.BoolValue);
 }
 
 message UpdateUserRequest {

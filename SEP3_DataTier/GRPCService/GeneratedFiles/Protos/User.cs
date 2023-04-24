@@ -26,25 +26,29 @@ namespace SEP3_DataTier {
           string.Concat(
             "ChFQcm90b3MvdXNlci5wcm90bxoeZ29vZ2xlL3Byb3RvYnVmL3dyYXBwZXJz",
             "LnByb3RvGhZQcm90b3MvZGViaXRjYXJkLnByb3RvGhtnb29nbGUvcHJvdG9i",
-            "dWYvZW1wdHkucHJvdG8icQoMVXNlclByb3RvT2JqEg8KB3VzZXJfaWQYASAB",
-            "KAMSEQoJZnVsbF9uYW1lGAIgASgJEhEKCXVzZXJfbmFtZRgDIAEoCRIQCghw",
-            "YXNzd29yZBgEIAEoCRIYCgRjYXJkGAUgASgLMgouRGViaXRDYXJkIkoKEVVw",
-            "ZGF0ZVVzZXJSZXF1ZXN0EhAKCHVzZXJuYW1lGAEgASgJEiMKDHRvVXBkYXRl",
-            "VXNlchgCIAEoCzINLlVzZXJQcm90b09iaiIzChBVc2VyTGlzdFJlc3BvbnNl",
-            "Eh8KCGFsbFVzZXJzGAEgAygLMg0uVXNlclByb3RvT2JqMv4CChBVc2VyUHJv",
-            "dG9TZXJ2aWNlEiwKCkNyZWF0ZVVzZXISDS5Vc2VyUHJvdG9PYmoaDS5Vc2Vy",
-            "UHJvdG9PYmoiABI7CgxGZXRjaEFsbFVzZXISFi5nb29nbGUucHJvdG9idWYu",
-            "RW1wdHkaES5Vc2VyTGlzdFJlc3BvbnNlIgASRAoTRmV0Y2hVc2VyQnlVc2Vy",
-            "bmFtZRIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRoNLlVzZXJQcm90",
-            "b09iaiIAEj0KDUZldGNoVXNlckJ5SWQSGy5nb29nbGUucHJvdG9idWYuSW50",
-            "MzJWYWx1ZRoNLlVzZXJQcm90b09iaiIAEjEKClVwZGF0ZVVzZXISEi5VcGRh",
-            "dGVVc2VyUmVxdWVzdBoNLlVzZXJQcm90b09iaiIAEkcKCkRlbGV0ZVVzZXIS",
-            "Gy5nb29nbGUucHJvdG9idWYuSW50NjRWYWx1ZRoaLmdvb2dsZS5wcm90b2J1",
-            "Zi5Cb29sVmFsdWUiAEIQqgINU0VQM19EYXRhVGllcmIGcHJvdG8z"));
+            "dWYvZW1wdHkucHJvdG8iggEKDFVzZXJQcm90b09iahIPCgd1c2VyX2lkGAEg",
+            "ASgDEhEKCWZ1bGxfbmFtZRgCIAEoCRIRCgl1c2VyX25hbWUYAyABKAkSEAoI",
+            "cGFzc3dvcmQYBCABKAkSGAoEY2FyZBgFIAEoCzIKLkRlYml0Q2FyZBIPCgdi",
+            "YWxhbmNlGAYgASgFIkoKEVVwZGF0ZVVzZXJSZXF1ZXN0EhAKCHVzZXJuYW1l",
+            "GAEgASgJEiMKDHRvVXBkYXRlVXNlchgCIAEoCzINLlVzZXJQcm90b09iaiIz",
+            "ChBVc2VyTGlzdFJlc3BvbnNlEh8KCGFsbFVzZXJzGAEgAygLMg0uVXNlclBy",
+            "b3RvT2JqMp0EChBVc2VyUHJvdG9TZXJ2aWNlEiwKCkNyZWF0ZVVzZXISDS5V",
+            "c2VyUHJvdG9PYmoaDS5Vc2VyUHJvdG9PYmoiABI7CgxGZXRjaEFsbFVzZXIS",
+            "Fi5nb29nbGUucHJvdG9idWYuRW1wdHkaES5Vc2VyTGlzdFJlc3BvbnNlIgAS",
+            "RAoTRmV0Y2hVc2VyQnlVc2VybmFtZRIcLmdvb2dsZS5wcm90b2J1Zi5TdHJp",
+            "bmdWYWx1ZRoNLlVzZXJQcm90b09iaiIAEj0KDUZldGNoVXNlckJ5SWQSGy5n",
+            "b29nbGUucHJvdG9idWYuSW50MzJWYWx1ZRoNLlVzZXJQcm90b09iaiIAEjEK",
+            "ClVwZGF0ZVVzZXISEi5VcGRhdGVVc2VyUmVxdWVzdBoNLlVzZXJQcm90b09i",
+            "aiIAEkcKCkRlbGV0ZVVzZXISGy5nb29nbGUucHJvdG9idWYuSW50NjRWYWx1",
+            "ZRoaLmdvb2dsZS5wcm90b2J1Zi5Cb29sVmFsdWUiABJTChZGZXRjaEJhbGFu",
+            "Y2VCeVVzZXJuYW1lEhwuZ29vZ2xlLnByb3RvYnVmLlN0cmluZ1ZhbHVlGhsu",
+            "Z29vZ2xlLnByb3RvYnVmLkludDMyVmFsdWUSSAoNVXBkYXRlQmFsYW5jZRIb",
+            "Lmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlGhouZ29vZ2xlLnByb3RvYnVm",
+            "LkJvb2xWYWx1ZUIQqgINU0VQM19EYXRhVGllcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::SEP3_DataTier.DebitcardReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.UserProtoObj), global::SEP3_DataTier.UserProtoObj.Parser, new[]{ "UserId", "FullName", "UserName", "Password", "Card" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.UserProtoObj), global::SEP3_DataTier.UserProtoObj.Parser, new[]{ "UserId", "FullName", "UserName", "Password", "Card", "Balance" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.UpdateUserRequest), global::SEP3_DataTier.UpdateUserRequest.Parser, new[]{ "Username", "ToUpdateUser" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.UserListResponse), global::SEP3_DataTier.UserListResponse.Parser, new[]{ "AllUsers" }, null, null, null, null)
           }));
@@ -92,6 +96,7 @@ namespace SEP3_DataTier {
       userName_ = other.userName_;
       password_ = other.password_;
       card_ = other.card_ != null ? other.card_.Clone() : null;
+      balance_ = other.balance_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -161,6 +166,18 @@ namespace SEP3_DataTier {
       }
     }
 
+    /// <summary>Field number for the "balance" field.</summary>
+    public const int BalanceFieldNumber = 6;
+    private int balance_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Balance {
+      get { return balance_; }
+      set {
+        balance_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -181,6 +198,7 @@ namespace SEP3_DataTier {
       if (UserName != other.UserName) return false;
       if (Password != other.Password) return false;
       if (!object.Equals(Card, other.Card)) return false;
+      if (Balance != other.Balance) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -193,6 +211,7 @@ namespace SEP3_DataTier {
       if (UserName.Length != 0) hash ^= UserName.GetHashCode();
       if (Password.Length != 0) hash ^= Password.GetHashCode();
       if (card_ != null) hash ^= Card.GetHashCode();
+      if (Balance != 0) hash ^= Balance.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -231,6 +250,10 @@ namespace SEP3_DataTier {
         output.WriteRawTag(42);
         output.WriteMessage(Card);
       }
+      if (Balance != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(Balance);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -261,6 +284,10 @@ namespace SEP3_DataTier {
         output.WriteRawTag(42);
         output.WriteMessage(Card);
       }
+      if (Balance != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(Balance);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -285,6 +312,9 @@ namespace SEP3_DataTier {
       }
       if (card_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Card);
+      }
+      if (Balance != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Balance);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -315,6 +345,9 @@ namespace SEP3_DataTier {
           Card = new global::SEP3_DataTier.DebitCard();
         }
         Card.MergeFrom(other.Card);
+      }
+      if (other.Balance != 0) {
+        Balance = other.Balance;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -354,6 +387,10 @@ namespace SEP3_DataTier {
             input.ReadMessage(Card);
             break;
           }
+          case 48: {
+            Balance = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -390,6 +427,10 @@ namespace SEP3_DataTier {
               Card = new global::SEP3_DataTier.DebitCard();
             }
             input.ReadMessage(Card);
+            break;
+          }
+          case 48: {
+            Balance = input.ReadInt32();
             break;
           }
         }

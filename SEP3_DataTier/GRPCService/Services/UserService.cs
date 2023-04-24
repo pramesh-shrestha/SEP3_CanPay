@@ -117,4 +117,14 @@ public class UserService : UserProtoService.UserProtoServiceBase
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
     }
+
+    public override Task<Int32Value> FetchBalanceByUsername(StringValue request, ServerCallContext context)
+    {
+        return base.FetchBalanceByUsername(request, context);
+    }
+
+    public override Task<BoolValue> UpdateBalance(Int32Value request, ServerCallContext context)
+    {
+        return base.UpdateBalance(request, context);
+    }
 }
