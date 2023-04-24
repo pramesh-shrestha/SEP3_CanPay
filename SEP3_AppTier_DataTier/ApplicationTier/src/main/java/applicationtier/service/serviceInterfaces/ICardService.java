@@ -1,11 +1,11 @@
 package applicationtier.service.serviceInterfaces;
 
 
-import applicationtier.entity.DebitCard;
+import applicationtier.entity.DebitCardEntity;
 
 public interface ICardService {
-    DebitCard CreateCard(DebitCard card);
-    DebitCard FetchCardByUsername(String username);
-    DebitCard updateCard(Long id,DebitCard card);
+    DebitCardEntity CreateCard(DebitCardEntity card);
+    DebitCardEntity FetchCardByUsername(String username);
+    DebitCardEntity updateCard(Long id, DebitCardEntity card);
     void deleteCard(Long id);
 }

@@ -1,7 +1,7 @@
 package applicationtier.service.serviceImplementations;
 
 import applicationtier.GrpcClient.user.IUserClient;
-import applicationtier.entity.User;
+import applicationtier.entity.UserEntity;
 import applicationtier.service.serviceInterfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class UserServiceImplementation implements IUserService {
   }
 
   @Override
-  public User createUser(User user) {
+  public UserEntity createUser(UserEntity user) {
     try{
      return userClient.createUser(user);
     }
@@ -29,22 +29,22 @@ public class UserServiceImplementation implements IUserService {
   }
 
   @Override
-  public List<User> fetchUsers() {
+  public List<UserEntity> fetchUsers() {
     return null;
   }
 
   @Override
-  public User fetchUserById(Long id) {
+  public UserEntity fetchUserById(Long id) {
     return null;
   }
 
   @Override
-  public User fetchUserByUsername(String username) {
+  public UserEntity fetchUserByUsername(String username) {
     return null;
   }
 
   @Override
-  public User updateUser(Long id, User user) {
+  public UserEntity updateUser(Long id, UserEntity user) {
     return null;
   }
 

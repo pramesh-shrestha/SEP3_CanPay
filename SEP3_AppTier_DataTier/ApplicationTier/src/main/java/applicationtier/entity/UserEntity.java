@@ -1,21 +1,21 @@
 package applicationtier.entity;
 
 
-public class User {
+public class UserEntity {
     private Long userId;
     private String fullName;
     private String userName;
     private String password;
-    private DebitCard card;
+    private DebitCardEntity card;
 
-    public User(String fullName, String userName, String password, DebitCard card) {
+    public UserEntity(String fullName, String userName, String password, DebitCardEntity card) {
         this.fullName = fullName;
         this.userName = userName;
         this.password = password;
         this.card = card;
     }
 
-    public User() {
+    public UserEntity() {
     }
 
     public Long getUserId() {
@@ -42,11 +42,11 @@ public class User {
         this.password = password;
     }
 
-    public DebitCard getCard() {
+    public DebitCardEntity getCard() {
         return card;
     }
 
-    public void setCard(DebitCard card) {
+    public void setCard(DebitCardEntity card) {
         this.card = card;
     }
 

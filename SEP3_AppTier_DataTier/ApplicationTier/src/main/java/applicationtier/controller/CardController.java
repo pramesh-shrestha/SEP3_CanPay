@@ -1,6 +1,6 @@
 package applicationtier.controller;
 
-import applicationtier.entity.DebitCard;
+import applicationtier.entity.DebitCardEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,8 @@ public class CardController {
 
     //Create Card--
     @PostMapping("/card/create")
-    public ResponseEntity<DebitCard> CreateCard(@RequestBody DebitCard card){
+    public ResponseEntity<DebitCardEntity> CreateCard(@RequestBody
+    DebitCardEntity card){
         try {
             return new ResponseEntity<>(cardService.CreateCard(card), HttpStatus.OK);
         }
@@ -30,7 +31,7 @@ public class CardController {
 
     //Get Card by username--
     @GetMapping("/card/{username}")
-    public ResponseEntity<DebitCard> FetchCardByUsername(@PathVariable("username") String username){
+    public ResponseEntity<DebitCardEntity> FetchCardByUsername(@PathVariable("username") String username){
         try{
             return new ResponseEntity<>(cardService.FetchCardByUsername(username),HttpStatus.OK);
         }
@@ -41,7 +42,8 @@ public class CardController {
 
     //update card--
     @PutMapping("/card/{id}")
-    public ResponseEntity<DebitCard> UpdateCard(@PathVariable long id, @RequestBody DebitCard card){
+    public ResponseEntity<DebitCardEntity> UpdateCard(@PathVariable long id, @RequestBody
+    DebitCardEntity card){
         try{
             return new ResponseEntity<>(cardService.updateCard(id,card),HttpStatus.OK);
         }

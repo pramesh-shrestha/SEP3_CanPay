@@ -1,18 +1,18 @@
 package applicationtier.entity;
 
-public class DebitCard {
+public class DebitCardEntity {
     private Long cardId;
     private Long cardNumber;
     private String expiryDate;
     private int cvv;
 
-    public DebitCard(Long cardNumber, String expiryDate, int cvv) {
+    public DebitCardEntity(Long cardNumber, String expiryDate, int cvv) {
         this.cardNumber = cardNumber;
         this.expiryDate = expiryDate;
         this.cvv = cvv;
     }
 
-    public DebitCard() {
+    public DebitCardEntity() {
     }
 
     public Long getCardId() {

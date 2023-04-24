@@ -1,15 +1,15 @@
 package applicationtier.service.serviceInterfaces;
 
 
-import applicationtier.entity.User;
+import applicationtier.entity.UserEntity;
 
 import java.util.List;
 
 public interface IUserService {
-  User createUser(User user);
-  List<User> fetchUsers();
-  User fetchUserById(Long id);
-  User fetchUserByUsername(String username);
-  User updateUser(Long id, User user);
+  UserEntity createUser(UserEntity user);
+  List<UserEntity> fetchUsers();
+  UserEntity fetchUserById(Long id);
+  UserEntity fetchUserByUsername(String username);
+  UserEntity updateUser(Long id, UserEntity user);
   void deleteUser(Long id);
 }

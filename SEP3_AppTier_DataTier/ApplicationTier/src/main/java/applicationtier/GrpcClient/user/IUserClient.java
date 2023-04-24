@@ -1,7 +1,7 @@
 package applicationtier.GrpcClient.user;
 
-import applicationtier.entity.User;
+import applicationtier.entity.UserEntity;
 
 public interface IUserClient {
-  User createUser(User user);
+  UserEntity createUser(UserEntity user);
 }

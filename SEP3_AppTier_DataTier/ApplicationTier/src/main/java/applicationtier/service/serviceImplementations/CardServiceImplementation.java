@@ -1,24 +1,24 @@
 package applicationtier.service.serviceImplementations;
 
 
-import applicationtier.entity.DebitCard;
+import applicationtier.entity.DebitCardEntity;
 import applicationtier.service.serviceInterfaces.ICardService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CardServiceImplementation implements ICardService {
     @Override
-    public DebitCard CreateCard(DebitCard card) {
+    public DebitCardEntity CreateCard(DebitCardEntity card) {
         return null;
     }
 
     @Override
-    public DebitCard FetchCardByUsername(String username) {
+    public DebitCardEntity FetchCardByUsername(String username) {
         return null;
     }
 
     @Override
-    public DebitCard updateCard(Long id, DebitCard card) {
+    public DebitCardEntity updateCard(Long id, DebitCardEntity card) {
         return null;
     }
 

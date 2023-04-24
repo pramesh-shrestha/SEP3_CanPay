@@ -1,6 +1,6 @@
 package applicationtier.controller;
 
-import applicationtier.entity.User;
+import applicationtier.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +21,10 @@ public class UserController {
 
     //create user
     @PostMapping("/user/create")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<UserEntity> createUser(@RequestBody
+    UserEntity user) {
         try {
-            ResponseEntity<User> response = new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
+            ResponseEntity<UserEntity> response = new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
             System.out.println(response);
             return response;
 
@@ -34,7 +35,7 @@ public class UserController {
 
     //get all users
     @GetMapping("/user")
-    public ResponseEntity<List<User>> fetchUsers() {
+    public ResponseEntity<List<UserEntity>> fetchUsers() {
         System.out.println("here");
         try {
             return new ResponseEntity<>(userService.fetchUsers(), HttpStatus.OK);
@@ -45,7 +46,7 @@ public class UserController {
 
     //get user by id
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> fetchUserById(@PathVariable("id") Long id) {
+    public ResponseEntity<UserEntity> fetchUserById(@PathVariable("id") Long id) {
         try {
             return new ResponseEntity<>(userService.fetchUserById(id), HttpStatus.OK);
         } catch (Exception e) {
@@ -55,7 +56,7 @@ public class UserController {
 
     //get user by username
     @GetMapping("/user/{username}")
-    public ResponseEntity<User> fetchUserByUsername(@PathVariable("username") String username) {
+    public ResponseEntity<UserEntity> fetchUserByUsername(@PathVariable("username") String username) {
         try {
             return new ResponseEntity<>(userService.fetchUserByUsername(username), HttpStatus.OK);
         } catch (Exception e) {
@@ -65,7 +66,8 @@ public class UserController {
 
     //update user
     @PutMapping("/user/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+    public ResponseEntity<UserEntity> updateUser(@PathVariable Long id, @RequestBody
+    UserEntity updatedUser) {
         try {
             return new ResponseEntity<>(userService.updateUser(id, updatedUser), HttpStatus.OK);
         } catch (Exception e) {
