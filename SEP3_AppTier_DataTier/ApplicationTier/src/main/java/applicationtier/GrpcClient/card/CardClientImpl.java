@@ -24,7 +24,7 @@ public class CardClientImpl implements ICardClient {
     public DebitCardEntity createCard(DebitCardEntity debitCardEntity) {
         try {
             Debitcard.DebitCardProtoObj cardProtoObj = fromEntityToProtoObj(debitCardEntity);
-            Debitcard.DebitCardProtoObj protoObj = cardBlockingStub.createCard(cardProtoObj);
+            Debitcard.DebitCardProtoObj protoObj = getCardBlockingStub().createCard(cardProtoObj);
             return fromProtoObjToEntity(protoObj);
         } catch (Exception e) {
             throw new RuntimeException(e);

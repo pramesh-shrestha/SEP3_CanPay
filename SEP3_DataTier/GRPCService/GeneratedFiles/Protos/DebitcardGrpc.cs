@@ -46,37 +46,39 @@ namespace SEP3_DataTier {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::SEP3_DataTier.DebitCard> __Marshaller_DebitCard = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.DebitCard.Parser));
+    static readonly grpc::Marshaller<global::SEP3_DataTier.DebitCardProtoObj> __Marshaller_DebitCardProtoObj = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.DebitCardProtoObj.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.BoolValue> __Marshaller_google_protobuf_BoolValue = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.BoolValue.Parser));
+    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.StringValue> __Marshaller_google_protobuf_StringValue = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.StringValue.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::SEP3_DataTier.UpdateCard> __Marshaller_UpdateCard = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.UpdateCard.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Int64Value> __Marshaller_google_protobuf_Int64Value = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Int64Value.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::SEP3_DataTier.UpdateCard> __Marshaller_UpdateCard = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.UpdateCard.Parser));
+    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.BoolValue> __Marshaller_google_protobuf_BoolValue = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.BoolValue.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::SEP3_DataTier.DebitCard, global::Google.Protobuf.WellKnownTypes.BoolValue> __Method_CreateCard = new grpc::Method<global::SEP3_DataTier.DebitCard, global::Google.Protobuf.WellKnownTypes.BoolValue>(
+    static readonly grpc::Method<global::SEP3_DataTier.DebitCardProtoObj, global::SEP3_DataTier.DebitCardProtoObj> __Method_CreateCard = new grpc::Method<global::SEP3_DataTier.DebitCardProtoObj, global::SEP3_DataTier.DebitCardProtoObj>(
         grpc::MethodType.Unary,
         __ServiceName,
         "CreateCard",
-        __Marshaller_DebitCard,
-        __Marshaller_google_protobuf_BoolValue);
+        __Marshaller_DebitCardProtoObj,
+        __Marshaller_DebitCardProtoObj);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Int64Value, global::SEP3_DataTier.DebitCard> __Method_FetchCardByUsername = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Int64Value, global::SEP3_DataTier.DebitCard>(
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.StringValue, global::SEP3_DataTier.DebitCardProtoObj> __Method_FetchCardByUsername = new grpc::Method<global::Google.Protobuf.WellKnownTypes.StringValue, global::SEP3_DataTier.DebitCardProtoObj>(
         grpc::MethodType.Unary,
         __ServiceName,
         "FetchCardByUsername",
-        __Marshaller_google_protobuf_Int64Value,
-        __Marshaller_DebitCard);
+        __Marshaller_google_protobuf_StringValue,
+        __Marshaller_DebitCardProtoObj);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::SEP3_DataTier.UpdateCard, global::SEP3_DataTier.DebitCard> __Method_UpdateCardDetails = new grpc::Method<global::SEP3_DataTier.UpdateCard, global::SEP3_DataTier.DebitCard>(
+    static readonly grpc::Method<global::SEP3_DataTier.UpdateCard, global::SEP3_DataTier.DebitCardProtoObj> __Method_UpdateCardDetails = new grpc::Method<global::SEP3_DataTier.UpdateCard, global::SEP3_DataTier.DebitCardProtoObj>(
         grpc::MethodType.Unary,
         __ServiceName,
         "UpdateCardDetails",
         __Marshaller_UpdateCard,
-        __Marshaller_DebitCard);
+        __Marshaller_DebitCardProtoObj);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Int64Value, global::Google.Protobuf.WellKnownTypes.BoolValue> __Method_DeleteCard = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Int64Value, global::Google.Protobuf.WellKnownTypes.BoolValue>(
@@ -97,19 +99,19 @@ namespace SEP3_DataTier {
     public abstract partial class DebitCardProtoServiceBase
     {
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.BoolValue> CreateCard(global::SEP3_DataTier.DebitCard request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.DebitCardProtoObj> CreateCard(global::SEP3_DataTier.DebitCardProtoObj request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.DebitCard> FetchCardByUsername(global::Google.Protobuf.WellKnownTypes.Int64Value request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.DebitCardProtoObj> FetchCardByUsername(global::Google.Protobuf.WellKnownTypes.StringValue request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.DebitCard> UpdateCardDetails(global::SEP3_DataTier.UpdateCard request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.DebitCardProtoObj> UpdateCardDetails(global::SEP3_DataTier.UpdateCard request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -141,9 +143,9 @@ namespace SEP3_DataTier {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, DebitCardProtoServiceBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_CreateCard, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.DebitCard, global::Google.Protobuf.WellKnownTypes.BoolValue>(serviceImpl.CreateCard));
-      serviceBinder.AddMethod(__Method_FetchCardByUsername, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Int64Value, global::SEP3_DataTier.DebitCard>(serviceImpl.FetchCardByUsername));
-      serviceBinder.AddMethod(__Method_UpdateCardDetails, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.UpdateCard, global::SEP3_DataTier.DebitCard>(serviceImpl.UpdateCardDetails));
+      serviceBinder.AddMethod(__Method_CreateCard, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.DebitCardProtoObj, global::SEP3_DataTier.DebitCardProtoObj>(serviceImpl.CreateCard));
+      serviceBinder.AddMethod(__Method_FetchCardByUsername, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.StringValue, global::SEP3_DataTier.DebitCardProtoObj>(serviceImpl.FetchCardByUsername));
+      serviceBinder.AddMethod(__Method_UpdateCardDetails, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.UpdateCard, global::SEP3_DataTier.DebitCardProtoObj>(serviceImpl.UpdateCardDetails));
       serviceBinder.AddMethod(__Method_DeleteCard, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Int64Value, global::Google.Protobuf.WellKnownTypes.BoolValue>(serviceImpl.DeleteCard));
     }
 

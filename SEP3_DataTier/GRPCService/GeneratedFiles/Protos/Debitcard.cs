@@ -25,20 +25,21 @@ namespace SEP3_DataTier {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChZQcm90b3MvZGViaXRjYXJkLnByb3RvGh5nb29nbGUvcHJvdG9idWYvd3Jh",
-            "cHBlcnMucHJvdG8iUwoJRGViaXRDYXJkEg8KB2NhcmRfaWQYASABKAMSEwoL",
-            "Y2FyZF9udW1iZXIYAiABKAMSEwoLZXhwaXJ5X2RhdGUYAyABKAkSCwoDY3Z2",
-            "GAQgASgFIjcKClVwZGF0ZUNhcmQSDwoHY2FyZF9pZBgBIAEoAxIYCgRjYXJk",
-            "GAIgASgLMgouRGViaXRDYXJkMooCChVEZWJpdENhcmRQcm90b1NlcnZpY2US",
-            "NgoKQ3JlYXRlQ2FyZBIKLkRlYml0Q2FyZBoaLmdvb2dsZS5wcm90b2J1Zi5C",
-            "b29sVmFsdWUiABJAChNGZXRjaENhcmRCeVVzZXJuYW1lEhsuZ29vZ2xlLnBy",
-            "b3RvYnVmLkludDY0VmFsdWUaCi5EZWJpdENhcmQiABIuChFVcGRhdGVDYXJk",
-            "RGV0YWlscxILLlVwZGF0ZUNhcmQaCi5EZWJpdENhcmQiABJHCgpEZWxldGVD",
-            "YXJkEhsuZ29vZ2xlLnByb3RvYnVmLkludDY0VmFsdWUaGi5nb29nbGUucHJv",
-            "dG9idWYuQm9vbFZhbHVlIgBCEKoCDVNFUDNfRGF0YVRpZXJiBnByb3RvMw=="));
+            "cHBlcnMucHJvdG8iWwoRRGViaXRDYXJkUHJvdG9PYmoSDwoHY2FyZF9pZBgB",
+            "IAEoAxITCgtjYXJkX251bWJlchgCIAEoAxITCgtleHBpcnlfZGF0ZRgDIAEo",
+            "CRILCgNjdnYYBCABKAUiPwoKVXBkYXRlQ2FyZBIPCgdjYXJkX2lkGAEgASgD",
+            "EiAKBGNhcmQYAiABKAsyEi5EZWJpdENhcmRQcm90b09iajKbAgoVRGViaXRD",
+            "YXJkUHJvdG9TZXJ2aWNlEjYKCkNyZWF0ZUNhcmQSEi5EZWJpdENhcmRQcm90",
+            "b09iahoSLkRlYml0Q2FyZFByb3RvT2JqIgASSQoTRmV0Y2hDYXJkQnlVc2Vy",
+            "bmFtZRIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRoSLkRlYml0Q2Fy",
+            "ZFByb3RvT2JqIgASNgoRVXBkYXRlQ2FyZERldGFpbHMSCy5VcGRhdGVDYXJk",
+            "GhIuRGViaXRDYXJkUHJvdG9PYmoiABJHCgpEZWxldGVDYXJkEhsuZ29vZ2xl",
+            "LnByb3RvYnVmLkludDY0VmFsdWUaGi5nb29nbGUucHJvdG9idWYuQm9vbFZh",
+            "bHVlIgBCEKoCDVNFUDNfRGF0YVRpZXJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.DebitCard), global::SEP3_DataTier.DebitCard.Parser, new[]{ "CardId", "CardNumber", "ExpiryDate", "Cvv" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.DebitCardProtoObj), global::SEP3_DataTier.DebitCardProtoObj.Parser, new[]{ "CardId", "CardNumber", "ExpiryDate", "Cvv" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.UpdateCard), global::SEP3_DataTier.UpdateCard.Parser, new[]{ "CardId", "Card" }, null, null, null, null)
           }));
     }
@@ -46,16 +47,16 @@ namespace SEP3_DataTier {
 
   }
   #region Messages
-  public sealed partial class DebitCard : pb::IMessage<DebitCard>
+  public sealed partial class DebitCardProtoObj : pb::IMessage<DebitCardProtoObj>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<DebitCard> _parser = new pb::MessageParser<DebitCard>(() => new DebitCard());
+    private static readonly pb::MessageParser<DebitCardProtoObj> _parser = new pb::MessageParser<DebitCardProtoObj>(() => new DebitCardProtoObj());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<DebitCard> Parser { get { return _parser; } }
+    public static pb::MessageParser<DebitCardProtoObj> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -71,7 +72,7 @@ namespace SEP3_DataTier {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DebitCard() {
+    public DebitCardProtoObj() {
       OnConstruction();
     }
 
@@ -79,7 +80,7 @@ namespace SEP3_DataTier {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DebitCard(DebitCard other) : this() {
+    public DebitCardProtoObj(DebitCardProtoObj other) : this() {
       cardId_ = other.cardId_;
       cardNumber_ = other.cardNumber_;
       expiryDate_ = other.expiryDate_;
@@ -89,8 +90,8 @@ namespace SEP3_DataTier {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DebitCard Clone() {
-      return new DebitCard(this);
+    public DebitCardProtoObj Clone() {
+      return new DebitCardProtoObj(this);
     }
 
     /// <summary>Field number for the "card_id" field.</summary>
@@ -144,12 +145,12 @@ namespace SEP3_DataTier {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as DebitCard);
+      return Equals(other as DebitCardProtoObj);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(DebitCard other) {
+    public bool Equals(DebitCardProtoObj other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -261,7 +262,7 @@ namespace SEP3_DataTier {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(DebitCard other) {
+    public void MergeFrom(DebitCardProtoObj other) {
       if (other == null) {
         return;
       }
@@ -405,10 +406,10 @@ namespace SEP3_DataTier {
 
     /// <summary>Field number for the "card" field.</summary>
     public const int CardFieldNumber = 2;
-    private global::SEP3_DataTier.DebitCard card_;
+    private global::SEP3_DataTier.DebitCardProtoObj card_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::SEP3_DataTier.DebitCard Card {
+    public global::SEP3_DataTier.DebitCardProtoObj Card {
       get { return card_; }
       set {
         card_ = value;
@@ -518,7 +519,7 @@ namespace SEP3_DataTier {
       }
       if (other.card_ != null) {
         if (card_ == null) {
-          Card = new global::SEP3_DataTier.DebitCard();
+          Card = new global::SEP3_DataTier.DebitCardProtoObj();
         }
         Card.MergeFrom(other.Card);
       }
@@ -543,7 +544,7 @@ namespace SEP3_DataTier {
           }
           case 18: {
             if (card_ == null) {
-              Card = new global::SEP3_DataTier.DebitCard();
+              Card = new global::SEP3_DataTier.DebitCardProtoObj();
             }
             input.ReadMessage(Card);
             break;
@@ -569,7 +570,7 @@ namespace SEP3_DataTier {
           }
           case 18: {
             if (card_ == null) {
-              Card = new global::SEP3_DataTier.DebitCard();
+              Card = new global::SEP3_DataTier.DebitCardProtoObj();
             }
             input.ReadMessage(Card);
             break;

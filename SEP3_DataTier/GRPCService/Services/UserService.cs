@@ -3,7 +3,6 @@ using Entity.Model;
 using Google.Protobuf.Collections;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
-using GrpcService.ObjectMapper;
 using SEP3_DataTier;
 
 namespace GrpcService.Services;
@@ -21,10 +20,10 @@ public class UserService : UserProtoService.UserProtoServiceBase
     {
         try
         {
-            UserEntity toAddUser = UserEntityMapper.FromProtoToEntity(request);
+            UserEntity toAddUser = FromProtoToEntity(request);
             UserEntity addedUser = await userDao.CreateUserAsync(toAddUser);
 
-            UserProtoObj userProtoObj = UserEntityMapper.FromEntityToProto(addedUser);
+            UserProtoObj userProtoObj = FromEntityToProto(addedUser);
             return userProtoObj;
         }
         catch (Exception e)
@@ -43,7 +42,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
 
             foreach (UserEntity userEntity in allUsers)
             {
-                userProtoObjs.Add(UserEntityMapper.FromEntityToProto(userEntity));
+                userProtoObjs.Add(FromEntityToProto(userEntity));
             }
 
             return new UserListResponse() { AllUsers = { userProtoObjs } };
@@ -60,7 +59,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
         try
         {
             UserEntity userByUsername = await userDao.FetchUserByUsernameAsync(request.Value);
-            UserProtoObj userProtoObj = UserEntityMapper.FromEntityToProto(userByUsername);
+            UserProtoObj userProtoObj = FromEntityToProto(userByUsername);
             return userProtoObj;
         }
         catch (Exception e)
@@ -75,7 +74,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
         try
         {
             UserEntity userById = await userDao.FetchUserByIdAsync(request.Value);
-            UserProtoObj protoObj = UserEntityMapper.FromEntityToProto(userById);
+            UserProtoObj protoObj = FromEntityToProto(userById);
             return protoObj;
         }
         catch (Exception e)
@@ -91,10 +90,10 @@ public class UserService : UserProtoService.UserProtoServiceBase
 
         try
         {
-            UserEntity userUpdate = UserEntityMapper.FromProtoToEntity(request.ToUpdateUser);
+            UserEntity userUpdate = FromProtoToEntity(request.ToUpdateUser);
             UserEntity updatedUser = await userDao.UpdateUserAsync(userUpdate);
 
-            UserProtoObj userProtoObj = UserEntityMapper.FromEntityToProto(updatedUser);
+            UserProtoObj userProtoObj = FromEntityToProto(updatedUser);
             return userProtoObj;
         }
         catch (Exception e)
@@ -126,5 +125,29 @@ public class UserService : UserProtoService.UserProtoServiceBase
     public override Task<BoolValue> UpdateBalance(Int32Value request, ServerCallContext context)
     {
         return base.UpdateBalance(request, context);
+    }
+
+    public static UserEntity FromProtoToEntity(UserProtoObj userProtoObj)
+    {
+        return new UserEntity()
+        {
+            Fullname = userProtoObj.FullName,
+            Username = userProtoObj.UserName,
+            Password = userProtoObj.Password,
+            Card = DebitCardService.FromProtoToEntity(userProtoObj.Card),
+            Balance = userProtoObj.Balance
+        };
+    }
+
+    public static UserProtoObj FromEntityToProto(UserEntity userEntity)
+    {
+        return new UserProtoObj()
+        {
+            FullName = userEntity.Fullname,
+            UserName = userEntity.Username,
+            Password = userEntity.Password,
+            Card = DebitCardService.FromEntityToProto(userEntity.Card),
+            Balance = userEntity.Balance
+        };
     }
 }

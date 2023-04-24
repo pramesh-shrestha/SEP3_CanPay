@@ -12,7 +12,7 @@ message UserProtoObj {
   string full_name = 2;
   string user_name = 3;
   string password = 4;
-  DebitCard card = 5;
+  DebitCardProtoObj card = 5;
   int32  balance = 6;
 }
 
