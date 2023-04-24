@@ -29,7 +29,7 @@ public class CardController {
     }
 
     //Get Card by username--
-    @GetMapping("/user/{username}")
+    @GetMapping("/card/{username}")
     public ResponseEntity<DebitCard> FetchCardByUsername(@PathVariable("username") String username){
         try{
             return new ResponseEntity<>(cardService.FetchCardByUsername(username),HttpStatus.OK);
