@@ -20,7 +20,6 @@ public class UserDaoImpl : IUserDao
     {
         try
         {
-            Console.WriteLine($"User DAO Impl T3: {userEntity.Username}");
             EntityEntry<UserEntity> userToAdd = await context.Users.AddAsync(userEntity);
             await context.SaveChangesAsync();
             return userToAdd.Entity;
@@ -90,23 +89,21 @@ public class UserDaoImpl : IUserDao
     }
 
     //update balance
-    public async Task<bool> UpdateBalanceAsync(string sender, string receiver, int balance)
+    public async Task<bool> UpdateBalanceAsync(string sender, string receiver, int amount)
     {
         try
         {
             int senderAmount = await FetchBalanceByUsername(sender);
             //sender side
-            if (senderAmount > 0 && senderAmount >= balance)
+            if (senderAmount > 0 && senderAmount >= amount)
             {
-                senderAmount -= balance;
+                senderAmount -= amount;
                 UserEntity senderEntity = await FetchUserByUsernameAsync(sender);
                 senderEntity.Balance = senderAmount;
 
                 //receiver side
-                int receiverAmount = await FetchBalanceByUsername(receiver);
-                receiverAmount += balance;
-                UserEntity receiverEntity = await FetchUserByUsernameAsync(receiver);
-                receiverEntity.Balance = receiverAmount;
+                UserEntity receiverUser = await FetchUserByUsernameAsync(receiver);
+                receiverUser.Balance += amount;
 
                 await context.SaveChangesAsync();
                 return true;

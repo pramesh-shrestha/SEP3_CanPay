@@ -9,7 +9,7 @@ public interface IUserDao {
     Task<ICollection<UserEntity>> FetchUsersAsync();
     Task<UserEntity> UpdateUserAsync(UserEntity userEntity);
     Task DeleteUserAsync(long id);
-    Task<bool> UpdateBalanceAsync(string sender, string receiver, int balance);
+    Task<bool> UpdateBalanceAsync(string sender, string receiver, int amount);
     Task<int> FetchBalanceByUsername(string username);
 
 }
