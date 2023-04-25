@@ -1,0 +1,223 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\GrpcService\\GrpcService.csproj": {}
+  },
+  "projects": {
+    "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
+        "projectName": "EFCDataAccess",
+        "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
+        "packagesPath": "C:\\Users\\pdlra\\.nuget\\packages\\",
+        "outputPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\pdlra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj": {
+                "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj",
+        "projectName": "Entity",
+        "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj",
+        "packagesPath": "C:\\Users\\pdlra\\.nuget\\packages\\",
+        "outputPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\pdlra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\GrpcService\\GrpcService.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\GrpcService\\GrpcService.csproj",
+        "projectName": "GrpcService",
+        "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\GrpcService\\GrpcService.csproj",
+        "packagesPath": "C:\\Users\\pdlra\\.nuget\\packages\\",
+        "outputPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\GrpcService\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\pdlra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj": {
+                "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj"
+              },
+              "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj": {
+                "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Grpc.AspNetCore": {
+              "target": "Package",
+              "version": "[2.49.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
