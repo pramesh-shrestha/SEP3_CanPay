@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+
+import "google/protobuf/wrappers.proto";
+
+option java_multiple_files = false;
+option java_package = "applicationtier.protobuf";
+
+message DebitCardProtoObj {
+  int64 card_id = 1;
+  int64 card_number = 2;
+  string expiry_date = 3;
+  int32 cvv = 4;
+}
+
+service DebitCardProtoService {
+  rpc CreateCard(DebitCardProtoObj) returns (DebitCardProtoObj) {}
+  rpc FetchCardByUsername(google.protobuf.Int64Value) returns (DebitCardProtoObj) {}
+  rpc UpdateCardDetails(UpdateCard) returns (DebitCardProtoObj) {}
+  rpc DeleteCard(google.protobuf.Int64Value) returns (google.protobuf.BoolValue) {}
+}
+
+message UpdateCard {
+  int64 card_id = 1;
+  DebitCardProtoObj card = 2;
+}

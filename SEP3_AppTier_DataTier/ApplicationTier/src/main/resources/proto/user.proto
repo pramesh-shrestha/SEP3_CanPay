@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option csharp_namespace = "SEP3_DataTier";
+
+import "google/protobuf/wrappers.proto";
+import "debitcard.proto";
+import "google/protobuf/empty.proto";
+
+option java_multiple_files = false;
+option java_package = "applicationtier.protobuf";
+
+message UserProtoObj {
+  int64 user_id = 1;
+  string full_name = 2;
+  string user_name = 3;
+  string password = 4;
+  DebitCardProtoObj card = 5;
+  int32 balance = 6;
+}
+
+service UserProtoService {
+  rpc CreateUser(UserProtoObj) returns (UserProtoObj) {}
+  rpc FetchAllUser(google.protobuf.Empty) returns (UserListResponse) {}
+  rpc FetchUserByUsername(google.protobuf.StringValue) returns (UserProtoObj) {}
+  rpc FetchUserById(google.protobuf.Int32Value) returns (UserProtoObj) {}
+  rpc UpdateUser(UpdateUserRequest) returns (UserProtoObj) {}
+  rpc DeleteUser(google.protobuf.Int64Value) returns (google.protobuf.BoolValue) {}
+  rpc UpdateBalance(google.protobuf.Int32Value) returns(google.protobuf.BoolValue);
+  rpc FetchBalanceByUsername(google.protobuf.StringValue) returns(google.protobuf.Int32Value);
+}
+
+message UpdateUserRequest {
+  string username = 1;
+  UserProtoObj toUpdateUser = 2;
+}
+
+message UserListResponse {
+  repeated UserProtoObj allUsers = 1;
+}
