@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\iamsu\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj": {}
+    "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\iamsu\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj": {
+    "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iamsu\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
+        "projectUniqueName": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
         "projectName": "EFCDataAccess",
-        "projectPath": "C:\\Users\\iamsu\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
-        "packagesPath": "C:\\Users\\iamsu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iamsu\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\obj\\",
+        "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
+        "packagesPath": "C:\\Users\\pdlra\\.nuget\\packages\\",
+        "outputPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\iamsu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pdlra\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\iamsu\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj": {
-                "projectPath": "C:\\Users\\iamsu\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj"
+              "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj": {
+                "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj"
               }
             }
           }
@@ -83,17 +83,17 @@
         }
       }
     },
-    "C:\\Users\\iamsu\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj": {
+    "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iamsu\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj",
+        "projectUniqueName": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj",
         "projectName": "Entity",
-        "projectPath": "C:\\Users\\iamsu\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj",
-        "packagesPath": "C:\\Users\\iamsu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iamsu\\RiderProjects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\obj\\",
+        "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj",
+        "packagesPath": "C:\\Users\\pdlra\\.nuget\\packages\\",
+        "outputPath": "D:\\VIA\\SEM-3\\Projects\\SEP3\\SEP3_CanPay\\SEP3_DataTier\\Entity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\iamsu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pdlra\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -6,12 +6,16 @@ import applicationtier.entity.UserEntity;
 import applicationtier.protobuf.User;
 import applicationtier.protobuf.UserProtoServiceGrpc;
 import io.grpc.ManagedChannel;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserClientImpl implements IUserClient {
 
     private UserProtoServiceGrpc.UserProtoServiceBlockingStub userBlockingStub;
+
 
     public UserProtoServiceGrpc.UserProtoServiceBlockingStub getUserBlockingStub() {
         if (userBlockingStub == null) {
@@ -27,6 +31,7 @@ public class UserClientImpl implements IUserClient {
             System.out.println("User Client Impl T2: " + userEntity.getBalance());
 
             User.UserProtoObj userProtoObj = fromEntityToProtoObj(userEntity);
+
             User.UserProtoObj protoObjFromServer = getUserBlockingStub().createUser(userProtoObj);
             return fromProtoObjToEntity(protoObjFromServer);
         } catch (Exception e) {
@@ -57,4 +62,6 @@ public class UserClientImpl implements IUserClient {
         userEntity.setBalance(userEntity.getBalance());
         return userEntity;
     }
+
+
 }
