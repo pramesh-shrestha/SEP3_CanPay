@@ -24,6 +24,8 @@ public class UserClientImpl implements IUserClient {
     @Override
     public UserEntity createUser(UserEntity userEntity) {
         try {
+            System.out.println("User Client Impl T2: " + userEntity.getBalance());
+
             User.UserProtoObj userProtoObj = fromEntityToProtoObj(userEntity);
             User.UserProtoObj protoObjFromServer = getUserBlockingStub().createUser(userProtoObj);
             return fromProtoObjToEntity(protoObjFromServer);
@@ -40,9 +42,9 @@ public class UserClientImpl implements IUserClient {
                 .setPassword(userEntity.getPassword())
                 .setFullName(userEntity.getFullName())
                 .setCard(CardClientImpl.fromEntityToProtoObj(userEntity.getCard()))
+                .setBalance(userEntity.getBalance())
                 .build();
         return userProtoObj;
-
     }
 
     //convert proto to user object
@@ -52,6 +54,7 @@ public class UserClientImpl implements IUserClient {
         userEntity.setUserName(userProtoObj.getUserName());
         userEntity.setPassword(userProtoObj.getPassword());
         userEntity.setFullName(userProtoObj.getFullName());
+        userEntity.setBalance(userEntity.getBalance());
         return userEntity;
     }
 }

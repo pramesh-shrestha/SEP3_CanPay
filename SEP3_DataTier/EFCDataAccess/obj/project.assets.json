@@ -391,6 +391,9 @@
       "Entity/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.5"
+        },
         "compile": {
           "bin/placeholder/Entity.dll": {}
         },
@@ -1002,23 +1005,24 @@
       "Entity >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.5",
+      "Microsoft.EntityFrameworkCore.Relational >= 7.0.5",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\prmss\\.nuget\\packages\\": {}
+    "C:\\Users\\pdlra\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\prmss\\Sep3\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
+      "projectUniqueName": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
       "projectName": "EFCDataAccess",
-      "projectPath": "C:\\Users\\prmss\\Sep3\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
-      "packagesPath": "C:\\Users\\prmss\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\prmss\\Sep3\\SEP3_DataTier\\EFCDataAccess\\obj\\",
+      "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
+      "packagesPath": "C:\\Users\\pdlra\\.nuget\\packages\\",
+      "outputPath": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\prmss\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pdlra\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1032,8 +1036,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\prmss\\Sep3\\SEP3_DataTier\\Entity\\Entity.csproj": {
-              "projectPath": "C:\\Users\\prmss\\Sep3\\SEP3_DataTier\\Entity\\Entity.csproj"
+            "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj": {
+              "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj"
             }
           }
         }
@@ -1058,6 +1062,10 @@
             "target": "Package",
             "version": "[7.0.5, )"
           },
+          "Microsoft.EntityFrameworkCore.Relational": {
+            "target": "Package",
+            "version": "[7.0.5, )"
+          },
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
             "version": "[7.0.3, )"
@@ -1079,7 +1087,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

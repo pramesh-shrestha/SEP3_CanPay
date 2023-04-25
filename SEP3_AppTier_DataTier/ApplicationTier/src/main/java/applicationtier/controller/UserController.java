@@ -22,10 +22,10 @@ public class UserController {
     //create user
     @PostMapping("/user/create")
     public ResponseEntity<UserEntity> createUser(@RequestBody
-    UserEntity user) {
+                                                 UserEntity user) {
         try {
+            System.out.println("User Controller T2: " + user.getBalance());
             ResponseEntity<UserEntity> response = new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
-            System.out.println(response);
             return response;
 
         } catch (Exception e) {

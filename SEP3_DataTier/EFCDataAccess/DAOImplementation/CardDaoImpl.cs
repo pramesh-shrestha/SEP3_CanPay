@@ -50,7 +50,7 @@ public class CardDaoImpl : ICardDao
         return debitCardEntity;
     }
 
-    //delete cardd
+    //delete card
     public async Task DeleteCardAsync(long id)
     {
         DebitCardEntity? existedCardEntity = await context.Cards.FirstOrDefaultAsync(card => card.CardId == id);

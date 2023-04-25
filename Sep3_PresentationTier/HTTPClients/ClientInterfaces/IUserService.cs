@@ -5,10 +5,10 @@ namespace HTTPClients.ClientInterfaces;
 
 public interface IUserService
 {
-    Task<User> CreateAsync(User toCreateUser);
-    Task<IEnumerable<User>> FetchUsersAsync();
-    Task<User> FetchUserByIdAsync();
-    Task<User> FetchUserByUsernameAsync(string username);
-    Task<User> UpdateUserAsync(long id, User user);
-    Task DeleteUserAsync(long id);
+    Task<UserEntity> CreateAsync(UserEntity toCreateUserEntity);
+    Task<IEnumerable<UserEntity>> FetchUsersAsync();
+    Task<UserEntity> FetchUserByIdAsync(long id);
+    Task<UserEntity> FetchUserByUsernameAsync(string username);
+    Task<UserEntity> UpdateUserAsync(long id, UserEntity userEntity);
+    Task<Boolean> DeleteUserAsync(long id);
 }

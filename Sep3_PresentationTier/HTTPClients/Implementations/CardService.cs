@@ -14,9 +14,9 @@ public class CardService : ICardService
         this.client = client;
     }
 
-    public async Task<DebitCard> CreateAsync(DebitCard toCreateCard)
+    public async Task<DebitCardEntity> CreateAsync(DebitCardEntity toCreateCardEntity)
     {
-        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("card/create", toCreateCard);
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("card/create", toCreateCardEntity);
         string result = await responseMessage.Content.ReadAsStringAsync();
 
         if (!responseMessage.IsSuccessStatusCode)
@@ -24,24 +24,24 @@ public class CardService : ICardService
             throw new Exception(result);
         }
 
-        DebitCard debitCard = JsonSerializer.Deserialize<DebitCard>(result, new JsonSerializerOptions
+        DebitCardEntity debitCardEntity = JsonSerializer.Deserialize<DebitCardEntity>(result, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         })!;
-        return debitCard;
+        return debitCardEntity;
     }
 
-    public Task<DebitCard> FetchCardByUsernameAsync(string username)
+    public Task<DebitCardEntity> FetchCardByUsernameAsync(string username)
     {
         throw new NotImplementedException();
     }
 
-    public Task<DebitCard> UpdateCardAsync(long id, User user)
+    public Task<DebitCardEntity> UpdateCardAsync(long id, UserEntity userEntity)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteCardAsync(long id)
+    public Task<Boolean> DeleteCardAsync(long id)
     {
         throw new NotImplementedException();
     }

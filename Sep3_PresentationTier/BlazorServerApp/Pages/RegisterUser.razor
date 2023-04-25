@@ -3,7 +3,6 @@
 @using System.Text.RegularExpressions
 @using Domains.Entity
 @inject IUserService UserService;
-@inject ICardService CardService;
 
 <div class="form-content">
     <div class="container ">
@@ -25,7 +24,7 @@
                 </div>
 
                 <button class="signUp">
-                    <span @onclick="@Create">Create Account</span>
+                    <span @onclick="@CreateAsync">Create Account</span>
                 </button>
             </div>
 
@@ -156,7 +155,7 @@
         step = 1;
     }
 
-    private async Task Create()
+    private async Task CreateAsync()
     {
         try
         {
@@ -173,10 +172,9 @@
             if (cvv == 0) throw new Exception("CVV Cannot Be Empty");
             if (cvv.ToString().Length != 3) throw new Exception("CVV must be 3 digits long");
 
-            DebitCard card = new DebitCard(cardNumber, expiryDate, cvv);
-            User user = new User(name, username, password, card, 1000);
-            await UserService.CreateAsync(user);
-            await CardService.CreateAsync(card);
+            DebitCardEntity cardEntity = new DebitCardEntity(cardNumber, expiryDate, cvv);
+            UserEntity userEntity = new UserEntity(name, username, password, cardEntity, 1000);
+            await UserService.CreateAsync(userEntity);
         }
         catch (Exception e)
         {

@@ -9,6 +9,6 @@ public interface ICardClient {
 
     DebitCardEntity updateCardDetails(DebitCardEntity debitCard);
 
-    DebitCardEntity deleteCard(int cardId);
+    boolean deleteCard(Long cardId);
 
 }

@@ -20,22 +20,21 @@ public class CardController {
     //Create Card--
     @PostMapping("/card/create")
     public ResponseEntity<DebitCardEntity> CreateCard(@RequestBody
-    DebitCardEntity card){
+                                                      DebitCardEntity card) {
         try {
+            System.out.println("card controller t2 called");
             return new ResponseEntity<>(cardService.CreateCard(card), HttpStatus.OK);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     //Get Card by username--
     @GetMapping("/card/{username}")
-    public ResponseEntity<DebitCardEntity> FetchCardByUsername(@PathVariable("username") String username){
-        try{
-            return new ResponseEntity<>(cardService.FetchCardByUsername(username),HttpStatus.OK);
-        }
-        catch (Exception e){
+    public ResponseEntity<DebitCardEntity> FetchCardByUsername(@PathVariable("username") String username) {
+        try {
+            return new ResponseEntity<>(cardService.FetchCardByUsername(username), HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -43,24 +42,22 @@ public class CardController {
     //update card--
     @PutMapping("/card/{id}")
     public ResponseEntity<DebitCardEntity> UpdateCard(@PathVariable long id, @RequestBody
-    DebitCardEntity card){
-        try{
-            return new ResponseEntity<>(cardService.updateCard(id,card),HttpStatus.OK);
-        }
-        catch (Exception e){
+    DebitCardEntity card) {
+        try {
+            return new ResponseEntity<>(cardService.updateCard(id, card), HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     //delete card--
     @DeleteMapping("/card/delete/{id}")
-    public ResponseEntity<String> DeleteCard(@PathVariable("id") long id){
+    public ResponseEntity<String> DeleteCard(@PathVariable("id") long id) {
         try {
             cardService.deleteCard(id);
-            return new ResponseEntity<>("Card has been successfully deleted",HttpStatus.OK);
-        }
-        catch (Exception e){
-            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Card has been successfully deleted", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }

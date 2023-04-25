@@ -4,8 +4,8 @@ namespace HTTPClients.ClientInterfaces;
 
 public interface ICardService
 {
-    Task<DebitCard> CreateAsync(DebitCard toCreateCard);
-    Task<DebitCard> FetchCardByUsernameAsync(string username);
-    Task<DebitCard> UpdateCardAsync(long id, User user);
-    Task DeleteCardAsync(long id);
+    Task<DebitCardEntity> CreateAsync(DebitCardEntity toCreateCardEntity);
+    Task<DebitCardEntity> FetchCardByUsernameAsync(string username);
+    Task<DebitCardEntity> UpdateCardAsync(long id, UserEntity userEntity);
+    Task<Boolean> DeleteCardAsync(long id);
 }

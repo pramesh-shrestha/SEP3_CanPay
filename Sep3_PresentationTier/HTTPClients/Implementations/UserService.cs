@@ -14,44 +14,44 @@ public class UserService : IUserService
         this.client = client;
     }
 
-    public async Task<User> CreateAsync(User toCreateUser)
+    public async Task<UserEntity> CreateAsync(UserEntity toCreateUserEntity)
     {
-        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/user/create", toCreateUser);
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/user/create", toCreateUserEntity);
         string result = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode)
         {
             throw new Exception(result);
         }
 
-        User user = JsonSerializer.Deserialize<User>(result, new JsonSerializerOptions
+        UserEntity userEntity = JsonSerializer.Deserialize<UserEntity>(result, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         })!;
-        
-        return user;
+
+        return userEntity;
     }
 
-    public Task<IEnumerable<User>> FetchUsersAsync()
+    public Task<IEnumerable<UserEntity>> FetchUsersAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<User> FetchUserByIdAsync()
+    public Task<UserEntity> FetchUserByIdAsync(long id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<User> FetchUserByUsernameAsync(string username)
+    public Task<UserEntity> FetchUserByUsernameAsync(string username)
     {
         throw new NotImplementedException();
     }
 
-    public Task<User> UpdateUserAsync(long id, User user)
+    public Task<UserEntity> UpdateUserAsync(long id, UserEntity userEntity)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteUserAsync(long id)
+    public Task<Boolean> DeleteUserAsync(long id)
     {
         throw new NotImplementedException();
     }

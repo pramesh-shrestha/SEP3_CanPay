@@ -7,5 +7,5 @@ public interface ICardService {
     DebitCardEntity CreateCard(DebitCardEntity card);
     DebitCardEntity FetchCardByUsername(String username);
     DebitCardEntity updateCard(Long id, DebitCardEntity card);
-    void deleteCard(Long id);
+    boolean deleteCard(Long id);
 }

@@ -42,8 +42,8 @@ public class CardClientImpl implements ICardClient {
     }
 
     @Override
-    public DebitCardEntity deleteCard(int cardId) {
-        return null;
+    public boolean deleteCard(Long cardId) {
+        return false;
     }
 
     public static Debitcard.DebitCardProtoObj fromEntityToProtoObj(DebitCardEntity debitCard) {
