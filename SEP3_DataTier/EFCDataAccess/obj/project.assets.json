@@ -1010,19 +1010,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pdlra\\.nuget\\packages\\": {}
+    "C:\\Users\\prmss\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\prmss\\Sep3\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
       "projectName": "EFCDataAccess",
-      "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
-      "packagesPath": "C:\\Users\\pdlra\\.nuget\\packages\\",
-      "outputPath": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\EFCDataAccess\\obj\\",
+      "projectPath": "C:\\Users\\prmss\\Sep3\\SEP3_DataTier\\EFCDataAccess\\EFCDataAccess.csproj",
+      "packagesPath": "C:\\Users\\prmss\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\prmss\\Sep3\\SEP3_DataTier\\EFCDataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\pdlra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\prmss\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1036,8 +1036,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj": {
-              "projectPath": "D:\\VIA\\SEM-3\\Projects\\SEP3_CanPay\\SEP3_DataTier\\Entity\\Entity.csproj"
+            "C:\\Users\\prmss\\Sep3\\SEP3_DataTier\\Entity\\Entity.csproj": {
+              "projectPath": "C:\\Users\\prmss\\Sep3\\SEP3_DataTier\\Entity\\Entity.csproj"
             }
           }
         }
@@ -1087,7 +1087,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
