@@ -1,0 +1,63 @@
+//User Controller
+
+//Create user
+###
+POST http://localhost:8090/user/create
+Content-Type: application/json
+
+{
+  "fullName": "Pramesh shrestha",
+  "userName": "Pramesh12",
+  "password": "Pramesh1@",
+  "balance" : 1000,
+  "card": {
+    "cardNumber": 1231234564567812,
+    "expiryDate": "12/23",
+    "cvv" : 133
+  }
+}
+
+###
+//Get all users
+GET http://localhost:8090/user
+
+###
+//Get user by id
+GET http://localhost:8090/user/2
+
+###
+//Get user by username
+GET http://localhost:8090/user/Pramesh12
+
+###
+//Delete user by id
+DELETE http://localhost:8090/user/delete/1
+
+###
+//Card controller
+
+
+###
+//Create Card
+POST http://localhost:8090/card/create
+Content-Type: application/json
+
+{
+  "cardNumber": 1234567890123456,
+  "expiryDate": "12/25",
+  "cvv": 123
+}
+
+###
+//Get card by username
+GET http://localhost:8090/card/Pramesh12
+
+###
+//Get card by id
+PUT http://localhost:8090/card/2
+
+###
+//Delete card by id
+DELETE http://localhost:8090/card/delete/1
+
+
