@@ -81,7 +81,7 @@
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <label>Cardholder Name</label>
-                                        <input type="text" placeholder="Full name as displayed on card." disabled @bind="username" class="form-control">
+                                        <input type="text" placeholder="Full name as displayed on card." disabled @bind="name" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Card Number</label>
@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Expiry Date</label>
-                                        <input type="text" class="form-control" placeholder="MM/YYYY" @bind="expiryDate">
+                                        <input type="month" class="form-control"  @bind="expiryFullDate" min="@DateTime.Now.ToString("MM-yyyy")">
                                     </div>
                                     <div class="form-group">
                                         <label>CVV</label>
@@ -120,13 +120,15 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-
-                        @if (!string.IsNullOrEmpty(errorLabel))
-                        {
-                            <label style="color: red; width: 100%">@errorLabel</label>
-                        }
-                    </div>
+                    @if (isErrorMessageDisplayed)
+                    {
+                        <div class="form-group">
+                            @if (!string.IsNullOrEmpty(errorLabel))
+                            {
+                                <label style="color: @color; width: 100%">@errorLabel</label>
+                            }
+                        </div>
+                    }
 
                 </div>
             </div>
@@ -141,13 +143,31 @@
     private string? password;
     private string? repeatPassword;
     private long cardNumber;
-    private string? expiryDate;
+    private DateTime expiryFullDate = DateTime.Now;
     private int cvv;
     private string? errorLabel;
+    private string? color = "red";
+
+    private bool isErrorMessageDisplayed;
+    private Timer? timer;
+    private readonly int messageDisplayTime = 2000; // in millisecond
 
     private void GoToStep2()
     {
-        step = 2;
+        try
+        {
+            if (string.IsNullOrEmpty(name)) throw new Exception("Full Name Cannot Be Empty");
+            if (string.IsNullOrEmpty(username)) throw new Exception("Username Cannot Be Empty");
+            if (string.IsNullOrEmpty(password)) throw new Exception("Password Cannot Be Empty");
+            if (string.IsNullOrEmpty(repeatPassword)) throw new Exception("Repeat Password Cannot Be Empty");
+            if (!password.Equals(repeatPassword)) throw new Exception("Password and Repeat Password doesn't match!!");
+            step = 2;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            DisplayMessage(e.Message);
+        }
     }
 
     private void GoToStep1()
@@ -159,11 +179,7 @@
     {
         try
         {
-            if (string.IsNullOrEmpty(name)) throw new Exception("Full Name Cannot Be Empty");
-            if (string.IsNullOrEmpty(username)) throw new Exception("Username Cannot Be Empty");
-            if (string.IsNullOrEmpty(password)) throw new Exception("Password Cannot Be Empty");
-            if (string.IsNullOrEmpty(repeatPassword)) throw new Exception("Repeat Password Cannot Be Empty");
-            if (!password.Equals(repeatPassword)) throw new Exception("Password and Repeat Password doesn't match!!");
+            string expiryDate = $"{expiryFullDate.Date.Month}/{expiryFullDate.Date.Year}";
             if (cardNumber == 0) throw new Exception("Card Number Cannot Be Empty");
             if (cardNumber.ToString().Length != 16) throw new Exception("Card Number Must Be 16 Digits Long");
             if (string.IsNullOrEmpty(expiryDate)) throw new Exception("ExpiryDate Cannot Be Empty");
@@ -174,14 +190,31 @@
 
             DebitCardEntity cardEntity = new DebitCardEntity(cardNumber, expiryDate, cvv);
             UserEntity userEntity = new UserEntity(name, username, password, cardEntity, 1000);
-            await UserService.CreateAsync(userEntity);
+            UserEntity entity = await UserService.CreateAsync(userEntity);
+
+            color = "green";
+            DisplayMessage($"User {entity.UserName} successfully created");
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            errorLabel = $"Error: {e.Message}";
+            DisplayMessage(e.Message);
         }
     }
 
+    private void DisplayMessage(string errorMessage)
+    {
+        errorLabel = $"Error: {errorMessage}";
+        isErrorMessageDisplayed = true;
+        timer = new Timer(OnTimerElapsed, null, messageDisplayTime, Timeout.Infinite);
+    }
+
+    private void OnTimerElapsed(object state)
+    {
+        timer?.DisposeAsync();
+    // Clear the error message here
+        isErrorMessageDisplayed = false;
+        InvokeAsync(StateHasChanged);
+    }
 
 }
