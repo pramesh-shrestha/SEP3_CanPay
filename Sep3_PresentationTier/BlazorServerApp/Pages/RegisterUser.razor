@@ -145,7 +145,6 @@
     public string RepeatPassword { get; set; }
     public long CardNumber { get; set; }
     public DateTime ExpiryFullDate { get; set; }
-    public string expiryDate = "";
     public int CVV { get; set; }
     public string ErrorLabel { get; set; }
     private string? color = "red";
@@ -197,9 +196,7 @@
     {
         try
         {
-            int monthNumber = DateTime.ParseExact(ExpiryFullDate.Date.Month.ToString(), "MMMM", CultureInfo.InvariantCulture).Month;
-
-            expiryDate = $"{monthNumber}/{ExpiryFullDate.Date.Year}";
+            string expiryDate = $"{ExpiryFullDate.Date.Month}/{ExpiryFullDate.Date.Year}";
             if (CardNumber == 0) throw new Exception("Card Number Cannot Be Empty");
             if (CardNumber.ToString().Length != 16) throw new Exception("Card Number Must Be 16 Digits Long");
             if (string.IsNullOrEmpty(expiryDate)) throw new Exception("ExpiryDate Cannot Be Empty");

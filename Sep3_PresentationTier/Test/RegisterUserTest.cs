@@ -11,11 +11,12 @@ public class RegisterUserTest : IClassFixture<TestContext>
     
     private TestContext context;
     private IRenderedComponent<RegisterUser> renderedComponent;
+    private IUserService userService;
 
-    private void Setup()
-    {
+    private void Setup() {
+        userService = new UserService(new HttpClient());
         context = new TestContext();
-        context.Services.AddSingleton<IUserService>(new UserService(new HttpClient()));
+        context.Services.AddSingleton<IUserService>(userService);
         context.Services.AddSingleton<ICardService>(new CardService(new HttpClient()));
 
         renderedComponent = context.RenderComponent<RegisterUser>();
@@ -28,14 +29,11 @@ public class RegisterUserTest : IClassFixture<TestContext>
         renderedComponent.Instance.Username = "test12";
         renderedComponent.Instance.Password = "Test@123";
         renderedComponent.Instance.RepeatPassword = "Test@123";
-        renderedComponent.Instance.CardNumber = 1234567890123456;
-        renderedComponent.Instance.expiryDate = "2/2030";
-        renderedComponent.Instance.CVV = 741;
     }
     
-    private void SetInstancesValueForUserForDebitCard() {
+    private void SetInstancesValueForDebitCard() {
         renderedComponent.Instance.CardNumber = 1234567890123456;
-        renderedComponent.Instance.expiryDate = "22/2030";
+        renderedComponent.Instance.ExpiryFullDate = DateTime.Parse("22/12/2026");
         renderedComponent.Instance.CVV = 741;
        
     }
@@ -119,15 +117,15 @@ public class RegisterUserTest : IClassFixture<TestContext>
 
     [Fact]
     public async Task CreateAccount_ShouldThrowAnError_WhenCardNumberIsZero() {
+        //Arrange
         Setup();
-        SetInstancesValueForUser();
-        renderedComponent.Instance.GoToStep2();
-        // SetInstancesValueForUserForDebitCard();
+        SetInstancesValueForDebitCard();
         renderedComponent.Instance.CardNumber = 0;
+        
+        //Act
         await renderedComponent.Instance.CreateAsync();
 
-        
-        
+        //Assert
         Assert.Equal("Error: Card Number Cannot Be Empty", renderedComponent.Instance.ErrorLabel);
     }
 }
