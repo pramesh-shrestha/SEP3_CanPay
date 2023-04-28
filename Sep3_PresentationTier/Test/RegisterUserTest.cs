@@ -11,13 +11,13 @@ public class RegisterUserTest : IClassFixture<TestContext>
     
     private TestContext context;
     private IRenderedComponent<RegisterUser> renderedComponent;
-    private IUserService userService;
+ 
 
     private void Setup() {
-        userService = new UserService(new HttpClient());
+        HttpClient client = new HttpClient();
         context = new TestContext();
-        context.Services.AddSingleton<IUserService>(userService);
-        context.Services.AddSingleton<ICardService>(new CardService(new HttpClient()));
+        context.Services.AddSingleton<IUserService>(new UserService(client));
+        context.Services.AddSingleton<ICardService>(new CardService(client));
 
         renderedComponent = context.RenderComponent<RegisterUser>();
         
@@ -127,5 +127,20 @@ public class RegisterUserTest : IClassFixture<TestContext>
 
         //Assert
         Assert.Equal("Error: Card Number Cannot Be Empty", renderedComponent.Instance.ErrorLabel);
+    }
+
+    [Fact]
+    public async Task CreateAccount_ShouldThrowAnError_WhenCarNumberIsTenDigits() {
+        //Arrange
+        Setup();
+        SetInstancesValueForDebitCard();
+        renderedComponent.Instance.CardNumber = 1234567890;
+        
+        //Act
+        await renderedComponent.Instance.CreateAsync();
+        
+        //Assert
+        Assert.Equal("Error: Card Number Must Be 16 Digits Long", renderedComponent.Instance.ErrorLabel);
+
     }
 }
