@@ -2,8 +2,6 @@ package applicationtier.service.serviceInterfaces;
 
 
 import applicationtier.entity.UserEntity;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 
@@ -13,6 +11,8 @@ public interface IUserService {
   UserEntity fetchUserById(Long id);
   UserEntity fetchUserByUsername(String username);
   UserEntity updateUser(Long id, UserEntity user);
-  void deleteUser(Long id);
+  boolean deleteUser(Long id);
 
 }
+
+

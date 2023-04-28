@@ -1,3 +1,4 @@
+/*
 package applicationtier.jwt.auth;
 
 import lombok.AllArgsConstructor;
@@ -15,3 +16,4 @@ public class RegisterRequest {
     private String username;
     private String password;
 }
+*/

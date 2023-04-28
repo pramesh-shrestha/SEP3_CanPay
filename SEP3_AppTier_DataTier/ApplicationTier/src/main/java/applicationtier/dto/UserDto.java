@@ -1,4 +1,4 @@
-package applicationtier.jwt.auth;
+package applicationtier.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class UserDto {
     private String username;
     private String password;
 }

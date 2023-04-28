@@ -2,8 +2,14 @@ package applicationtier.service.serviceImplementations;
 
 import applicationtier.GrpcClient.user.IUserClient;
 import applicationtier.entity.UserEntity;
+import applicationtier.jwt.JwtService;
+import applicationtier.jwt.auth.AuthenticationResponse;
+import applicationtier.dto.UserDto;
 import applicationtier.service.serviceInterfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +18,15 @@ import java.util.List;
 public class UserServiceImplementation implements IUserService {
 
   private IUserClient userClient;
+  private final PasswordEncoder passwordEncoder;
+  private final JwtService jwtService;
+  private final AuthenticationManager authenticationManager;
   @Autowired
-  public UserServiceImplementation(IUserClient userClient) {
+  public UserServiceImplementation(IUserClient userClient, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager) {
     this.userClient = userClient;
+    this.passwordEncoder = passwordEncoder;
+    this.jwtService = jwtService;
+    this.authenticationManager = authenticationManager;
   }
 
   @Override
@@ -26,20 +38,49 @@ public class UserServiceImplementation implements IUserService {
       throw new RuntimeException(e.getMessage());
     }
   }
-
+  /* public AuthenticationResponse register(RegisterRequest request) {
+        UserEntity user = User.builder()
+                .firstname(request.getFirstname())
+                .lastname(request.getLastname())
+                .username(request.getUsername())
+                .password(passwordEncoder.encode(request.getPassword()))
+                //.role(Role.USER)
+                .build();
+        iUserClient.save(user);
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
+    }*/
   @Override
   public List<UserEntity> fetchUsers() {
-    return null;
+    try {
+      return userClient.fetchUsers();
+    }
+    catch (Exception e){
+      throw new RuntimeException(e.getMessage());
+    }
   }
+
 
   @Override
   public UserEntity fetchUserById(Long id) {
-    return null;
+    try {
+      return userClient.FetchUserById(id);
+    }
+    catch (Exception e){
+      throw new RuntimeException(e.getMessage());
+    }
   }
 
   @Override
   public UserEntity fetchUserByUsername(String username) {
-    return null;
+    try {
+      return userClient.findByUsername(username);
+    }
+    catch (Exception e){
+      throw new RuntimeException(e.getMessage());
+    }
   }
 
   @Override
@@ -48,7 +89,29 @@ public class UserServiceImplementation implements IUserService {
   }
 
   @Override
-  public void deleteUser(Long id) {
+  public boolean deleteUser(Long id) {
+    try {
+      return userClient.deleteUser(id);
+    }
+    catch (Exception e){
+      throw new RuntimeException(e.getMessage());
+    }
+  }
+
+
+
+  public AuthenticationResponse authenticate(UserDto request) {
+    authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
+                    request.getUsername(),
+                    request.getPassword()
+            )
+    );
+    var user = userClient.findByUsername(request.getUsername());
+    var jwtToken = jwtService.generateToken(user);
+    return AuthenticationResponse.builder()
+            .token(jwtToken)
+            .build();
 
   }
 

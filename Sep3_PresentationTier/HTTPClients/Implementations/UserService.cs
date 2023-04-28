@@ -30,6 +30,28 @@ public class UserService : IUserService
 
         return userEntity;
     }
+    
+    //Send user credentials to the Application tier for validation
+    public async Task<UserEntity> ValidateUser(string username, string password)
+    {
+        LoginDto loginDto = new LoginDto
+        {
+            Username = username,
+            Password = password
+        };
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/user/validate", loginDto);
+        string result = await responseMessage.Content.ReadAsStringAsync();
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        UserEntity userEntity = JsonSerializer.Deserialize<UserEntity>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return userEntity;
+    }
 
     public Task<IEnumerable<UserEntity>> FetchUsersAsync()
     {
@@ -41,9 +63,22 @@ public class UserService : IUserService
         throw new NotImplementedException();
     }
 
-    public Task<UserEntity> FetchUserByUsernameAsync(string username)
+    public async Task<UserEntity> FetchUserByUsernameAsync(string username)
     {
-        throw new NotImplementedException();
+        HttpResponseMessage responseMessage = await client.GetAsync($"/user/{username}");
+        string result = await responseMessage.Content.ReadAsStringAsync();
+
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        UserEntity userEntity = JsonSerializer.Deserialize<UserEntity>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+
+        return userEntity;
     }
 
     public Task<UserEntity> UpdateUserAsync(long id, UserEntity userEntity)
