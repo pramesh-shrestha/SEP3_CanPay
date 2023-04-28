@@ -1,19 +1,11 @@
 package applicationtier.protobuf;
 
 import static io.grpc.stub.ClientCalls.asyncUnaryCall;
-import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
 import static io.grpc.stub.ClientCalls.blockingUnaryCall;
-import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
 import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ServerCalls.asyncUnaryCall;
-import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
-import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 
 /**
  */
@@ -55,13 +47,13 @@ public class UserProtoServiceGrpc {
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.StringValue.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.User.UserProtoObj.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.google.protobuf.Int32Value,
+  public static final io.grpc.MethodDescriptor<com.google.protobuf.Int64Value,
       applicationtier.protobuf.User.UserProtoObj> METHOD_FETCH_USER_BY_ID =
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
               "UserProtoService", "FetchUserById"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int32Value.getDefaultInstance()),
+          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int64Value.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.User.UserProtoObj.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<applicationtier.protobuf.User.UpdateUserRequest,
@@ -210,7 +202,7 @@ public class UserProtoServiceGrpc {
             METHOD_FETCH_USER_BY_ID,
             asyncUnaryCall(
               new MethodHandlers<
-                com.google.protobuf.Int32Value,
+                com.google.protobuf.Int64Value,
                 applicationtier.protobuf.User.UserProtoObj>(
                   this, METHODID_FETCH_USER_BY_ID)))
           .addMethod(
@@ -289,7 +281,7 @@ public class UserProtoServiceGrpc {
 
     /**
      */
-    public void fetchUserById(com.google.protobuf.Int32Value request,
+    public void fetchUserById(com.google.protobuf.Int64Value request,
         io.grpc.stub.StreamObserver<applicationtier.protobuf.User.UserProtoObj> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_FETCH_USER_BY_ID, getCallOptions()), request, responseObserver);
@@ -369,7 +361,7 @@ public class UserProtoServiceGrpc {
 
     /**
      */
-    public applicationtier.protobuf.User.UserProtoObj fetchUserById(com.google.protobuf.Int32Value request) {
+    public applicationtier.protobuf.User.UserProtoObj fetchUserById(com.google.protobuf.Int64Value request) {
       return blockingUnaryCall(
           getChannel(), METHOD_FETCH_USER_BY_ID, getCallOptions(), request);
     }
@@ -448,7 +440,7 @@ public class UserProtoServiceGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.User.UserProtoObj> fetchUserById(
-        com.google.protobuf.Int32Value request) {
+        com.google.protobuf.Int64Value request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_FETCH_USER_BY_ID, getCallOptions()), request);
     }
