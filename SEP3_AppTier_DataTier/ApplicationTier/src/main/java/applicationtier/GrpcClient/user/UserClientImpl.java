@@ -51,6 +51,7 @@ public class UserClientImpl implements IUserClient {
         }
     }
 
+
     @Override
     public UserEntity FetchUserById(Long id) {
         try {

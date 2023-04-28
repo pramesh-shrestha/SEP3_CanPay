@@ -37,6 +37,7 @@ public class UserServiceImplementation implements IUserService {
     }
   }
 
+
   @Override
   public UserEntity fetchUserById(Long id) {
     try {

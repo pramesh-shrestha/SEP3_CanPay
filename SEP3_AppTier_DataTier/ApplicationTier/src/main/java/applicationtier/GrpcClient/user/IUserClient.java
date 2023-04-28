@@ -8,8 +8,7 @@ public interface IUserClient {
   UserEntity createUser(UserEntity user);
   UserEntity findByUsername(String username);
   UserEntity FetchUserById(Long id);
-
   boolean deleteUser(Long id);
-
   List<UserEntity> fetchUsers();
 }
+
