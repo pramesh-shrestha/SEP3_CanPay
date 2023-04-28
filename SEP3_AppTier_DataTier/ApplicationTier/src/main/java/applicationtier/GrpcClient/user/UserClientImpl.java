@@ -37,6 +37,11 @@ public class UserClientImpl implements IUserClient {
 
     }
 
+    @Override
+    public UserEntity findByUsername(String username) {
+        return null;
+    }
+
     //convert user to proto object
     public static User.UserProtoObj fromEntityToProtoObj(UserEntity userEntity) {
         User.UserProtoObj userProtoObj = User.UserProtoObj.newBuilder()
