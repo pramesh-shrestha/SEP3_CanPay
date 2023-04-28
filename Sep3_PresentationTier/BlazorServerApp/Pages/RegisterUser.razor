@@ -145,9 +145,11 @@
     public string RepeatPassword { get; set; }
     public long CardNumber { get; set; }
     public DateTime ExpiryFullDate { get; set; }
+    public string expiryDate = "";
     public int CVV { get; set; }
     public string ErrorLabel { get; set; }
     private string? color = "red";
+    
 
     private bool isErrorMessageDisplayed;
     private Timer? timer;
@@ -180,13 +182,24 @@
         step = 1;
     }
 
-    private async Task CreateAsync()
+    // public async Task<String> GetErrorMessage() {
+    //     try {
+    //         await CreateAsync();
+    //     }
+    //     catch (Exception e) {
+    //         return e.Message;
+    //     }
+    //
+    //     return null;
+    // }
+
+    public async Task CreateAsync()
     {
         try
         {
             int monthNumber = DateTime.ParseExact(ExpiryFullDate.Date.Month.ToString(), "MMMM", CultureInfo.InvariantCulture).Month;
 
-            string expiryDate = $"{monthNumber}/{ExpiryFullDate.Date.Year}";
+            expiryDate = $"{monthNumber}/{ExpiryFullDate.Date.Year}";
             if (CardNumber == 0) throw new Exception("Card Number Cannot Be Empty");
             if (CardNumber.ToString().Length != 16) throw new Exception("Card Number Must Be 16 Digits Long");
             if (string.IsNullOrEmpty(expiryDate)) throw new Exception("ExpiryDate Cannot Be Empty");

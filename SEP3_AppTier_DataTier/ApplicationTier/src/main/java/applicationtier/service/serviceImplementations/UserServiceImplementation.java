@@ -29,17 +29,33 @@ public class UserServiceImplementation implements IUserService {
 
   @Override
   public List<UserEntity> fetchUsers() {
-    return null;
+    try {
+      return userClient.fetchUsers();
+    }
+    catch (Exception e){
+      throw new RuntimeException(e.getMessage());
+    }
   }
+
 
   @Override
   public UserEntity fetchUserById(Long id) {
-    return null;
+    try {
+      return userClient.FetchUserById(id);
+    }
+    catch (Exception e){
+      throw new RuntimeException(e.getMessage());
+    }
   }
 
   @Override
   public UserEntity fetchUserByUsername(String username) {
-    return null;
+    try {
+      return userClient.findByUsername(username);
+    }
+    catch (Exception e){
+      throw new RuntimeException(e.getMessage());
+    }
   }
 
   @Override
@@ -48,8 +64,13 @@ public class UserServiceImplementation implements IUserService {
   }
 
   @Override
-  public void deleteUser(Long id) {
-
+  public boolean deleteUser(Long id) {
+    try {
+      return userClient.deleteUser(id);
+    }
+    catch (Exception e){
+      throw new RuntimeException(e.getMessage());
+    }
   }
 
 

@@ -28,11 +28,14 @@ public class RegisterUserTest : IClassFixture<TestContext>
         renderedComponent.Instance.Username = "test12";
         renderedComponent.Instance.Password = "Test@123";
         renderedComponent.Instance.RepeatPassword = "Test@123";
+        renderedComponent.Instance.CardNumber = 1234567890123456;
+        renderedComponent.Instance.expiryDate = "2/2030";
+        renderedComponent.Instance.CVV = 741;
     }
     
     private void SetInstancesValueForUserForDebitCard() {
         renderedComponent.Instance.CardNumber = 1234567890123456;
-        renderedComponent.Instance.ExpiryFullDate = DateTime.Parse("12/12/2026");
+        renderedComponent.Instance.expiryDate = "22/2030";
         renderedComponent.Instance.CVV = 741;
        
     }
@@ -112,5 +115,19 @@ public class RegisterUserTest : IClassFixture<TestContext>
         renderedComponent.Instance.GoToStep2();
 
         Assert.Equal("Error: Password and Repeat Password doesn't match!!", renderedComponent.Instance.ErrorLabel);
+    }
+
+    [Fact]
+    public async Task CreateAccount_ShouldThrowAnError_WhenCardNumberIsZero() {
+        Setup();
+        SetInstancesValueForUser();
+        renderedComponent.Instance.GoToStep2();
+        // SetInstancesValueForUserForDebitCard();
+        renderedComponent.Instance.CardNumber = 0;
+        await renderedComponent.Instance.CreateAsync();
+
+        
+        
+        Assert.Equal("Error: Card Number Cannot Be Empty", renderedComponent.Instance.ErrorLabel);
     }
 }
