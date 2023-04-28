@@ -93,7 +93,7 @@
                 {
                     UserEntity user = await UserService.ValidateUser(loginDto.Username, loginDto.Password);
                     // Authentication success
-                    NavigationManager.NavigateTo("/");
+                    //  NavigateTo("/");
                 }
                 catch (Exception e)
                 {
