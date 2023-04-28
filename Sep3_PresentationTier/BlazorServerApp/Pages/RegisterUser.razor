@@ -159,7 +159,7 @@
         try
         {
             string? passwordRegex = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s:])([^\s]){8,30}$";
-            if (string.IsNullOrEmpty(Name)) throw new Exception("Full Name Cannot Be Empty");
+            if (string.IsNullOrEmpty(Name)) throw new Exception("Full name Cannot Be Empty");
             if (string.IsNullOrEmpty(Username)) throw new Exception("Username Cannot Be Empty");
             if (string.IsNullOrEmpty(Password)) throw new Exception("Password Cannot Be Empty");
             if (string.IsNullOrEmpty(RepeatPassword)) throw new Exception("Repeat Password Cannot Be Empty");
@@ -181,18 +181,18 @@
         step = 1;
     }
 
-    // public async Task<String> GetErrorMessage() {
-    //     try {
-    //         await CreateAsync();
-    //     }
-    //     catch (Exception e) {
-    //         return e.Message;
-    //     }
-    //
-    //     return null;
-    // }
+    public async Task<String> GetErrorMessage() {
+        try {
+            await CreateAsync();
+        }
+        catch (Exception e) {
+            return e.Message;
+        }
+    
+        return null;
+    }
 
-    public async Task CreateAsync()
+    private async Task CreateAsync()
     {
         try
         {
