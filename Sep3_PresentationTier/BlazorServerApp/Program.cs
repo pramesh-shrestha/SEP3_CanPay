@@ -52,9 +52,9 @@ app.MapFallbackToPage("/_Host");
 app.UseAuthentication(); //Use authentication
 
 //Needed to contact a URL different from it's own home URL
-app.UseCors(x => x
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-    .SetIsOriginAllowed(origin => true) // allow any origin
-    .AllowCredentials());
+// app.UseCors(x => x
+//     .AllowAnyMethod()
+//     .AllowAnyHeader()
+//     .SetIsOriginAllowed(origin => true) // allow any origin
+//     .AllowCredentials());
 app.Run();
