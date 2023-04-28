@@ -16,92 +16,101 @@ public class RegisterUserTest : IClassFixture<TestContext>
     {
         context = new TestContext();
         context.Services.AddSingleton<IUserService>(new UserService(new HttpClient()));
+        context.Services.AddSingleton<ICardService>(new CardService(new HttpClient()));
 
         renderedComponent = context.RenderComponent<RegisterUser>();
         
     }
 
-    private void SetInstancesValue()
+    private void SetInstancesValueForUser()
     {
-        renderedComponent.Instance.name = "test";
-        renderedComponent.Instance.username = "test12";
-        renderedComponent.Instance.password = "Test@123";
-        renderedComponent.Instance.repeatPassword = "Test@123";
+        renderedComponent.Instance.Name = "test";
+        renderedComponent.Instance.Username = "test12";
+        renderedComponent.Instance.Password = "Test@123";
+        renderedComponent.Instance.RepeatPassword = "Test@123";
     }
-
+    
+    private void SetInstancesValueForUserForDebitCard() {
+        renderedComponent.Instance.CardNumber = 1234567890123456;
+        renderedComponent.Instance.ExpiryFullDate = DateTime.Parse("12/12/2026");
+        renderedComponent.Instance.CVV = 741;
+       
+    }
+    
+    
     [Fact]
     public void ErrorMessageWhenFullNameIsNull()
     {
         Setup();
-        SetInstancesValue();
+        SetInstancesValueForUser();
 
-        renderedComponent.Instance.name = "";
+        renderedComponent.Instance.Name = "";
         renderedComponent.Instance.GoToStep2();
 
-        Assert.Equal("Error: Full Name Cannot Be Empty", renderedComponent.Instance.errorLabel);
+        Assert.Equal("Error: Full Name Cannot Be Empty", renderedComponent.Instance.ErrorLabel);
     }
 
     [Fact]
     public void ErrorMessageWhenUsernameIsNull()
     {
         Setup();
-        SetInstancesValue();
+        SetInstancesValueForUser();
 
-        renderedComponent.Instance.username = "";
+        renderedComponent.Instance.Username = "";
         renderedComponent.Instance.GoToStep2();
 
-        Assert.Equal("Error: Username Cannot Be Empty", renderedComponent.Instance.errorLabel);
+        Assert.Equal("Error: Username Cannot Be Empty", renderedComponent.Instance.ErrorLabel);
     }
 
     [Fact]
     public void ErrorMessageWhenPasswordIsNull()
     {
         Setup();
-        SetInstancesValue();
+        SetInstancesValueForUser();
 
-        renderedComponent.Instance.password = "";
+        renderedComponent.Instance.Password = "";
         renderedComponent.Instance.GoToStep2();
 
-        Assert.Equal("Error: Password Cannot Be Empty", renderedComponent.Instance.errorLabel);
+        Assert.Equal("Error: Password Cannot Be Empty", renderedComponent.Instance.ErrorLabel);
     }
 
     [Fact]
     public void ErrorMessageWhenRepeatPasswordIsNull()
     {
         Setup();
-        SetInstancesValue();
+        SetInstancesValueForUser();
 
-        renderedComponent.Instance.repeatPassword = "";
+        renderedComponent.Instance.RepeatPassword = "";
         renderedComponent.Instance.GoToStep2();
 
-        Assert.Equal("Error: Repeat Password Cannot Be Empty", renderedComponent.Instance.errorLabel);
+        Assert.Equal("Error: Repeat Password Cannot Be Empty", renderedComponent.Instance.ErrorLabel);
     }
 
     [Fact]
     public void ErrorMessageWhenPasswordIs6CharactersLong()
     {
         Setup();
-        SetInstancesValue();
+        SetInstancesValueForUser();
 
-        renderedComponent.Instance.password = "12345";
-        renderedComponent.Instance.repeatPassword = "12345";
+        renderedComponent.Instance.Password = "12345";
+        renderedComponent.Instance.RepeatPassword = "12345";
         renderedComponent.Instance.GoToStep2();
 
         Assert.Equal(
             "Error: Password Must Be Between 8 and 30 Characters Long. Must Have 1 symbol and 1 capital letter",
-            renderedComponent.Instance.errorLabel);
+            renderedComponent.Instance.ErrorLabel);
     }
 
     [Fact]
     public void ErrorMessageWhenPasswordAndRepeatPasswordDoesnotMatch()
     {
         Setup();
-        SetInstancesValue();
+        SetInstancesValueForUser();
 
-        renderedComponent.Instance.password = "Test@123";
-        renderedComponent.Instance.repeatPassword = "Test@1234";
+        renderedComponent.Instance.Password = "Test@123";
+        renderedComponent.Instance.RepeatPassword = "Test@1234";
         renderedComponent.Instance.GoToStep2();
 
-        Assert.Equal("Error: Password and Repeat Password doesn't match!!", renderedComponent.Instance.errorLabel);
+        Assert.Equal("Error: Password and Repeat Password doesn't match!!", renderedComponent.Instance.ErrorLabel);
     }
 }
