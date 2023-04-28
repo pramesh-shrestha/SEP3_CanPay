@@ -2,6 +2,7 @@
 @using HTTPClients.ClientInterfaces
 @using System.Text.RegularExpressions
 @using Domains.Entity
+@using System.Globalization
 @inject IUserService UserService;
 
 <div class="form-content">
@@ -89,7 +90,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Expiry Date</label>
-                                        <input type="month" class="form-control"  @bind="expiryFullDate" min="@DateTime.Now.ToString("MM-yyyy")">
+                                        <input type="month" class="form-control" @bind="expiryFullDate" min="@DateTime.Now.ToString("MM-yyyy")">
                                     </div>
                                     <div class="form-group">
                                         <label>CVV</label>
@@ -138,28 +139,32 @@
 
 @code {
     private int step = 1;
-    private string? name;
-    private string? username;
-    private string? password;
-    private string? repeatPassword;
+    public string? name;
+    public string? username;
+    public string? password;
+    public string? repeatPassword;
     private long cardNumber;
     private DateTime expiryFullDate = DateTime.Now;
     private int cvv;
-    private string? errorLabel;
+    public string? errorLabel;
     private string? color = "red";
 
     private bool isErrorMessageDisplayed;
     private Timer? timer;
     private readonly int messageDisplayTime = 2000; // in millisecond
 
-    private void GoToStep2()
+    public void GoToStep2()
     {
         try
         {
+            string? passwordRegex = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s:])([^\s]){8,30}$";
             if (string.IsNullOrEmpty(name)) throw new Exception("Full Name Cannot Be Empty");
             if (string.IsNullOrEmpty(username)) throw new Exception("Username Cannot Be Empty");
             if (string.IsNullOrEmpty(password)) throw new Exception("Password Cannot Be Empty");
             if (string.IsNullOrEmpty(repeatPassword)) throw new Exception("Repeat Password Cannot Be Empty");
+            if (!Regex.IsMatch(password, passwordRegex))
+                throw new Exception("Password Must Be Between" +
+                                    " 8 and 30 Characters Long. Must Have 1 symbol and 1 capital letter");
             if (!password.Equals(repeatPassword)) throw new Exception("Password and Repeat Password doesn't match!!");
             step = 2;
         }
@@ -179,12 +184,12 @@
     {
         try
         {
-            string expiryDate = $"{expiryFullDate.Date.Month}/{expiryFullDate.Date.Year}";
+            int monthNumber = DateTime.ParseExact(expiryFullDate.Date.Month.ToString(), "MMMM", CultureInfo.InvariantCulture).Month;
+
+            string expiryDate = $"{monthNumber}/{expiryFullDate.Date.Year}";
             if (cardNumber == 0) throw new Exception("Card Number Cannot Be Empty");
             if (cardNumber.ToString().Length != 16) throw new Exception("Card Number Must Be 16 Digits Long");
             if (string.IsNullOrEmpty(expiryDate)) throw new Exception("ExpiryDate Cannot Be Empty");
-            if (!Regex.IsMatch(expiryDate, @"^(0[1-9]|1[0-2])\/\d{4}$"))
-                throw new Exception("Invalid Expiry Date Format. Expiry Date Should be Written As MM/YYYY");
             if (cvv == 0) throw new Exception("CVV Cannot Be Empty");
             if (cvv.ToString().Length != 3) throw new Exception("CVV must be 3 digits long");
 
