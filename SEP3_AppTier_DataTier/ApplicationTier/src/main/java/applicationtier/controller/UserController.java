@@ -1,6 +1,9 @@
 package applicationtier.controller;
 
 import applicationtier.entity.UserEntity;
+import applicationtier.jwt.auth.AuthenticationResponse;
+import applicationtier.dto.UserDto;
+import applicationtier.service.serviceImplementations.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +13,16 @@ import applicationtier.service.serviceInterfaces.IUserService;
 import java.util.List;
 
 @RestController
+//@RequestMapping("/api/auth")
 public class UserController {
 
     private final IUserService userService;
+    private final UserServiceImplementation service;
 
     @Autowired
-    public UserController(IUserService userService) {
+    public UserController(IUserService userService, UserServiceImplementation service) {
         this.userService = userService;
+        this.service = service;
     }
 
     //create user
@@ -84,6 +90,22 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+
+   /* @PostMapping("/register")
+    public ResponseEntity<AuthenticationResponse> register(
+            @RequestBody RegisterRequest request
+    ){
+        return ResponseEntity.ok(service.register(request));
+    }*/
+
+//login
+    @PostMapping("user/authenticate")
+    public ResponseEntity<AuthenticationResponse> authenticate(
+            @RequestBody UserDto request
+    ){
+        return ResponseEntity.ok(service.authenticate(request));
     }
 
 

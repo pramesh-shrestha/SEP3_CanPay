@@ -145,7 +145,6 @@
     public string RepeatPassword { get; set; }
     public long CardNumber { get; set; }
     public DateTime ExpiryFullDate { get; set; }
-    public string expiryDate = "";
     public int CVV { get; set; }
     public string ErrorLabel { get; set; }
     private string? color = "red";
@@ -160,7 +159,7 @@
         try
         {
             string? passwordRegex = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s:])([^\s]){8,30}$";
-            if (string.IsNullOrEmpty(Name)) throw new Exception("Full Name Cannot Be Empty");
+            if (string.IsNullOrEmpty(Name)) throw new Exception("Full name Cannot Be Empty");
             if (string.IsNullOrEmpty(Username)) throw new Exception("Username Cannot Be Empty");
             if (string.IsNullOrEmpty(Password)) throw new Exception("Password Cannot Be Empty");
             if (string.IsNullOrEmpty(RepeatPassword)) throw new Exception("Repeat Password Cannot Be Empty");
@@ -182,24 +181,23 @@
         step = 1;
     }
 
-    // public async Task<String> GetErrorMessage() {
-    //     try {
-    //         await CreateAsync();
-    //     }
-    //     catch (Exception e) {
-    //         return e.Message;
-    //     }
-    //
-    //     return null;
-    // }
+    //For testing purpose only
+    public async Task<String> GetErrorMessage() {
+        try {
+            await CreateAsync();
+        }
+        catch (Exception e) {
+            return e.Message;
+        }
+    
+        return null;
+    }
 
-    public async Task CreateAsync()
+    private async Task CreateAsync()
     {
         try
         {
-            int monthNumber = DateTime.ParseExact(ExpiryFullDate.Date.Month.ToString(), "MMMM", CultureInfo.InvariantCulture).Month;
-
-            expiryDate = $"{monthNumber}/{ExpiryFullDate.Date.Year}";
+            string expiryDate = $"{ExpiryFullDate.Date.Month}/{ExpiryFullDate.Date.Year}";
             if (CardNumber == 0) throw new Exception("Card Number Cannot Be Empty");
             if (CardNumber.ToString().Length != 16) throw new Exception("Card Number Must Be 16 Digits Long");
             if (string.IsNullOrEmpty(expiryDate)) throw new Exception("ExpiryDate Cannot Be Empty");
