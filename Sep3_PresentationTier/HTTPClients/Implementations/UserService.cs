@@ -2,9 +2,8 @@
 using System.Text.Json;
 using Domains.Entity;
 using HTTPClients.ClientInterfaces;
-
 namespace HTTPClients.Implementations;
-
+using Domains;
 public class UserService : IUserService
 {
     private readonly HttpClient client;
@@ -31,28 +30,6 @@ public class UserService : IUserService
         return userEntity;
     }
     
-    //Send user credentials to the Application tier for validation
-    public async Task<UserEntity> ValidateUser(string username, string password)
-    {
-        LoginDto loginDto = new LoginDto
-        {
-            Username = username,
-            Password = password
-        };
-        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/user/validate", loginDto);
-        string result = await responseMessage.Content.ReadAsStringAsync();
-        if (!responseMessage.IsSuccessStatusCode)
-        {
-            throw new Exception(result);
-        }
-
-        UserEntity userEntity = JsonSerializer.Deserialize<UserEntity>(result, new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        })!;
-        return userEntity;
-    }
-
     public Task<IEnumerable<UserEntity>> FetchUsersAsync()
     {
         throw new NotImplementedException();
@@ -89,5 +66,27 @@ public class UserService : IUserService
     public Task<Boolean> DeleteUserAsync(long id)
     {
         throw new NotImplementedException();
+    }
+    
+    //Send user credentials to the Application tier for validation
+    public async Task<UserEntity> ValidateUser(string username, string password)
+    {
+        LoginDto loginDto = new LoginDto
+        {
+            Username = username,
+            Password = password
+        };
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/user/validate", loginDto);
+        string result = await responseMessage.Content.ReadAsStringAsync();
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        UserEntity userEntity = JsonSerializer.Deserialize<UserEntity>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return userEntity;
     }
 }
