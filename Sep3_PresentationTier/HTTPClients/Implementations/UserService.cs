@@ -76,7 +76,7 @@ public class UserService : IUserService
             Username = username,
             Password = password
         };
-        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/user/validate", loginDto);
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/user/authenticate", loginDto);
         string result = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode)
         {
