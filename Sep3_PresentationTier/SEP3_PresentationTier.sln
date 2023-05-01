@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domains", "Domains\Domains.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTTPClients", "HTTPClients\HTTPClients.csproj", "{44F3A311-8D9D-45D1-B7D8-15C67F330AC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{F6511AF5-ED26-440A-8801-288F51716DFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{44F3A311-8D9D-45D1-B7D8-15C67F330AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44F3A311-8D9D-45D1-B7D8-15C67F330AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44F3A311-8D9D-45D1-B7D8-15C67F330AC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6511AF5-ED26-440A-8801-288F51716DFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6511AF5-ED26-440A-8801-288F51716DFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6511AF5-ED26-440A-8801-288F51716DFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6511AF5-ED26-440A-8801-288F51716DFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

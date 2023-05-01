@@ -11,4 +11,6 @@ public interface IUserService
     Task<UserEntity> FetchUserByUsernameAsync(string username);
     Task<UserEntity> UpdateUserAsync(long id, UserEntity userEntity);
     Task<Boolean> DeleteUserAsync(long id);
+    Task<UserEntity> ValidateUser(string username, string password);
+
 }

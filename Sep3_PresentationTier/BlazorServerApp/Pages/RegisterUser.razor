@@ -2,6 +2,7 @@
 @using HTTPClients.ClientInterfaces
 @using System.Text.RegularExpressions
 @using Domains.Entity
+@using System.Globalization
 @inject IUserService UserService;
 
 <div class="form-content">
@@ -50,19 +51,19 @@
                             <form class="form-horizontal">
                                 <div class="form-group">
                                     <label>User Name</label>
-                                    <input type="text" placeholder="User Name" @bind="username" class="form-control">
+                                    <input type="text" placeholder="User Name" @bind="Username" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Full Name</label>
-                                    <input type="email" class="form-control" @bind="name" placeholder="Full Name">
+                                    <input type="email" class="form-control" @bind="Name" placeholder="Full Name">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="password" class="form-control" @bind="password" placeholder="Password">
+                                    <input type="password" class="form-control" @bind="Password" placeholder="Password">
                                 </div>
                                 <div class="form-group">
                                     <label>Confirm Password</label>
-                                    <input type="password" class="form-control" @bind="repeatPassword" placeholder="Confirm Password">
+                                    <input type="password" class="form-control" @bind="RepeatPassword" placeholder="Confirm Password">
                                 </div>
                             </form>
                             break;
@@ -81,19 +82,19 @@
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <label>Cardholder Name</label>
-                                        <input type="text" placeholder="Full name as displayed on card." disabled @bind="username" class="form-control">
+                                        <input type="text" placeholder="Full name as displayed on card." disabled @bind="Name" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Card Number</label>
-                                        <input type="number" class="form-control" placeholder="Card Number" pattern="[0-9]*" inputmode="numeric" @bind="cardNumber">
+                                        <input type="number" class="form-control" placeholder="Card Number" pattern="[0-9]*" inputmode="numeric" @bind="CardNumber">
                                     </div>
                                     <div class="form-group">
                                         <label>Expiry Date</label>
-                                        <input type="text" class="form-control" placeholder="MM/YYYY" @bind="expiryDate">
+                                        <input type="month" class="form-control" @bind="ExpiryFullDate" min="@DateTime.Now.ToString("MM-yyyy")">
                                     </div>
                                     <div class="form-group">
                                         <label>CVV</label>
-                                        <input type="password" class="form-control" maxlength="3" placeholder="CVV" pattern="[0-9]*" inputmode="numeric" @bind="cvv">
+                                        <input type="password" class="form-control" maxlength="3" placeholder="CVV" pattern="[0-9]*" inputmode="numeric" @bind="CVV">
                                     </div>
                                 </form>
                             </section>
@@ -104,7 +105,7 @@
                     @* footer from here *@
                     <div class="row">
                         <div class="col-md-8">
-                            <span class="signin-link">Already have an account? Click here to <a href="">Login</a></span>
+                            <span class="signin-link">Already have an account? Click here to <a href="/Login">Login</a></span>
                         </div>
                         <div class="col-md-4">
                             <button class="nextPrevious">
@@ -120,13 +121,15 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-
-                        @if (!string.IsNullOrEmpty(errorLabel))
-                        {
-                            <label style="color: red; width: 100%">@errorLabel</label>
-                        }
-                    </div>
+                    @if (isErrorMessageDisplayed)
+                    {
+                        <div class="form-group">
+                            @if (!string.IsNullOrEmpty(ErrorLabel))
+                            {
+                                <label style="color: @color; width: 100%">@ErrorLabel</label>
+                            }
+                        </div>
+                    }
 
                 </div>
             </div>
@@ -136,18 +139,41 @@
 
 @code {
     private int step = 1;
-    private string? name;
-    private string? username;
-    private string? password;
-    private string? repeatPassword;
-    private long cardNumber;
-    private string? expiryDate;
-    private int cvv;
-    private string? errorLabel;
+    public string Name { get; set; }
+    public string Username { get; set; }
+    public string Password { get; set; }
+    public string RepeatPassword { get; set; }
+    public long CardNumber { get; set; }
+    public DateTime ExpiryFullDate { get; set; }
+    public int CVV { get; set; }
+    public string ErrorLabel { get; set; }
+    private string? color = "red";
+    
 
-    private void GoToStep2()
+    private bool isErrorMessageDisplayed;
+    private Timer? timer;
+    private readonly int messageDisplayTime = 2000; // in millisecond
+
+    public void GoToStep2()
     {
-        step = 2;
+        try
+        {
+            string? passwordRegex = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s:])([^\s]){8,30}$";
+            if (string.IsNullOrEmpty(Name)) throw new Exception("Full name Cannot Be Empty");
+            if (string.IsNullOrEmpty(Username)) throw new Exception("Username Cannot Be Empty");
+            if (string.IsNullOrEmpty(Password)) throw new Exception("Password Cannot Be Empty");
+            if (string.IsNullOrEmpty(RepeatPassword)) throw new Exception("Repeat Password Cannot Be Empty");
+            if (!Regex.IsMatch(Password, passwordRegex))
+                throw new Exception("Password Must Be Between" +
+                                    " 8 and 30 Characters Long. Must Have 1 symbol and 1 capital letter");
+            if (!Password.Equals(RepeatPassword)) throw new Exception("Password and Repeat Password doesn't match!!");
+            step = 2;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            DisplayMessage(e.Message);
+        }
     }
 
     private void GoToStep1()
@@ -155,33 +181,56 @@
         step = 1;
     }
 
+    //For testing purpose only
+    public async Task<String> GetErrorMessage() {
+        try {
+            await CreateAsync();
+        }
+        catch (Exception e) {
+            return e.Message;
+        }
+    
+        return null;
+    }
+
     private async Task CreateAsync()
     {
         try
         {
-            if (string.IsNullOrEmpty(name)) throw new Exception("Full Name Cannot Be Empty");
-            if (string.IsNullOrEmpty(username)) throw new Exception("Username Cannot Be Empty");
-            if (string.IsNullOrEmpty(password)) throw new Exception("Password Cannot Be Empty");
-            if (string.IsNullOrEmpty(repeatPassword)) throw new Exception("Repeat Password Cannot Be Empty");
-            if (!password.Equals(repeatPassword)) throw new Exception("Password and Repeat Password doesn't match!!");
-            if (cardNumber == 0) throw new Exception("Card Number Cannot Be Empty");
-            if (cardNumber.ToString().Length != 16) throw new Exception("Card Number Must Be 16 Digits Long");
+            string expiryDate = $"{ExpiryFullDate.Date.Month}/{ExpiryFullDate.Date.Year}";
+            if (CardNumber == 0) throw new Exception("Card Number Cannot Be Empty");
+            if (CardNumber.ToString().Length != 16) throw new Exception("Card Number Must Be 16 Digits Long");
             if (string.IsNullOrEmpty(expiryDate)) throw new Exception("ExpiryDate Cannot Be Empty");
-            if (!Regex.IsMatch(expiryDate, @"^(0[1-9]|1[0-2])\/\d{4}$"))
-                throw new Exception("Invalid Expiry Date Format. Expiry Date Should be Written As MM/YYYY");
-            if (cvv == 0) throw new Exception("CVV Cannot Be Empty");
-            if (cvv.ToString().Length != 3) throw new Exception("CVV must be 3 digits long");
+            if (CVV == 0) throw new Exception("CVV Cannot Be Empty");
+            if (CVV.ToString().Length != 3) throw new Exception("CVV must be 3 digits long");
 
-            DebitCardEntity cardEntity = new DebitCardEntity(cardNumber, expiryDate, cvv);
-            UserEntity userEntity = new UserEntity(name, username, password, cardEntity, 1000);
-            await UserService.CreateAsync(userEntity);
+            DebitCardEntity cardEntity = new DebitCardEntity(CardNumber, expiryDate, CVV);
+            UserEntity userEntity = new UserEntity(Name, Username, Password, cardEntity, 1000);
+            UserEntity entity = await UserService.CreateAsync(userEntity);
+
+            color = "green";
+            DisplayMessage($"User {entity.UserName} successfully created");
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            errorLabel = $"Error: {e.Message}";
+            DisplayMessage(e.Message);
         }
     }
 
+    private void DisplayMessage(string errorMessage)
+    {
+        ErrorLabel = $"Error: {errorMessage}";
+        isErrorMessageDisplayed = true;
+        timer = new Timer(OnTimerElapsed, null, messageDisplayTime, Timeout.Infinite);
+    }
+
+    private void OnTimerElapsed(object state)
+    {
+        timer?.DisposeAsync();
+    // Clear the error message here
+        isErrorMessageDisplayed = false;
+        InvokeAsync(StateHasChanged);
+    }
 
 }

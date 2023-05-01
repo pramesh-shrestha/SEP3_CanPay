@@ -11,5 +11,8 @@ public interface IUserService {
   UserEntity fetchUserById(Long id);
   UserEntity fetchUserByUsername(String username);
   UserEntity updateUser(Long id, UserEntity user);
-  void deleteUser(Long id);
+  boolean deleteUser(Long id);
+
 }
+
+

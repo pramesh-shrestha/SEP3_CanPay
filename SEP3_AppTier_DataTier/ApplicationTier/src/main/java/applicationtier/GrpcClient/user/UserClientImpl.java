@@ -5,11 +5,11 @@ import applicationtier.GrpcClient.card.CardClientImpl;
 import applicationtier.entity.UserEntity;
 import applicationtier.protobuf.User;
 import applicationtier.protobuf.UserProtoServiceGrpc;
+import com.google.protobuf.*;
 import io.grpc.ManagedChannel;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserClientImpl implements IUserClient {
@@ -28,7 +28,6 @@ public class UserClientImpl implements IUserClient {
     @Override
     public UserEntity createUser(UserEntity userEntity) {
         try {
-            System.out.println("User Client Impl T2: " + userEntity.getBalance());
 
             User.UserProtoObj userProtoObj = fromEntityToProtoObj(userEntity);
 
@@ -39,6 +38,44 @@ public class UserClientImpl implements IUserClient {
         }
 
     }
+
+    @Override
+    public UserEntity findByUsername(String username) {
+        try {
+            User.UserProtoObj userProtoObj = getUserBlockingStub().fetchUserByUsername(StringValue.of(username));
+            System.out.println("User Client Impl: " + userProtoObj.getCard().getCardNumber());
+            return fromProtoObjToEntity(userProtoObj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    @Override
+    public UserEntity FetchUserById(Long id) {
+        try {
+            User.UserProtoObj userProtoObj = getUserBlockingStub().fetchUserById(Int64Value.of(id));
+            return fromProtoObjToEntity(userProtoObj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean deleteUser(Long id) {
+        try {
+            BoolValue userProtoObj = getUserBlockingStub().deleteUser(Int64Value.of(id));
+            return userProtoObj.toBuilder().getValue();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<UserEntity> fetchUsers() {
+        return null;
+    }
+
 
     //convert user to proto object
     public static User.UserProtoObj fromEntityToProtoObj(UserEntity userEntity) {

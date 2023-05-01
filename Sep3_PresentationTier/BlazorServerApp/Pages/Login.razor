@@ -1,0 +1,128 @@
+﻿    @page "/Login"
+    @using HTTPClients.ClientInterfaces
+    @using Domains
+    @using Domains.Entity;
+    @inject IUserService UserService;
+
+    <div class="form-content">
+        <div class="container ">
+            <div class="row">
+                
+                <!-- Sign In button container-->
+                <div class="col-md-3 side-container">
+                    <div class="form-buttons">
+                        <button class="signIn">
+                            <span @onclick="@LoginAsync">Sign in</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!--    login info-->
+                <div class="col-md-9 ">
+                    <div class="form-container">
+                        <h3 class="title">Sign in</h3>
+
+                        @* personal information text *@
+                        <div class="section-description">
+                            <h3 class="heading">User Login</h3>
+                            <p class="heading-subtext">
+                                Please enter your information and proceed to the next step, so you can
+                                sign in.
+                            </p>
+                        </div>
+
+
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label>User Name</label>
+                                <input type="text" placeholder="User Name" @bind="loginDto.Username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" @bind="loginDto.Password" placeholder="Password">
+                            </div>
+                        </form>
+
+                        @if (isErrorMessageDisplayed)
+                        {
+                            <div class="form-group">
+                                @if (!string.IsNullOrEmpty(errorLabel))
+                                {
+                                    <label style="color: @color; width: 100%">@errorLabel</label>
+                                }
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @code {
+        private string? username;
+        private string? password;
+        private string? errorLabel;
+        private string? color = "red";
+        private bool isErrorMessageDisplayed;
+        private Timer? timer;
+        private readonly int messageDisplayTime = 2000; // in millisecond
+        
+        LoginDto loginDto = new LoginDto();
+
+        private async Task LoginAsync()
+        {
+            errorLabel = "";
+            try
+            {
+                if (string.IsNullOrEmpty(loginDto.Username) && string.IsNullOrEmpty(loginDto.Password))
+                {
+                    throw new Exception("Both Username and Password are left blank");
+                }
+                else if (string.IsNullOrEmpty(loginDto.Username))
+                {
+                    throw new Exception("Username cannot be empty");
+                }
+                else if (string.IsNullOrEmpty(loginDto.Password))
+                {
+                    throw new Exception("Password cannot be empty");
+                }
+                else
+                {
+                    try
+                    {
+                        UserEntity user = await UserService.ValidateUser(loginDto.Username, loginDto.Password);
+                        DisplayMessage("Login successful!");
+                        //  NavigateTo("/");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        DisplayMessage("Invalid username or password.");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                DisplayMessage(e.Message);
+            }
+        }
+
+        
+
+        private void DisplayMessage(string errorMessage)
+        {
+            errorLabel = $"Error: {errorMessage}";
+            isErrorMessageDisplayed = true;
+            timer = new Timer(OnTimerElapsed, null, messageDisplayTime, Timeout.Infinite);
+        }
+
+        private void OnTimerElapsed(object state)
+        {
+            timer?.DisposeAsync();
+        // Clear the error message here
+            isErrorMessageDisplayed = false;
+            InvokeAsync(StateHasChanged);
+        }
+    }

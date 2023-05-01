@@ -1,6 +1,9 @@
 package applicationtier.controller;
 
 import applicationtier.entity.UserEntity;
+import applicationtier.jwt.auth.AuthenticationResponse;
+import applicationtier.dto.LoginDto;
+import applicationtier.service.serviceImplementations.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +13,16 @@ import applicationtier.service.serviceInterfaces.IUserService;
 import java.util.List;
 
 @RestController
+//@RequestMapping("/api/auth")
 public class UserController {
 
     private final IUserService userService;
+    private final UserServiceImplementation service;
 
     @Autowired
-    public UserController(IUserService userService) {
+    public UserController(IUserService userService, UserServiceImplementation service) {
         this.userService = userService;
+        this.service = service;
     }
 
     //create user
@@ -24,7 +30,6 @@ public class UserController {
     public ResponseEntity<UserEntity> createUser(@RequestBody
                                                  UserEntity user) {
         try {
-            System.out.println("User Controller T2: " + user.getBalance());
             ResponseEntity<UserEntity> response = new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
             return response;
 
@@ -65,7 +70,7 @@ public class UserController {
     }
 
     //update user
-    @PutMapping("/user/{id}")
+    @PutMapping("/user/update/{id}")
     public ResponseEntity<UserEntity> updateUser(@PathVariable Long id, @RequestBody
     UserEntity updatedUser) {
         try {
@@ -84,6 +89,24 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+
+   /* @PostMapping("/register")
+    public ResponseEntity<AuthenticationResponse> register(
+            @RequestBody RegisterRequest request
+    ){
+        return ResponseEntity.ok(service.register(request));
+    }*/
+
+    //login
+    @PostMapping("/user/authenticate")
+    public ResponseEntity<AuthenticationResponse> authenticate(
+            @RequestBody LoginDto request
+    ) {
+        ResponseEntity<AuthenticationResponse> response = ResponseEntity.ok(service.authenticate(request));
+        System.out.println(response.getStatusCode());
+        return response;
     }
 
 
