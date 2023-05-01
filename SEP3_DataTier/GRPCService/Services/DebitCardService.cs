@@ -77,6 +77,11 @@ public class DebitCardService : DebitCardProtoService.DebitCardProtoServiceBase
 
     public static DebitCardProtoObj FromEntityToProto(DebitCardEntity cardEntity)
     {
+        var card = cardEntity.CardId;
+        var cardNumber = cardEntity.CardNumber;
+        var expirYDate = cardEntity.ExpiryDate;
+        var Cvv = cardEntity.CVV;
+        Console.WriteLine($"Debit CS: {Cvv}");
         return new DebitCardProtoObj()
         {
             CardId = cardEntity.CardId,
@@ -84,5 +89,6 @@ public class DebitCardService : DebitCardProtoService.DebitCardProtoServiceBase
             ExpiryDate = cardEntity.ExpiryDate,
             Cvv = cardEntity.CVV
         };
+        Console.WriteLine("");
     }
 }

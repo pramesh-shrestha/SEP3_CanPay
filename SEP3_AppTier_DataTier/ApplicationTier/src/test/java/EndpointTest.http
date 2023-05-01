@@ -6,16 +6,20 @@ POST http://localhost:8090/user/create
 Content-Type: application/json
 
 {
-  "fullName": "Pramesh shrestha",
-  "userName": "Pramesh12",
-  "password": "Pramesh1@",
+  "fullName": "Rajib",
+  "userName": "rajip1",
+  "password": "rajip1@",
   "balance" : 1000,
   "card": {
-    "cardNumber": 1231234564567812,
-    "expiryDate": "12/23",
+    "cardNumber": 1234567890123456,
+    "expiryDate": "11/30",
     "cvv" : 133
   }
 }
+
+
+###
+
 
 
 ###

@@ -2,7 +2,7 @@ package applicationtier.controller;
 
 import applicationtier.entity.UserEntity;
 import applicationtier.jwt.auth.AuthenticationResponse;
-import applicationtier.dto.UserDto;
+import applicationtier.dto.LoginDto;
 import applicationtier.service.serviceImplementations.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,6 @@ public class UserController {
     public ResponseEntity<UserEntity> createUser(@RequestBody
                                                  UserEntity user) {
         try {
-            System.out.println("User Controller T2: " + user.getBalance());
             ResponseEntity<UserEntity> response = new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
             return response;
 
@@ -100,14 +99,15 @@ public class UserController {
         return ResponseEntity.ok(service.register(request));
     }*/
 
-//login
-    @PostMapping("user/authenticate")
+    //login
+    @PostMapping("/user/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody UserDto request
-    ){
-        return ResponseEntity.ok(service.authenticate(request));
+            @RequestBody LoginDto request
+    ) {
+        ResponseEntity<AuthenticationResponse> response = ResponseEntity.ok(service.authenticate(request));
+        System.out.println(response.getStatusCode());
+        return response;
     }
-
 
 
 }

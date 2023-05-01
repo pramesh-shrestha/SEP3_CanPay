@@ -28,7 +28,6 @@ public class UserClientImpl implements IUserClient {
     @Override
     public UserEntity createUser(UserEntity userEntity) {
         try {
-            System.out.println("User Client Impl T2: " + userEntity.getBalance());
 
             User.UserProtoObj userProtoObj = fromEntityToProtoObj(userEntity);
 
@@ -43,10 +42,10 @@ public class UserClientImpl implements IUserClient {
     @Override
     public UserEntity findByUsername(String username) {
         try {
-            User.UserProtoObj userProtoObj=getUserBlockingStub().fetchUserByUsername(StringValue.of(username));
+            User.UserProtoObj userProtoObj = getUserBlockingStub().fetchUserByUsername(StringValue.of(username));
+            System.out.println("User Client Impl: " + userProtoObj.getCard().getCardNumber());
             return fromProtoObjToEntity(userProtoObj);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -55,10 +54,9 @@ public class UserClientImpl implements IUserClient {
     @Override
     public UserEntity FetchUserById(Long id) {
         try {
-            User.UserProtoObj userProtoObj=getUserBlockingStub().fetchUserById(Int64Value.of(id));
+            User.UserProtoObj userProtoObj = getUserBlockingStub().fetchUserById(Int64Value.of(id));
             return fromProtoObjToEntity(userProtoObj);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -66,17 +64,16 @@ public class UserClientImpl implements IUserClient {
     @Override
     public boolean deleteUser(Long id) {
         try {
-            BoolValue userProtoObj= getUserBlockingStub().deleteUser(Int64Value.of(id));
+            BoolValue userProtoObj = getUserBlockingStub().deleteUser(Int64Value.of(id));
             return userProtoObj.toBuilder().getValue();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
     public List<UserEntity> fetchUsers() {
-       return null;
+        return null;
     }
 
 

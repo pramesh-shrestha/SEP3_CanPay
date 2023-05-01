@@ -9,6 +9,7 @@ namespace EFCDataAccess.DAOImplementation;
 public class UserDaoImpl : IUserDao
 {
     private readonly CanPayDbAccess context;
+    private ICardDao cardDao;
 
     public UserDaoImpl(CanPayDbAccess context)
     {
@@ -34,7 +35,11 @@ public class UserDaoImpl : IUserDao
     public async Task<UserEntity> FetchUserByUsernameAsync(string username)
     {
         //username is a primary key so we can use FindAsync
-        UserEntity? user = await context.Users.FindAsync(username);
+        UserEntity? user =
+            await context.Users.Include(entity => entity.Card)
+                .FirstOrDefaultAsync(entity => entity.Username.ToLower().Equals(username.ToLower()));
+        Console.WriteLine($"UserDao: {user.Card.ExpiryDate}");
+
         if (user == null)
         {
             throw new Exception("Username does not exists");
