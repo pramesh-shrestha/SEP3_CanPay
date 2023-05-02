@@ -58,7 +58,6 @@ public class UserService : UserProtoService.UserProtoServiceBase
     {
         try
         {
-            Console.WriteLine($"User Service T3: {request.Value}");
             UserEntity userByUsername = await userDao.FetchUserByUsernameAsync(request.Value);
             UserProtoObj userProtoObj = FromEntityToProto(userByUsername);
             return userProtoObj;
