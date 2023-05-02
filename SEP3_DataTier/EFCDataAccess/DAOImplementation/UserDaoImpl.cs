@@ -37,7 +37,6 @@ public class UserDaoImpl : IUserDao
         UserEntity? user =
             await context.Users.Include(entity => entity.Card)
                 .FirstOrDefaultAsync(entity => entity.Username.ToLower().Equals(username.ToLower()));
-        Console.WriteLine($"UserDao: {user.Card.ExpiryDate}");
 
         if (user == null)
         {
@@ -93,9 +92,15 @@ public class UserDaoImpl : IUserDao
     }
 
     //update balance
-    public async Task<bool> UpdateBalanceAsync(string sender, string receiver, int amount)
+    public async Task<bool> UpdateBalanceAsync(string username, int newBalance)
     {
-        try
+        //todo: balance adding and removing should be done in application tier. need to consult with group 
+        UserEntity user = await FetchUserByUsernameAsync(username);
+        user.Balance = newBalance;
+        await context.SaveChangesAsync();
+        return true;
+
+        /*try
         {
             int senderAmount = await FetchBalanceByUsername(sender);
             //sender side
@@ -118,7 +123,7 @@ public class UserDaoImpl : IUserDao
             throw new Exception(e.Message);
         }
 
-        return false;
+        return false;*/
     }
 
     //get balance by username

@@ -10,9 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
-builder.Services.AddScoped<IUserDao, UserDaoImpl>();
 builder.Services.AddScoped<CanPayDbAccess>();
+builder.Services.AddScoped<IUserDao, UserDaoImpl>();
 builder.Services.AddScoped<ICardDao, CardDaoImpl>();
+builder.Services.AddScoped<ITransactionDao, TransactionDaoImpl>();
 
 var app = builder.Build();
 
