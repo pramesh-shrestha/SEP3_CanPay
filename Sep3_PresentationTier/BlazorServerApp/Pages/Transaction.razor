@@ -1,0 +1,34 @@
+﻿@page "/Transaction"
+@using Domains.Entity
+
+
+<div class="card">
+    <h3>Transaction</h3>
+    
+    <div class="form-group">
+        <label>From</label>
+        <input type="text" @bind="sender">
+        <div>
+            <select @bind="selectedCardId">
+                <option value="">Select card</option>
+                <option value="@user.Card.CardId">@user.Card.CardNumber</option>
+                
+            </select>
+        </div>
+    </div>
+    
+</div>
+
+<div>
+    <select></select>
+</div>
+
+@code {
+    private string sender;
+    private string receiver;
+    private int amount;
+    private DateTime dateTime;
+    private int selectedCardId;
+    private UserEntity user;
+
+}
