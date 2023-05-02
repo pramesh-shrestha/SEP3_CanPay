@@ -9,7 +9,6 @@ namespace EFCDataAccess.DAOImplementation;
 public class UserDaoImpl : IUserDao
 {
     private readonly CanPayDbAccess context;
-    private ICardDao cardDao;
 
     public UserDaoImpl(CanPayDbAccess context)
     {

@@ -2,6 +2,7 @@
 using EFCDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EFCDataAccess.Migrations
 {
     [DbContext(typeof(CanPayDbAccess))]
-    partial class CanPayDbAccessModelSnapshot : ModelSnapshot
+    [Migration("20230502193638_AddedTransactionEntityTable")]
+    partial class AddedTransactionEntityTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
