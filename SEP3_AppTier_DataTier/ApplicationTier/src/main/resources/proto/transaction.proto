@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+
+import "google/protobuf/wrappers.proto";
+import "user.proto";
+import "google/protobuf/empty.proto";
+
+option java_multiple_files = false;
+option java_package = "applicationtier.protobuf";
+
+message TransactionProtoObj {
+  google.protobuf.Int64Value transaction_id = 1;
+  UserProtoObj senderUser = 2;
+  UserProtoObj receiverUser = 3;
+  google.protobuf.Int32Value amount = 4;
+  google.protobuf.StringValue date = 5;
+}
+
+service TransactionProtoService {
+  rpc CreateTransactionAsync(TransactionProtoObj) returns (TransactionProtoObj);
+  rpc FetchTransactionByIdAsync(google.protobuf.Int64Value) returns (TransactionProtoObj);
+  rpc FetchAlLTransactionsBySenderAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+  rpc FetchAllTransactionsByReceiverAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+  rpc FetchAlLTransactionsInvolvingUserAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+  rpc FetchTransactionsByDateAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+  rpc DeleteTransactionAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
+}
+
+message  TransactionProtoObjList {
+  repeated TransactionProtoObj allTransactions = 1;
+}

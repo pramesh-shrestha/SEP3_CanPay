@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "SEP3_DataTier";
+//package = "SEP3_DataTier";
 
 import "google/protobuf/wrappers.proto";
 import "debitcard.proto";
