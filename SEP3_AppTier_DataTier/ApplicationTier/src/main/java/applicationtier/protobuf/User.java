@@ -2582,7 +2582,7 @@ public final class User {
       "ser\022\026.google.protobuf.Empty\032\021.UserListRe" +
       "sponse\"\000\022D\n\023FetchUserByUsername\022\034.google" +
       ".protobuf.StringValue\032\r.UserProtoObj\"\000\022=" +
-      "\n\rFetchUserById\022\033.google.protobuf.Int32V" +
+      "\n\rFetchUserById\022\033.google.protobuf.Int64V" +
       "alue\032\r.UserProtoObj\"\000\0221\n\nUpdateUser\022\022.Up" +
       "dateUserRequest\032\r.UserProtoObj\"\000\022G\n\nDele" +
       "teUser\022\033.google.protobuf.Int64Value\032\032.go" +
@@ -2590,8 +2590,8 @@ public final class User {
       "ce\022\033.google.protobuf.Int32Value\032\032.google",
       ".protobuf.BoolValue\022S\n\026FetchBalanceByUse" +
       "rname\022\034.google.protobuf.StringValue\032\033.go" +
-      "ogle.protobuf.Int32ValueB,\n\030applicationt" +
-      "ier.protobufP\000\252\002\rSEP3_DataTierb\006proto3"
+      "ogle.protobuf.Int32ValueB\034\n\030applicationt" +
+      "ier.protobufP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
