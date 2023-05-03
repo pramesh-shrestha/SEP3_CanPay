@@ -50,7 +50,7 @@ public class UserService : IUserService
             PropertyNameCaseInsensitive = true
         })!;
         
-        return userEntities;
+        return userEntities.ToList();
     }
 
 
