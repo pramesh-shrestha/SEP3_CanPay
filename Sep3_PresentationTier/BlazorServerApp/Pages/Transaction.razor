@@ -7,7 +7,7 @@
 
 <div class="card">
     <h3>Transaction</h3>
-    
+
     <div class="form-group">
         <label>From</label>
         <input type="text" @bind="sender">
@@ -15,11 +15,11 @@
             <select @bind="selectedCardId">
                 <option value="">Select card</option>
                 @* <option value="@user.Card.CardId">@user.Card.CardNumber</option> *@
-                
+
             </select>
         </div>
     </div>
-    
+
 </div>
 
 <div>
@@ -34,10 +34,10 @@
     private int selectedCardId;
     // private UserEntity user;
 
-    protected override async Task OnInitializedAsync() {
+    protected override async Task OnInitializedAsync()
+    {
         AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
         sender = state.User.Identity?.Name;
-       
     }
 
 }

@@ -3,6 +3,8 @@
 @using Domains
 @using Domains.Entity;
 @inject IUserService UserService;
+@inject NavigationManager NavigationManager;
+
 
 <div class="form-content">
     <div class="container ">
@@ -89,9 +91,9 @@
             }
             try
             {
-                UserEntity user = await UserService.ValidateUser(loginDto.Username, loginDto.Password);
+                await UserService.ValidateUser(loginDto.Username, loginDto.Password);
                 DisplayMessage("Login successful!");
-    //  NavigateTo("/");
+                NavigationManager.NavigateTo("/Transaction");
             }
             catch (Exception e)
             {

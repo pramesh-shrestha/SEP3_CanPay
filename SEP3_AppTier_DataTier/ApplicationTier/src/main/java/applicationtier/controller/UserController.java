@@ -105,7 +105,7 @@ public class UserController {
             @RequestBody LoginDto request
     ) {
         ResponseEntity<AuthenticationResponse> response = ResponseEntity.ok(service.authenticate(request));
-        System.out.println(response.getStatusCode());
+        System.out.println(response.getBody().getToken());
         return response;
     }
 

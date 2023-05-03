@@ -98,7 +98,6 @@ public class UserServiceImplementation implements IUserService {
 
 
     public AuthenticationResponse authenticate(LoginDto request) {
-        System.out.println("User Service Implementation: " + request.getUsername());
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -111,7 +110,6 @@ public class UserServiceImplementation implements IUserService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
-
     }
 
 
