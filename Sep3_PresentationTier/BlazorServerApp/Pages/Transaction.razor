@@ -4,27 +4,34 @@
 @using Domains.Entity
 @using HTTPClients.ClientInterfaces
 
-
-<div class="card">
+<body>
+<div class="container">
     <h3>Transaction</h3>
+    <div class="row">
+        <!-- 8 Columns -->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>@sender</label>
+                <label>From</label>
+                <div>
+                    <select @bind="selectedCardId" class="optionFieldLength">
+                        <option selected value="">Select card</option>
+                        @* <option value="@user.Card.CardId">@user.Card.CardNumber</option> *@
 
-    <div class="form-group">
-        <label>From</label>
-        <input type="text" @bind="sender">
-        <div>
-            <select @bind="selectedCardId">
-                <option value="">Select card</option>
-                @* <option value="@user.Card.CardId">@user.Card.CardNumber</option> *@
+                    </select>
+                </div>
+            </div>
+        </div>
 
-            </select>
+        <!-- 4 Columns -->
+        <div class="col-md-4">
+            <div class="card">
+                
+            </div>
         </div>
     </div>
-
 </div>
-
-<div>
-    <select></select>
-</div>
+</body>
 
 @code {
     private string? sender;
@@ -32,10 +39,10 @@
     private int amount;
     private DateTime dateTime;
     private int selectedCardId;
-    // private UserEntity user;
+    private List<UserEntity> userEntities;
+    List<string> usernames;
 
-    protected override async Task OnInitializedAsync()
-    {
+    protected override async Task OnInitializedAsync() {
         AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
         sender = state.User.Identity?.Name;
     }
