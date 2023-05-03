@@ -1,9 +1,11 @@
 package applicationtier.GrpcClient.transaction;
 
 import applicationtier.entity.TransactionEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TransactionClientImpl implements ITransactionClient{
 
     @Override

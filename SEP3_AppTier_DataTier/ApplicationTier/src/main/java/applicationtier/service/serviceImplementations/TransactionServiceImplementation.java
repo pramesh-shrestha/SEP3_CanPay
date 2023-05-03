@@ -1,5 +1,6 @@
 package applicationtier.service.serviceImplementations;
 
+import applicationtier.GrpcClient.transaction.ITransactionClient;
 import applicationtier.entity.TransactionEntity;
 import applicationtier.service.serviceInterfaces.ITransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +11,17 @@ import java.util.List;
 @Service
 public class TransactionServiceImplementation implements ITransactionService {
 
-    private ITransactionService transactionService;
+    private ITransactionClient transactionClient;
 
     @Autowired
-    public TransactionServiceImplementation(ITransactionService transactionService) {
-        this.transactionService = transactionService;
+    public TransactionServiceImplementation(ITransactionClient transactionClient) {
+        this.transactionClient = transactionClient;
     }
 
     @Override
     public TransactionEntity createTransaction(TransactionEntity transaction) {
         try {
-            return transactionService.createTransaction(transaction);
+            return transactionClient.createTransaction(transaction);
         }
         catch (Exception e){
             throw new RuntimeException(e.getMessage());
@@ -30,7 +31,7 @@ public class TransactionServiceImplementation implements ITransactionService {
     @Override
     public TransactionEntity fetchTransactionById(Long id) {
         try {
-            return transactionService.fetchTransactionById(id);
+            return transactionClient.fetchTransactionById(id);
         }
         catch (Exception e){
             throw new RuntimeException(e.getMessage());
@@ -40,7 +41,7 @@ public class TransactionServiceImplementation implements ITransactionService {
     @Override
     public List<TransactionEntity> fetchAlLTransactionsBySender(String senderUsername) {
         try {
-            return transactionService.fetchAlLTransactionsBySender(senderUsername);
+            return transactionClient.fetchAlLTransactionsBySender(senderUsername);
         }
         catch (Exception e){
             throw new RuntimeException(e.getMessage());
@@ -50,7 +51,7 @@ public class TransactionServiceImplementation implements ITransactionService {
     @Override
     public List<TransactionEntity> fetchAllTransactionByReceiver(String receiverUsername) {
         try{
-            return transactionService.fetchAllTransactionByReceiver(receiverUsername);
+            return transactionClient.fetchAllTransactionByReceiver(receiverUsername);
         }
         catch (Exception e){
             throw new RuntimeException(e.getMessage());
@@ -60,7 +61,7 @@ public class TransactionServiceImplementation implements ITransactionService {
     @Override
     public List<TransactionEntity> fetchAllTransactionInvolvingUser(String username) {
         try{
-            return transactionService.fetchAllTransactionInvolvingUser(username);
+            return transactionClient.fetchAllTransactionInvolvingUser(username);
         }
         catch (Exception e){
             throw new RuntimeException(e.getMessage());
@@ -70,7 +71,7 @@ public class TransactionServiceImplementation implements ITransactionService {
     @Override
     public List<TransactionEntity> fetchTransactionByDate(String date) {
         try{
-            return transactionService.fetchTransactionByDate(date);
+            return transactionClient.fetchTransactionByDate(date);
         }
         catch (Exception e){
             throw new RuntimeException(e.getMessage());
@@ -80,7 +81,7 @@ public class TransactionServiceImplementation implements ITransactionService {
     @Override
     public boolean deleteTransaction(Long id) {
         try {
-            return transactionService.deleteTransaction(id);
+            return transactionClient.deleteTransaction(id);
         }
         catch (Exception e){
             throw new RuntimeException(e.getMessage());
