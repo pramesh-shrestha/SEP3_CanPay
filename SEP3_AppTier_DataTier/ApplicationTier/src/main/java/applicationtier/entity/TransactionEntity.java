@@ -16,6 +16,9 @@ public class TransactionEntity {
         this.date = date;
     }
 
+    public TransactionEntity() {
+    }
+
     public Long getId() {
         return id;
     }
