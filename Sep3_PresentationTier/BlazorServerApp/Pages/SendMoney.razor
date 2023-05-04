@@ -2,6 +2,7 @@
 @using Domains.Entity
 @using HTTPClients.ClientInterfaces
 @inject IUserService UserService;
+@inject ITransactionService TransactionService;
 @inject AuthenticationStateProvider StateProvider;
 @inject NavigationManager NavMgr;
 
@@ -51,7 +52,12 @@
                 <div class="inputFields">
                     <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
                 </div>
-
+                
+                <div class="error">
+                    @if (!string.IsNullOrEmpty(errorLabel)) {
+                        <label style="color: @color">@errorLabel</label>
+                    }
+                </div>
             </div>
         </div>
         <div class="col-md-3 third-box usernameList">
@@ -84,51 +90,54 @@
     private string color;
 
     protected override async Task OnInitializedAsync() {
-        // AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
-        // sender = state.User.Identity?.Name.ToUpper();
-        // userEntities = await UserService.FetchAllUsersAsync();
-        // user = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(sender));
-        // usernames = GetUsernames();
-        userEntities = GetUserEntities();
-        sender = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals("pramesh")).UserName.ToUpper();
+        AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
+        sender = state.User.Identity?.Name.ToUpper();
+        userEntities = await UserService.FetchAllUsersAsync();
         senderUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(sender));
         usernames = GetUsernames();
+        // userEntities = GetUserEntities();
+        // sender = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals("pramesh")).UserName.ToUpper();
+        // senderUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(sender));
+        // usernames = GetUsernames();
     }
 
+    //send money to receiver
     private async Task SendMoneyToReceiver(string sender, string receiver, int amount, DateTime dateTime) {
         UserEntity receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
-        
-        
+        string date = $"{dateTime.Date.Day}{dateTime.Date.Month}/{dateTime.Date.Year}";
+
+        TransactionEntity transactionEntity = new TransactionEntity(senderUser,receiverUser,this.amount,date);
+
+        try {
+            if (string.IsNullOrEmpty(this.receiver)) {
+                errorLabel = "Receiver must be selected.";
+                color = "red";
+            }
+            if (this.amount <= 0) {
+                errorLabel = "Amount must be more than 0.";
+                color = "red";
+            }
+            if (string.IsNullOrEmpty(errorLabel)) {
+                await TransactionService.CreateTransactionAsync(transactionEntity);
+                errorLabel = "Transaction successful.";
+                color = "green";
+                this.receiver = "";
+                this.amount = 0;
+            }
+           
+        }
+        catch (Exception e) {
+            errorLabel = e.Message;
+            color = "red";
+        }
     }
     
+    //navigate back to home page
     private void BackToHome() {
         NavMgr.NavigateTo("/");
     }
-
-    public IEnumerable<UserEntity> GetUserEntities() {
-        IEnumerable<UserEntity> users = new List<UserEntity>() {
-            new UserEntity("Pramesh", "pramesh", "Password1@", new DebitCardEntity(1234567890123456, "12/2030", 123), 1000),
-            new UserEntity("Rajip", "rajip", "Password1@", new DebitCardEntity(1234567890654321, "12/2030", 123), 1000),
-            new UserEntity("Troels", "troels", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Suhani", "suhani", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Sachin", "sachin", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Himal", "himal", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Rajesh", "rajesh", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Ravi", "ravi", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Rakesh", "rakesh", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Reema", "reema", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Prakash", "prakash", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Shyam", "shyam", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Pratap", "pratap", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Sushma", "sushma", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Bheema", "bheema", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Rajendra", "rajendra", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Ramesh", "ramesh", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-         
-        };
-        return users;
-    }
-
+    
+    //get all usernames
     private List<string> GetUsernames() {
         List<string> users = new List<string>();
         foreach (var user in userEntities) {
@@ -136,6 +145,32 @@
         }
         return users;
     }
+
+    // public IEnumerable<UserEntity> GetUserEntities() {
+    //     IEnumerable<UserEntity> users = new List<UserEntity>() {
+    //         new UserEntity("Pramesh", "pramesh", "Password1@", new DebitCardEntity(1234567890123456, "12/2030", 123), 1000),
+    //         new UserEntity("Rajip", "rajip", "Password1@", new DebitCardEntity(1234567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Troels", "troels", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Suhani", "suhani", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Sachin", "sachin", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Himal", "himal", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Rajesh", "rajesh", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Ravi", "ravi", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Rakesh", "rakesh", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Reema", "reema", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Prakash", "prakash", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Shyam", "shyam", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Pratap", "pratap", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Sushma", "sushma", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Bheema", "bheema", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Rajendra", "rajendra", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //         new UserEntity("Ramesh", "ramesh", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+    //      
+    //     };
+    //     return users;
+    // }
+
+  
 
   
 
