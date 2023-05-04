@@ -8,27 +8,53 @@
 <div class="container">
     <h3>Send Money</h3>
     <div class="row">
+        <div class="col-md-3 first-box">
+            
+            <div class="icon-image">
+                <img src="images/KANPAY logo.png" alt="">
+            </div>
+            
+            <div class="buttonDiv">
+                <button class="button">Send</button>
+                <button class="button">Cancel</button>
+            </div>
+        </div>
+        
         <!-- 8 Columns -->
         <div class="col-md-6">
             <div class="form-group">
-                <label>@sender</label>
+                <div><label>@sender</label></div>
                 <label>From</label>
-                <div>
+
+                <div class="inputFields">
                     <select @bind="selectedCardId" class="fieldLength">
                         <option selected value="">Select card</option>
                         @* <option value="@user.Card.CardId">@user.Card.CardNumber</option> *@
 
                     </select>
                 </div>
-            </div>
-        </div>
+                <label>To</label>
+                <div class="inputFields">
+                    <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
+                </div>
 
-        <!-- 4 Columns -->
-        <div class="col-md-4 offset-md-2">
-            <div class="form-group" >
-                <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
+                <label>Amount</label>
+                <div class="inputFields">
+                    <input type="text" class="fieldLength" @bind="amount">
+                </div>
+
+                <label>Date</label>
+                <div class="inputFields">
+                    <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
+                </div>
+
             </div>
         </div>
+        <div class="col-md-3 third-box">
+            <img src="images/send money.gif" alt="" class="gifImage">
+        </div>
+        
+        
     </div>
 </div>
 </body>
@@ -37,7 +63,7 @@
     private string? sender;
     private string receiver;
     private int amount;
-    private DateTime dateTime;
+    private DateTime dateTime = DateTime.Now.Date;
     private int selectedCardId;
     IEnumerable<UserEntity> userEntities;
     List<string> usernames;
