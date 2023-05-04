@@ -30,7 +30,7 @@
                     <select @bind="selectedCardId" class="fieldLength">
                         <option selected value="">Select card</option>
                         @* <option value="@user.Card.CardId">@user.Card.CardNumber</option> *@
-
+                        <option value="">@user.Card.CardNumber</option> 
                     </select>
                 </div>
                 <label>To</label>
@@ -50,8 +50,16 @@
 
             </div>
         </div>
-        <div class="col-md-3 third-box">
-            <img src="images/send money.gif" alt="" class="gifImage">
+        <div class="col-md-3 third-box usernameList">
+            <h4>List of usernames</h4>
+            @* <img src="images/send money.gif" alt="" class="gifImage"> *@
+            @foreach (var item in usernames) {
+                if (item.ToLower().Contains(receiver.ToLower())) {
+                    <ul>
+                        <li @onclick="() => receiver = item">@item</li>
+                    </ul>
+                }
+            }
         </div>
         
         
@@ -60,18 +68,55 @@
 </body>
 
 @code {
-    private string? sender;
-    private string receiver;
+    private string? sender = string.Empty;
+    private string receiver = string.Empty;
     private int amount;
     private DateTime dateTime = DateTime.Now.Date;
     private int selectedCardId;
-    IEnumerable<UserEntity> userEntities;
-    List<string> usernames;
+    private IEnumerable<UserEntity> userEntities;
+    private List<string> usernames;
+    private UserEntity user;
 
     protected override async Task OnInitializedAsync() {
-        AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
-        sender = state.User.Identity?.Name;
+        // AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
+        // sender = state.User.Identity?.Name;
         // userEntities = await UserService.FetchAllUsersAsync();
+        userEntities = GetUserEntities();
+        sender = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals("pramesh")).UserName.ToUpper();
+        user = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals("pramesh"));
+        usernames = GetUsernames();
+    }
+    
+     public IEnumerable<UserEntity> GetUserEntities() {
+        IEnumerable<UserEntity> users = new List<UserEntity>() {
+            new UserEntity("Pramesh", "pramesh", "Password1@", new DebitCardEntity(1234567890123456, "12/2030", 123), 1000),
+            new UserEntity("Rajip", "rajip", "Password1@", new DebitCardEntity(1234567890654321, "12/2030", 123), 1000),
+            new UserEntity("Troels", "troels", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Suhani", "suhani", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Sachin", "sachin", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Himal", "himal", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Rajesh", "rajesh", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Ravi", "ravi", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Rakesh", "rakesh", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Reema", "reema", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Prakash", "prakash", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Shyam", "shyam", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Pratap", "pratap", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Sushma", "sushma", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Bheema", "bheema", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Rajendra", "rajendra", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+            new UserEntity("Ramesh", "ramesh", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
+         
+        };
+        return users;
+    }
+
+    private List<string> GetUsernames() {
+        List<string> users = new List<string>();
+        foreach (var user in userEntities) {
+            users.Add(user.UserName);
+        }
+        return users;
     }
 
 }
