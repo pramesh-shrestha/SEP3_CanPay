@@ -82,9 +82,14 @@ public class UserServiceImplementation implements IUserService {
         }
     }
 
+
     @Override
-    public UserEntity updateUser(Long id, UserEntity user) {
-        return null;
+    public UserEntity updateUser(UserEntity user) {
+        try {
+            return userClient.updateUser(user);
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @Override
