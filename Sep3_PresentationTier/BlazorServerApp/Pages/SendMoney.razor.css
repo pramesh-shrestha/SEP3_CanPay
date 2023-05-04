@@ -127,3 +127,13 @@
     position: sticky;
     top: 0;
 }
+
+.usernameList ul li{
+    cursor: pointer;
+}
+
+.usernameList ul:hover {
+    transform: translateY(-5px);
+    background-color:  #5E5DF0;
+    color: #FFFFFF;
+}

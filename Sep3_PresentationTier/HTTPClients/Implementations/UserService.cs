@@ -86,6 +86,7 @@ public class UserService : IUserService
     {
         throw new NotImplementedException();
     }
+    
 
     //Send user credentials to the Application tier for validation
     public async Task<AuthenticationResponse> ValidateUser(string username, string password)
@@ -137,6 +138,9 @@ public class UserService : IUserService
         ClaimsPrincipal principal = CreateClaimsPrincipal();
         return Task.FromResult(principal);
     }
+
+    //updating the balance
+   
 
     public static async Task<string?> GetJwtToken()
     {
