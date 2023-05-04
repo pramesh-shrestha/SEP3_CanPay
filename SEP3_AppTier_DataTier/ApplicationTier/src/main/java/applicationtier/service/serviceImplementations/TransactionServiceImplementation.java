@@ -29,6 +29,9 @@ public class TransactionServiceImplementation implements ITransactionService {
             UserEntity sender = transaction.getSender();
             int amount = transaction.getAmount();
 
+            if (sender.getBalance()>amount || sender.getBalance()==0){
+                throw new Exception("Insufficient balance");
+            }
             //set balance of sender and receiver after transaction
             sender.setBalance(sender.getBalance()-amount);
             receiver.setBalance(receiver.getBalance()+amount);
