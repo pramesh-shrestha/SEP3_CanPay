@@ -3,6 +3,7 @@
 @using HTTPClients.ClientInterfaces
 @inject IUserService UserService;
 @inject AuthenticationStateProvider StateProvider;
+@inject NavigationManager NavMgr;
 
 <body>
 <div class="container">
@@ -15,8 +16,8 @@
             </div>
             
             <div class="buttonDiv">
-                <button class="button">Send</button>
-                <button class="button">Cancel</button>
+                <button class="button" @onclick="() => SendMoneyToReceiver(sender,receiver,amount,dateTime)">Send</button>
+                <button class="button" @onclick="BackToHome">Cancel</button>
             </div>
         </div>
         
@@ -30,7 +31,10 @@
                     <select @bind="selectedCardId" class="fieldLength">
                         <option selected value="">Select card</option>
                         @* <option value="@user.Card.CardId">@user.Card.CardNumber</option> *@
-                        <option value="">@user.Card.CardNumber</option> 
+                        
+                        <option value="@senderUser.Card.CardId">@senderUser.Card.CardNumber</option> 
+                
+                        
                     </select>
                 </div>
                 <label>To</label>
@@ -75,19 +79,33 @@
     private int selectedCardId;
     private IEnumerable<UserEntity> userEntities;
     private List<string> usernames;
-    private UserEntity user;
+    private UserEntity senderUser;
+    private string errorLabel;
+    private string color;
 
     protected override async Task OnInitializedAsync() {
         // AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
-        // sender = state.User.Identity?.Name;
+        // sender = state.User.Identity?.Name.ToUpper();
         // userEntities = await UserService.FetchAllUsersAsync();
+        // user = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(sender));
+        // usernames = GetUsernames();
         userEntities = GetUserEntities();
         sender = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals("pramesh")).UserName.ToUpper();
-        user = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals("pramesh"));
+        senderUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(sender));
         usernames = GetUsernames();
     }
+
+    private async Task SendMoneyToReceiver(string sender, string receiver, int amount, DateTime dateTime) {
+        UserEntity receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
+        
+        
+    }
     
-     public IEnumerable<UserEntity> GetUserEntities() {
+    private void BackToHome() {
+        NavMgr.NavigateTo("/");
+    }
+
+    public IEnumerable<UserEntity> GetUserEntities() {
         IEnumerable<UserEntity> users = new List<UserEntity>() {
             new UserEntity("Pramesh", "pramesh", "Password1@", new DebitCardEntity(1234567890123456, "12/2030", 123), 1000),
             new UserEntity("Rajip", "rajip", "Password1@", new DebitCardEntity(1234567890654321, "12/2030", 123), 1000),
@@ -118,5 +136,7 @@
         }
         return users;
     }
+
+  
 
 }
