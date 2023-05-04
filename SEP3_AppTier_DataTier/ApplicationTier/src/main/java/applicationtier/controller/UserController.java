@@ -13,6 +13,7 @@ import applicationtier.service.serviceInterfaces.IUserService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 //@RequestMapping("/api/auth")
 public class UserController {
 
@@ -102,8 +103,8 @@ public class UserController {
     //login
     @PostMapping("/user/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody LoginDto request
-    ) {
+            @RequestBody LoginDto request) {
+        System.out.println("I am here at user controller");
         ResponseEntity<AuthenticationResponse> response = ResponseEntity.ok(service.authenticate(request));
         System.out.println(response.getBody().getToken());
         return response;

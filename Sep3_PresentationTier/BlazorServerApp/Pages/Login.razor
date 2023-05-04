@@ -93,7 +93,7 @@
             {
                 await UserService.ValidateUser(loginDto.Username, loginDto.Password);
                 DisplayMessage("Login successful!");
-                NavigationManager.NavigateTo("/Transaction");
+                NavigationManager.NavigateTo("/SendMoney");
             }
             catch (Exception e)
             {
