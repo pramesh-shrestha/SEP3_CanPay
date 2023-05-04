@@ -24,6 +24,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
             UserEntity addedUser = await userDao.CreateUserAsync(toAddUser);
 
             UserProtoObj userProtoObj = FromEntityToProto(addedUser);
+            userProtoObj.UserId = addedUser.Id;
             return userProtoObj;
         }
         catch (Exception e)
@@ -42,7 +43,9 @@ public class UserService : UserProtoService.UserProtoServiceBase
 
             foreach (UserEntity userEntity in allUsers)
             {
-                userProtoObjs.Add(FromEntityToProto(userEntity));
+                UserProtoObj protoObj = FromEntityToProto(userEntity);
+                protoObj.UserId = userEntity.Id;
+                userProtoObjs.Add(protoObj);
             }
 
             return new UserListResponse() { AllUsers = { userProtoObjs } };
@@ -60,6 +63,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
         {
             UserEntity userByUsername = await userDao.FetchUserByUsernameAsync(request.Value);
             UserProtoObj userProtoObj = FromEntityToProto(userByUsername);
+            userProtoObj.UserId = userByUsername.Id;
             return userProtoObj;
         }
         catch (Exception e)
@@ -75,6 +79,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
         {
             UserEntity userById = await userDao.FetchUserByIdAsync(request.Value);
             UserProtoObj protoObj = FromEntityToProto(userById);
+            protoObj.UserId = userById.Id;
             return protoObj;
         }
         catch (Exception e)
@@ -84,10 +89,29 @@ public class UserService : UserProtoService.UserProtoServiceBase
         }
     }
 
-    public override async Task<UserProtoObj> UpdateUser(UpdateUserRequest request, ServerCallContext context)
-    {
-        // todo: have to look into this another time
 
+    public override async Task<UserProtoObj> UpdateUser(UserProtoObj request, ServerCallContext context)
+    {
+        try
+        {
+            UserEntity userEntity = FromProtoToEntity(request);
+            userEntity.Id = (int)request.UserId;
+
+            UserEntity updatedUserEntity = await userDao.UpdateUserAsync(userEntity);
+            UserProtoObj updatedProtoObj = FromEntityToProto(updatedUserEntity);
+            updatedProtoObj.UserId = updatedUserEntity.Id;
+
+            return updatedProtoObj;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
+        }
+    }
+
+    /*public override async Task<UserProtoObj> UpdateUser(UpdateUserRequest request, ServerCallContext context)
+    {
         try
         {
             UserEntity userUpdate = FromProtoToEntity(request.ToUpdateUser);
@@ -101,7 +125,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.InvalidArgument, e.Message));
         }
-    }
+    }*/
 
     public override async Task<BoolValue> DeleteUser(Int64Value request, ServerCallContext context)
     {
@@ -117,15 +141,24 @@ public class UserService : UserProtoService.UserProtoServiceBase
         }
     }
 
-    public override Task<Int32Value> FetchBalanceByUsername(StringValue request, ServerCallContext context)
+    public override async Task<Int32Value> FetchBalanceByUsername(StringValue request, ServerCallContext context)
     {
-        return base.FetchBalanceByUsername(request, context);
+        try
+        {
+            int balanceByUsername = await userDao.FetchBalanceByUsername(request.Value);
+            return new Int32Value { Value = balanceByUsername };
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
+        }
     }
 
-    public override Task<BoolValue> UpdateBalance(Int32Value request, ServerCallContext context)
+    /*public override Task<BoolValue> UpdateBalance(Int32Value request, ServerCallContext context)
     {
         return base.UpdateBalance(request, context);
-    }
+    }*/
 
     public static UserEntity FromProtoToEntity(UserProtoObj userProtoObj)
     {
@@ -141,7 +174,6 @@ public class UserService : UserProtoService.UserProtoServiceBase
 
     public static UserProtoObj FromEntityToProto(UserEntity userEntity)
     {
-        Console.WriteLine($"UserService {userEntity.Card.CardNumber}");
         return new UserProtoObj()
         {
             FullName = userEntity.Fullname,

@@ -126,7 +126,7 @@ public class UserService : IUserService
 
         IEnumerable<Claim> claimsFromJwt = ParseClaimsFromJwt(Jwt);
 
-        ClaimsIdentity identity = new(claimsFromJwt, "jwt");
+        ClaimsIdentity identity = new ClaimsIdentity(claimsFromJwt, "jwt");
 
         ClaimsPrincipal principal = new(identity);
         return principal;
