@@ -71,11 +71,11 @@ public class UserController {
     }
 
     //update user
-    @PutMapping("/user/update/{id}")
-    public ResponseEntity<UserEntity> updateUser(@PathVariable Long id, @RequestBody
+    @PutMapping("/user/update/{updatedUser}")
+    public ResponseEntity<UserEntity> updateUser(@RequestBody
     UserEntity updatedUser) {
         try {
-            return new ResponseEntity<>(userService.updateUser(id, updatedUser), HttpStatus.OK);
+            return new ResponseEntity<>(userService.updateUser(updatedUser), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

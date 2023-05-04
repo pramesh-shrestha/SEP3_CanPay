@@ -62,6 +62,15 @@ public class UserClientImpl implements IUserClient {
     }
 
     @Override
+    public UserEntity updateUser(UserEntity user) {
+       try {
+           User.UserProtoObj userProtoObj=getUserBlockingStub().updateUser(fromEntityToProtoObj(user));
+           return fromProtoObjToEntity(userProtoObj);
+       }catch (Exception e){
+           throw new RuntimeException(e);
+       }
+    }
+    @Override
     public boolean deleteUser(Long id) {
         try {
             BoolValue userProtoObj = getUserBlockingStub().deleteUser(Int64Value.of(id));
