@@ -49,6 +49,8 @@ public class TransactionController {
         }
     }
 
+
+
     @GetMapping("/transaction/receiver/{receiverUsername}")
     public ResponseEntity<List<TransactionEntity>> fetchAllTransactionByReceiver(@PathVariable("receiverUsername") String receiverUsername){
 
