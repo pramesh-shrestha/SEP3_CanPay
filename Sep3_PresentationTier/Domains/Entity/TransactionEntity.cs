@@ -8,8 +8,7 @@ public class TransactionEntity {
     public int Amount { get; set; }
     public string Date { get; set; }
 
-    public TransactionEntity(long transactionId, UserEntity sender, UserEntity receiver, int amount, string date) {
-        TransactionId = transactionId;
+    public TransactionEntity(UserEntity sender, UserEntity receiver, int amount, string date) {
         Sender = sender;
         Receiver = receiver;
         Amount = amount;
