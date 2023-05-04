@@ -104,3 +104,26 @@
 .button:focus {
     background-color: #403fa3;
 }
+
+/*username list box styling*/
+.usernameList{
+    background-color: #FFFFFF;
+    height: 350px;
+    overflow-y: auto;
+}
+
+.usernameList h4,ul li {
+    font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji", NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
+    font-weight: bolder;
+}
+
+.usernameList h4 {
+    background-color: #5E5DF0;
+    color: #FFFFFF;
+    border-radius: 999px;
+    text-align: center;
+    margin-top: 5px;
+    padding: 3px 0 3px 0;
+    position: sticky;
+    top: 0;
+}
