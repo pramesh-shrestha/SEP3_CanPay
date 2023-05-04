@@ -5,9 +5,11 @@ namespace HTTPClients.ClientInterfaces;
 public interface ITransactionService {
     Task<TransactionEntity> CreateTransactionAsync(TransactionEntity transactionEntity);
     Task<TransactionEntity> FetchTransactionByIdAsync(long id);
-    Task<TransactionEntity> FetchAllTransactionBySender(string username);
-    Task<TransactionEntity> FetchAllTransactionByReceiver(string username);
-    Task<TransactionEntity> FetchAllTransactionInvolvingBothUsers(string username);
-    
-    
+    Task<TransactionEntity> FetchAllTransactionBySenderAsync(string username);
+    Task<TransactionEntity> FetchAllTransactionByReceiverAsync(string username);
+    Task<TransactionEntity> FetchAllTransactionInvolvingBothUsersAsync(string username);
+    Task<TransactionEntity> FetchTransactionByDateAsync(string date);
+    Task DeleteTransactionAsync(long id);
+
+
 }
