@@ -39,7 +39,7 @@ public class TransactionController {
         }
     }
 
-    @GetMapping("/transaction/{senderUsername}")
+    @GetMapping("/transaction/sender/{senderUsername}")
     public ResponseEntity<List<TransactionEntity>> fetchAllTransactionBySender(@PathVariable("senderUsername") String senderUsername){
         try {
             return new ResponseEntity<>(transactionService.fetchAlLTransactionsBySender(senderUsername),HttpStatus.OK);
@@ -49,7 +49,7 @@ public class TransactionController {
         }
     }
 
-    @GetMapping("/transaction/{receiverUsername}")
+    @GetMapping("/transaction/receiver/{receiverUsername}")
     public ResponseEntity<List<TransactionEntity>> fetchAllTransactionByReceiver(@PathVariable("receiverUsername") String receiverUsername){
 
         try {
