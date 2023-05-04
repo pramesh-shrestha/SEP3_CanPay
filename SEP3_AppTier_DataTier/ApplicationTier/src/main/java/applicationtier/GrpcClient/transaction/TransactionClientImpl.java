@@ -12,17 +12,18 @@ import com.google.protobuf.StringValue;
 import io.grpc.ManagedChannel;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TransactionClientImpl implements ITransactionClient{
+public class TransactionClientImpl implements ITransactionClient {
 
     private TransactionProtoServiceGrpc.TransactionProtoServiceBlockingStub transactionBlockingStub;
 
-    private TransactionProtoServiceGrpc.TransactionProtoServiceBlockingStub getTransactionBlockingStub(){
-        if (transactionBlockingStub==null){
-            ManagedChannel channel= ManagedChannelProvider.getChannel();
-            transactionBlockingStub=TransactionProtoServiceGrpc.newBlockingStub(channel);
+    private TransactionProtoServiceGrpc.TransactionProtoServiceBlockingStub getTransactionBlockingStub() {
+        if (transactionBlockingStub == null) {
+            ManagedChannel channel = ManagedChannelProvider.getChannel();
+            transactionBlockingStub = TransactionProtoServiceGrpc.newBlockingStub(channel);
         }
         return transactionBlockingStub;
     }
@@ -30,10 +31,10 @@ public class TransactionClientImpl implements ITransactionClient{
     @Override
     public TransactionEntity createTransaction(TransactionEntity transaction) {
         try {
-            Transaction.TransactionProtoObj transactionProtoObj=fromEntityToProtoObj(transaction);
-            Transaction.TransactionProtoObj protoObj=getTransactionBlockingStub().createTransactionAsync(transactionProtoObj);
+            Transaction.TransactionProtoObj transactionProtoObj = fromEntityToProtoObj(transaction);
+            Transaction.TransactionProtoObj protoObj = getTransactionBlockingStub().createTransactionAsync(transactionProtoObj);
             return fromProtoObjToEntity(protoObj);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -41,51 +42,86 @@ public class TransactionClientImpl implements ITransactionClient{
     @Override
     public TransactionEntity fetchTransactionById(Long id) {
         try {
-            Transaction.TransactionProtoObj transactionProtoObj=getTransactionBlockingStub().fetchTransactionByIdAsync(Int64Value.of(id));
+            Transaction.TransactionProtoObj transactionProtoObj = getTransactionBlockingStub().fetchTransactionByIdAsync(Int64Value.of(id));
             return fromProtoObjToEntity(transactionProtoObj);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
     public List<TransactionEntity> fetchAlLTransactionsBySender(String senderUsername) {
-        return null;
+        try {
+            List<Transaction.TransactionProtoObj> allTransactionsList = getTransactionBlockingStub().fetchAlLTransactionsBySenderAsync(StringValue.of(senderUsername)).getAllTransactionsList();
+            List<TransactionEntity> transactionEntities=new ArrayList<>();
+            for (Transaction.TransactionProtoObj transactionProtoObj : allTransactionsList) {
+                transactionEntities.add(fromProtoObjToEntity(transactionProtoObj));
+            }
+            return transactionEntities;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
 
 
     @Override
     public List<TransactionEntity> fetchAllTransactionByReceiver(String receiverUsername) {
-        return null;
+        try {
+            List<Transaction.TransactionProtoObj> allTransactionsList = getTransactionBlockingStub().fetchAllTransactionsByReceiverAsync(StringValue.of(receiverUsername)).getAllTransactionsList();
+            List<TransactionEntity> transactionEntities=new ArrayList<>();
+            for (Transaction.TransactionProtoObj transactionProtoObj : allTransactionsList) {
+                transactionEntities.add(fromProtoObjToEntity(transactionProtoObj));
+            }
+            return transactionEntities;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
-
 
 
     @Override
     public List<TransactionEntity> fetchAllTransactionInvolvingUser(String username) {
-        return null;
+        try {
+            List<Transaction.TransactionProtoObj> allTransactionsList = getTransactionBlockingStub().fetchAlLTransactionsInvolvingUserAsync(StringValue.of(username)).getAllTransactionsList();
+            List<TransactionEntity> transactionEntities= new ArrayList<>();
+            for (Transaction.TransactionProtoObj transactionProtoObj : allTransactionsList) {
+                transactionEntities.add(fromProtoObjToEntity(transactionProtoObj));
+            }
+            return transactionEntities;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public List<TransactionEntity> fetchTransactionByDate(String date) {
-        return null;
+        try {
+            List<Transaction.TransactionProtoObj> transactionsList1 = getTransactionBlockingStub().
+                    fetchTransactionsByDateAsync(StringValue.of(date)).getAllTransactionsList();
+            List<TransactionEntity> transactionEntities = new ArrayList<>();
+            for (Transaction.TransactionProtoObj transactionProtoObj : transactionsList1) {
+                transactionEntities.add(fromProtoObjToEntity(transactionProtoObj));
+            }
+            return transactionEntities;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public boolean deleteTransaction(Long id) {
         try {
-            BoolValue transactionProtoObj= getTransactionBlockingStub().deleteTransactionAsync(Int64Value.of(id));
+            BoolValue transactionProtoObj = getTransactionBlockingStub().deleteTransactionAsync(Int64Value.of(id));
             return transactionProtoObj.toBuilder().getValue();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static TransactionEntity fromProtoObjToEntity(Transaction.TransactionProtoObj transactionProtoObj){
-        TransactionEntity transaction=new TransactionEntity();
+
+    //from proto to entity
+    public static TransactionEntity fromProtoObjToEntity(Transaction.TransactionProtoObj transactionProtoObj) {
+        TransactionEntity transaction = new TransactionEntity();
         transaction.setReceiver(UserClientImpl.fromProtoObjToEntity(transactionProtoObj.getReceiverUser()));
         transaction.setSender(UserClientImpl.fromProtoObjToEntity(transactionProtoObj.getSenderUser()));
         transaction.setAmount(transactionProtoObj.getAmount().getValue());
@@ -93,8 +129,9 @@ public class TransactionClientImpl implements ITransactionClient{
         return transaction;
     }
 
-    public static Transaction.TransactionProtoObj fromEntityToProtoObj(TransactionEntity transaction){
-        Transaction.TransactionProtoObj.Builder transactionBuilder=Transaction.TransactionProtoObj.newBuilder()
+    //from entity to proto
+    public static Transaction.TransactionProtoObj fromEntityToProtoObj(TransactionEntity transaction) {
+        Transaction.TransactionProtoObj.Builder transactionBuilder = Transaction.TransactionProtoObj.newBuilder()
                 .setReceiverUser(UserClientImpl.fromEntityToProtoObj(transaction.getReceiver()))
                 .setSenderUser(UserClientImpl.fromEntityToProtoObj(transaction.getSender()))
                 .setDate(StringValue.of(transaction.getDate()))
