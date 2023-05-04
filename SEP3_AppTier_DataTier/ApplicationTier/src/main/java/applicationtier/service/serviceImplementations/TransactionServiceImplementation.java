@@ -33,8 +33,6 @@ public class TransactionServiceImplementation implements ITransactionService {
             sender.setBalance(sender.getBalance()-amount);
             receiver.setBalance(receiver.getBalance()+amount);
 
-
-
             //update user
             userClient.updateUser(sender);
             userClient.updateUser(receiver);

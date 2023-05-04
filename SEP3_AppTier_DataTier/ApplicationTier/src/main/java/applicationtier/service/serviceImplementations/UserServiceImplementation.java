@@ -82,6 +82,7 @@ public class UserServiceImplementation implements IUserService {
         }
     }
 
+
     @Override
     public UserEntity updateUser(UserEntity user) {
         try {

@@ -14,9 +14,9 @@ public class TransactionEntity {
         this.date = date;
     }
 
+
     public TransactionEntity() {
     }
-
 
     public UserEntity getSender() {
         return sender;
