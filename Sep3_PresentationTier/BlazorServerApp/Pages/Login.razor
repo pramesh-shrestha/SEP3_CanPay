@@ -64,13 +64,26 @@
 @code {
     public string username { get; set; }
     public string password { get; set; }
-    private string? errorLabel;
+    public string? errorLabel { get; set; }
     private string? color = "red";
     private bool isErrorMessageDisplayed;
     private Timer? timer;
     private readonly int messageDisplayTime = 2000; // in millisecond
 
-    LoginDto loginDto = new LoginDto();
+    //For testing purpose only
+    public async Task<String> GetErrorMessage()
+    {
+        try
+        {
+            await LoginAsync();
+        }
+        catch (Exception e)
+        {
+            return e.Message;
+        }
+
+        return null;
+    }
 
     private async Task LoginAsync()
     {
