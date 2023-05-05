@@ -42,7 +42,7 @@ public class SecurityConfiguration {
         http
                 .cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
+                .authorizeHttpRequests()
                 .requestMatchers(new AntPathRequestMatcher("/user/register")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/user/authenticate")).permitAll()
                 .anyRequest().authenticated();

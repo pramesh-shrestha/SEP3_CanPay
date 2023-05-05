@@ -1,10 +1,10 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=02bed20d_002Dfb9a_002D4c32_002Db2f7_002De7165dcd65ad/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ErrorMessageWhenFullNameIsNull" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=02bed20d_002Dfb9a_002D4c32_002Db2f7_002De7165dcd65ad/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ErrorMessageWhenFullNameIsNull" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.RegisterUserTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=53251a67_002Da557_002D4702_002D8745_002D6536efbe248a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CreateAccount_ShouldThrowAnError_WhenCardNumberIsZero" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=53251a67_002Da557_002D4702_002D8745_002D6536efbe248a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CreateAccount_ShouldThrowAnError_WhenCardNumberIsZero" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.RegisterUserTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
