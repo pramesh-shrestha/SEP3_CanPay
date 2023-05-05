@@ -1,10 +1,13 @@
 ﻿@page "/SendMoney"
 @using Domains.Entity
 @using HTTPClients.ClientInterfaces
+@using System.Security.Claims
+@using System.IdentityModel.Tokens.Jwt
 @inject IUserService UserService;
 @inject ITransactionService TransactionService;
 @inject AuthenticationStateProvider StateProvider;
 @inject NavigationManager NavMgr;
+
 
 <body>
 <div class="container">
@@ -89,8 +92,16 @@
     private string color;
 
     protected override async Task OnInitializedAsync() {
+        
         AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
         sender = state.User.Identity?.Name.ToUpper();
+        
+        // var jwtClaim = state.User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Jti)?.Value;
+        // var tokenHandler = new JwtSecurityTokenHandler();
+        // var token = tokenHandler.ReadJwtToken(jwtClaim);
+        // sender = token.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+        
+        Console.WriteLine($"this is {sender}");
         userEntities = await UserService.FetchAllUsersAsync();
         senderUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(sender));
         usernames = GetUsernames();
