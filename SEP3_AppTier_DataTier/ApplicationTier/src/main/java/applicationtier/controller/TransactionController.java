@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class TransactionController {
+public class  TransactionController {
     private final ITransactionService transactionService;
 
     @Autowired
@@ -71,7 +71,7 @@ public class TransactionController {
         }
     }
 
-    @GetMapping("/transaction/{date}")
+    @GetMapping("/transaction/date/{date}")
     public ResponseEntity<List<TransactionEntity>> fetchTransactionByDate(@PathVariable("date") String date){
 
         try {
