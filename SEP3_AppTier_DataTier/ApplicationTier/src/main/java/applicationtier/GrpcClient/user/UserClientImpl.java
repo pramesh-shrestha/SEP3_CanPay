@@ -43,7 +43,6 @@ public class UserClientImpl implements IUserClient {
     public UserEntity findByUsername(String username) {
         try {
             User.UserProtoObj userProtoObj = getUserBlockingStub().fetchUserByUsername(StringValue.of(username));
-            System.out.println("User Client Impl: " + userProtoObj.getCard().getCardNumber());
             return fromProtoObjToEntity(userProtoObj);
         } catch (Exception e) {
             throw new RuntimeException(e);

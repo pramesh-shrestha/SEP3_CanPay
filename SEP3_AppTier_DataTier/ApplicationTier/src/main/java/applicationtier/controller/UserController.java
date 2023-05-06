@@ -42,7 +42,6 @@ public class UserController {
     //get all users
     @GetMapping("/user")
     public ResponseEntity<List<UserEntity>> fetchUsers() {
-        System.out.println("here");
         try {
             return new ResponseEntity<>(userService.fetchUsers(), HttpStatus.OK);
         } catch (Exception e) {
@@ -104,9 +103,7 @@ public class UserController {
     @PostMapping("/user/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody LoginDto request) {
-        System.out.println("I am here at user controller");
         ResponseEntity<AuthenticationResponse> response = ResponseEntity.ok(service.authenticate(request));
-        System.out.println(response.getBody().getToken());
         return response;
     }
 

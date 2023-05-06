@@ -39,14 +39,14 @@ public class UserService : IUserService
         return userEntity;
     }
 
-    public async Task<IEnumerable<UserEntity>> FetchAllUsersAsync() {
+    public async Task<IEnumerable<UserEntity?>> FetchAllUsersAsync() {
         HttpResponseMessage responseMessage = await client.GetAsync("/user");
         string result = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode) {
             throw new Exception(result);
         }
 
-        IEnumerable<UserEntity> userEntities = JsonSerializer.Deserialize<IEnumerable<UserEntity>>(result, new JsonSerializerOptions {
+        IEnumerable<UserEntity?> userEntities = JsonSerializer.Deserialize<IEnumerable<UserEntity>>(result, new JsonSerializerOptions {
             PropertyNameCaseInsensitive = true
         })!;
         

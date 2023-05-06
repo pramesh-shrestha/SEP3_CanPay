@@ -28,24 +28,13 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(UserEntity user) {
+    public String generateToken(UserEntity userDetails) {
+        Claims claims = Jwts.claims();
+        claims.put(Claims.SUBJECT, userDetails.getUsername());
+        claims.put("username", userDetails.getUserName());
+        claims.put("fullname", userDetails.getFullName());
 
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("username", user.getUsername());
-        claims.put("fullname", user.getFullName());
-        return generateToken(new HashMap<>(), user);
-    }
-
-    public String generateToken(Map<String, Object> extraClaims, UserEntity userDetails) {
-       /* String token = Jwts.builder().setClaims(extraClaims)
-                .withSubject(userDetails.getUsername())
-                .withClaim("username", userDetails.getUsername())
-                .withClaim("fullname", userDetails.getFullName())
-                .withClaim("balance", userDetails.getBalance())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 000 * 60 * 24))
-                .sign(getSignInKey(), SignatureAlgorithm.HS256);*/
-
-        return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername())
+        return Jwts.builder().setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
