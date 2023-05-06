@@ -43,6 +43,7 @@ public class UserController {
     @GetMapping("/user")
     public ResponseEntity<List<UserEntity>> fetchUsers() {
         try {
+            System.out.println("I am here inside fetchusers");
             return new ResponseEntity<>(userService.fetchUsers(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

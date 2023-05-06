@@ -106,7 +106,7 @@
             {
                 await UserService.ValidateUser(username, password);
                 DisplayMessage("Login successful!");
-                NavigationManager.NavigateTo("/SendMoney");
+                NavigationManager.NavigateTo("/");
             }
             catch (Exception e)
             {

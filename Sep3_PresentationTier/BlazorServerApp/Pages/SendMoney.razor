@@ -1,14 +1,11 @@
 ﻿@page "/SendMoney"
 @using Domains.Entity
 @using HTTPClients.ClientInterfaces
-@using System.Security.Claims
-@using Microsoft.IdentityModel.Tokens
 @inject IUserService UserService;
 @inject ITransactionService TransactionService;
 @inject AuthenticationStateProvider StateProvider;
 @inject NavigationManager NavMgr;
 
-<body>
 <div class="container">
     <h3>Send Money</h3>
     <div class="row">
@@ -28,14 +25,13 @@
         <div class="col-md-6">
             <div class="form-group">
                 <div>
-                    <label>@sender</label>
+                    <span></span>
                 </div>
                 <label>From</label>
 
                 <div class="inputFields">
                     <select @bind="selectedCardId" class="fieldLength">
                         <option selected value="">Select card</option>
-                        @* <option value="@user.Card.CardId">@user.Card.CardNumber</option> *@
 
                         <option value="@senderUser.Card!.CardId">@senderUser.Card.CardNumber</option>
 
@@ -58,8 +54,7 @@
                 </div>
 
                 <div class="error">
-                    @if (!string.IsNullOrEmpty(errorLabel))
-                    {
+                    @if (!string.IsNullOrEmpty(errorLabel)) {
                         <label style="color: @color">@errorLabel</label>
                     }
                 </div>
@@ -67,11 +62,8 @@
         </div>
         <div class="col-md-3 third-box usernameList">
             <h4>List of usernames</h4>
-            @* <img src="images/send money.gif" alt="" class="gifImage"> *@
-            @foreach (var item in usernames)
-            {
-                if (item.ToLower().Contains(receiver.ToLower()))
-                {
+            @foreach (var item in usernames) {
+                if (item.ToLower().Contains(receiver.ToLower())) {
                     <ul>
                         <li @onclick="() => receiver = item">@item</li>
                     </ul>
@@ -81,82 +73,71 @@
 
     </div>
 </div>
-</body>
+
 
 @code {
-    private string? sender;
-    private string receiver;
-    private int amount;
+    private string? sender = "";
+    private string? receiver = "";
+    private string? amount = "";
     private DateTime dateTime = DateTime.Now.Date;
     private int selectedCardId;
-    private IEnumerable<UserEntity?> userEntities;
-    private List<string?> usernames;
-    private UserEntity senderUser;
-    private string errorLabel;
-    private string color;
+    private IEnumerable<UserEntity?> userEntities = new List<UserEntity?>();
+    private List<string?> usernames = new List<string?>();
+    private UserEntity? senderUser = new UserEntity();
+    private string? errorLabel = "";
+    private string? color = "";
 
-    protected override async Task OnInitializedAsync()
-    {
-        AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
-        sender = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.ToString();
-
-        bool isSenderNull = sender.IsNullOrEmpty();
-
+    protected override async Task OnInitializedAsync() {
+        try {
+            AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
+            sender = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.ToString();
 
     // Claim? claim = state.User.FindFirst(ClaimTypes.Name);
     // sender = state.User.Identity?.Name.ToUpper();
 
-        userEntities = await UserService.FetchAllUsersAsync();
-        senderUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(sender));
+            userEntities = await UserService.FetchAllUsersAsync();
+            senderUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(sender));
 
-        usernames = userEntities.Select(u => u.UserName).ToList();
-
-
-    // userEntities = GetUserEntities();
-    // sender = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals("pramesh")).UserName.ToUpper();
-    // senderUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(sender));
-    // usernames = GetUsernames();
+            usernames = userEntities.Select(u => u.UserName).ToList();
+        }
+        catch (Exception e) {
+            Console.WriteLine(e.Message);
+            throw;
+        }
     }
 
     //send money to receiver
-    private async Task SendMoneyToReceiver()
-    {
+    private async Task SendMoneyToReceiver() {
         UserEntity? receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
         string date = $"{dateTime.Date.Day}{dateTime.Date.Month}/{dateTime.Date.Year}";
 
-        TransactionEntity transactionEntity = new TransactionEntity(senderUser, receiverUser, amount, date);
+        TransactionEntity transactionEntity = new TransactionEntity(senderUser, receiverUser, int.Parse(amount), date);
 
-        try
-        {
-            if (string.IsNullOrEmpty(this.receiver))
-            {
+        try {
+            if (string.IsNullOrEmpty(this.receiver)) {
                 errorLabel = "Receiver must be selected.";
                 color = "red";
             }
-            if (this.amount <= 0)
-            {
+            if (int.Parse(amount) <= 0) {
                 errorLabel = "Amount must be more than 0.";
                 color = "red";
             }
-            if (string.IsNullOrEmpty(errorLabel))
-            {
+            if (string.IsNullOrEmpty(errorLabel)) {
                 await TransactionService.CreateTransactionAsync(transactionEntity);
                 errorLabel = "Transaction successful.";
                 color = "green";
-                this.receiver = "";
-                this.amount = 0;
+                receiver = "";
+                amount = "0";
             }
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             errorLabel = e.Message;
             color = "red";
         }
     }
 
     //navigate back to home page
-    private void BackToHome()
-    {
+    private void BackToHome() {
         NavMgr.NavigateTo("/");
     }
 
@@ -170,35 +151,4 @@
         }
         return users;
     }*/
-
-    /*
-    public IEnumerable<UserEntity> GetUserEntities() {
-        IEnumerable<UserEntity> users = new List<UserEntity>() {
-            new UserEntity("Pramesh", "pramesh", "Password1@", new DebitCardEntity(1234567890123456, "12/2030", 123), 1000),
-            new UserEntity("Rajip", "rajip", "Password1@", new DebitCardEntity(1234567890654321, "12/2030", 123), 1000),
-            new UserEntity("Troels", "troels", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Suhani", "suhani", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Sachin", "sachin", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Himal", "himal", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Rajesh", "rajesh", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Ravi", "ravi", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Rakesh", "rakesh", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Reema", "reema", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Prakash", "prakash", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Shyam", "shyam", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Pratap", "pratap", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Sushma", "sushma", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Bheema", "bheema", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Rajendra", "rajendra", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-            new UserEntity("Ramesh", "ramesh", "Password1@", new DebitCardEntity(4321567890654321, "12/2030", 123), 1000),
-         
-        };
-        return users;
-    }
-    */
-
-
-
-
-
 }

@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Security.Claims;
 using System.Text.Json;
 using Domains.Entity;
@@ -40,6 +41,7 @@ public class UserService : IUserService
     }
 
     public async Task<IEnumerable<UserEntity?>> FetchAllUsersAsync() {
+        LoadClientWithToken();
         HttpResponseMessage responseMessage = await client.GetAsync("/user");
         string result = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode) {
@@ -168,5 +170,9 @@ public class UserService : IUserService
         }
 
         return Convert.FromBase64String(base64);
+    }
+
+    private void LoadClientWithToken() {
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Jwt);
     }
 }

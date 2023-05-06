@@ -17,4 +17,7 @@ public class UserEntity
         Balance = balance;
         Card = card;
     }
+
+    public UserEntity() {
+    }
 }
