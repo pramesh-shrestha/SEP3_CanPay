@@ -37,11 +37,11 @@
                     <form class="form-horizontal">
                         <div class="form-group">
                             <label>User Name</label>
-                            <input type="text" placeholder="User Name" @bind="loginDto.Username" class="form-control">
+                            <input type="text" placeholder="User Name" @bind="username" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" class="form-control" @bind="loginDto.Password" placeholder="Password">
+                            <input type="password" class="form-control" @bind="password" placeholder="Password">
                         </div>
                     </form>
 
@@ -62,36 +62,49 @@
 </div>
 
 @code {
-    private string? username;
-    private string? password;
-    private string? errorLabel;
+    public string username { get; set; }
+    public string password { get; set; }
+    public string? errorLabel { get; set; }
     private string? color = "red";
     private bool isErrorMessageDisplayed;
     private Timer? timer;
     private readonly int messageDisplayTime = 2000; // in millisecond
 
-    LoginDto loginDto = new LoginDto();
+    //For testing purpose only
+    public async Task<String> GetErrorMessage()
+    {
+        try
+        {
+            await LoginAsync();
+        }
+        catch (Exception e)
+        {
+            return e.Message;
+        }
+
+        return null;
+    }
 
     private async Task LoginAsync()
     {
         errorLabel = "";
         try
         {
-            if (string.IsNullOrEmpty(loginDto.Username) && string.IsNullOrEmpty(loginDto.Password))
+            if (string.IsNullOrEmpty(username) && string.IsNullOrEmpty(password))
             {
                 throw new Exception("Both Username and Password are left blank");
             }
-            if (string.IsNullOrEmpty(loginDto.Username))
+            if (string.IsNullOrEmpty(username))
             {
                 throw new Exception("Username cannot be empty");
             }
-            if (string.IsNullOrEmpty(loginDto.Password))
+            if (string.IsNullOrEmpty(password))
             {
                 throw new Exception("Password cannot be empty");
             }
             try
             {
-                await UserService.ValidateUser(loginDto.Username, loginDto.Password);
+                await UserService.ValidateUser(username, password);
                 DisplayMessage("Login successful!");
                 NavigationManager.NavigateTo("/SendMoney");
             }
