@@ -7,7 +7,7 @@ public class CanPayDbAccess : DbContext
 {
     public DbSet<UserEntity> Users { get; set; }
     public DbSet<DebitCardEntity> Cards { get; set; }
-    public DbSet<TransactionEntity> Transactions { get; set; }
+    public DbSet<TransactionEntity?> Transactions { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

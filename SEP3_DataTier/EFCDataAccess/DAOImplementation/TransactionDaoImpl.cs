@@ -23,11 +23,11 @@ public class TransactionDaoImpl : ITransactionDao
     /// </summary>
     /// <param name="transaction">The transaction entity to create.</param>
     /// <returns>The created transaction entity.</returns>
-    public async Task<TransactionEntity> CreateTransactionAsync(TransactionEntity transaction)
+    public async Task<TransactionEntity?> CreateTransactionAsync(TransactionEntity? transaction)
     {
         try
         {
-            EntityEntry<TransactionEntity> createdTransaction = await context.Transactions.AddAsync(transaction);
+            EntityEntry<TransactionEntity?> createdTransaction = await context.Transactions.AddAsync(transaction);
             await context.SaveChangesAsync();
             return createdTransaction.Entity;
         }
@@ -130,9 +130,9 @@ public class TransactionDaoImpl : ITransactionDao
     /// </summary>
     /// <param name="date">The date to filter transactions by.</param>
     /// <returns>A collection of transaction entities made on the given date.</returns>
-    public async Task<ICollection<TransactionEntity>> FetchTransactionsByDateAsync(string date)
+    public async Task<ICollection<TransactionEntity?>> FetchTransactionsByDateAsync(string date)
     {
-        List<TransactionEntity> transactionByDate =
+        List<TransactionEntity?> transactionByDate =
             await context.Transactions.Where(entity => entity.Date.Equals(date)).ToListAsync();
 
         if (transactionByDate.Count == 0)
