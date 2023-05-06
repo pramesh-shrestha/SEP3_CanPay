@@ -171,6 +171,13 @@ public class UserService : IUserService
 
         return Convert.FromBase64String(base64);
     }
+    
+    public Task LogoutAsync() {
+        Jwt = null;
+        ClaimsPrincipal claimsPrincipal = new();
+        OnAuthStateChanged.Invoke(claimsPrincipal);
+        return Task.CompletedTask;
+    }
 
     private void LoadClientWithToken() {
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Jwt);

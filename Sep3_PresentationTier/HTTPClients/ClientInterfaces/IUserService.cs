@@ -17,4 +17,6 @@ public interface IUserService
     Action<ClaimsPrincipal> OnAuthStateChanged { get; set; }
     Task<ClaimsPrincipal> GetAuthAsync();
 
+    Task LogoutAsync();
+
 }
