@@ -39,6 +39,9 @@ public class UserService : UserProtoService.UserProtoServiceBase
         try
         {
             ICollection<UserEntity> allUsers = await userDao.FetchUsersAsync();
+
+            Console.WriteLine($"UserService: {allUsers.Count}");
+
             RepeatedField<UserProtoObj> userProtoObjs = new RepeatedField<UserProtoObj>();
 
             foreach (UserEntity userEntity in allUsers)

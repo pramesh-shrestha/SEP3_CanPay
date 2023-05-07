@@ -9,6 +9,7 @@ import com.google.protobuf.*;
 import io.grpc.ManagedChannel;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,6 +50,22 @@ public class UserClientImpl implements IUserClient {
         }
     }
 
+    @Override
+    public List<UserEntity> fetchUsers() {
+        try {
+            User.UserListResponse allUserProto = getUserBlockingStub().fetchAllUser(Empty.newBuilder().build());
+            List<UserEntity> userEntities = new ArrayList<>();
+
+            for (User.UserProtoObj userProtoObj : allUserProto.getAllUsersList()) {
+                UserEntity user = fromProtoObjToEntity(userProtoObj);
+                userEntities.add(user);
+            }
+            return userEntities;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     @Override
     public UserEntity FetchUserById(Long id) {
@@ -62,13 +79,14 @@ public class UserClientImpl implements IUserClient {
 
     @Override
     public UserEntity updateUser(UserEntity user) {
-       try {
-           User.UserProtoObj userProtoObj=getUserBlockingStub().updateUser(fromEntityToProtoObj(user));
-           return fromProtoObjToEntity(userProtoObj);
-       }catch (Exception e){
-           throw new RuntimeException(e);
-       }
+        try {
+            User.UserProtoObj userProtoObj = getUserBlockingStub().updateUser(fromEntityToProtoObj(user));
+            return fromProtoObjToEntity(userProtoObj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+
     @Override
     public boolean deleteUser(Long id) {
         try {
@@ -79,22 +97,16 @@ public class UserClientImpl implements IUserClient {
         }
     }
 
-    @Override
-    public List<UserEntity> fetchUsers() {
-        return null;
-    }
-
 
     //convert user to proto object
     public static User.UserProtoObj fromEntityToProtoObj(UserEntity userEntity) {
-        User.UserProtoObj userProtoObj = User.UserProtoObj.newBuilder()
+        return User.UserProtoObj.newBuilder()
                 .setUserName(userEntity.getUserName())
                 .setPassword(userEntity.getPassword())
                 .setFullName(userEntity.getFullName())
                 .setCard(CardClientImpl.fromEntityToProtoObj(userEntity.getCard()))
                 .setBalance(userEntity.getBalance())
                 .build();
-        return userProtoObj;
     }
 
     //convert proto to user object
@@ -105,6 +117,7 @@ public class UserClientImpl implements IUserClient {
         userEntity.setPassword(userProtoObj.getPassword());
         userEntity.setFullName(userProtoObj.getFullName());
         userEntity.setBalance(userEntity.getBalance());
+        userEntity.setCard(CardClientImpl.fromProtoObjToEntity(userProtoObj.getCard()));
         return userEntity;
     }
 

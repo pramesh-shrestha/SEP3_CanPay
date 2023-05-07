@@ -20,6 +20,7 @@ public class UserService : IUserService
     public UserService(HttpClient client)
     {
         this.client = client;
+        // client.Timeout = Timeout.InfiniteTimeSpan;
     }
 
     public async Task<UserEntity> CreateAsync(UserEntity toCreateUserEntity)
@@ -40,18 +41,22 @@ public class UserService : IUserService
         return userEntity;
     }
 
-    public async Task<IEnumerable<UserEntity?>> FetchAllUsersAsync() {
+    public async Task<IEnumerable<UserEntity?>> FetchAllUsersAsync()
+    {
         LoadClientWithToken();
         HttpResponseMessage responseMessage = await client.GetAsync("/user");
         string result = await responseMessage.Content.ReadAsStringAsync();
-        if (!responseMessage.IsSuccessStatusCode) {
+        if (!responseMessage.IsSuccessStatusCode)
+        {
             throw new Exception(result);
         }
 
-        IEnumerable<UserEntity?> userEntities = JsonSerializer.Deserialize<IEnumerable<UserEntity>>(result, new JsonSerializerOptions {
-            PropertyNameCaseInsensitive = true
-        })!;
-        
+        IEnumerable<UserEntity?> userEntities = JsonSerializer.Deserialize<IEnumerable<UserEntity>>(result,
+            new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            })!;
+
         return userEntities.ToList();
     }
 
@@ -88,7 +93,7 @@ public class UserService : IUserService
     {
         throw new NotImplementedException();
     }
-    
+
 
     //Send user credentials to the Application tier for validation
     public async Task<AuthenticationResponse> ValidateUser(string username, string password)
@@ -115,7 +120,6 @@ public class UserService : IUserService
         Jwt = authenticationResponse.token;
         ClaimsPrincipal principal = CreateClaimsPrincipal();
         OnAuthStateChanged.Invoke(principal);
-        // Console.WriteLine($"User Service Token: {principal.Claims.}");
 
         return authenticationResponse;
     }
@@ -142,7 +146,7 @@ public class UserService : IUserService
     }
 
     //updating the balance
-   
+
 
     public static async Task<string?> GetJwtToken()
     {
@@ -171,15 +175,17 @@ public class UserService : IUserService
 
         return Convert.FromBase64String(base64);
     }
-    
-    public Task LogoutAsync() {
+
+    public Task LogoutAsync()
+    {
         Jwt = null;
         ClaimsPrincipal claimsPrincipal = new();
         OnAuthStateChanged.Invoke(claimsPrincipal);
         return Task.CompletedTask;
     }
 
-    private void LoadClientWithToken() {
+    private void LoadClientWithToken()
+    {
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Jwt);
     }
 }

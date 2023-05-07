@@ -61,13 +61,10 @@ public class UserDaoImpl : IUserDao
     //get all users
     public async Task<ICollection<UserEntity>> FetchUsersAsync()
     {
-        if (context.Users.Any())
-        {
-            ICollection<UserEntity> users = await context.Users.ToListAsync();
-            return users;
-        }
-
-        throw new Exception("No users found");
+        if (!context.Users.Any()) throw new Exception("No users found");
+        ICollection<UserEntity> users = await context.Users.Include(entity => entity.Card).ToListAsync();
+        Console.WriteLine($"UserDaoImpl {users.Count}");
+        return users;
     }
 
     //update user

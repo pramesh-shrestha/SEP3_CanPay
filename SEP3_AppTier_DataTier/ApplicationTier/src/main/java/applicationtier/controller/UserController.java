@@ -31,9 +31,7 @@ public class UserController {
     public ResponseEntity<UserEntity> createUser(@RequestBody
                                                  UserEntity user) {
         try {
-            ResponseEntity<UserEntity> response = new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
-            return response;
-
+            return new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -43,8 +41,11 @@ public class UserController {
     @GetMapping("/user")
     public ResponseEntity<List<UserEntity>> fetchUsers() {
         try {
-            System.out.println("I am here inside fetchusers");
-            return new ResponseEntity<>(userService.fetchUsers(), HttpStatus.OK);
+            List<UserEntity> userEntities = userService.fetchUsers();
+
+            System.out.println(userEntities.size() + " user controller");
+
+            return new ResponseEntity<>(userEntities, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -73,7 +74,7 @@ public class UserController {
     //update user
     @PutMapping("/user/update/{updatedUser}")
     public ResponseEntity<UserEntity> updateUser(@RequestBody
-    UserEntity updatedUser) {
+                                                 UserEntity updatedUser) {
         try {
             return new ResponseEntity<>(userService.updateUser(updatedUser), HttpStatus.OK);
         } catch (Exception e) {
