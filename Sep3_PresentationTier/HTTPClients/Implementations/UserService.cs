@@ -20,7 +20,6 @@ public class UserService : IUserService
     public UserService(HttpClient client)
     {
         this.client = client;
-        // client.Timeout = Timeout.InfiniteTimeSpan;
     }
 
     public async Task<UserEntity> CreateAsync(UserEntity toCreateUserEntity)

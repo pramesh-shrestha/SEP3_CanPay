@@ -31,15 +31,7 @@
                 <label>From</label>
 
                 <div class="inputFields">
-                    @* <select @bind="selectedCardId" class="fieldLength"> *@
-                    <select class="fieldLength">
-                        <option selected value="">Select card</option>
-
-                        @* <option value="@senderUser!.Card!.CardId">@senderUser.Card.CardNumber</option> *@
-                        <option value=""></option>
-
-
-                    </select>
+                    <input type="text" class="fieldLength" @bind="cardNumber" disabled="">
                 </div>
                 <label>To</label>
                 <div class="inputFields">
@@ -48,7 +40,7 @@
 
                 <label>Amount</label>
                 <div class="inputFields">
-                    <input type="text" class="fieldLength" @bind="amount">
+                    <input type="number" class="fieldLength" @bind="amount">
                 </div>
 
                 <label>Date</label>
@@ -86,7 +78,8 @@
     public string? receiver = "";
     public string? amount = "";
     private DateTime dateTime = DateTime.Now.Date;
-    private int selectedCardId;
+    // private int selectedCardId;
+    private long cardNumber;
     private IEnumerable<UserEntity?> userEntities = new List<UserEntity?>();
     private List<string?> usernames = new List<string?>();
     private UserEntity? senderUser = new UserEntity();
@@ -102,43 +95,34 @@
             AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
             sender = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
 
-    // Console.WriteLine($"Sender: {sender}");
-
-
-    // Claim? claim = state.User.FindFirst(ClaimTypes.Name);
-    // sender = state.User.Identity?.Name.ToUpper();
-
-    // await Task.Delay(2000);
-
             IEnumerable<UserEntity?> entities = userEntities.ToList();
             senderUser = entities.FirstOrDefault(u => u.UserName.ToLower().Equals(sender));
-            
-            // Console.WriteLine($"Send Money After SenderUser: {senderUser.Card.CardNumber}");
+            cardNumber = senderUser.Card.CardNumber;
 
             usernames = entities.Select(u => u.UserName).ToList();
+            usernames.Remove(senderUser.UserName);
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
-    // throw new Exception(e.Message);
         }
     }
 
-     //For testing purpose only
-        public async Task<String> GetErrorMessage()
+    //For testing purpose only
+    public async Task<String> GetErrorMessage()
+    {
+        try
         {
-            try
-            {
-                await SendMoneyToReceiver();
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-     
-            return null;
+            await SendMoneyToReceiver();
         }
-    
+        catch (Exception e)
+        {
+            return e.Message;
+        }
+
+        return null;
+    }
+
     //send money to receiver
     private async Task SendMoneyToReceiver()
     {
@@ -149,7 +133,7 @@
 
         try
         {
-            if (string.IsNullOrEmpty(this.receiver))
+            if (string.IsNullOrEmpty(receiver))
             {
                 errorLabel = "Receiver must be selected.";
                 color = "red";
@@ -181,14 +165,5 @@
         NavMgr.NavigateTo("/");
     }
 
-    //get all usernames
-    /*private List<string> GetUsernames()
-    {
-        List<string> users = new List<string>();
-        foreach (var user in userEntities)
-        {
-            users.Add(user.UserName);
-        }
-        return users;
-    }*/
+
 }
