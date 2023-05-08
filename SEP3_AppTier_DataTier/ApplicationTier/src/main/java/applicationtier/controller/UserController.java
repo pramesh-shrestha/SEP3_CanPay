@@ -42,9 +42,6 @@ public class UserController {
     public ResponseEntity<List<UserEntity>> fetchUsers() {
         try {
             List<UserEntity> userEntities = userService.fetchUsers();
-
-            System.out.println(userEntities.size() + " user controller");
-
             return new ResponseEntity<>(userEntities, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

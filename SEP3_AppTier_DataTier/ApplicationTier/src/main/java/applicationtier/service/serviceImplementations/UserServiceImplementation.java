@@ -87,7 +87,7 @@ public class UserServiceImplementation implements IUserService {
     public UserEntity updateUser(UserEntity user) {
         try {
             return userClient.updateUser(user);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
