@@ -82,15 +82,15 @@
 
 
 @code {
-    private string? sender = "";
-    private string? receiver = "";
-    private string? amount = "";
+    public string? sender = "";
+    public string? receiver = "";
+    public string? amount = "";
     private DateTime dateTime = DateTime.Now.Date;
     private int selectedCardId;
     private IEnumerable<UserEntity?> userEntities = new List<UserEntity?>();
     private List<string?> usernames = new List<string?>();
     private UserEntity? senderUser = new UserEntity();
-    private string? errorLabel = "";
+    public string? errorLabel = "";
     private string? color = "";
 
     protected override async Task OnInitializedAsync()
@@ -124,6 +124,21 @@
         }
     }
 
+     //For testing purpose only
+        public async Task<String> GetErrorMessage()
+        {
+            try
+            {
+                await SendMoneyToReceiver();
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+     
+            return null;
+        }
+    
     //send money to receiver
     private async Task SendMoneyToReceiver()
     {
