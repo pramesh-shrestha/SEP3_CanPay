@@ -2,8 +2,11 @@
 @using HTTPClients.ClientInterfaces
 @using System.Text.RegularExpressions
 @using Domains.Entity
-@using System.Globalization
+
 @inject IUserService UserService;
+@inject NavigationManager NavigationManager
+;
+
 
 <div class="form-content">
     <div class="container ">
@@ -148,7 +151,7 @@
     public int CVV { get; set; }
     public string ErrorLabel { get; set; }
     private string? color = "red";
-    
+
 
     private bool isErrorMessageDisplayed;
     private Timer? timer;
@@ -182,14 +185,17 @@
     }
 
     //For testing purpose only
-    public async Task<String> GetErrorMessage() {
-        try {
+    public async Task<String> GetErrorMessage()
+    {
+        try
+        {
             await CreateAsync();
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             return e.Message;
         }
-    
+
         return null;
     }
 
@@ -210,6 +216,7 @@
 
             color = "green";
             DisplayMessage($"User {entity.UserName} successfully created");
+            NavigationManager.NavigateTo("/Login");
         }
         catch (Exception e)
         {

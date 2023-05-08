@@ -82,9 +82,14 @@ public class UserServiceImplementation implements IUserService {
         }
     }
 
+
     @Override
-    public UserEntity updateUser(Long id, UserEntity user) {
-        return null;
+    public UserEntity updateUser(UserEntity user) {
+        try {
+            return userClient.updateUser(user);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @Override
@@ -98,7 +103,6 @@ public class UserServiceImplementation implements IUserService {
 
 
     public AuthenticationResponse authenticate(LoginDto request) {
-        System.out.println("User Service Implementation: " + request.getUsername());
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -111,7 +115,6 @@ public class UserServiceImplementation implements IUserService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
-
     }
 
 

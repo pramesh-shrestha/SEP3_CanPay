@@ -13,6 +13,7 @@ import applicationtier.service.serviceInterfaces.IUserService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 //@RequestMapping("/api/auth")
 public class UserController {
 
@@ -30,9 +31,7 @@ public class UserController {
     public ResponseEntity<UserEntity> createUser(@RequestBody
                                                  UserEntity user) {
         try {
-            ResponseEntity<UserEntity> response = new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
-            return response;
-
+            return new ResponseEntity<>(userService.createUser(user), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -41,9 +40,9 @@ public class UserController {
     //get all users
     @GetMapping("/user")
     public ResponseEntity<List<UserEntity>> fetchUsers() {
-        System.out.println("here");
         try {
-            return new ResponseEntity<>(userService.fetchUsers(), HttpStatus.OK);
+            List<UserEntity> userEntities = userService.fetchUsers();
+            return new ResponseEntity<>(userEntities, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -70,11 +69,11 @@ public class UserController {
     }
 
     //update user
-    @PutMapping("/user/update/{id}")
-    public ResponseEntity<UserEntity> updateUser(@PathVariable Long id, @RequestBody
-    UserEntity updatedUser) {
+    @PutMapping("/user/update/{updatedUser}")
+    public ResponseEntity<UserEntity> updateUser(@RequestBody
+                                                 UserEntity updatedUser) {
         try {
-            return new ResponseEntity<>(userService.updateUser(id, updatedUser), HttpStatus.OK);
+            return new ResponseEntity<>(userService.updateUser(updatedUser), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -102,10 +101,8 @@ public class UserController {
     //login
     @PostMapping("/user/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody LoginDto request
-    ) {
+            @RequestBody LoginDto request) {
         ResponseEntity<AuthenticationResponse> response = ResponseEntity.ok(service.authenticate(request));
-        System.out.println(response.getStatusCode());
         return response;
     }
 

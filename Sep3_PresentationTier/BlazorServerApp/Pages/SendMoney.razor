@@ -1,0 +1,170 @@
+﻿@page "/SendMoney"
+@using Domains.Entity
+@using HTTPClients.ClientInterfaces
+
+@inject IUserService UserService;
+@inject ITransactionService TransactionService;
+@inject AuthenticationStateProvider StateProvider;
+@inject NavigationManager NavMgr;
+
+<div class="container">
+    <h3>Send Money</h3>
+    <div class="row">
+        <div class="col-md-3 first-box">
+
+            <div class="icon-image">
+                <img src="images/KANPAY logo.png" alt="">
+            </div>
+
+            <div class="buttonDiv">
+                <button class="button" @onclick="SendMoneyToReceiver">Send</button>
+                <button class="button" @onclick="BackToHome">Cancel</button>
+            </div>
+        </div>
+
+        <!-- 8 Columns -->
+        <div class="col-md-6">
+            <div class="form-group">
+                <div>
+                    <span></span>
+                </div>
+                <label>From</label>
+
+                <div class="inputFields">
+                    <input type="text" class="fieldLength" @bind="cardNumber" disabled="">
+                </div>
+                <label>To</label>
+                <div class="inputFields">
+                    <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
+                </div>
+
+                <label>Amount</label>
+                <div class="inputFields">
+                    <input type="number" class="fieldLength" @bind="amount">
+                </div>
+
+                <label>Date</label>
+                <div class="inputFields">
+                    <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
+                </div>
+
+                <div class="error">
+                    @if (!string.IsNullOrEmpty(errorLabel))
+                    {
+                        <label style="color: @color">@errorLabel</label>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 third-box usernameList">
+            <h4>List of usernames</h4>
+            @foreach (var item in usernames)
+            {
+                if (item.ToLower().Contains(receiver.ToLower()))
+                {
+                    <ul>
+                        <li @onclick="() => receiver = item">@item</li>
+                    </ul>
+                }
+            }
+        </div>
+
+    </div>
+</div>
+
+
+@code {
+    public string? sender = "";
+    public string? receiver = "";
+    public string? amount = "";
+    private DateTime dateTime = DateTime.Now.Date;
+    // private int selectedCardId;
+    private long cardNumber;
+    private IEnumerable<UserEntity?> userEntities = new List<UserEntity?>();
+    private List<string?> usernames = new List<string?>();
+    private UserEntity? senderUser = new UserEntity();
+    public string? errorLabel = "";
+    private string? color = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            userEntities = await UserService.FetchAllUsersAsync();
+
+            AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
+            sender = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
+
+            IEnumerable<UserEntity?> entities = userEntities.ToList();
+            senderUser = entities.FirstOrDefault(u => u.UserName.ToLower().Equals(sender));
+            cardNumber = senderUser.Card.CardNumber;
+
+            usernames = entities.Select(u => u.UserName).ToList();
+            usernames.Remove(senderUser.UserName);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
+    //For testing purpose only
+    public async Task<String> GetErrorMessage()
+    {
+        try
+        {
+            await SendMoneyToReceiver();
+        }
+        catch (Exception e)
+        {
+            return e.Message;
+        }
+
+        return null;
+    }
+
+    //send money to receiver
+    private async Task SendMoneyToReceiver()
+    {
+        UserEntity? receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
+        string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
+
+        TransactionEntity transactionEntity = new TransactionEntity(senderUser, receiverUser, int.Parse(amount), date);
+
+        try
+        {
+            if (string.IsNullOrEmpty(receiver))
+            {
+                errorLabel = "Receiver must be selected.";
+                color = "red";
+            }
+            if (int.Parse(amount) <= 0)
+            {
+                errorLabel = "Amount must be more than 0.";
+                color = "red";
+            }
+            if (string.IsNullOrEmpty(errorLabel))
+            {
+                await TransactionService.CreateTransactionAsync(transactionEntity);
+                errorLabel = "Transaction successful.";
+                color = "green";
+                receiver = "";
+                amount = "0";
+            }
+            
+        }
+        catch (Exception e)
+        {
+            errorLabel = e.Message;
+            color = "red";
+        }
+    }
+
+    //navigate back to home page
+    private void BackToHome()
+    {
+        NavMgr.NavigateTo("/");
+    }
+
+
+}

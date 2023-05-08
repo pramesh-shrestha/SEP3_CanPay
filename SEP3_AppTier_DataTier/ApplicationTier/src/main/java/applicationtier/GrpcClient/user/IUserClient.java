@@ -10,5 +10,7 @@ public interface IUserClient {
   UserEntity FetchUserById(Long id);
   boolean deleteUser(Long id);
   List<UserEntity> fetchUsers();
+
+  UserEntity updateUser(UserEntity user);
 }
 

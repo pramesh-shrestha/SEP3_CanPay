@@ -29,27 +29,23 @@ namespace SEP3_DataTier {
             "dWYvZW1wdHkucHJvdG8iigEKDFVzZXJQcm90b09iahIPCgd1c2VyX2lkGAEg",
             "ASgDEhEKCWZ1bGxfbmFtZRgCIAEoCRIRCgl1c2VyX25hbWUYAyABKAkSEAoI",
             "cGFzc3dvcmQYBCABKAkSIAoEY2FyZBgFIAEoCzISLkRlYml0Q2FyZFByb3Rv",
-            "T2JqEg8KB2JhbGFuY2UYBiABKAUiSgoRVXBkYXRlVXNlclJlcXVlc3QSEAoI",
-            "dXNlcm5hbWUYASABKAkSIwoMdG9VcGRhdGVVc2VyGAIgASgLMg0uVXNlclBy",
-            "b3RvT2JqIjMKEFVzZXJMaXN0UmVzcG9uc2USHwoIYWxsVXNlcnMYASADKAsy",
-            "DS5Vc2VyUHJvdG9PYmoynQQKEFVzZXJQcm90b1NlcnZpY2USLAoKQ3JlYXRl",
-            "VXNlchINLlVzZXJQcm90b09iahoNLlVzZXJQcm90b09iaiIAEjsKDEZldGNo",
-            "QWxsVXNlchIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoRLlVzZXJMaXN0UmVz",
-            "cG9uc2UiABJEChNGZXRjaFVzZXJCeVVzZXJuYW1lEhwuZ29vZ2xlLnByb3Rv",
-            "YnVmLlN0cmluZ1ZhbHVlGg0uVXNlclByb3RvT2JqIgASPQoNRmV0Y2hVc2Vy",
-            "QnlJZBIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlGg0uVXNlclByb3Rv",
-            "T2JqIgASMQoKVXBkYXRlVXNlchISLlVwZGF0ZVVzZXJSZXF1ZXN0Gg0uVXNl",
-            "clByb3RvT2JqIgASRwoKRGVsZXRlVXNlchIbLmdvb2dsZS5wcm90b2J1Zi5J",
-            "bnQ2NFZhbHVlGhouZ29vZ2xlLnByb3RvYnVmLkJvb2xWYWx1ZSIAElMKFkZl",
-            "dGNoQmFsYW5jZUJ5VXNlcm5hbWUSHC5nb29nbGUucHJvdG9idWYuU3RyaW5n",
-            "VmFsdWUaGy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1ZRJICg1VcGRhdGVC",
-            "YWxhbmNlEhsuZ29vZ2xlLnByb3RvYnVmLkludDMyVmFsdWUaGi5nb29nbGUu",
-            "cHJvdG9idWYuQm9vbFZhbHVlQhCqAg1TRVAzX0RhdGFUaWVyYgZwcm90bzM="));
+            "T2JqEg8KB2JhbGFuY2UYBiABKAUiMwoQVXNlckxpc3RSZXNwb25zZRIfCghh",
+            "bGxVc2VycxgBIAMoCzINLlVzZXJQcm90b09iajLOAwoQVXNlclByb3RvU2Vy",
+            "dmljZRIsCgpDcmVhdGVVc2VyEg0uVXNlclByb3RvT2JqGg0uVXNlclByb3Rv",
+            "T2JqIgASOwoMRmV0Y2hBbGxVc2VyEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5",
+            "GhEuVXNlckxpc3RSZXNwb25zZSIAEkQKE0ZldGNoVXNlckJ5VXNlcm5hbWUS",
+            "HC5nb29nbGUucHJvdG9idWYuU3RyaW5nVmFsdWUaDS5Vc2VyUHJvdG9PYmoi",
+            "ABI9Cg1GZXRjaFVzZXJCeUlkEhsuZ29vZ2xlLnByb3RvYnVmLkludDMyVmFs",
+            "dWUaDS5Vc2VyUHJvdG9PYmoiABIsCgpVcGRhdGVVc2VyEg0uVXNlclByb3Rv",
+            "T2JqGg0uVXNlclByb3RvT2JqIgASRwoKRGVsZXRlVXNlchIbLmdvb2dsZS5w",
+            "cm90b2J1Zi5JbnQ2NFZhbHVlGhouZ29vZ2xlLnByb3RvYnVmLkJvb2xWYWx1",
+            "ZSIAElMKFkZldGNoQmFsYW5jZUJ5VXNlcm5hbWUSHC5nb29nbGUucHJvdG9i",
+            "dWYuU3RyaW5nVmFsdWUaGy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1ZUIQ",
+            "qgINU0VQM19EYXRhVGllcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::SEP3_DataTier.DebitcardReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.UserProtoObj), global::SEP3_DataTier.UserProtoObj.Parser, new[]{ "UserId", "FullName", "UserName", "Password", "Card", "Balance" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.UpdateUserRequest), global::SEP3_DataTier.UpdateUserRequest.Parser, new[]{ "Username", "ToUpdateUser" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.UserListResponse), global::SEP3_DataTier.UserListResponse.Parser, new[]{ "AllUsers" }, null, null, null, null)
           }));
     }
@@ -440,241 +436,6 @@ namespace SEP3_DataTier {
 
   }
 
-  public sealed partial class UpdateUserRequest : pb::IMessage<UpdateUserRequest>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<UpdateUserRequest> _parser = new pb::MessageParser<UpdateUserRequest>(() => new UpdateUserRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<UpdateUserRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::SEP3_DataTier.UserReflection.Descriptor.MessageTypes[1]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdateUserRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdateUserRequest(UpdateUserRequest other) : this() {
-      username_ = other.username_;
-      toUpdateUser_ = other.toUpdateUser_ != null ? other.toUpdateUser_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public UpdateUserRequest Clone() {
-      return new UpdateUserRequest(this);
-    }
-
-    /// <summary>Field number for the "username" field.</summary>
-    public const int UsernameFieldNumber = 1;
-    private string username_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Username {
-      get { return username_; }
-      set {
-        username_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "toUpdateUser" field.</summary>
-    public const int ToUpdateUserFieldNumber = 2;
-    private global::SEP3_DataTier.UserProtoObj toUpdateUser_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::SEP3_DataTier.UserProtoObj ToUpdateUser {
-      get { return toUpdateUser_; }
-      set {
-        toUpdateUser_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as UpdateUserRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(UpdateUserRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Username != other.Username) return false;
-      if (!object.Equals(ToUpdateUser, other.ToUpdateUser)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Username.Length != 0) hash ^= Username.GetHashCode();
-      if (toUpdateUser_ != null) hash ^= ToUpdateUser.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (Username.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Username);
-      }
-      if (toUpdateUser_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(ToUpdateUser);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Username.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Username);
-      }
-      if (toUpdateUser_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(ToUpdateUser);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (Username.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Username);
-      }
-      if (toUpdateUser_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ToUpdateUser);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(UpdateUserRequest other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Username.Length != 0) {
-        Username = other.Username;
-      }
-      if (other.toUpdateUser_ != null) {
-        if (toUpdateUser_ == null) {
-          ToUpdateUser = new global::SEP3_DataTier.UserProtoObj();
-        }
-        ToUpdateUser.MergeFrom(other.ToUpdateUser);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            Username = input.ReadString();
-            break;
-          }
-          case 18: {
-            if (toUpdateUser_ == null) {
-              ToUpdateUser = new global::SEP3_DataTier.UserProtoObj();
-            }
-            input.ReadMessage(ToUpdateUser);
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 10: {
-            Username = input.ReadString();
-            break;
-          }
-          case 18: {
-            if (toUpdateUser_ == null) {
-              ToUpdateUser = new global::SEP3_DataTier.UserProtoObj();
-            }
-            input.ReadMessage(ToUpdateUser);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
   public sealed partial class UserListResponse : pb::IMessage<UserListResponse>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -689,7 +450,7 @@ namespace SEP3_DataTier {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::SEP3_DataTier.UserReflection.Descriptor.MessageTypes[2]; }
+      get { return global::SEP3_DataTier.UserReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

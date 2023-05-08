@@ -22,7 +22,6 @@ public class CardController {
     public ResponseEntity<DebitCardEntity> CreateCard(@RequestBody
                                                       DebitCardEntity card) {
         try {
-            System.out.println("card controller t2 called");
             return new ResponseEntity<>(cardService.CreateCard(card), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

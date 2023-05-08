@@ -46,6 +46,38 @@ namespace EFCDataAccess.Migrations
                     b.ToTable("Cards", "CanPay");
                 });
 
+            modelBuilder.Entity("Entity.Model.TransactionEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ReceiverUsername")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SenderUsername")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverUsername");
+
+                    b.HasIndex("SenderUsername");
+
+                    b.ToTable("Transactions", "CanPay");
+                });
+
             modelBuilder.Entity("Entity.Model.UserEntity", b =>
                 {
                     b.Property<string>("Username")
@@ -76,6 +108,25 @@ namespace EFCDataAccess.Migrations
                     b.HasIndex("CardId");
 
                     b.ToTable("Users", "CanPay");
+                });
+
+            modelBuilder.Entity("Entity.Model.TransactionEntity", b =>
+                {
+                    b.HasOne("Entity.Model.UserEntity", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverUsername")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Model.UserEntity", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderUsername")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("Entity.Model.UserEntity", b =>

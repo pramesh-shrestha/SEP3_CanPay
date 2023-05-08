@@ -9,7 +9,6 @@ namespace EFCDataAccess.DAOImplementation;
 public class UserDaoImpl : IUserDao
 {
     private readonly CanPayDbAccess context;
-    private ICardDao cardDao;
 
     public UserDaoImpl(CanPayDbAccess context)
     {
@@ -38,7 +37,6 @@ public class UserDaoImpl : IUserDao
         UserEntity? user =
             await context.Users.Include(entity => entity.Card)
                 .FirstOrDefaultAsync(entity => entity.Username.ToLower().Equals(username.ToLower()));
-        Console.WriteLine($"UserDao: {user.Card.ExpiryDate}");
 
         if (user == null)
         {
@@ -63,13 +61,10 @@ public class UserDaoImpl : IUserDao
     //get all users
     public async Task<ICollection<UserEntity>> FetchUsersAsync()
     {
-        if (context.Users.Any())
-        {
-            ICollection<UserEntity> users = await context.Users.ToListAsync();
-            return users;
-        }
-
-        throw new Exception("No users found");
+        if (!context.Users.Any()) throw new Exception("No users found");
+        ICollection<UserEntity> users = await context.Users.Include(entity => entity.Card).ToListAsync();
+        Console.WriteLine($"UserDaoImpl {users.Count}");
+        return users;
     }
 
     //update user
@@ -94,9 +89,15 @@ public class UserDaoImpl : IUserDao
     }
 
     //update balance
-    public async Task<bool> UpdateBalanceAsync(string sender, string receiver, int amount)
+    public async Task<bool> UpdateBalanceAsync(string username, int newBalance)
     {
-        try
+        //todo: balance adding and removing should be done in application tier. need to consult with group 
+        UserEntity user = await FetchUserByUsernameAsync(username);
+        user.Balance = newBalance;
+        await context.SaveChangesAsync();
+        return true;
+
+        /*try
         {
             int senderAmount = await FetchBalanceByUsername(sender);
             //sender side
@@ -119,7 +120,7 @@ public class UserDaoImpl : IUserDao
             throw new Exception(e.Message);
         }
 
-        return false;
+        return false;*/
     }
 
     //get balance by username

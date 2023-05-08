@@ -22,10 +22,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
         context = new TestContext();
         context.Services.AddSingleton<IUserService>(new UserService(client));
         context.Services.AddSingleton<ICardService>(new CardService(client));
-        
-
         renderedComponent = context.RenderComponent<RegisterUser>();
-        
     }
 
     private void SetInstancesValueForUser()
