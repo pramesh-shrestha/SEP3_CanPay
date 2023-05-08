@@ -17,9 +17,9 @@ public class TransactionServiceImplementation implements ITransactionService {
     private IUserClient userClient;
 
     @Autowired
-    public TransactionServiceImplementation(ITransactionClient transactionClient,IUserClient userClient) {
+    public TransactionServiceImplementation(ITransactionClient transactionClient, IUserClient userClient) {
         this.transactionClient = transactionClient;
-        this.userClient=userClient;
+        this.userClient = userClient;
     }
 
     @Override
@@ -29,21 +29,23 @@ public class TransactionServiceImplementation implements ITransactionService {
             UserEntity sender = transaction.getSender();
             int amount = transaction.getAmount();
 
-            if (sender.getBalance()>amount || sender.getBalance()==0){
+
+            if (sender.getBalance() < amount || sender.getBalance() == 0) {
                 throw new Exception("Insufficient balance");
             }
             //set balance of sender and receiver after transaction
-            sender.setBalance(sender.getBalance()-amount);
-            receiver.setBalance(receiver.getBalance()+amount);
+            sender.setBalance(sender.getBalance() - amount);
+            receiver.setBalance(receiver.getBalance() + amount);
 
             //update user
             userClient.updateUser(sender);
             userClient.updateUser(receiver);
 
+            System.out.println("TransactionServiceImpl : " + transaction.getReceiver());
+
             //create transaction
             return transactionClient.createTransaction(transaction);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -52,8 +54,7 @@ public class TransactionServiceImplementation implements ITransactionService {
     public TransactionEntity fetchTransactionById(Long id) {
         try {
             return transactionClient.fetchTransactionById(id);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -62,38 +63,34 @@ public class TransactionServiceImplementation implements ITransactionService {
     public List<TransactionEntity> fetchAlLTransactionsBySender(String senderUsername) {
         try {
             return transactionClient.fetchAlLTransactionsBySender(senderUsername);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
     public List<TransactionEntity> fetchAllTransactionByReceiver(String receiverUsername) {
-        try{
+        try {
             return transactionClient.fetchAllTransactionByReceiver(receiverUsername);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
     public List<TransactionEntity> fetchAllTransactionInvolvingUser(String username) {
-        try{
+        try {
             return transactionClient.fetchAllTransactionInvolvingUser(username);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
     public List<TransactionEntity> fetchTransactionByDate(String date) {
-        try{
+        try {
             return transactionClient.fetchTransactionByDate(date);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -102,8 +99,7 @@ public class TransactionServiceImplementation implements ITransactionService {
     public boolean deleteTransaction(Long id) {
         try {
             return transactionClient.deleteTransaction(id);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }

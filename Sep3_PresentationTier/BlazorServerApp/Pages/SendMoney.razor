@@ -127,7 +127,7 @@
     private async Task SendMoneyToReceiver()
     {
         UserEntity? receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
-        string date = $"{dateTime.Date.Day}{dateTime.Date.Month}/{dateTime.Date.Year}";
+        string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
 
         TransactionEntity transactionEntity = new TransactionEntity(senderUser, receiverUser, int.Parse(amount), date);
 
@@ -151,6 +151,7 @@
                 receiver = "";
                 amount = "0";
             }
+            
         }
         catch (Exception e)
         {

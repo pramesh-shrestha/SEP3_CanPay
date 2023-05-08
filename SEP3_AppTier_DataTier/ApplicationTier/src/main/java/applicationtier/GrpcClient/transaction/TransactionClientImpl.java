@@ -31,7 +31,9 @@ public class TransactionClientImpl implements ITransactionClient {
     @Override
     public TransactionEntity createTransaction(TransactionEntity transaction) {
         try {
+            System.out.println("Transaction Client: " + transaction.getReceiver());
             Transaction.TransactionProtoObj transactionProtoObj = fromEntityToProtoObj(transaction);
+
             Transaction.TransactionProtoObj protoObj = getTransactionBlockingStub().createTransactionAsync(transactionProtoObj);
             return fromProtoObjToEntity(protoObj);
         } catch (Exception e) {

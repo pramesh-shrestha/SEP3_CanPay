@@ -29,7 +29,6 @@ public class SecurityConfiguration {
         /*http.csrf().and().cors().disable().
                 authorizeHttpRequests().
                 requestMatchers(new AntPathRequestMatcher("/user/register")).
-
                 permitAll().anyRequest().authenticated().
                 and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).

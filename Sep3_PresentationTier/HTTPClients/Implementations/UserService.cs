@@ -183,8 +183,9 @@ public class UserService : IUserService
         return Task.CompletedTask;
     }
 
-    private void LoadClientWithToken()
+    public void LoadClientWithToken()
     {
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Jwt);
     }
+    
 }

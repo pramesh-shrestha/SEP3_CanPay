@@ -27,8 +27,15 @@ public class TransactionDaoImpl : ITransactionDao
     {
         try
         {
+            EntityEntry<UserEntity> senderEntity = context.Users.Attach(transaction.Sender);
+            EntityEntry<UserEntity> receiverEntity = context.Users.Attach(transaction.Receiver);
+
+            transaction.Sender = senderEntity.Entity;
+            transaction.Receiver = receiverEntity.Entity;
+
             EntityEntry<TransactionEntity?> createdTransaction = await context.Transactions.AddAsync(transaction);
             await context.SaveChangesAsync();
+            
             return createdTransaction.Entity;
         }
         catch (Exception e)

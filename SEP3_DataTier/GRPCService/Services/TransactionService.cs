@@ -21,8 +21,9 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
     {
         try
         {
+            TransactionEntity? transactionEntity = FromProtoToEntity(request);
             TransactionEntity? createdTransaction =
-                await transactionDao.CreateTransactionAsync(FromProtoToEntity(request));
+                await transactionDao.CreateTransactionAsync(transactionEntity);
 
             TransactionProtoObj protoObj = FromEntityToProto(createdTransaction);
             protoObj.TransactionId = createdTransaction!.Id;

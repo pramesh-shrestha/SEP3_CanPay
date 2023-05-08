@@ -20,6 +20,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.MapGrpcService<DebitCardService>();
 app.MapGrpcService<UserService>();
+app.MapGrpcService<TransactionService>();
 
 app.MapGet("/",
     () =>

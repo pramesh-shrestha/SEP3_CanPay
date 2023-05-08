@@ -80,7 +80,13 @@ public class UserClientImpl implements IUserClient {
     @Override
     public UserEntity updateUser(UserEntity user) {
         try {
+
+            System.out.println(user.getUserName());
+
             User.UserProtoObj userProtoObj = getUserBlockingStub().updateUser(fromEntityToProtoObj(user));
+
+            System.out.println(user.getUserName());
+
             return fromProtoObjToEntity(userProtoObj);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -116,7 +122,7 @@ public class UserClientImpl implements IUserClient {
         userEntity.setUserName(userProtoObj.getUserName());
         userEntity.setPassword(userProtoObj.getPassword());
         userEntity.setFullName(userProtoObj.getFullName());
-        userEntity.setBalance(userEntity.getBalance());
+        userEntity.setBalance(userProtoObj.getBalance());
         userEntity.setCard(CardClientImpl.fromProtoObjToEntity(userProtoObj.getCard()));
         return userEntity;
     }

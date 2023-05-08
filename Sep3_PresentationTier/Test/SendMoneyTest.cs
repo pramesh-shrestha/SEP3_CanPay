@@ -33,21 +33,7 @@ namespace Test {
             renderedComponent.Instance.amount = "100";
         }
 
-
-        // [Fact] public async Task SendMoneyAsync_ShouldThrowAnErrorMessage_WhenSenderNameFieldIsEmpty()
-        // {
-        //     //Arrange
-        //     Setup();
-        //     SetInstancesValue();
-        //     renderedComponent.Instance.sender = "";
-        //
-        //     //Act
-        //     // await renderedComponent.Instance.GetErrorMessage();
-        //
-        //     //Assert
-        //     Assert.Equal("Error: Sender name cannot be empty", renderedComponent.Instance.errorLabel);
-        // }
-
+        
         [Fact] public async Task SendMoneyAsync_ShouldThrowAnErrorMessage_WhenRecipientNameFieldIsEmpty()
         {
             //Arrange   
@@ -75,20 +61,7 @@ namespace Test {
             //Assert
             Assert.Equal("Amount must be more than 0.", renderedComponent.Instance.errorLabel);
         }
-
-        // [Fact] public async Task SendMoneyAsync_ShouldThrowAnErrorMessage_WhenAmountIsNotANumber()
-        // {
-        //     //Arrange   
-        //     Setup();
-        //     SetInstancesValue();
-        //     renderedComponent.Instance.amount = "&";
-        //
-        //     //Act
-        //     await renderedComponent.Instance.GetErrorMessage();
-        //
-        //     //Assert
-        //     Assert.Equal("Error: Amount must be a valid number", renderedComponent.Instance.errorLabel);
-        // }
+        
 
         [Fact] public async Task SendMoneyAsync_ShouldThrowAnErrorMessage_WhenAmountIsNegative()
         {
