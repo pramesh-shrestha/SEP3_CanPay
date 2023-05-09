@@ -48,7 +48,7 @@ public class NotificationController {
         }
     }
 
-    @PutMapping("/notifications/markAllAsRead/{receivingUsername}")
+    /*@PutMapping("/notifications/markAllAsRead/{receivingUsername}")
     public ResponseEntity<?> markAllAsRead(@PathVariable("receivingUsername") String receivingUsername){
         try{
             notificationService.markAllAsRead(receivingUsername);
@@ -56,7 +56,7 @@ public class NotificationController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-    }
+    }*/
 
     @DeleteMapping("/notification/delete/{id}")
     public ResponseEntity<String> deleteNotification(@PathVariable("id") Long id) {

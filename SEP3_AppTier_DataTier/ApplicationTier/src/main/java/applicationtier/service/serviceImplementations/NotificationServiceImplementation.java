@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class NotificationServiceImplementation implements INotificationService {
 
@@ -26,10 +27,10 @@ public class NotificationServiceImplementation implements INotificationService {
     @Override
     public NotificationEntity createNotification(NotificationEntity notification) {
 
-        try{
-            TransactionEntity transaction = transactionClient.fetchTransactionById(notification.getId());
+        try {
+            /*TransactionEntity transaction = transactionClient.fetchTransactionById(notification.getId());
 
-            if(transaction == null){
+            if (transaction == null) {
                 throw new Exception("Transaction not found");
             }
 
@@ -40,10 +41,10 @@ public class NotificationServiceImplementation implements INotificationService {
             newNotification.setId(transaction.getId());
             newNotification.setDate(transaction.getDate());
             newNotification.setMessage("You received a payment from " + transaction.getSender().getUsername());
-            //newNotification.setType();
-            newNotification.setRead(false);
+            newNotification.setType(NotificationTypes.TRANSACTION.name());
+            newNotification.setRead(false);*/
 
-            return notificationClient.createNotification(newNotification);
+            return notificationClient.createNotification(notification);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -53,7 +54,9 @@ public class NotificationServiceImplementation implements INotificationService {
     @Override
     public List<NotificationEntity> fetchAllNotificationsByReceiver(String receiverUsername) {
         try {
-            return notificationClient.fetchAllNotificationsByReceiver(receiverUsername);
+            List<NotificationEntity> entities = notificationClient.fetchAllNotificationsByReceiver(receiverUsername);
+            markAllAsRead(entities);
+            return entities;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -71,19 +74,17 @@ public class NotificationServiceImplementation implements INotificationService {
 
 
     @Override
-    public void markAllAsRead(String receivingUsername) {
+    public void markAllAsRead(List<NotificationEntity> notificationList) {
         try {
-            List<NotificationEntity> notificationList = fetchAllNotificationsByReceiver(receivingUsername);
             for (NotificationEntity notification : notificationList) {
                 notification.setRead(true);
-                notificationList.add(notification);
+//                notificationList.add(notification);
             }
             notificationClient.markAllAsRead(notificationList);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
 
 
     @Override
