@@ -14,6 +14,7 @@ builder.Services.AddScoped<CanPayDbAccess>();
 builder.Services.AddScoped<IUserDao, UserDaoImpl>();
 builder.Services.AddScoped<ICardDao, CardDaoImpl>();
 builder.Services.AddScoped<ITransactionDao, TransactionDaoImpl>();
+builder.Services.AddScoped<INotificationDao, NotificationDaoImpl>();
 
 var app = builder.Build();
 
