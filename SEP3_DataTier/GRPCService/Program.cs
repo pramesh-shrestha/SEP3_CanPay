@@ -22,6 +22,7 @@ var app = builder.Build();
 app.MapGrpcService<DebitCardService>();
 app.MapGrpcService<UserService>();
 app.MapGrpcService<TransactionService>();
+app.MapGrpcService<NotificationService>();
 
 app.MapGet("/",
     () =>
