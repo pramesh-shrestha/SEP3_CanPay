@@ -46,22 +46,22 @@ public class NotificationProtoServiceGrpc {
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.StringValue.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Notification.NotificationProtoObjList.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.google.protobuf.Int64Value,
+  public static final io.grpc.MethodDescriptor<applicationtier.protobuf.Notification.NotificationProtoObj,
       com.google.protobuf.Empty> METHOD_MARK_AS_READ =
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
               "NotificationProtoService", "MarkAsRead"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int64Value.getDefaultInstance()),
+          io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Notification.NotificationProtoObj.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Empty.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.google.protobuf.StringValue,
+  public static final io.grpc.MethodDescriptor<applicationtier.protobuf.Notification.NotificationProtoObjList,
       com.google.protobuf.Empty> METHOD_MARK_ALL_AS_READ =
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
               "NotificationProtoService", "MarkAllAsRead"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.StringValue.getDefaultInstance()),
+          io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Notification.NotificationProtoObjList.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Empty.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<com.google.protobuf.Int64Value,
@@ -116,14 +116,14 @@ public class NotificationProtoServiceGrpc {
 
     /**
      */
-    public void markAsRead(com.google.protobuf.Int64Value request,
+    public void markAsRead(applicationtier.protobuf.Notification.NotificationProtoObj request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_MARK_AS_READ, responseObserver);
     }
 
     /**
      */
-    public void markAllAsRead(com.google.protobuf.StringValue request,
+    public void markAllAsRead(applicationtier.protobuf.Notification.NotificationProtoObjList request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_MARK_ALL_AS_READ, responseObserver);
     }
@@ -155,14 +155,14 @@ public class NotificationProtoServiceGrpc {
             METHOD_MARK_AS_READ,
             asyncUnaryCall(
               new MethodHandlers<
-                com.google.protobuf.Int64Value,
+                applicationtier.protobuf.Notification.NotificationProtoObj,
                 com.google.protobuf.Empty>(
                   this, METHODID_MARK_AS_READ)))
           .addMethod(
             METHOD_MARK_ALL_AS_READ,
             asyncUnaryCall(
               new MethodHandlers<
-                com.google.protobuf.StringValue,
+                applicationtier.protobuf.Notification.NotificationProtoObjList,
                 com.google.protobuf.Empty>(
                   this, METHODID_MARK_ALL_AS_READ)))
           .addMethod(
@@ -212,7 +212,7 @@ public class NotificationProtoServiceGrpc {
 
     /**
      */
-    public void markAsRead(com.google.protobuf.Int64Value request,
+    public void markAsRead(applicationtier.protobuf.Notification.NotificationProtoObj request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_MARK_AS_READ, getCallOptions()), request, responseObserver);
@@ -220,7 +220,7 @@ public class NotificationProtoServiceGrpc {
 
     /**
      */
-    public void markAllAsRead(com.google.protobuf.StringValue request,
+    public void markAllAsRead(applicationtier.protobuf.Notification.NotificationProtoObjList request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_MARK_ALL_AS_READ, getCallOptions()), request, responseObserver);
@@ -269,14 +269,14 @@ public class NotificationProtoServiceGrpc {
 
     /**
      */
-    public com.google.protobuf.Empty markAsRead(com.google.protobuf.Int64Value request) {
+    public com.google.protobuf.Empty markAsRead(applicationtier.protobuf.Notification.NotificationProtoObj request) {
       return blockingUnaryCall(
           getChannel(), METHOD_MARK_AS_READ, getCallOptions(), request);
     }
 
     /**
      */
-    public com.google.protobuf.Empty markAllAsRead(com.google.protobuf.StringValue request) {
+    public com.google.protobuf.Empty markAllAsRead(applicationtier.protobuf.Notification.NotificationProtoObjList request) {
       return blockingUnaryCall(
           getChannel(), METHOD_MARK_ALL_AS_READ, getCallOptions(), request);
     }
@@ -326,7 +326,7 @@ public class NotificationProtoServiceGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> markAsRead(
-        com.google.protobuf.Int64Value request) {
+        applicationtier.protobuf.Notification.NotificationProtoObj request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_MARK_AS_READ, getCallOptions()), request);
     }
@@ -334,7 +334,7 @@ public class NotificationProtoServiceGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> markAllAsRead(
-        com.google.protobuf.StringValue request) {
+        applicationtier.protobuf.Notification.NotificationProtoObjList request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_MARK_ALL_AS_READ, getCallOptions()), request);
     }
@@ -380,11 +380,11 @@ public class NotificationProtoServiceGrpc {
               (io.grpc.stub.StreamObserver<applicationtier.protobuf.Notification.NotificationProtoObjList>) responseObserver);
           break;
         case METHODID_MARK_AS_READ:
-          serviceImpl.markAsRead((com.google.protobuf.Int64Value) request,
+          serviceImpl.markAsRead((applicationtier.protobuf.Notification.NotificationProtoObj) request,
               (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
           break;
         case METHODID_MARK_ALL_AS_READ:
-          serviceImpl.markAllAsRead((com.google.protobuf.StringValue) request,
+          serviceImpl.markAllAsRead((applicationtier.protobuf.Notification.NotificationProtoObjList) request,
               (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
           break;
         case METHODID_DELETE_NOTIFICATION_ASYNC:

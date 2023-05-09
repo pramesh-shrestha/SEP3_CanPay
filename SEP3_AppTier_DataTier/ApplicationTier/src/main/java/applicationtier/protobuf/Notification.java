@@ -2504,18 +2504,18 @@ public final class Notification {
       "rotobuf.StringValue\022*\n\006isRead\030\007 \001(\0132\032.go",
       "ogle.protobuf.BoolValue\"K\n\030NotificationP" +
       "rotoObjList\022/\n\020allNotifications\030\001 \003(\0132\025." +
-      "NotificationProtoObj2\242\003\n\030NotificationPro" +
+      "NotificationProtoObj2\231\003\n\030NotificationPro" +
       "toService\022G\n\027CreateNotificationAsync\022\025.N" +
       "otificationProtoObj\032\025.NotificationProtoO" +
       "bj\022_\n$FetchAllNotificationsByReceiverAsy" +
       "nc\022\034.google.protobuf.StringValue\032\031.Notif" +
-      "icationProtoObjList\022A\n\nMarkAsRead\022\033.goog" +
-      "le.protobuf.Int64Value\032\026.google.protobuf" +
-      ".Empty\022E\n\rMarkAllAsRead\022\034.google.protobu",
-      "f.StringValue\032\026.google.protobuf.Empty\022R\n" +
-      "\027DeleteNotificationAsync\022\033.google.protob" +
-      "uf.Int64Value\032\032.google.protobuf.BoolValu" +
-      "eB\034\n\030applicationtier.protobufP\000b\006proto3"
+      "icationProtoObjList\022;\n\nMarkAsRead\022\025.Noti" +
+      "ficationProtoObj\032\026.google.protobuf.Empty" +
+      "\022B\n\rMarkAllAsRead\022\031.NotificationProtoObj",
+      "List\032\026.google.protobuf.Empty\022R\n\027DeleteNo" +
+      "tificationAsync\022\033.google.protobuf.Int64V" +
+      "alue\032\032.google.protobuf.BoolValueB\034\n\030appl" +
+      "icationtier.protobufP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
