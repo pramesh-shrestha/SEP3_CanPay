@@ -1,6 +1,7 @@
 ﻿@page "/SendMoney"
 @using Domains.Entity
 @using HTTPClients.ClientInterfaces
+@using UIComponents
 
 @inject IUserService UserService;
 @inject ITransactionService TransactionService;
@@ -73,8 +74,10 @@
 </div>
 
 <Modal ShowModal="showModal">
-    <p>You have successfully added a new Todo item. You should be very proud of yourself!</p>
-    <button @onclick="@Proceed">Wonderful</button>
+    <p >You have successfully transferred the amount!</p>
+    <div>
+        <button class="button" @onclick="@Proceed" >OK</button>
+    </div>
 </Modal>
 
 
@@ -152,10 +155,8 @@
             if (string.IsNullOrEmpty(errorLabel))
             {
                 await TransactionService.CreateTransactionAsync(transactionEntity);
-                errorLabel = "Transaction successful.";
-                color = "green";
-                receiver = "";
-                amount = "0";
+                showModal = true;
+                
             }
             
         }
