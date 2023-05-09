@@ -11,6 +11,8 @@
         <Protobuf Include="Protos\user.proto" OutputDir="GeneratedFiles" Namespace="GrpcService" GrpcServices="Server" />
         <Protobuf Include="Protos\debitcard.proto" OutputDir="GeneratedFiles" Namespace="GrpcService" GrpcServices="Server" />
         <Protobuf Include="Protos\transaction.proto" OutputDir="GeneratedFiles" Namespace="GrpcService" GrpcServices="Server" />
+        <Protobuf Include="Protos\notification.proto" OutputDir="GeneratedFiles" Namespace="GrpcService" GrpcServices="Server" />
+        
     </ItemGroup>
     
     <ItemGroup>
