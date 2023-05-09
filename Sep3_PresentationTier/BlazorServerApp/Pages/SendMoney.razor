@@ -72,6 +72,11 @@
     </div>
 </div>
 
+<Modal ShowModal="showModal">
+    <p>You have successfully added a new Todo item. You should be very proud of yourself!</p>
+    <button @onclick="@Proceed">Wonderful</button>
+</Modal>
+
 
 @code {
     public string? sender = "";
@@ -85,6 +90,7 @@
     private UserEntity? senderUser = new UserEntity();
     public string? errorLabel = "";
     private string? color = "";
+    private bool showModal;
 
     protected override async Task OnInitializedAsync()
     {
@@ -163,6 +169,11 @@
     //navigate back to home page
     private void BackToHome()
     {
+        NavMgr.NavigateTo("/");
+    }
+    
+    private void Proceed() {
+        showModal = false;
         NavMgr.NavigateTo("/");
     }
 
