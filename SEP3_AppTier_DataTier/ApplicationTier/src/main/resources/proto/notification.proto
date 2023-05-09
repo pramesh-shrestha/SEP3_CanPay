@@ -22,7 +22,7 @@ message  NotificationProtoObjList {
   repeated NotificationProtoObj allNotifications = 1;
 }
 
-service TransactionProtoService {
+service NotificationProtoService {
   rpc CreateNotificationAsync(NotificationProtoObj) returns (NotificationProtoObj);
   rpc FetchAllNotificationsByReceiverAsync(google.protobuf.StringValue) returns (NotificationProtoObjList);
   rpc MarkAsRead(google.protobuf.Int64Value) returns (google.protobuf.Empty);
