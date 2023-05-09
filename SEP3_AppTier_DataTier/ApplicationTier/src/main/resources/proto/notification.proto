@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "user.proto";
+import "google/protobuf/empty.proto";
+
+option java_multiple_files = false;
+option java_package = "applicationtier.protobuf";
+
+message NotificationProtoObj {
+  google.protobuf.Int64Value notification_id = 1;
+  UserProtoObj senderUser = 2;
+  UserProtoObj receiverUser = 3;
+  google.protobuf.StringValue date = 4;
+  google.protobuf.StringValue message = 5;
+  google.protobuf.StringValue type = 6;
+  google.protobuf.BoolValue isRead = 7;
+
+}
+
+message  NotificationProtoObjList {
+  repeated NotificationProtoObj allNotifications = 1;
+}
+
+service TransactionProtoService {
+  rpc CreateNotificationAsync(NotificationProtoObj) returns (NotificationProtoObj);
+  rpc FetchAllNotificationsByReceiverAsync(google.protobuf.StringValue) returns (NotificationProtoObjList);
+  rpc MarkAsRead(google.protobuf.Int64Value) returns (google.protobuf.Empty);
+  rpc MarkAllAsRead(google.protobuf.StringValue) returns (google.protobuf.Empty);
+  rpc DeleteNotificationAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
+}
