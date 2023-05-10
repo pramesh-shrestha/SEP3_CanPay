@@ -70,7 +70,7 @@
 .number-div{
     position: absolute;
     top: 10px;
-    right:130px;
+    right:80px;
 }
 .number{
     position: absolute;
@@ -92,7 +92,7 @@
 .noti-body{
     position: absolute;
     top: 40px;
-    right: 120px;
+    right: 60px;
     border: 1px solid #ccc;
     box-shadow:2px 2px 2px #e0e1dd;
     border-radius: 5px;
