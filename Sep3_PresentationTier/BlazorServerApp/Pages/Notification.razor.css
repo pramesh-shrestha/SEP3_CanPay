@@ -1,7 +1,7 @@
 ﻿.notification-icon{
     height: 30px;
     width: 30px;
-    margin-left: 20px;
+    
 }
 
 .container{
@@ -9,8 +9,12 @@
     justify-content: flex-end;
 }
 
+.container-text{
+    display: flex;
+    justify-content: flex-start;
+}
+
 .text{
-  
     font-size: 18px;
 }
 
@@ -67,8 +71,8 @@
 
 .number-div{
     position: absolute;
-    top: 1px;
-    left: 35px;
+    top: 10px;
+    right:130px;
 }
 .number{
     position: absolute;
@@ -82,8 +86,49 @@
 }
 
 .noti_count {
-    position: absolute;
-    top : -1.7px;
-    left: 1.5px;
+    position: relative;
+    top : -1.4px;
     right: 1px;
+}
+
+.noti-body{
+    position: absolute;
+    top: 40px;
+    right: 120px;
+    border: 1px solid #ccc;
+    box-shadow:2px 2px 2px #e0e1dd;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+    height: 300px;
+    width: 300px;
+    background-color: white;
+}
+
+.header{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 20px;
+    color: #172B48;
+    margin-top: 5px;
+}
+.hr1{
+    border-top: 2px solid #a9d6e5;
+}
+.notification-table{
+    display: flex;
+    justify-content: flex-start;
+}
+.date{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.card{
+    border: none;
+}
+
+.card-body:hover{
+    background-color: #edede9;
 }

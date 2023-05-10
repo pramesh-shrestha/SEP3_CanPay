@@ -5,37 +5,47 @@
 @inject NavigationManager NavMgr;
 
 <AuthorizeView>
-    <span class="text">Hello, Welcome to KanPay</span>
-    <div class="container">
-    <img src="images/@(showNotification ? "clear_" : "")notification-bell.png" class="notification-icon" @onclick="@(() => showNotification = !showNotification)" alt="" style="cursor: pointer"/>
-    <div class="notification-hover">notification</div>
-        <div class="number-div">
-            <button class="number">
-                <span class="noti_count" @bind="">3</span>
-            </button>
+    <Authorized>
+         <div class="container-text">
+                        <span class="text">Hello, Welcome to KanPay</span>
+                    </div>
+        <div class="container">
+            <img src="images/notification-bell.png" class="notification-icon" @onclick="@(() => showNotification = !showNotification)" alt="notification" style="cursor: pointer"/>
+            <div class="number-div">
+                <button class="number">
+                    <span class="noti_count">@notification.Count</span>
+                </button>
+            </div>
         </div>
-    @if (showNotification)
-    {
-        @foreach (var message in notification)
-        {
-            <div class="card-body">@message.Message</div>
-        }
-    }
-    @* <img class="notification-icon" src="images/notification-bell.png" alt="" style="cursor: pointer"> *@
-    
-    </div>
+        
+        @if (showNotification)
+                    {
+                        <div class="noti-body ">
+                            <label class="header">Notifications</label>
+                            <hr class="hr1"/>
+                            <div class="card">
+                                @foreach (var items in notification)
+                                {
+                                    <div class="card-body">
+                                        <label class="notification-table" >@items.Message</label>
+                                        <label class="date text-muted">@items.Date</label>
+                                    </div>
+                                }
+                            </div>
+                    </div>
+                    }
+    </Authorized>
 </AuthorizeView>
 
 @code {
-    private int notificationId;
     private UserEntity? senderUser;
-    private UserEntity? receiverUser;
+    private UserEntity? receiverUser= new UserEntity();
     private string? receiver;
     private string? notificationType = "";
     public string? Message = "";
     private DateTime dateTime = DateTime.Now.Date;
     public bool IsRead;
-    private IEnumerable<NotificationEntity>? notification = new List<NotificationEntity>();
+    private ICollection<NotificationEntity>? notification= new List<NotificationEntity>();
     private bool showNotification = false;
 
     protected override async Task OnInitializedAsync()
