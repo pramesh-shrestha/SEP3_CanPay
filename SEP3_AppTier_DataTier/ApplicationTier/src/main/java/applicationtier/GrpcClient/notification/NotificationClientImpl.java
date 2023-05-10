@@ -67,6 +67,7 @@ public class NotificationClientImpl implements INotificationClient {
     @Override
     public List<NotificationEntity> fetchAllNotificationsByReceiver(String receiverUsername) {
         try {
+            System.out.println("grpc client"+receiverUsername);
             List<Notification.NotificationProtoObj> allNotificationsList = getNotificationBlockingStub().fetchAllNotificationsByReceiverAsync(StringValue.of(receiverUsername)).getAllNotificationsList();
             List<NotificationEntity> notificationEntities = new ArrayList<>();
             for (Notification.NotificationProtoObj notificationProtoObj : allNotificationsList) {

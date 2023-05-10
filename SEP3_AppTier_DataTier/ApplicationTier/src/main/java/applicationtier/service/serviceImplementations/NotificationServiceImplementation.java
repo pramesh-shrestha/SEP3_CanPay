@@ -53,6 +53,7 @@ public class NotificationServiceImplementation implements INotificationService {
     @Override
     public List<NotificationEntity> fetchAllNotificationsByReceiver(String receiverUsername) {
         try {
+            System.out.println("service impl"+receiverUsername);
             List<NotificationEntity> entities = notificationClient.fetchAllNotificationsByReceiver(receiverUsername);
             markAllAsRead(entities);
             return entities;

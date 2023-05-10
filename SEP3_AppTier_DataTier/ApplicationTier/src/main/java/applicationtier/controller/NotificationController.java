@@ -23,7 +23,7 @@ public class NotificationController {
     @PostMapping("/notification/create")
     public ResponseEntity<NotificationEntity> createNotification(@RequestBody NotificationEntity notification) {
         try {
-            System.out.println("Notification Controller Here");
+
             return new ResponseEntity<>(notificationService.createNotification(notification), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error creating notification", e);
@@ -34,6 +34,7 @@ public class NotificationController {
     public ResponseEntity<List<NotificationEntity>> fetchAllNotificationsByReceiver(@PathVariable("receiverUsername") String receiverUsername) {
 
         try {
+            System.out.println("Notification Controller Here"+receiverUsername);
             return new ResponseEntity<>(notificationService.fetchAllNotificationsByReceiver(receiverUsername), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

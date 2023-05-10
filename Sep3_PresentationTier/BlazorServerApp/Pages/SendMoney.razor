@@ -125,6 +125,8 @@
 
             usernames = entities.Select(u => u.UserName).ToList();
             usernames.Remove(senderUser.UserName);
+
+            // ICollection<NotificationEntity> fetchAllNotificationsByReceiverAsync = await NotificationService.FetchAllNotificationsByReceiverAsync(sender);
         }
         catch (Exception e)
         {
