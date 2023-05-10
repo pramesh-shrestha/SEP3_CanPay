@@ -23,9 +23,8 @@ public class TransactionController {
     public ResponseEntity<TransactionEntity> createTransaction(@RequestBody TransactionEntity transaction) {
         try {
 
-            System.out.println("Transaction Controller: " + transaction.getReceiver().getUsername());
-
-            return new ResponseEntity<>(transactionService.createTransaction(transaction), HttpStatus.OK);
+            TransactionEntity transactionEntity = transactionService.createTransaction(transaction);
+            return new ResponseEntity<>(transactionEntity, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

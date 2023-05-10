@@ -57,7 +57,8 @@ public class UserServiceImplementation implements IUserService {
     @Override
     public List<UserEntity> fetchUsers() {
         try {
-            return userClient.fetchUsers();
+            List<UserEntity> userEntities = userClient.fetchUsers();
+            return userEntities;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -76,7 +77,8 @@ public class UserServiceImplementation implements IUserService {
     @Override
     public UserEntity fetchUserByUsername(String username) {
         try {
-            return userClient.findByUsername(username);
+            UserEntity byUsername = userClient.findByUsername(username);
+            return byUsername;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }

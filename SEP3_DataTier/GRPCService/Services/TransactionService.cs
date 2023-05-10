@@ -26,7 +26,6 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
                 await transactionDao.CreateTransactionAsync(transactionEntity);
 
             TransactionProtoObj protoObj = FromEntityToProto(createdTransaction);
-            protoObj.TransactionId = createdTransaction!.Id;
             return protoObj;
         }
         catch (Exception e)
@@ -43,7 +42,7 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         {
             TransactionEntity? entity = await transactionDao.FetchTransactionByIdAsync(request.Value);
             TransactionProtoObj protoObj = FromEntityToProto(entity);
-            protoObj.TransactionId = entity.Id;
+            // protoObj.TransactionId = entity.Id;
 
             return protoObj;
         }
@@ -142,19 +141,27 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
 
     public static TransactionEntity? FromProtoToEntity(TransactionProtoObj transactionProtoObj)
     {
-        return new TransactionEntity()
+        TransactionEntity transactionEntity = new TransactionEntity()
         {
             Sender = UserService.FromProtoToEntity(transactionProtoObj.SenderUser),
             Receiver = UserService.FromProtoToEntity(transactionProtoObj.ReceiverUser),
             Amount = transactionProtoObj.Amount,
-            Date = transactionProtoObj.Date
+            Date = transactionProtoObj.Date,
         };
+
+        if (transactionProtoObj.TransactionId != 0)
+        {
+            transactionEntity.Id = transactionProtoObj.TransactionId!.Value;
+        }
+
+        return transactionEntity;
     }
 
     public static TransactionProtoObj FromEntityToProto(TransactionEntity? transactionEntity)
     {
         return new TransactionProtoObj()
         {
+            TransactionId = transactionEntity!.Id,
             SenderUser = UserService.FromEntityToProto(transactionEntity!.Sender),
             ReceiverUser = UserService.FromEntityToProto(transactionEntity.Receiver),
             Amount = transactionEntity.Amount,
@@ -171,7 +178,6 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
                 transactionEntities.Select(entity =>
                 {
                     TransactionProtoObj protoObj = FromEntityToProto(entity);
-                    protoObj.TransactionId = entity.Id;
                     return protoObj;
                 })
             }

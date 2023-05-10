@@ -63,7 +63,6 @@ public class UserDaoImpl : IUserDao
     {
         if (!context.Users.Any()) throw new Exception("No users found");
         ICollection<UserEntity> users = await context.Users.Include(entity => entity.Card).ToListAsync();
-        Console.WriteLine($"UserDaoImpl {users.Count}");
         return users;
     }
 

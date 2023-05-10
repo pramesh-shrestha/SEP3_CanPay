@@ -20,10 +20,8 @@ public class TransactionService : ITransactionService
 
     public async Task<TransactionEntity> CreateTransactionAsync(TransactionEntity transactionEntity)
     {
-        
         HttpResponseMessage response = await client.PostAsJsonAsync("/transaction/create", transactionEntity);
 
-        Console.WriteLine($"Transaction Service: {transactionEntity.Sender}");
 
         string result = await response.Content.ReadAsStringAsync();
 
@@ -37,6 +35,9 @@ public class TransactionService : ITransactionService
             {
                 PropertyNameCaseInsensitive = true
             })!;
+
+        Console.WriteLine(entity.TransactionId.GetTypeCode());
+
         return entity;
     }
 
@@ -140,7 +141,7 @@ public class TransactionService : ITransactionService
             throw new Exception(result);
         }
     }
-    
+
     private async void LoadClientWithToken()
     {
         Jwt = await UserService.GetJwtToken();

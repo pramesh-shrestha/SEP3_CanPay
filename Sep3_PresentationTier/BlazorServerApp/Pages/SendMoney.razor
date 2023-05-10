@@ -10,7 +10,7 @@
 @inject INotificationService NotificationService;
 <AuthorizeView>
     <Authorized>
-        
+
         <div class="container">
             <h3>Send Money</h3>
             <div class="row">
@@ -79,16 +79,15 @@
         <Modal ShowModal="showModal">
             <p >You have successfully transferred the amount!</p>
             <div>
-                <button class="button" @onclick="@Proceed" >OK</button>
+                <button class="button" @onclick="@Proceed">OK</button>
             </div>
         </Modal>
     </Authorized>
-    
+
     <NotAuthorized>
         <h3>We are sorry, you must be logged in to access this page.</h3>
     </NotAuthorized>
 </AuthorizeView>
-
 
 
 @code {
@@ -101,10 +100,11 @@
     private IEnumerable<UserEntity?> userEntities = new List<UserEntity?>();
     private List<string?> usernames = new List<string?>();
     private UserEntity? senderUser = new UserEntity();
+    private UserEntity? receiverUser = new UserEntity();
     public string? errorLabel = "";
     private string? color = "";
     private bool showModal;
-    
+
     // private string? notificationType = "";
     // public string? notification = "";
     // private UserEntity? receiverUser= new UserEntity();
@@ -150,7 +150,7 @@
     //send money to receiver
     private async Task SendMoneyToReceiver()
     {
-        UserEntity? receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
+        receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
         string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
 
         TransactionEntity transactionEntity = new TransactionEntity(senderUser, receiverUser, int.Parse(amount), date);
@@ -172,9 +172,7 @@
                 await TransactionService.CreateTransactionAsync(transactionEntity);
                 await CreateNotification();
                 showModal = true;
-                
             }
-            
         }
         catch (Exception e)
         {
@@ -188,8 +186,9 @@
     {
         NavMgr.NavigateTo("/");
     }
-    
-    private void Proceed() {
+
+    private void Proceed()
+    {
         showModal = false;
         NavMgr.NavigateTo("/");
     }
@@ -203,8 +202,12 @@
             {
                 Message = $"{senderUser.FullName} has sent you {amount} dollar",
                 Date = date,
+                Sender = senderUser,
+                Receiver = receiverUser,
+                NotificationType = "Transaction",
+                IsRead = false
             };
-           await NotificationService.CreateNotificationAsync(notificationEntity);
+            await NotificationService.CreateNotificationAsync(notificationEntity);
         }
         catch (Exception e)
         {

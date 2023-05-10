@@ -8,17 +8,17 @@ public class NotificationEntity {
 
     private String message;
 
-    private String type;
+    private String notificationType;
 
     private boolean isRead;
 
-    public NotificationEntity(Long id, UserEntity sender, UserEntity receiver, String date, String message, String type, boolean isRead) {
+    public NotificationEntity(Long id, UserEntity sender, UserEntity receiver, String date, String message, String notificationType, boolean isRead) {
         this.id = id;
         this.sender = sender;
         this.receiver = receiver;
         this.date = date;
         this.message = message;
-        this.type = type;
+        this.notificationType = notificationType;
         this.isRead = isRead;
     }
     public NotificationEntity(){}
@@ -63,12 +63,12 @@ public class NotificationEntity {
         this.message = message;
     }
 
-    public String getType() {
-        return type;
+    public String getNotificationType() {
+        return notificationType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setNotificationType(String notificationType) {
+        this.notificationType = notificationType;
     }
 
     public boolean isRead() {
@@ -78,4 +78,6 @@ public class NotificationEntity {
     public void setRead(boolean read) {
         isRead = read;
     }
+
+
 }

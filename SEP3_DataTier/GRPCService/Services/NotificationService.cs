@@ -21,13 +21,10 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
     {
         try
         {
-            Console.WriteLine($"Notification Service: {request.Message}");
-
             NotificationEntity createdNotification =
                 await notificationDao.CreateNotificationAsync(FromProtoToEntity(request));
 
             NotificationProtoObj notificationProtoObj = FromEntityToProto(createdNotification);
-            notificationProtoObj.NotificationId = createdNotification.Id;
 
             return notificationProtoObj;
         }
@@ -113,6 +110,12 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
             Receiver = UserService.FromProtoToEntity(notificationProtoObj.ReceiverUser),
             NotificationType = notificationProtoObj.Type
         };
+
+        if (notificationProtoObj.NotificationId != 0)
+        {
+            entity.Id = notificationProtoObj.NotificationId!.Value;
+        }
+
         return entity;
     }
 
@@ -120,6 +123,7 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
     {
         NotificationProtoObj protoObj = new NotificationProtoObj
         {
+            NotificationId = entity.Id,
             Date = entity.Date,
             IsRead = entity.IsRead,
             Message = entity.Message,

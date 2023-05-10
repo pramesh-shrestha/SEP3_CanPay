@@ -23,6 +23,7 @@ public class NotificationController {
     @PostMapping("/notification/create")
     public ResponseEntity<NotificationEntity> createNotification(@RequestBody NotificationEntity notification) {
         try {
+            System.out.println("Notification Controller Here");
             return new ResponseEntity<>(notificationService.createNotification(notification), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error creating notification", e);

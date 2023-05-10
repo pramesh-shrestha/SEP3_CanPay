@@ -13,10 +13,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class NotificationClientImpl implements INotificationClient {
 
     private NotificationProtoServiceGrpc.NotificationProtoServiceBlockingStub notificationBlockingStub;
+
     private NotificationProtoServiceGrpc.NotificationProtoServiceBlockingStub getNotificationBlockingStub() {
         if (notificationBlockingStub == null) {
             ManagedChannel channel = ManagedChannelProvider.getChannel();
@@ -33,6 +35,7 @@ public class NotificationClientImpl implements INotificationClient {
 
             Notification.NotificationProtoObj protoObj = getNotificationBlockingStub().createNotificationAsync(notificationProtoObj);
             return fromProtoObjToEntity(protoObj);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -65,7 +68,7 @@ public class NotificationClientImpl implements INotificationClient {
     public List<NotificationEntity> fetchAllNotificationsByReceiver(String receiverUsername) {
         try {
             List<Notification.NotificationProtoObj> allNotificationsList = getNotificationBlockingStub().fetchAllNotificationsByReceiverAsync(StringValue.of(receiverUsername)).getAllNotificationsList();
-            List<NotificationEntity> notificationEntities=new ArrayList<>();
+            List<NotificationEntity> notificationEntities = new ArrayList<>();
             for (Notification.NotificationProtoObj notificationProtoObj : allNotificationsList) {
                 notificationEntities.add(fromProtoObjToEntity(notificationProtoObj));
             }
@@ -93,8 +96,9 @@ public class NotificationClientImpl implements INotificationClient {
         notification.setSender(UserClientImpl.fromProtoObjToEntity(notificationProtoObj.getSenderUser()));
         notification.setDate(notificationProtoObj.getDate().getValue());
         notification.setMessage(notificationProtoObj.getMessage().getValue());
-        notification.setType(notificationProtoObj.getType().getValue());
+        notification.setNotificationType(notificationProtoObj.getType().getValue());
         notification.setRead(notificationProtoObj.getIsRead().getValue());
+        notification.setId(notificationProtoObj.getNotificationId().getValue());
 
         return notification;
     }
@@ -106,8 +110,13 @@ public class NotificationClientImpl implements INotificationClient {
                 .setSenderUser(UserClientImpl.fromEntityToProtoObj(notification.getSender()))
                 .setDate(StringValue.of(notification.getDate()))
                 .setMessage(StringValue.of(notification.getMessage()))
-                .setType(StringValue.of(notification.getType()))
+                .setType(StringValue.of(notification.getNotificationType()))
                 .setIsRead(BoolValue.of(notification.isRead()));
+
+        if (notification.getId() != null || notification.getId() == 0) {
+            notificationBuilder.setNotificationId(Int64Value.of(notification.getId()));
+        }
+
         return notificationBuilder.build();
     }
 }

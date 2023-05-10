@@ -51,6 +51,10 @@ public class CardClientImpl implements ICardClient {
                 .setCardNumber(debitCard.getCardNumber())
                 .setCvv(debitCard.getCvv())
                 .setExpiryDate(debitCard.getExpiryDate());
+
+        if (debitCard.getCardId() != null) {
+            cardBuilder.setCardId(debitCard.getCardId());
+        }
         return cardBuilder.build();
     }
 

@@ -24,7 +24,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
             UserEntity addedUser = await userDao.CreateUserAsync(toAddUser);
 
             UserProtoObj userProtoObj = FromEntityToProto(addedUser);
-            userProtoObj.UserId = addedUser.Id;
+            // userProtoObj.UserId = addedUser.Id;
             return userProtoObj;
         }
         catch (Exception e)
@@ -39,15 +39,12 @@ public class UserService : UserProtoService.UserProtoServiceBase
         try
         {
             ICollection<UserEntity> allUsers = await userDao.FetchUsersAsync();
-
-            Console.WriteLine($"UserService: {allUsers.Count}");
-
             RepeatedField<UserProtoObj> userProtoObjs = new RepeatedField<UserProtoObj>();
 
             foreach (UserEntity userEntity in allUsers)
             {
                 UserProtoObj protoObj = FromEntityToProto(userEntity);
-                protoObj.UserId = userEntity.Id;
+                // protoObj.UserId = userEntity.Id;
                 userProtoObjs.Add(protoObj);
             }
 
@@ -66,7 +63,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
         {
             UserEntity userByUsername = await userDao.FetchUserByUsernameAsync(request.Value);
             UserProtoObj userProtoObj = FromEntityToProto(userByUsername);
-            userProtoObj.UserId = userByUsername.Id;
+            // Console.WriteLine($"UserService: {userProtoObj.UserId}");
             return userProtoObj;
         }
         catch (Exception e)
@@ -82,7 +79,6 @@ public class UserService : UserProtoService.UserProtoServiceBase
         {
             UserEntity userById = await userDao.FetchUserByIdAsync(request.Value);
             UserProtoObj protoObj = FromEntityToProto(userById);
-            protoObj.UserId = userById.Id;
             return protoObj;
         }
         catch (Exception e)
@@ -165,7 +161,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
 
     public static UserEntity FromProtoToEntity(UserProtoObj userProtoObj)
     {
-        return new UserEntity()
+        UserEntity userEntity = new UserEntity()
         {
             Fullname = userProtoObj.FullName,
             Username = userProtoObj.UserName,
@@ -173,12 +169,20 @@ public class UserService : UserProtoService.UserProtoServiceBase
             Card = DebitCardService.FromProtoToEntity(userProtoObj.Card),
             Balance = userProtoObj.Balance
         };
+
+        if (userProtoObj.UserId != 0)
+        {
+            userEntity.Id = (int)userProtoObj.UserId;
+        }
+
+        return userEntity;
     }
 
     public static UserProtoObj FromEntityToProto(UserEntity userEntity)
     {
         return new UserProtoObj()
         {
+            UserId = userEntity.Id,
             FullName = userEntity.Fullname,
             UserName = userEntity.Username,
             Password = userEntity.Password,

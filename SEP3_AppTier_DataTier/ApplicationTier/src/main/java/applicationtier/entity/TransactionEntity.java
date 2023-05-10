@@ -2,14 +2,14 @@ package applicationtier.entity;
 
 public class TransactionEntity {
 
-    private Long id;
+    private Long transactionId;
     private UserEntity sender;
     private UserEntity receiver;
     private int amount;
     private String date;
 
-    public TransactionEntity(Long id, UserEntity sender, UserEntity receiver, int amount, String date) {
-        this.id = id;
+    public TransactionEntity(Long TransactionId, UserEntity sender, UserEntity receiver, int amount, String date) {
+        this.transactionId = TransactionId;
         this.sender = sender;
         this.receiver = receiver;
         this.amount = amount;
@@ -19,12 +19,12 @@ public class TransactionEntity {
     public TransactionEntity() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getTransactionId() {
+        return transactionId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTransactionId(Long transactionId) {
+        this.transactionId = transactionId;
     }
 
     public UserEntity getSender() {
