@@ -14,7 +14,9 @@
 }
 
 .text{
-    font-size: 18px;
+    font-size: 20px;
+    width: 300px;
+    color: #172B48;
 }
 
 
@@ -85,7 +87,7 @@
 
 .noti_count {
     position: relative;
-    top : -1.4px;
+    top : -2px;
     right: 1px;
 }
 

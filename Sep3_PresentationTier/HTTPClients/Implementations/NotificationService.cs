@@ -34,9 +34,9 @@ public class NotificationService : INotificationService
         return entity;
     }
 
-    public async Task<ICollection<NotificationEntity>> FetchAllNotificationsByReceiverAsync(string? username)
+    public async Task<ICollection<NotificationEntity>> FetchAllNotificationsByReceiverAsync(string? receiverUsername)
     {
-        HttpResponseMessage responseMessage = await client.GetAsync($"/notification/receiver/{username}");
+        HttpResponseMessage responseMessage = await client.GetAsync($"/notification/receiver/{receiverUsername}");
         string result = await responseMessage.Content.ReadAsStringAsync();
 
         if (!responseMessage.IsSuccessStatusCode)

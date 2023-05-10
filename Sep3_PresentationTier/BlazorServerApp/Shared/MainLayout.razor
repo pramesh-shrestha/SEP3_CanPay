@@ -12,9 +12,14 @@
 
     <main>
         <div class="top-row ">
-            <Notification/>
+            <AuthorizeView>
+                <Authorized>
+                    <Notification/>
+                </Authorized>
+            </AuthorizeView>
+
             <LoginButtons/>
-            
+
         </div>
 
         <article class="content px-4">
