@@ -19,11 +19,30 @@ public class NotificationDaoImpl : INotificationDao
     {
         try
         {
-            EntityEntry<UserEntity> sender = context.Users.Attach(notificationEntity.Sender!);
+            /*EntityEntry<UserEntity> sender = context.Users.Attach(notificationEntity.Sender!);
             EntityEntry<UserEntity> receiver = context.Users.Attach(notificationEntity.Receiver!);
 
             notificationEntity.Sender = sender.Entity;
             notificationEntity.Receiver = receiver.Entity;
+
+            EntityEntry<NotificationEntity> createdNotification =
+                await context.Notifications.AddAsync(notificationEntity);
+            await context.SaveChangesAsync();
+            return createdNotification.Entity;*/
+
+            // Attach the sender and receiver entities to the context if they are not already attached
+            if (!context.Users.Local.Contains(notificationEntity.Sender))
+            {
+                context.Users.Attach(notificationEntity.Sender);
+                context.Cards.Attach(notificationEntity.Sender!.Card);
+            }
+
+            if (!context.Users.Local.Contains(notificationEntity.Receiver))
+            {
+                context.Users.Attach(notificationEntity.Receiver);
+                context.Cards.Attach(notificationEntity.Receiver!.Card);
+            }
+
 
             EntityEntry<NotificationEntity> createdNotification =
                 await context.Notifications.AddAsync(notificationEntity);
@@ -43,7 +62,19 @@ public class NotificationDaoImpl : INotificationDao
         {
             ICollection<NotificationEntity> notificationEntities = await context.Notifications
                 .Include(entity => entity.Sender).Include(entity => entity.Receiver)
-                .Where(e => e.Receiver!.Equals(username)).Where(entity => !entity.IsRead).ToListAsync();
+                .Where(e => e.Receiver!.Username!.Equals(username)).Where(entity => !entity.IsRead).ToListAsync();
+
+            Console.WriteLine($"NotificationDaoImpl: {notificationEntities.Count}");
+
+            if (notificationEntities.Count != 0)
+            {
+                foreach (NotificationEntity notificationEntity in notificationEntities)
+                {
+                    notificationEntity.IsRead = true;
+                }
+
+                await context.SaveChangesAsync();
+            }
             return notificationEntities;
         }
         catch (Exception e)
@@ -71,8 +102,15 @@ public class NotificationDaoImpl : INotificationDao
     {
         try
         {
-            context.Notifications.UpdateRange(notificationEntities);
-            await context.SaveChangesAsync();
+            /*if (notificationEntities.Count != 0)
+            {
+                foreach (NotificationEntity notificationEntity in notificationEntities)
+                {
+                    notificationEntity.IsRead = true;
+                }
+
+                await context.SaveChangesAsync();
+            }*/
         }
         catch (Exception e)
         {

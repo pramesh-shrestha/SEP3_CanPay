@@ -27,17 +27,35 @@ public class TransactionDaoImpl : ITransactionDao
     {
         try
         {
-            EntityEntry<UserEntity> senderEntity = context.Users.Attach(transaction.Sender);
-            EntityEntry<UserEntity> receiverEntity = context.Users.Attach(transaction.Receiver);
+            /*EntityEntry<UserEntity?> senderEntity = context.Users.Attach(transaction.Sender);
+            EntityEntry<UserEntity?> receiverEntity = context.Users.Attach(transaction.Receiver);
+            EntityEntry<DebitCardEntity> senderCardEntity = context.Cards.Attach(transaction.Sender!.Card);
+            EntityEntry<DebitCardEntity> receiverCardEntity = context.Cards.Attach(transaction.Receiver!.Card);
+
 
             transaction.Sender = senderEntity.Entity;
+            transaction.Sender!.Card = senderCardEntity.Entity;
             transaction.Receiver = receiverEntity.Entity;
+            transaction.Receiver!.Card = receiverCardEntity.Entity;*/
 
-            EntityEntry<TransactionEntity?> createdTransaction = await context.Transactions.AddAsync(transaction);
+            // Attach the sender and receiver entities to the context if they are not already attached
+            if (!context.Users.Local.Contains(transaction.Sender))
+            {
+                context.Users.Attach(transaction.Sender);
+                context.Cards.Attach(transaction.Sender!.Card);
+            }
+
+            if (!context.Users.Local.Contains(transaction.Receiver))
+            {
+                context.Users.Attach(transaction.Receiver);
+                context.Cards.Attach(transaction.Receiver!.Card);
+            }
+
+
+            EntityEntry<TransactionEntity> createdTransaction = (await context.Transactions.AddAsync(transaction))!;
             await context.SaveChangesAsync();
-            
+
             return createdTransaction.Entity;
-            
         }
         catch (Exception e)
         {

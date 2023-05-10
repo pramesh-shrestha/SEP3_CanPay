@@ -161,14 +161,14 @@
     {
         try
         {
-            string? passwordRegex = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s:])([^\s]){8,30}$";
+            string? passwordRegex = @"^(?=.*\S).{6,}$";
             if (string.IsNullOrEmpty(Name)) throw new Exception("Full name Cannot Be Empty");
             if (string.IsNullOrEmpty(Username)) throw new Exception("Username Cannot Be Empty");
             if (string.IsNullOrEmpty(Password)) throw new Exception("Password Cannot Be Empty");
             if (string.IsNullOrEmpty(RepeatPassword)) throw new Exception("Repeat Password Cannot Be Empty");
             if (!Regex.IsMatch(Password, passwordRegex))
-                throw new Exception("Password Must Be Between" +
-                                    " 8 and 30 Characters Long. Must Have 1 symbol and 1 capital letter");
+                throw new Exception("Password Must Be " +
+                                    " 6 Characters Long.");
             if (!Password.Equals(RepeatPassword)) throw new Exception("Password and Repeat Password doesn't match!!");
             step = 2;
         }
