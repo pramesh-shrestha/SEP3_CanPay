@@ -44,7 +44,7 @@
     private string? receiver;
     private string? notificationType = "";
     public string? Message = "";
-    private DateTime dateTime = DateTime.Now.Date;
+    private DateTime dateTime=DateTime.Now.Date;
     public bool IsRead;
     private ICollection<NotificationEntity>? notification= new List<NotificationEntity>();
     private bool showNotification = false;
@@ -60,6 +60,8 @@
             Console.WriteLine(e.Message);
         }
     }
+
+    
 
     /*public async Task CreateNotification()
     {

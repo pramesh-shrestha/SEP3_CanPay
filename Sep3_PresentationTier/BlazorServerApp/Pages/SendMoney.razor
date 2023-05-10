@@ -7,7 +7,7 @@
 @inject ITransactionService TransactionService;
 @inject AuthenticationStateProvider StateProvider;
 @inject NavigationManager NavMgr;
-
+@inject INotificationService NotificationService;
 <AuthorizeView>
     <Authorized>
         
@@ -104,6 +104,11 @@
     public string? errorLabel = "";
     private string? color = "";
     private bool showModal;
+    
+    // private string? notificationType = "";
+    // public string? notification = "";
+    // private UserEntity? receiverUser= new UserEntity();
+    // public bool IsRead;
 
     protected override async Task OnInitializedAsync()
     {
@@ -165,6 +170,7 @@
             if (string.IsNullOrEmpty(errorLabel))
             {
                 await TransactionService.CreateTransactionAsync(transactionEntity);
+                await CreateNotification();
                 showModal = true;
                 
             }
@@ -188,5 +194,23 @@
         NavMgr.NavigateTo("/");
     }
 
+    public async Task CreateNotification()
+    {
+        try
+        {
+            string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
+            NotificationEntity notificationEntity = new NotificationEntity
+            {
+                Message = $"{senderUser.FullName} has sent you {amount} dollar",
+                Date = date,
+            };
+           await NotificationService.CreateNotificationAsync(notificationEntity);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
 
 }
