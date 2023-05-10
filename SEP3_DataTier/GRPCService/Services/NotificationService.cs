@@ -21,6 +21,8 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
     {
         try
         {
+            Console.WriteLine($"Notification Service: {request.Message}");
+
             NotificationEntity createdNotification =
                 await notificationDao.CreateNotificationAsync(FromProtoToEntity(request));
 

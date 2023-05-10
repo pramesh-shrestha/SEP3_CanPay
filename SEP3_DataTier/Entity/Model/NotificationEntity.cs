@@ -17,4 +17,6 @@ public class NotificationEntity
     [Required] public string? Date { get; set; }
 
     [Required] public bool IsRead { get; set; }
+    
+    
 }

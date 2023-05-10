@@ -9,9 +9,9 @@ public interface INotificationService {
     List<NotificationEntity> fetchAllNotificationsByReceiver(String receiverUsername);
     void markAsRead(NotificationEntity notification);
 
-    //void markAllAsRead(List<NotificationEntity> notifications);
+    void markAllAsRead(List<NotificationEntity> notifications);
 
     boolean deleteNotification(Long id);
 
-    void markAllAsRead(String receivingUsername);
+//    void markAllAsRead(String receivingUsername);
 }

@@ -1,0 +1,89 @@
+﻿.notification-icon{
+    height: 30px;
+    width: 30px;
+    margin-left: 20px;
+}
+
+.container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.text{
+  
+    font-size: 18px;
+}
+
+
+
+.notification-hover{
+    position: absolute;
+    background-color: gray;
+    color: white;
+    padding:4px 8px;
+    border-radius: 2px;
+    font-size: 12px;
+    bottom: -30px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+}
+.notification-hover{
+    opacity: 1;
+}
+.notification-hover{
+    position: absolute;
+    background-color: gray;
+    color: white;
+    padding:4px 8px;
+    border-radius: 2px;
+    font-size: 12px;
+    bottom: -30px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+}
+
+.notification .notification-hover{
+    position: absolute;
+    background-color: gray;
+    color: white;
+    padding:4px 8px;
+    border-radius: 2px;
+    font-size: 12px;
+    bottom: -30px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+}
+.notification:hover .notification-hover{
+    opacity: 1;
+}
+
+
+.notification{
+    position: relative;
+}
+
+.number-div{
+    position: absolute;
+    top: 1px;
+    left: 35px;
+}
+.number{
+    position: absolute;
+    background-color: rgb(198, 18, 18);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 12px;
+}
+
+.noti_count {
+    position: absolute;
+    top : -1.7px;
+    left: 1.5px;
+    right: 1px;
+}

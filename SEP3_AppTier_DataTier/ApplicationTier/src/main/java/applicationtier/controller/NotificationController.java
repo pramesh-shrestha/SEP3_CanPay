@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class NotificationController {
         try {
             return new ResponseEntity<>(notificationService.createNotification(notification), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error creating notification", e);
         }
     }
 
@@ -39,8 +40,8 @@ public class NotificationController {
     }
 
     @PutMapping("/notifications/markAsRead/{notification}")
-    public ResponseEntity<?> markAsRead(@PathVariable("notification") NotificationEntity notification){
-        try{
+    public ResponseEntity<?> markAsRead(@PathVariable("notification") NotificationEntity notification) {
+        try {
             notificationService.markAsRead(notification);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
@@ -48,7 +49,7 @@ public class NotificationController {
         }
     }
 
-    @PutMapping("/notifications/markAllAsRead/{receivingUsername}")
+    /*@PutMapping("/notifications/markAllAsRead/{receivingUsername}")
     public ResponseEntity<?> markAllAsRead(@PathVariable("receivingUsername") String receivingUsername){
         try{
             notificationService.markAllAsRead(receivingUsername);
@@ -56,7 +57,7 @@ public class NotificationController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-    }
+    }*/
 
     @DeleteMapping("/notification/delete/{id}")
     public ResponseEntity<String> deleteNotification(@PathVariable("id") Long id) {

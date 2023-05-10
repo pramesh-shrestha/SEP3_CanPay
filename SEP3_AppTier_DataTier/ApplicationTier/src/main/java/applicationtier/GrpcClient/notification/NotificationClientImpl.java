@@ -61,8 +61,6 @@ public class NotificationClientImpl implements INotificationClient {
     }
 
 
-
-
     @Override
     public List<NotificationEntity> fetchAllNotificationsByReceiver(String receiverUsername) {
         try {

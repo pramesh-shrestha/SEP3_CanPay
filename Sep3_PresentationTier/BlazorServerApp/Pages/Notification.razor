@@ -1,0 +1,72 @@
+﻿@using Domains.Entity
+@using HTTPClients.ClientInterfaces
+@namespace BlazorServerApp.Pages
+@inject INotificationService NotificationService;
+@inject NavigationManager NavMgr;
+
+<AuthorizeView>
+    <span class="text">Hello, Welcome to KanPay</span>
+    <div class="container">
+    <img src="images/@(showNotification ? "clear_" : "")notification-bell.png" class="notification-icon" @onclick="@(() => showNotification = !showNotification)" alt="" style="cursor: pointer"/>
+    <div class="notification-hover">notification</div>
+        <div class="number-div">
+            <button class="number">
+                <span class="noti_count" @bind="">3</span>
+            </button>
+        </div>
+    @if (showNotification)
+    {
+        @foreach (var message in notification)
+        {
+            <div class="card-body">@message.Message</div>
+        }
+    }
+    @* <img class="notification-icon" src="images/notification-bell.png" alt="" style="cursor: pointer"> *@
+    
+    </div>
+</AuthorizeView>
+
+@code {
+    private int notificationId;
+    private UserEntity? senderUser;
+    private UserEntity? receiverUser;
+    private string? receiver;
+    private string? notificationType = "";
+    public string? Message = "";
+    private DateTime dateTime = DateTime.Now.Date;
+    public bool IsRead;
+    private IEnumerable<NotificationEntity>? notification = new List<NotificationEntity>();
+    private bool showNotification = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            notification = await NotificationService.FetchAllNotificationsByReceiverAsync(receiverUser!.UserName);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
+    /*public async Task CreateNotification()
+    {
+        try
+        {
+            Message = "someone has sent you money bororo";
+            string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
+            NotificationEntity notificationEntity = new NotificationEntity
+                (notificationId, senderUser, receiverUser, Message, notificationType, date, IsRead);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }*/
+    
+    
+
+
+}

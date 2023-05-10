@@ -1,5 +1,8 @@
 ﻿@inherits LayoutComponentBase
+@namespace BlazorServerApp.Pages
 @using UIComponents
+
+
 <PageTitle>BlazorServerApp</PageTitle>
 
 <div class="page">
@@ -8,8 +11,10 @@
     </div>
 
     <main>
-        <div class="top-row px-4">
+        <div class="top-row ">
+            <Notification/>
             <LoginButtons/>
+            
         </div>
 
         <article class="content px-4">
