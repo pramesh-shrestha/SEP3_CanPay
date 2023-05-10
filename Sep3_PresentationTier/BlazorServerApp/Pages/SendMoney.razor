@@ -78,7 +78,7 @@
 <Modal ShowModal="showModal">
     <p >You have successfully transferred the amount!</p>
     <div>
-        <button class="button" @onclick="@Proceed" >OK</button>
+        <button class="button" @onclick="@Proceed">OK</button>
     </div>
 </Modal>
 
@@ -96,13 +96,13 @@
     public string? errorLabel = "";
     private string? color = "";
     private bool showModal;
-    
+
     //notification properties
-    private int notificationId;
-    private string? notificationType = "";
+    // private int notificationId;
+    // private string? notificationType;
     public string? Message = "";
     public bool IsRead;
-    private UserEntity? receiverUser;
+    private UserEntity? receiverUser = new UserEntity();
 
     // [CascadingParameter]
     // private Notification notification { get; set; }
@@ -169,9 +169,7 @@
                 await TransactionService.CreateTransactionAsync(transactionEntity);
                 await CreateNotification();
                 showModal = true;
-                
             }
-            
         }
         catch (Exception e)
         {
@@ -185,8 +183,9 @@
     {
         NavMgr.NavigateTo("/");
     }
-    
-    private void Proceed() {
+
+    private void Proceed()
+    {
         showModal = false;
         NavMgr.NavigateTo("/");
     }
@@ -195,16 +194,20 @@
     {
         try
         {
-            Message = $"{senderUser.FullName} has sent you {amount} dollar.";
-            string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
-            notificationType = "transaction";
-            NotificationEntity notificationEntity = new NotificationEntity
-                (notificationId, senderUser, receiverUser, Message, notificationType, date, IsRead);
+            NotificationEntity notificationEntity = new NotificationEntity ()
+            {
+                Message = $"{senderUser!.FullName} has sent you {amount} dollar.",
+                Date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}",
+                NotificationType = "Transaction",
+                Sender = senderUser,
+                Receiver = receiverUser,
+                IsRead = false
+            };
             await NotificationService.CreateNotificationAsync(notificationEntity);
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            Console.WriteLine(e.Message);
             throw;
         }
     }

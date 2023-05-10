@@ -16,14 +16,13 @@ public class NotificationEntity
 
     public bool IsRead { get; set; }
 
-    public NotificationEntity(long id, UserEntity? sender, UserEntity? receiver, string? message, string? notificationType, string? date, bool isRead)
+    /*public NotificationEntity(UserEntity? sender, UserEntity? receiver, string? message, string? notificationType, string? date, bool isRead)
     {
-        Id = id;
         Sender = sender;
         Receiver = receiver;
         Message = message;
         NotificationType = notificationType;
         Date = date;
         IsRead = isRead;
-    }
+    }*/
 }

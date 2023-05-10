@@ -23,12 +23,9 @@ public class NotificationController {
     @PostMapping("/notification/create")
     public ResponseEntity<NotificationEntity> createNotification(@RequestBody NotificationEntity notification) {
         try {
-            System.out.println("Notification Controller Called");
             return new ResponseEntity<>(notificationService.createNotification(notification), HttpStatus.OK);
         } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            System.out.println(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Error creating notification",e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error creating notification", e);
         }
     }
 
@@ -43,8 +40,8 @@ public class NotificationController {
     }
 
     @PutMapping("/notifications/markAsRead/{notification}")
-    public ResponseEntity<?> markAsRead(@PathVariable("notification") NotificationEntity notification){
-        try{
+    public ResponseEntity<?> markAsRead(@PathVariable("notification") NotificationEntity notification) {
+        try {
             notificationService.markAsRead(notification);
             return ResponseEntity.ok().build();
         } catch (Exception e) {

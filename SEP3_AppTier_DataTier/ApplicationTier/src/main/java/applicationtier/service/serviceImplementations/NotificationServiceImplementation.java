@@ -43,8 +43,7 @@ public class NotificationServiceImplementation implements INotificationService {
             newNotification.setMessage("You received a payment from " + transaction.getSender().getUsername());
             newNotification.setType(NotificationTypes.TRANSACTION.name());
             newNotification.setRead(false);*/
-            NotificationEntity entity = notification;
-            return notificationClient.createNotification(entity);
+            return notificationClient.createNotification(notification);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
