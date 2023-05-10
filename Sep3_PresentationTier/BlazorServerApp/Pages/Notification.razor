@@ -5,7 +5,7 @@
 @inject NavigationManager NavMgr;
 
 <AuthorizeView>
-    <span class="text">Hello, Welcome to KanPay</span>
+    <span class="text">Hello , Welcome to KanPay</span>
     <div class="container">
     <img src="images/@(showNotification ? "clear_" : "")notification-bell.png" class="notification-icon" @onclick="@(() => showNotification = !showNotification)" alt="" style="cursor: pointer"/>
     <div class="notification-hover">notification</div>
@@ -28,7 +28,7 @@
 
 @code {
     private int notificationId;
-    private UserEntity? senderUser;
+    private UserEntity? senderUser= new UserEntity();
     private UserEntity? receiverUser;
     private string? receiver;
     private string? notificationType = "";
