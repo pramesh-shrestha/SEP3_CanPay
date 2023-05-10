@@ -7,14 +7,15 @@
 
 <AuthorizeView>
     <Authorized>
-        @* <img class="icon" src="img/Logout.png" @onclick="Logout"/> *@
-        @* <span>Hello, Welcome to KanPay</span> *@
-        <a href="#" @onclick="Logout" class="icon">Log Out</a>
+        
+        <img class="icon" src="images/Logout.png" @onclick="Logout"/>
+
+        @* <a href="#" @onclick="Logout" class="icon">Log Out</a> *@
     </Authorized>
     <NotAuthorized>
         @* <img class="icon" src="img/Login.png" @onclick="Login"/> *@
-        <a href="#" @onclick="RegisterUser" class="icon">Register</a>
-        <a href="#" @onclick="Login" class="icon">Login</a>
+        <a href="#" @onclick="RegisterUser" >Register</a>
+        <a href="#" @onclick="Login" >Login</a>
     </NotAuthorized>
 </AuthorizeView>
 
