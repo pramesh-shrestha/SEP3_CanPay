@@ -1,12 +1,14 @@
 ﻿@page "/SendMoney"
 @using Domains.Entity
 @using HTTPClients.ClientInterfaces
+@using Microsoft.AspNetCore.Components
 @using UIComponents
-
+@* <Notification @ref="notification"/> *@
 @inject IUserService UserService;
 @inject ITransactionService TransactionService;
 @inject AuthenticationStateProvider StateProvider;
 @inject NavigationManager NavMgr;
+@inject INotificationService NotificationService;
 
 <div class="container">
     <h3>Send Money</h3>
@@ -94,6 +96,16 @@
     public string? errorLabel = "";
     private string? color = "";
     private bool showModal;
+    
+    //notification properties
+    private int notificationId;
+    private string? notificationType = "";
+    public string? Message = "";
+    public bool IsRead;
+    private UserEntity? receiverUser;
+
+    // [CascadingParameter]
+    // private Notification notification { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -135,7 +147,7 @@
     //send money to receiver
     private async Task SendMoneyToReceiver()
     {
-        UserEntity? receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
+        receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
         string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
 
         TransactionEntity transactionEntity = new TransactionEntity(senderUser, receiverUser, int.Parse(amount), date);
@@ -155,6 +167,7 @@
             if (string.IsNullOrEmpty(errorLabel))
             {
                 await TransactionService.CreateTransactionAsync(transactionEntity);
+                await CreateNotification();
                 showModal = true;
                 
             }
@@ -178,5 +191,22 @@
         NavMgr.NavigateTo("/");
     }
 
+    public async Task CreateNotification()
+    {
+        try
+        {
+            Message = $"{senderUser.FullName} has sent you {amount} dollar.";
+            string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
+            notificationType = "transaction";
+            NotificationEntity notificationEntity = new NotificationEntity
+                (notificationId, senderUser, receiverUser, Message, notificationType, date, IsRead);
+            await NotificationService.CreateNotificationAsync(notificationEntity);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
 
 }

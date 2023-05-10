@@ -43,7 +43,7 @@ public class NotificationDaoImpl : INotificationDao
         {
             ICollection<NotificationEntity> notificationEntities = await context.Notifications
                 .Include(entity => entity.Sender).Include(entity => entity.Receiver)
-                .Where(e => e.Receiver!.Equals(username)).Where(entity => entity.IsRead).ToListAsync();
+                .Where(e => e.Receiver!.Equals(username)).Where(entity => !entity.IsRead).ToListAsync();
             return notificationEntities;
         }
         catch (Exception e)
