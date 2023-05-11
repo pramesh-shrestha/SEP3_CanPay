@@ -119,14 +119,20 @@
 .notification-table{
     display: flex;
     justify-content: flex-start;
+    color: #344563;
+    font-size: 15px;
 }
 .date{
     display: flex;
     justify-content: flex-start;
+    font-size: 15px;
 }
 
 .card{
-    border: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid #dad7cd;
 }
 
 .card-body:hover{

@@ -31,7 +31,6 @@ public class UserClientImpl implements IUserClient {
         try {
 
             User.UserProtoObj userProtoObj = fromEntityToProtoObj(userEntity);
-
             User.UserProtoObj protoObjFromServer = getUserBlockingStub().createUser(userProtoObj);
             return fromProtoObjToEntity(protoObjFromServer);
         } catch (Exception e) {
@@ -45,7 +44,6 @@ public class UserClientImpl implements IUserClient {
         try {
             User.UserProtoObj userProtoObj = getUserBlockingStub().fetchUserByUsername(StringValue.of(username));
             UserEntity userEntity = fromProtoObjToEntity(userProtoObj);
-//            System.out.println("UserClientImplFindByUsername: " + userEntity.getUserId());
             return userEntity;
         } catch (Exception e) {
             throw new RuntimeException(e);

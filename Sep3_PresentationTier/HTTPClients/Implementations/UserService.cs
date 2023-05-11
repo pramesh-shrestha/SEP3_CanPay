@@ -28,7 +28,6 @@ public class UserService : IUserService
         string result = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode)
         {
-            Console.WriteLine(responseMessage);
             throw new Exception(result);
         }
 

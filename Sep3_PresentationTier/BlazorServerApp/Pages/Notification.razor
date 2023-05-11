@@ -15,7 +15,7 @@
             <img src="images/notification-bell.png" class="notification-icon" @onclick="@(() => showNotification = !showNotification)" alt="notification" style="cursor: pointer"/>
             <div class="number-div">
                 <button class="number">
-                    <span class="noti_count">@notification.Count</span>
+                    <span class="noti_count">@notification!.Count</span>
                 </button>
             </div>
 
@@ -30,8 +30,8 @@
                     @foreach (var items in notification)
                     {
                         <div class="card-body">
-                            <label class="notification-table">@items.Message</label>
                             <label class="date text-muted">@items.Date</label>
+                            <label class="notification-table">@items.Message</label>
                         </div>
                     }
                 </div>
@@ -82,8 +82,4 @@
             throw;
         }
     }*/
-
-
-
-
 }

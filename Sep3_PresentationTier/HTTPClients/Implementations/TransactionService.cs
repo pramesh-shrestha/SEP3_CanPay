@@ -21,8 +21,6 @@ public class TransactionService : ITransactionService
     public async Task<TransactionEntity> CreateTransactionAsync(TransactionEntity transactionEntity)
     {
         HttpResponseMessage response = await client.PostAsJsonAsync("/transaction/create", transactionEntity);
-
-
         string result = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)
