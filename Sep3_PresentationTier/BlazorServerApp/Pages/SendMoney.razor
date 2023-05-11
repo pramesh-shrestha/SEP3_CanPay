@@ -13,84 +13,85 @@
 
         <div class="container">
             <h3>Send Money</h3>
-            < class="row">
-            <div class="col-md-3 first-box">
+            <div class="row">
+                <div class="col-md-3 first-box">
 
-                <div class="icon-image">
-                    <img src="images/KANPAY logo.png" alt="">
+                    <div class="icon-image">
+                        <img src="images/KANPAY logo.png" alt="">
+                    </div>
+
+                    <div class="buttonDiv">
+                        <button class="button" @onclick="SendMoneyToReceiver">Send</button>
+                        <button class="button" @onclick="BackToHome">Cancel</button>
+                    </div>
                 </div>
 
-                <div class="buttonDiv">
-                    <button class="button" @onclick="SendMoneyToReceiver">Send</button>
-                    <button class="button" @onclick="BackToHome">Cancel</button>
-                </div>
-            </div>
+                <!-- 8 Columns -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div>
+                            <span>@sender.ToUpper()</span>
+                        </div>
+                        <label>From</label>
 
-            <!-- 8 Columns -->
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div>
-                        <span>@sender.ToUpper()</span>
-                    </div>
-                    <label>From</label>
+                        <div class="inputFields">
+                            <input type="text" class="fieldLength" @bind="cardNumber" disabled="">
+                        </div>
+                        <label>To</label>
+                        <div class="inputFields">
+                            <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
+                        </div>
 
-                    <div class="inputFields">
-                        <input type="text" class="fieldLength" @bind="cardNumber" disabled="">
-                    </div>
-                    <label>To</label>
-                    <div class="inputFields">
-                        <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
-                    </div>
+                        <label>Amount</label>
+                        <div class="inputFields">
+                            <input type="number" class="fieldLength" @bind="amount">
+                        </div>
 
-                    <label>Amount</label>
-                    <div class="inputFields">
-                        <input type="number" class="fieldLength" @bind="amount">
-                    </div>
+                        <!-- 8 Columns -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div>
+                                    <span></span>
+                                </div>
+                                <label>From</label>
 
-                    <!-- 8 Columns -->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div>
-                                <span></span>
-                            </div>
-                            <label>From</label>
+                                <div class="inputFields">
+                                    <input type="text" class="fieldLength" @bind="cardNumber" disabled="">
+                                </div>
+                                <label>To</label>
+                                <div class="inputFields">
+                                    <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
+                                </div>
 
-                            <div class="inputFields">
-                                <input type="text" class="fieldLength" @bind="cardNumber" disabled="">
-                            </div>
-                            <label>To</label>
-                            <div class="inputFields">
-                                <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
-                            </div>
+                                <label>Amount</label>
+                                <div class="inputFields">
+                                    <input type="number" class="fieldLength" @bind="amount">
+                                </div>
 
-                            <label>Amount</label>
-                            <div class="inputFields">
-                                <input type="number" class="fieldLength" @bind="amount">
-                            </div>
+                                <label>Date</label>
+                                <div class="inputFields">
+                                    <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
+                                </div>
 
-                            <label>Date</label>
-                            <div class="inputFields">
-                                <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
-                            </div>
-
-                            <div class="error">
-                                @if (!string.IsNullOrEmpty(errorLabel)) {
-                                    <label style="color: @color">@errorLabel</label>
-                                }
+                                <div class="error">
+                                    @if (!string.IsNullOrEmpty(errorLabel)) {
+                                        <label style="color: @color">@errorLabel</label>
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 third-box usernameList">
-                        <h4>List of usernames</h4>
-                        @foreach (var item in usernames) {
-                            if (item.ToLower().Contains(receiver.ToLower())) {
-                                <ul>
-                                    <li @onclick="() => receiver = item">@item</li>
-                                </ul>
+                        <div class="col-md-3 third-box usernameList">
+                            <h4>List of usernames</h4>
+                            @foreach (var item in usernames) {
+                                if (item.ToLower().Contains(receiver.ToLower())) {
+                                    <ul>
+                                        <li @onclick="() => receiver = item">@item</li>
+                                    </ul>
+                                }
                             }
-                        }
-                    </div>
+                        </div>
 
+                    </div>
                 </div>
             </div>
         </div>
