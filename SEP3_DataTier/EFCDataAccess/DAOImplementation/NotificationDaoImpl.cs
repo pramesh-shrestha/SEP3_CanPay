@@ -19,17 +19,6 @@ public class NotificationDaoImpl : INotificationDao
     {
         try
         {
-            /*EntityEntry<UserEntity> sender = context.Users.Attach(notificationEntity.Sender!);
-            EntityEntry<UserEntity> receiver = context.Users.Attach(notificationEntity.Receiver!);
-
-            notificationEntity.Sender = sender.Entity;
-            notificationEntity.Receiver = receiver.Entity;
-
-            EntityEntry<NotificationEntity> createdNotification =
-                await context.Notifications.AddAsync(notificationEntity);
-            await context.SaveChangesAsync();
-            return createdNotification.Entity;*/
-
             // Attach the sender and receiver entities to the context if they are not already attached
             if (!context.Users.Local.Contains(notificationEntity.Sender))
             {
@@ -64,7 +53,6 @@ public class NotificationDaoImpl : INotificationDao
                 .Include(entity => entity.Sender).Include(entity => entity.Receiver)
                 .Where(e => e.Receiver!.Username!.Equals(username)).Where(entity => !entity.IsRead).ToListAsync();
 
-            Console.WriteLine($"NotificationDaoImpl: {notificationEntities.Count}");
 
             if (notificationEntities.Count != 0)
             {
@@ -75,6 +63,7 @@ public class NotificationDaoImpl : INotificationDao
 
                 await context.SaveChangesAsync();
             }
+
             return notificationEntities;
         }
         catch (Exception e)
@@ -86,7 +75,7 @@ public class NotificationDaoImpl : INotificationDao
 
     public async Task MarkNotificationAsReadAsync(NotificationEntity notificationEntity)
     {
-        try
+        /*try
         {
             context.Notifications.Update(notificationEntity);
             await context.SaveChangesAsync();
@@ -95,14 +84,14 @@ public class NotificationDaoImpl : INotificationDao
         {
             Console.WriteLine(e);
             throw new Exception(e.Message);
-        }
+        }*/
     }
 
     public async Task MarkAllNotificationsAsReadAsync(List<NotificationEntity> notificationEntities)
     {
-        try
+        /*try
         {
-            /*if (notificationEntities.Count != 0)
+            if (notificationEntities.Count != 0)
             {
                 foreach (NotificationEntity notificationEntity in notificationEntities)
                 {
@@ -110,13 +99,13 @@ public class NotificationDaoImpl : INotificationDao
                 }
 
                 await context.SaveChangesAsync();
-            }*/
+            }
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw new Exception(e.Message);
-        }
+        }*/
     }
 
     public async Task<bool> DeleteNotificationAsync(long notificationId)

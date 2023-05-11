@@ -95,20 +95,17 @@
     public string? receiver = "";
     public string? amount = "";
     private DateTime dateTime = DateTime.Now.Date;
-    // private int selectedCardId;
+
     private long cardNumber;
     private IEnumerable<UserEntity?> userEntities = new List<UserEntity?>();
     private List<string?> usernames = new List<string?>();
     private UserEntity? senderUser = new UserEntity();
     private UserEntity? receiverUser = new UserEntity();
+
     public string? errorLabel = "";
     private string? color = "";
     private bool showModal;
 
-    // private string? notificationType = "";
-    // public string? notification = "";
-    // private UserEntity? receiverUser= new UserEntity();
-    // public bool IsRead;
 
     protected override async Task OnInitializedAsync()
     {
@@ -125,8 +122,6 @@
 
             usernames = entities.Select(u => u.UserName).ToList();
             usernames.Remove(senderUser.UserName);
-
-            // ICollection<NotificationEntity> fetchAllNotificationsByReceiverAsync = await NotificationService.FetchAllNotificationsByReceiverAsync(sender);
         }
         catch (Exception e)
         {
@@ -195,7 +190,7 @@
         NavMgr.NavigateTo("/");
     }
 
-    public async Task CreateNotification()
+    private async Task CreateNotification()
     {
         try
         {

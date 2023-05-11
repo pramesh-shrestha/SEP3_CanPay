@@ -42,14 +42,15 @@
 
 @code {
     private UserEntity? senderUser;
-    // private UserEntity? receiverUser = new UserEntity();
     private string? receiver;
-    private string? notificationType = "";
-    // public string? Message = "";
-    private DateTime dateTime = DateTime.Now.Date;
-    // public bool IsRead;
     private ICollection<NotificationEntity>? notification = new List<NotificationEntity>();
     private bool showNotification = false;
+    
+    // private UserEntity? receiverUser = new UserEntity();
+    // private string? notificationType;
+    // public string? Message = "";
+    // private DateTime dateTime = DateTime.Now.Date;
+    // public bool IsRead;
 
     protected override async Task OnInitializedAsync()
     {
@@ -57,7 +58,7 @@
         {
             AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
             receiver = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
-            
+
             notification = await NotificationService.FetchAllNotificationsByReceiverAsync(receiver);
         }
         catch (Exception e)

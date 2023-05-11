@@ -9,13 +9,12 @@ namespace HTTPClients.Implementations;
 public class TransactionService : ITransactionService
 {
     private readonly HttpClient client;
-    public string? Jwt { get; set; }
 
 
     public TransactionService(HttpClient client)
     {
         this.client = client;
-        LoadClientWithToken();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserService.Jwt);
     }
 
     public async Task<TransactionEntity> CreateTransactionAsync(TransactionEntity transactionEntity)
@@ -57,7 +56,7 @@ public class TransactionService : ITransactionService
         return transactionEntity;
     }
 
-    public async Task<TransactionEntity> FetchAllTransactionBySenderAsync(string username)
+    public async Task<ICollection<TransactionEntity>> FetchAllTransactionBySenderAsync(string username)
     {
         HttpResponseMessage response = await client.GetAsync($"/transaction/sender/{username}");
         string result = await response.Content.ReadAsStringAsync();
@@ -67,7 +66,8 @@ public class TransactionService : ITransactionService
             throw new Exception(result);
         }
 
-        TransactionEntity transactionEntity = JsonSerializer.Deserialize<TransactionEntity>(result,
+        ICollection<TransactionEntity> transactionEntity = JsonSerializer.Deserialize<ICollection<TransactionEntity>>(
+            result,
             new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -75,7 +75,7 @@ public class TransactionService : ITransactionService
         return transactionEntity;
     }
 
-    public async Task<TransactionEntity> FetchAllTransactionByReceiverAsync(string username)
+    public async Task<ICollection<TransactionEntity>> FetchAllTransactionByReceiverAsync(string username)
     {
         HttpResponseMessage response = await client.GetAsync($"/transaction/receiver/{username}");
         string result = await response.Content.ReadAsStringAsync();
@@ -85,7 +85,8 @@ public class TransactionService : ITransactionService
             throw new Exception(result);
         }
 
-        TransactionEntity transactionEntity = JsonSerializer.Deserialize<TransactionEntity>(result,
+        ICollection<TransactionEntity> transactionEntity = JsonSerializer.Deserialize<ICollection<TransactionEntity>>(
+            result,
             new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -93,7 +94,7 @@ public class TransactionService : ITransactionService
         return transactionEntity;
     }
 
-    public async Task<TransactionEntity> FetchAllTransactionInvolvingBothUsersAsync(string username)
+    public async Task<ICollection<TransactionEntity>> FetchAllTransactionInvolvingBothUsersAsync(string username)
     {
         HttpResponseMessage response = await client.GetAsync($"/transaction/{username}");
         string result = await response.Content.ReadAsStringAsync();
@@ -103,7 +104,8 @@ public class TransactionService : ITransactionService
             throw new Exception(result);
         }
 
-        TransactionEntity transactionEntity = JsonSerializer.Deserialize<TransactionEntity>(result,
+        ICollection<TransactionEntity> transactionEntity = JsonSerializer.Deserialize<ICollection<TransactionEntity>>(
+            result,
             new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -111,7 +113,7 @@ public class TransactionService : ITransactionService
         return transactionEntity;
     }
 
-    public async Task<TransactionEntity> FetchTransactionByDateAsync(string date)
+    public async Task<ICollection<TransactionEntity>> FetchTransactionByDateAsync(string date)
     {
         HttpResponseMessage response = await client.GetAsync($"/transaction/date/{date}");
         string result = await response.Content.ReadAsStringAsync();
@@ -121,7 +123,8 @@ public class TransactionService : ITransactionService
             throw new Exception(result);
         }
 
-        TransactionEntity transactionEntity = JsonSerializer.Deserialize<TransactionEntity>(result,
+        ICollection<TransactionEntity> transactionEntity = JsonSerializer.Deserialize<ICollection<TransactionEntity>>(
+            result,
             new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -138,11 +141,5 @@ public class TransactionService : ITransactionService
             string result = await response.Content.ReadAsStringAsync();
             throw new Exception(result);
         }
-    }
-
-    private async void LoadClientWithToken()
-    {
-        Jwt = await UserService.GetJwtToken();
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Jwt);
     }
 }
