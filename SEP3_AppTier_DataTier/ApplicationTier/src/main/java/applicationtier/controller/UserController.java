@@ -62,7 +62,8 @@ public class UserController {
     @GetMapping("/user/{username}")
     public ResponseEntity<UserEntity> fetchUserByUsername(@PathVariable("username") String username) {
         try {
-            return new ResponseEntity<>(userService.fetchUserByUsername(username), HttpStatus.OK);
+            UserEntity user = userService.fetchUserByUsername(username);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

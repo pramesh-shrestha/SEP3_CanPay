@@ -31,7 +31,6 @@ public class UserClientImpl implements IUserClient {
         try {
 
             User.UserProtoObj userProtoObj = fromEntityToProtoObj(userEntity);
-
             User.UserProtoObj protoObjFromServer = getUserBlockingStub().createUser(userProtoObj);
             return fromProtoObjToEntity(protoObjFromServer);
         } catch (Exception e) {
@@ -44,7 +43,8 @@ public class UserClientImpl implements IUserClient {
     public UserEntity findByUsername(String username) {
         try {
             User.UserProtoObj userProtoObj = getUserBlockingStub().fetchUserByUsername(StringValue.of(username));
-            return fromProtoObjToEntity(userProtoObj);
+            UserEntity userEntity = fromProtoObjToEntity(userProtoObj);
+            return userEntity;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -80,13 +80,7 @@ public class UserClientImpl implements IUserClient {
     @Override
     public UserEntity updateUser(UserEntity user) {
         try {
-
-            System.out.println(user.getUserName());
-
             User.UserProtoObj userProtoObj = getUserBlockingStub().updateUser(fromEntityToProtoObj(user));
-
-            System.out.println(user.getUserName());
-
             return fromProtoObjToEntity(userProtoObj);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -106,13 +100,18 @@ public class UserClientImpl implements IUserClient {
 
     //convert user to proto object
     public static User.UserProtoObj fromEntityToProtoObj(UserEntity userEntity) {
-        return User.UserProtoObj.newBuilder()
+        User.UserProtoObj.Builder builder = User.UserProtoObj.newBuilder()
                 .setUserName(userEntity.getUserName())
                 .setPassword(userEntity.getPassword())
                 .setFullName(userEntity.getFullName())
                 .setCard(CardClientImpl.fromEntityToProtoObj(userEntity.getCard()))
-                .setBalance(userEntity.getBalance())
-                .build();
+                .setBalance(userEntity.getBalance());
+
+        if (userEntity.getUserId() != null || userEntity.getUserId() != 0) {
+            builder.setUserId(userEntity.getUserId());
+        }
+
+        return builder.build();
     }
 
     //convert proto to user object

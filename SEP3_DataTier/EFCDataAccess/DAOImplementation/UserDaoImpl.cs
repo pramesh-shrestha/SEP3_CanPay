@@ -16,11 +16,11 @@ public class UserDaoImpl : IUserDao
     }
 
     //create user
-    public async Task<UserEntity> CreateUserAsync(UserEntity userEntity)
+    public async Task<UserEntity?> CreateUserAsync(UserEntity? userEntity)
     {
         try
         {
-            EntityEntry<UserEntity> userToAdd = await context.Users.AddAsync(userEntity);
+            EntityEntry<UserEntity?> userToAdd = await context.Users.AddAsync(userEntity);
             await context.SaveChangesAsync();
             return userToAdd.Entity;
         }
@@ -31,7 +31,7 @@ public class UserDaoImpl : IUserDao
     }
 
     //get user by username
-    public async Task<UserEntity> FetchUserByUsernameAsync(string username)
+    public async Task<UserEntity?> FetchUserByUsernameAsync(string username)
     {
         //username is a primary key so we can use FindAsync
         UserEntity? user =
@@ -47,7 +47,7 @@ public class UserDaoImpl : IUserDao
     }
 
     //get user by id
-    public async Task<UserEntity> FetchUserByIdAsync(long id)
+    public async Task<UserEntity?> FetchUserByIdAsync(long id)
     {
         UserEntity? user = await context.Users.FirstOrDefaultAsync(u => u.Id == id);
         if (user == null)
@@ -59,16 +59,15 @@ public class UserDaoImpl : IUserDao
     }
 
     //get all users
-    public async Task<ICollection<UserEntity>> FetchUsersAsync()
+    public async Task<ICollection<UserEntity?>> FetchUsersAsync()
     {
         if (!context.Users.Any()) throw new Exception("No users found");
-        ICollection<UserEntity> users = await context.Users.Include(entity => entity.Card).ToListAsync();
-        Console.WriteLine($"UserDaoImpl {users.Count}");
+        ICollection<UserEntity?> users = await context.Users.Include(entity => entity.Card).ToListAsync();
         return users;
     }
 
     //update user
-    public async Task<UserEntity> UpdateUserAsync(UserEntity userEntity)
+    public async Task<UserEntity?> UpdateUserAsync(UserEntity? userEntity)
     {
         context.Users.Update(userEntity);
         await context.SaveChangesAsync();
@@ -78,7 +77,7 @@ public class UserDaoImpl : IUserDao
     //delete user
     public async Task DeleteUserAsync(long id)
     {
-        UserEntity existingUserEntity = await FetchUserByIdAsync(id);
+        UserEntity? existingUserEntity = await FetchUserByIdAsync(id);
         if (existingUserEntity == null)
         {
             throw new Exception($"Username with id {id} does not exists");
@@ -92,7 +91,7 @@ public class UserDaoImpl : IUserDao
     public async Task<bool> UpdateBalanceAsync(string username, int newBalance)
     {
         //todo: balance adding and removing should be done in application tier. need to consult with group 
-        UserEntity user = await FetchUserByUsernameAsync(username);
+        UserEntity? user = await FetchUserByUsernameAsync(username);
         user.Balance = newBalance;
         await context.SaveChangesAsync();
         return true;

@@ -1,4 +1,7 @@
 ﻿@page "/"
+@using HTTPClients.ClientInterfaces
+@using Domains.Entity
+@inject IUserService UserService;
 
 <PageTitle>Index</PageTitle>
 
@@ -7,3 +10,15 @@
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?"/>
+
+@code {
+    private IEnumerable<UserEntity?> userEntities = new List<UserEntity?>();
+
+
+    private async void
+        GetAllUsers()
+    {
+        userEntities = await UserService.FetchAllUsersAsync();
+    }
+
+}

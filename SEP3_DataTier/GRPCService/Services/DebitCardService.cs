@@ -66,12 +66,19 @@ public class DebitCardService : DebitCardProtoService.DebitCardProtoServiceBase
 
     public static DebitCardEntity FromProtoToEntity(DebitCardProtoObj debitCard)
     {
-        return new DebitCardEntity
+        DebitCardEntity cardEntity = new DebitCardEntity
         {
             CardNumber = debitCard.CardNumber,
             CVV = debitCard.Cvv,
             ExpiryDate = debitCard.ExpiryDate
         };
+
+        if (debitCard.CardId != 0)
+        {
+            cardEntity.CardId = debitCard.CardId;
+        }
+
+        return cardEntity;
     }
 
 

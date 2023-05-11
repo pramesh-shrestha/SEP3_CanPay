@@ -28,7 +28,6 @@ public class UserService : IUserService
         string result = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode)
         {
-            Console.WriteLine();
             throw new Exception(result);
         }
 
@@ -79,6 +78,7 @@ public class UserService : IUserService
         {
             PropertyNameCaseInsensitive = true
         })!;
+        
 
         return userEntity;
     }

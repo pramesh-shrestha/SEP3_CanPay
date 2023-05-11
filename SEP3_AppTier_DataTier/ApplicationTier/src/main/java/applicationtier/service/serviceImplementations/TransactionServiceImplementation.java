@@ -41,7 +41,7 @@ public class TransactionServiceImplementation implements ITransactionService {
             userClient.updateUser(sender);
             userClient.updateUser(receiver);
 
-            System.out.println("TransactionServiceImpl : " + transaction.getReceiver());
+//            System.out.println("TransactionServiceImpl : " + transaction.getReceiver());
 
             //create transaction
             return transactionClient.createTransaction(transaction);

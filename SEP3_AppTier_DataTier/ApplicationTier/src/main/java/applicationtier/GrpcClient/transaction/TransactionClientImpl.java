@@ -31,7 +31,6 @@ public class TransactionClientImpl implements ITransactionClient {
     @Override
     public TransactionEntity createTransaction(TransactionEntity transaction) {
         try {
-            System.out.println("Transaction Client: " + transaction.getReceiver());
             Transaction.TransactionProtoObj transactionProtoObj = fromEntityToProtoObj(transaction);
 
             Transaction.TransactionProtoObj protoObj = getTransactionBlockingStub().createTransactionAsync(transactionProtoObj);
@@ -55,9 +54,10 @@ public class TransactionClientImpl implements ITransactionClient {
     public List<TransactionEntity> fetchAlLTransactionsBySender(String senderUsername) {
         try {
             List<Transaction.TransactionProtoObj> allTransactionsList = getTransactionBlockingStub().fetchAlLTransactionsBySenderAsync(StringValue.of(senderUsername)).getAllTransactionsList();
-            List<TransactionEntity> transactionEntities=new ArrayList<>();
+            List<TransactionEntity> transactionEntities = new ArrayList<>();
             for (Transaction.TransactionProtoObj transactionProtoObj : allTransactionsList) {
                 transactionEntities.add(fromProtoObjToEntity(transactionProtoObj));
+
             }
             return transactionEntities;
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class TransactionClientImpl implements ITransactionClient {
     public List<TransactionEntity> fetchAllTransactionByReceiver(String receiverUsername) {
         try {
             List<Transaction.TransactionProtoObj> allTransactionsList = getTransactionBlockingStub().fetchAllTransactionsByReceiverAsync(StringValue.of(receiverUsername)).getAllTransactionsList();
-            List<TransactionEntity> transactionEntities=new ArrayList<>();
+            List<TransactionEntity> transactionEntities = new ArrayList<>();
             for (Transaction.TransactionProtoObj transactionProtoObj : allTransactionsList) {
                 transactionEntities.add(fromProtoObjToEntity(transactionProtoObj));
             }
@@ -85,7 +85,7 @@ public class TransactionClientImpl implements ITransactionClient {
     public List<TransactionEntity> fetchAllTransactionInvolvingUser(String username) {
         try {
             List<Transaction.TransactionProtoObj> allTransactionsList = getTransactionBlockingStub().fetchAlLTransactionsInvolvingUserAsync(StringValue.of(username)).getAllTransactionsList();
-            List<TransactionEntity> transactionEntities= new ArrayList<>();
+            List<TransactionEntity> transactionEntities = new ArrayList<>();
             for (Transaction.TransactionProtoObj transactionProtoObj : allTransactionsList) {
                 transactionEntities.add(fromProtoObjToEntity(transactionProtoObj));
             }
@@ -128,6 +128,7 @@ public class TransactionClientImpl implements ITransactionClient {
         transaction.setSender(UserClientImpl.fromProtoObjToEntity(transactionProtoObj.getSenderUser()));
         transaction.setAmount(transactionProtoObj.getAmount().getValue());
         transaction.setDate(transactionProtoObj.getDate().getValue());
+        transaction.setTransactionId(transactionProtoObj.getTransactionId().getValue());
         return transaction;
     }
 
@@ -138,6 +139,11 @@ public class TransactionClientImpl implements ITransactionClient {
                 .setSenderUser(UserClientImpl.fromEntityToProtoObj(transaction.getSender()))
                 .setDate(StringValue.of(transaction.getDate()))
                 .setAmount(Int32Value.of(transaction.getAmount()));
+
+        if (transaction.getTransactionId() != null || transaction.getTransactionId() != 0) {
+            transactionBuilder.setTransactionId(Int64Value.of(transaction.getTransactionId()));
+        }
+
         return transactionBuilder.build();
     }
 }

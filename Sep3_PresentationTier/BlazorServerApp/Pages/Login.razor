@@ -9,9 +9,13 @@
 <div class="form-content">
     <div class="container ">
         <div class="row">
-
             <!-- Sign In button container-->
             <div class="col-md-3 side-container">
+
+                <div class="icon-image">
+                    <img src="images/KANPAY logo.png" alt="">
+                </div>
+
                 <div class="form-buttons">
                     <button class="signIn">
                         <span @onclick="@LoginAsync">Sign in</span>
@@ -28,8 +32,7 @@
                     <div class="section-description">
                         <h3 class="heading">User Login</h3>
                         <p class="heading-subtext">
-                            Please enter your information and proceed to the next step, so you can
-                            sign in.
+                            Please enter your correct username and password to login.
                         </p>
                     </div>
 
@@ -44,6 +47,10 @@
                             <input type="password" class="form-control" @bind="password" placeholder="Password">
                         </div>
                     </form>
+
+                    <div class="col-md-8">
+                        <span class="signin-link">Don't have a account? Click here to <a href="/RegisterUser">Register</a></span>
+                    </div>
 
                     @if (isErrorMessageDisplayed)
                     {
