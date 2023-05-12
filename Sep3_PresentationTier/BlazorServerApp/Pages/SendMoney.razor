@@ -126,9 +126,9 @@
             usernames = entities.Select(u => u.UserName).ToList();
             usernames.Remove(senderUser.UserName);
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
+        catch (Exception e) {
+            errorLabel = e.Message;
+            color = "red";
         }
     }
 
