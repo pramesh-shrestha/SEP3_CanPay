@@ -1,5 +1,6 @@
 package applicationtier.controller;
 
+import applicationtier.dto.FilterDto;
 import applicationtier.entity.TransactionEntity;
 import applicationtier.service.serviceInterfaces.ITransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,19 @@ public class TransactionController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping("/transaction/date/{date}/username/{username}")
+    public ResponseEntity<List<TransactionEntity>> fetchTransactionsByDateAndUsername(
+            @PathVariable String date,
+            @PathVariable String username) {
+        try {
+            FilterDto filter = new FilterDto(username, date);
+            List<TransactionEntity> transactions = transactionService.fetchTransactionByDateAndUsername(filter);
+            return new ResponseEntity<>(transactions, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     @DeleteMapping("/transaction/delete/{id}")
     public ResponseEntity<String> deleterTransaction(@PathVariable("id") Long id) {

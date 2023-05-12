@@ -2,6 +2,7 @@ package applicationtier.service.serviceImplementations;
 
 import applicationtier.GrpcClient.transaction.ITransactionClient;
 import applicationtier.GrpcClient.user.IUserClient;
+import applicationtier.dto.FilterDto;
 import applicationtier.entity.TransactionEntity;
 import applicationtier.entity.UserEntity;
 import applicationtier.service.serviceInterfaces.ITransactionService;
@@ -96,6 +97,15 @@ public class TransactionServiceImplementation implements ITransactionService {
     }
 
     @Override
+    public List<TransactionEntity> fetchTransactionByDateAndUsername(FilterDto filterDto) {
+        try {
+            return transactionClient.fetchTransactionByDateAndUsername(filterDto.getDate(), filterDto.getUsername());
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
     public boolean deleteTransaction(Long id) {
         try {
             return transactionClient.deleteTransaction(id);
@@ -103,4 +113,6 @@ public class TransactionServiceImplementation implements ITransactionService {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+
 }

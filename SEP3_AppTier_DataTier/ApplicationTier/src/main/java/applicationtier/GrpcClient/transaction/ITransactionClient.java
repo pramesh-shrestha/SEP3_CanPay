@@ -14,4 +14,6 @@ public interface ITransactionClient {
     List<TransactionEntity> fetchTransactionByDate(String date);
     boolean deleteTransaction(Long id);
 
+    List<TransactionEntity> fetchTransactionByDateAndUsername(String date, String username);
+
 }

@@ -109,6 +109,46 @@ public class TransactionClientImpl implements ITransactionClient {
             throw new RuntimeException(e);
         }
     }
+    /*@Override
+    public List<TransactionEntity> fetchTransactionByDateAndUsername(String date, String username) {
+        try {
+            List<Transaction.TransactionProtoObj> transactionsList = getTransactionBlockingStub()
+                    .fetchTransactionsByRecipientAndDate(Transaction.TransactionProtoObj.newBuilder()
+                            .setDate(StringValue.of(date))
+                            .setReceiverUser(StringValue.of(username))
+                            //.setSenderUser(StringValue.of(username))
+                            .build())
+                    .getAllTransactionsList();
+
+            List<TransactionEntity> transactionEntities = new ArrayList<>();
+            for (Transaction.TransactionProtoObj transactionProtoObj : transactionsList) {
+                transactionEntities.add(fromProtoObjToEntity(transactionProtoObj));
+            }
+            return transactionEntities;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+    @Override
+    public List<TransactionEntity> fetchTransactionByDateAndUsername(String date, String username) {
+        try {
+            List<Transaction.TransactionProtoObj> transactionsList = getTransactionBlockingStub()
+                    .fetchTransactionsByRecipientAndDate(Transaction.FilterByUserAndDateProtoObj.newBuilder()
+                            .setDate(StringValue.of(date))
+                            .setUsername(StringValue.of(username))
+                            .build())
+                    .getAllTransactionsList();
+            List<TransactionEntity> transactionEntities = new ArrayList<>();
+            for (Transaction.TransactionProtoObj transactionProtoObj : transactionsList) {
+                transactionEntities.add(fromProtoObjToEntity(transactionProtoObj));
+            }
+            return transactionEntities;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
     @Override
     public boolean deleteTransaction(Long id) {
