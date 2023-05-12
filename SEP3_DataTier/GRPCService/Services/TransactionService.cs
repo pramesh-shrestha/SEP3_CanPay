@@ -126,20 +126,20 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
     }
 
     
-    // public override async Task<TransactionProtoObjList> FetchTransactionsByRecipientAndDate(FilterByUserAndDateProtoObj request, ServerCallContext context)
+
+    // public override async Task<TransactionProtoObjList> FetchTransactionsByUsernameAndDate(FilterByUserAndDateProtoObj request, ServerCallContext context)
     // {
     //     try
     //     {
-    //         ICollection<TransactionEntity?> byDateAndReceiver =
-    //             await transactionDao.FetchTransactionByRecipientAndDateAsync(request);
-    //
-    //         TransactionProtoObjList byDateAndReceiveProtoObjList = ConvertToProtoList(byDateAndReceiver);
-    //         return byDateAndReceiveProtoObjList;
+    //         ICollection<TransactionEntity?> byDateAndUsername =
+    //             await transactionDao.fetchTransactionByUsernameAndDate(request.Username);
+    //         TransactionProtoObjList byDateAndReceiveProtoObjList = ConvertToProtoList(byDateAndUsername);
+    //               return byDateAndReceiveProtoObjList;
     //     }
     //     catch (Exception e)
     //     {
     //         Console.WriteLine(e);
-    //         throw new RpcException(new Status(StatusCode.NotFound, e.Message));
+    //         throw new RpcException(new Status(StatusCode.NotFound, e.Message)); 
     //     }
     // }
 

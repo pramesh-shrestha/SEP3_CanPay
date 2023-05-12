@@ -170,19 +170,20 @@ public class TransactionDaoImpl : ITransactionDao
         return transactionByDate;
     }
 
-   
-    public async Task<ICollection<TransactionEntity?>> FetchTransactionByRecipientAndDateAsync(FilterDto filterDto)
+    public async Task<ICollection<TransactionEntity?>> fetchTransactionByUsernameAndDate(FilterDto filterDto)
     {
-        List<TransactionEntity?> transactionByDateAndReceiver =
-            await context.Transactions.Where(entity => entity.Date.Equals(filterDto.Date))
-                .Where(entity => entity.Receiver.Equals(filterDto.Username)).ToListAsync();
+        List<TransactionEntity?> transactionByDateAndUsername =
+            await context.Transactions.Where(entity => entity.Date.Equals(filterDto.Date)).Where(entity => entity.Receiver.Equals(filterDto.Username))
+                .Where(entity => entity.Sender.Equals(filterDto.Username)).ToListAsync();
 
-        if (transactionByDateAndReceiver.Count==0)
+        if (transactionByDateAndUsername.Count == 0)
         {
-            throw new Exception($"NO transaction available ");
+            throw new Exception($"No Transaction found");
         }
-        return transactionByDateAndReceiver;
+
+        return transactionByDateAndUsername;
     }
+    
 
 
     /// <summary>
@@ -204,4 +205,6 @@ public class TransactionDaoImpl : ITransactionDao
         await context.SaveChangesAsync();
         return true;
     }
+
+    
 }
