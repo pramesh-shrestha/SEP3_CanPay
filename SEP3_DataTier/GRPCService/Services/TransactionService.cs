@@ -126,22 +126,22 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
     }
 
     
-    public override async Task<TransactionProtoObjList> FetchTransactionsByRecipientAndDate(FilterByUserAndDateProtoObj request, ServerCallContext context)
-    {
-        try
-        {
-            ICollection<TransactionEntity?> byDateAndReceiver =
-                await transactionDao.FetchTransactionByRecipientAndDateAsync(request.Date, request.Username);
-
-            TransactionProtoObjList byDateAndReceiveProtoObjList = ConvertToProtoList(byDateAndReceiver);
-            return byDateAndReceiveProtoObjList;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
-        }
-    }
+    // public override async Task<TransactionProtoObjList> FetchTransactionsByRecipientAndDate(FilterByUserAndDateProtoObj request, ServerCallContext context)
+    // {
+    //     try
+    //     {
+    //         ICollection<TransactionEntity?> byDateAndReceiver =
+    //             await transactionDao.FetchTransactionByRecipientAndDateAsync(request);
+    //
+    //         TransactionProtoObjList byDateAndReceiveProtoObjList = ConvertToProtoList(byDateAndReceiver);
+    //         return byDateAndReceiveProtoObjList;
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         Console.WriteLine(e);
+    //         throw new RpcException(new Status(StatusCode.NotFound, e.Message));
+    //     }
+    // }
 
     public override async Task<BoolValue> DeleteTransactionAsync(Int64Value request, ServerCallContext context)
     {
@@ -186,6 +186,8 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             Date = transactionEntity.Date
         };
     }
+    
+    
 
     private static TransactionProtoObjList ConvertToProtoList(ICollection<TransactionEntity> transactionEntities)
     {
