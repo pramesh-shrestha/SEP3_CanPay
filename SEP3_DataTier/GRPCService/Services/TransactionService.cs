@@ -125,6 +125,7 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         }
     }
 
+    
     public override async Task<TransactionProtoObjList> FetchTransactionsByRecipientAndDate(FilterByUserAndDateProtoObj request, ServerCallContext context)
     {
         try

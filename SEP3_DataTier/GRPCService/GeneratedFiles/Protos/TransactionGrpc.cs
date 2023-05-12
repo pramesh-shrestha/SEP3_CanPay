@@ -7,6 +7,7 @@
 
 using grpc = global::Grpc.Core;
 
+
 namespace SEP3_DataTier {
   public static partial class TransactionProtoService
   {

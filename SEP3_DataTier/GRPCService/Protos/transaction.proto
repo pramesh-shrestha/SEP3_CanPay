@@ -20,6 +20,7 @@ message FilterByUserAndDateProtoObj {
 }
 
 
+
 service TransactionProtoService {
   rpc CreateTransactionAsync(TransactionProtoObj) returns (TransactionProtoObj);
   rpc FetchTransactionByIdAsync(google.protobuf.Int64Value) returns (TransactionProtoObj);

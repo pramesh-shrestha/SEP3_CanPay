@@ -11,6 +11,7 @@ using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
 namespace SEP3_DataTier {
 
+
   /// <summary>Holder for reflection information generated from Protos/transaction.proto</summary>
   public static partial class TransactionReflection {
 
