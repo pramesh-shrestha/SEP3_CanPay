@@ -10,5 +10,6 @@ public interface ITransactionDao
     Task<ICollection<TransactionEntity>> FetchAllTransactionsByReceiverAsync(string receiverUsername);
     Task<ICollection<TransactionEntity>> FetchAlLTransactionsInvolvingUserAsync(string username);
     Task<ICollection<TransactionEntity?>> FetchTransactionsByDateAsync(string date);
+    Task<ICollection<TransactionEntity?>> FetchTransactionByRecipientAndDateAsync(string date, string receiver);
     Task<bool> DeleteTransactionAsync(long id);
 }

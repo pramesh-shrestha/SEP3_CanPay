@@ -169,6 +169,27 @@ public class TransactionDaoImpl : ITransactionDao
         return transactionByDate;
     }
 
+    /// <summary>
+    /// Fetches transactions by recipient and date asynchronously.
+    /// </summary>
+    /// <param name="date">The date of the transactions to fetch.</param>
+    /// <param name="receiver">The recipient of the transactions to fetch.</param>
+    /// <returns>A collection of TransactionEntity objects that match the specified recipient and date.</returns>
+    /// <exception cref="Exception">Thrown when no transactions are available for the specified recipient and date.</exception>
+
+    public async Task<ICollection<TransactionEntity?>> FetchTransactionByRecipientAndDateAsync(string date, string receiver)
+    {
+        List<TransactionEntity?> transactionByDateAndReceiver =
+            await context.Transactions.Where(entity => entity.Date.Equals(date))
+                .Where(entity => entity.Receiver.Equals(receiver)).ToListAsync();
+
+        if (transactionByDateAndReceiver.Count==0)
+        {
+            throw new Exception($"NO transaction available ");
+        }
+        return transactionByDateAndReceiver;
+    }
+
 
     /// <summary>
     /// Deletes a transaction from the database.
