@@ -5,6 +5,7 @@
 @using System.Globalization
 @inject ITransactionService TransactionService;
 @inject AuthenticationStateProvider StateProvider;
+@inject NavigationManager NavMgr;
 
 
 <div class="main_container rounded ">
@@ -16,12 +17,10 @@
             <p class="subtitle text"> Welcome to your transactions </p>
         </div>
 
-        <div>
-            <button class="load_history_button" disabled="@isHistoryLoaded"
-                    @onclick="LoadAllTransactions">
-                Load History
-            </button>
-        </div>
+        <button class="w-auto new_transaction_button" @onclick="@(() => NavMgr.NavigateTo("/SendMoney"))">
+            New Transaction
+        </button>
+
     </div>
 
     <div class="filter_chips d-flex">
@@ -79,7 +78,14 @@
             <img src="images/search.png" class="icon" alt="">
             <input placeholder="Type Username You Want To Filter By" type="search" @bind="searchUsername" @bind:event="oninput" class="search_input">
         </div>
-        <button class="btn btn-primary">New Transaction</button>
+
+        <div>
+            <button class="load_history_button" disabled="@isHistoryLoaded"
+                    @onclick="LoadAllTransactions">
+                Load History
+            </button>
+        </div>
+
     </div>
 
     <div class="table_box">
@@ -115,7 +121,7 @@
                         </td>
 
                         <td>
-                            <div class="pl-3 user_info">
+                            <div class="user_info">
                                 <span>@transactionEntity.Receiver!.FullName</span>
                                 <span class="text-muted">@transactionEntity.Receiver.UserName</span>
                             </div>
@@ -125,7 +131,18 @@
                             <span>@transactionEntity.Date</span>
                         </td>
                         <td>
-                            <span>@transactionEntity.Amount</span>
+
+                            @if (transactionEntity.Sender.UserName!.Equals(currentUser))
+                            {
+                                <img class="amount_icon" src="images/minus.png"/>
+                                <span class="amount" style="color: red">@transactionEntity.Amount</span>
+                            }
+                            else
+                            {
+                                <img class="amount_icon" src="images/plus.png"/>
+                                <span class="amount" style="color: #00ff00">@transactionEntity.Amount</span>
+                            }
+
                         </td>
                     </tr>
                 }
