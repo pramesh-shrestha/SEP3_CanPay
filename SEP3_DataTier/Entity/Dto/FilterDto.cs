@@ -1,4 +1,4 @@
-﻿namespace Entity.Dto;
+﻿namespace Entity;
 
 public class FilterDto
 {

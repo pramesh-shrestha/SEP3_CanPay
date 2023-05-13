@@ -1,4 +1,5 @@
-using Entity.Dto;
+using Entity;
+using Entity;
 using Entity.Model;
 
 namespace EFCDataAccess.DAOInterface;
