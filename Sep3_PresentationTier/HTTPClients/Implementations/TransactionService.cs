@@ -94,9 +94,9 @@ public class TransactionService : ITransactionService
         return transactionEntity;
     }
 
-    public async Task<ICollection<TransactionEntity>> FetchAllTransactionInvolvingBothUsersAsync(string username)
+    public async Task<ICollection<TransactionEntity>> FetchAllTransactionInvolvingUserAsync(string username)
     {
-        HttpResponseMessage response = await client.GetAsync($"/transaction/{username}");
+        HttpResponseMessage response = await client.GetAsync($"/transaction/user/{username}");
         string result = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)
@@ -110,6 +110,7 @@ public class TransactionService : ITransactionService
             {
                 PropertyNameCaseInsensitive = true
             })!;
+        
         return transactionEntity;
     }
 

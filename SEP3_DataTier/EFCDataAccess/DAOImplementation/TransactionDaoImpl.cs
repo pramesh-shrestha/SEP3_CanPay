@@ -1,4 +1,6 @@
 using EFCDataAccess.DAOInterface;
+using Entity;
+using Entity;
 using Entity.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -116,7 +118,7 @@ public class TransactionDaoImpl : ITransactionDao
         // should include information about sender and receiver user
         ICollection<TransactionEntity> transactionByReceiver = await context.Transactions.Include(t => t.Sender)
             .Include(entity => entity.Receiver)
-            .Where(entity => entity.Receiver.Equals(receiverUsername)).ToListAsync();
+            .Where(entity => entity.Receiver.Username.Equals(receiverUsername)).ToListAsync();
 
         if (transactionByReceiver.Count == 0)
         {
@@ -169,23 +171,18 @@ public class TransactionDaoImpl : ITransactionDao
         return transactionByDate;
     }
 
-    /// <summary>
-    /// Fetches transactions by recipient and date asynchronously.
-    /// </summary>
-    /// <param name="date">The date of the transactions to fetch.</param>
-    /// <param name="receiver">The recipient of the transactions to fetch.</param>
-    /// <returns>A collection of TransactionEntity objects that match the specified recipient and date.</returns>
-    /// <exception cref="Exception">Thrown when no transactions are available for the specified recipient and date.</exception>
-    public async Task<ICollection<TransactionEntity?>> FetchTransactionByRecipientAndDateAsync(string date, string receiver)
+
+    public async Task<ICollection<TransactionEntity?>> FetchTransactionByUsernameAndDateAsync(FilterDto filterDto)
     {
         List<TransactionEntity?> transactionByDateAndReceiver =
-            await context.Transactions.Where(entity => entity.Date.Equals(date))
-                .Where(entity => entity.Receiver.Equals(receiver)).ToListAsync();
+            await context.Transactions.Where(entity => entity.Date.Equals(filterDto.Date))
+                .Where(entity => entity.Receiver.Equals(filterDto.Username)).ToListAsync();
 
-        if (transactionByDateAndReceiver.Count==0)
+        if (transactionByDateAndReceiver.Count == 0)
         {
             throw new Exception($"NO transaction available ");
         }
+
         return transactionByDateAndReceiver;
     }
 
@@ -208,5 +205,11 @@ public class TransactionDaoImpl : ITransactionDao
         context.Transactions.Remove(byIdAsync);
         await context.SaveChangesAsync();
         return true;
+    }
+
+
+    public Task<ICollection<TransactionEntity?>> fetchTransactionByUsernameAndDate(FilterDto filterDto)
+    {
+        throw new NotImplementedException();
     }
 }

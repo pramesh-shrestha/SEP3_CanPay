@@ -7,7 +7,6 @@
 
 using grpc = global::Grpc.Core;
 
-
 namespace SEP3_DataTier {
   public static partial class TransactionProtoService
   {
@@ -108,10 +107,10 @@ namespace SEP3_DataTier {
         __Marshaller_TransactionProtoObjList);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::SEP3_DataTier.FilterByUserAndDateProtoObj, global::SEP3_DataTier.TransactionProtoObjList> __Method_FetchTransactionsByRecipientAndDate = new grpc::Method<global::SEP3_DataTier.FilterByUserAndDateProtoObj, global::SEP3_DataTier.TransactionProtoObjList>(
+    static readonly grpc::Method<global::SEP3_DataTier.FilterByUserAndDateProtoObj, global::SEP3_DataTier.TransactionProtoObjList> __Method_FetchTransactionsByUsernameAndDate = new grpc::Method<global::SEP3_DataTier.FilterByUserAndDateProtoObj, global::SEP3_DataTier.TransactionProtoObjList>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "FetchTransactionsByRecipientAndDate",
+        "FetchTransactionsByUsernameAndDate",
         __Marshaller_FilterByUserAndDateProtoObj,
         __Marshaller_TransactionProtoObjList);
 
@@ -170,7 +169,7 @@ namespace SEP3_DataTier {
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.TransactionProtoObjList> FetchTransactionsByRecipientAndDate(global::SEP3_DataTier.FilterByUserAndDateProtoObj request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.TransactionProtoObjList> FetchTransactionsByUsernameAndDate(global::SEP3_DataTier.FilterByUserAndDateProtoObj request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -195,7 +194,7 @@ namespace SEP3_DataTier {
           .AddMethod(__Method_FetchAllTransactionsByReceiverAsync, serviceImpl.FetchAllTransactionsByReceiverAsync)
           .AddMethod(__Method_FetchAlLTransactionsInvolvingUserAsync, serviceImpl.FetchAlLTransactionsInvolvingUserAsync)
           .AddMethod(__Method_FetchTransactionsByDateAsync, serviceImpl.FetchTransactionsByDateAsync)
-          .AddMethod(__Method_FetchTransactionsByRecipientAndDate, serviceImpl.FetchTransactionsByRecipientAndDate)
+          .AddMethod(__Method_FetchTransactionsByUsernameAndDate, serviceImpl.FetchTransactionsByUsernameAndDate)
           .AddMethod(__Method_DeleteTransactionAsync, serviceImpl.DeleteTransactionAsync).Build();
     }
 
@@ -212,7 +211,7 @@ namespace SEP3_DataTier {
       serviceBinder.AddMethod(__Method_FetchAllTransactionsByReceiverAsync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.StringValue, global::SEP3_DataTier.TransactionProtoObjList>(serviceImpl.FetchAllTransactionsByReceiverAsync));
       serviceBinder.AddMethod(__Method_FetchAlLTransactionsInvolvingUserAsync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.StringValue, global::SEP3_DataTier.TransactionProtoObjList>(serviceImpl.FetchAlLTransactionsInvolvingUserAsync));
       serviceBinder.AddMethod(__Method_FetchTransactionsByDateAsync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.StringValue, global::SEP3_DataTier.TransactionProtoObjList>(serviceImpl.FetchTransactionsByDateAsync));
-      serviceBinder.AddMethod(__Method_FetchTransactionsByRecipientAndDate, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.FilterByUserAndDateProtoObj, global::SEP3_DataTier.TransactionProtoObjList>(serviceImpl.FetchTransactionsByRecipientAndDate));
+      serviceBinder.AddMethod(__Method_FetchTransactionsByUsernameAndDate, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.FilterByUserAndDateProtoObj, global::SEP3_DataTier.TransactionProtoObjList>(serviceImpl.FetchTransactionsByUsernameAndDate));
       serviceBinder.AddMethod(__Method_DeleteTransactionAsync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Int64Value, global::Google.Protobuf.WellKnownTypes.BoolValue>(serviceImpl.DeleteTransactionAsync));
     }
 

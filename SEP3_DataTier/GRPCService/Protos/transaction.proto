@@ -28,7 +28,7 @@ service TransactionProtoService {
   rpc FetchAllTransactionsByReceiverAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
   rpc FetchAlLTransactionsInvolvingUserAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
   rpc FetchTransactionsByDateAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
-  rpc FetchTransactionsByRecipientAndDate(FilterByUserAndDateProtoObj) returns (TransactionProtoObjList);
+  rpc FetchTransactionsByUsernameAndDate(FilterByUserAndDateProtoObj) returns (TransactionProtoObjList);
   rpc DeleteTransactionAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
 }
 
