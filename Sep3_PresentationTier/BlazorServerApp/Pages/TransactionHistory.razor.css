@@ -1,0 +1,238 @@
+﻿.main_container {
+    background-color: #326089;
+    height: auto;
+    width: 1100px;
+    margin: 10px auto;
+    padding: 10px 30px;
+}
+
+.top_bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.title {
+    font-size: 25px;
+    font-weight: bold;
+    color: #FCD34D;
+
+}
+
+
+/*Style for radio buttons start here*/
+.wrapper_loaded {
+    position: relative;
+    width: 550px;
+    height: 50px;
+    background-color: #fff;
+    border: 2px solid #323232;
+    border-radius: 34px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 4px 4px #323232;
+}
+
+.wrapper_disabled {
+    position: relative;
+    width: 550px;
+    height: 50px;
+    background-color: #fff;
+    border: 2px solid #323232;
+    border-radius: 34px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 4px 4px #323232;
+    pointer-events: none;
+    opacity: 20%;
+}
+
+
+.radio_container {
+    width: 200px;
+    height: 28px;
+    position: relative;
+    top: 2px;
+    left: 2px;
+}
+
+
+.radio_option {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    appearance: none;
+    cursor: pointer;
+}
+
+
+.filter_btn {
+    width: auto;
+    height: 43px;
+    background-color: #fff;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.span {
+    color: #323232;
+    font-size: 18px;
+}
+
+.radio_option:checked + .filter_btn {
+    background-color: #12bbd4;
+}
+
+.radio_option:checked + .filter_btn .span {
+    color: #FFF;
+}
+
+
+/*Styling for datepicker and checkbox*/
+.checkBox {
+    display: block;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(255, 255, 255, 0);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    top: -9px;
+    left: 8px;
+    box-shadow: 0 0 0 2px #000000;
+}
+
+.checkBox div {
+    width: 60px;
+    height: 60px;
+    background-color: #00b8e7;
+    top: -60px;
+    left: -52px;
+    position: absolute;
+    z-index: 100;
+}
+
+.checkBox input[type=checkbox]:checked + div {
+    left: -10px;
+    top: -10px;
+}
+
+.checkBox input[type=checkbox] {
+    position: absolute;
+    left: 50px;
+    visibility: hidden;
+}
+
+
+
+/*load history button css*/
+.load_history_button {
+    background-color: #00b8e7;
+    border: 1px solid rgba(26, 26, 26, 0);
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #3B3B3B;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    min-height: 45px;
+    min-width: 0;
+    outline: none;
+    padding: 4px 8px;
+    text-align: center;
+    width: 100%;
+}
+
+.load_history_button:disabled {
+    pointer-events: none;
+    opacity: 40%;
+}
+
+.load_history_button:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+}
+
+
+/*Styling for search bar*/
+.search_bar {
+    display: flex;
+    line-height: 28px;
+    align-items: center;
+    position: relative;
+    opacity: 0.8;
+}
+
+.search_input {
+    width: 500px;
+    height: 40px;
+    line-height: 28px;
+    padding: 0 1px 0 40px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background-color: #f3f3f4;
+    color: #0d0c22;
+    transition: .3s ease;
+
+}
+
+.search_input::placeholder {
+    color: #9e9ea7;
+}
+
+.search_input:focus, .search_input:hover {
+    outline: none;
+    border-color: #12bbd4;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+}
+
+.icon {
+    position: absolute;
+    left: 1rem;
+    fill: #9e9ea7;
+    width: 1rem;
+    height: 1rem;
+}
+
+/*Styling for table starts here*/
+.table_box {
+    max-height: 340px;
+    overflow-y: auto;
+    margin-top: 3px;
+}
+
+
+.table {
+    color: white;
+    box-shadow: 0 5px 12px -12px rgba(0, 0, 0, 0.29);
+    overflow: auto;
+    height: 200px;
+}
+
+th {
+    border: none;
+    padding: 10px;
+    font-size: 23px;
+    font-weight: 500;
+    color: white;
+}
+
+thead tr {
+    border-bottom: 1px solid white;
+}
+
+.user_info span {
+    display: block;
+}

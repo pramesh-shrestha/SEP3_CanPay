@@ -59,7 +59,7 @@ public class TransactionController {
         }
     }
 
-    @GetMapping("/transaction/{username}")
+    @GetMapping("/transaction/user/{username}")
     public ResponseEntity<List<TransactionEntity>> fetchAllTransactionInvolvingUser(@PathVariable("username") String username) {
 
         try {
