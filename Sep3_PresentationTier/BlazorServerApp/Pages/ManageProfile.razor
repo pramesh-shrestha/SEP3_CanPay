@@ -1,0 +1,99 @@
+﻿@page "/ManageProfile"
+@using Domains.Entity
+@using HTTPClients.ClientInterfaces
+@using UIComponents
+@using BCrypt.Net
+@inject AuthenticationStateProvider StateProvider;
+@inject IUserService UserService;
+@inject NavigationManager NavMgr;
+
+
+<div class="container mt-6">
+    <div class="card">
+
+        <div class="card-header">
+            <h2 class="card-title">Manage Profile</h2>
+        </div>
+
+        <div class="card-body">
+       
+            <div class="form-row">
+                <div>
+                    <label  class="form-label">Username</label>
+                    <input type="text"  @bind="username" disabled>
+                    
+                </div>
+                
+                <div>
+                    <label  class="form-label">Password</label>
+                    <input type="password" @bind="password" disabled >
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div>
+                    <label class="form-label">Fullname</label>
+                    <input type="text"  @bind="fullName" disabled="@IsDisabled" >
+                </div>
+                            
+                <div>
+                    <label  class="form-label">Card Number</label>
+                    <input type="text" @bind="cardNumber" disabled="@IsDisabled">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div>
+                    <label class="form-label">Expiry Date</label>
+                    <input type="text"  @bind="expiryDate" disabled="@IsDisabled">
+                </div>
+                                        
+                <div>
+                    <label  class="form-label">Cvv (3-digits)</label>
+                    <input type="text" @bind="cvv" disabled="@IsDisabled" >
+                </div>
+            </div>
+            
+            
+
+
+            <div class="form-row buttons">
+                <div>
+                    <button class="btn btn-primary">Save Changes</button>
+                    <button class="btn btn-primary  align-right">Cancel</button>
+                </div>
+                <div>
+                    @* @onclick:preventDefault -- prevent the default behavior of the button and prevent the page from reloading or submitting the form.
+                    It is necessary because there's a form submit or page reload happening that is resetting the form to its initial state. *@
+                    <button class="btn btn-primary edit-button" >Edit Profile</button>
+                    <button class="btn btn-primary align-right"  @onclick:preventDefault>Change Password</button>
+                </div>
+            </div>
+   
+            
+            <div class="mt-2">
+                <label class="form-label" style="color: @color">@error</label>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@code {
+    private string username { get; set; }
+    private UserEntity User { get; set; }
+    private bool IsDisabled { get; set; } = true;
+    private bool showModal;
+    private string password;
+    private string fullName;
+    private long cardNumber;
+    private string expiryDate;
+    private int cvv;
+    private int currentBalance;
+    private string currentPassword;
+    private string newPassword;
+    private string confirmNewPassword;
+    private string errorLabel;
+    private string error;
+    private string color;
+}

@@ -1,0 +1,46 @@
+.container {
+    width: 60%;
+
+}
+
+.mt-6 {
+    margin-top: 110px ;
+}
+
+
+.inline{
+    display: inline-block;
+}
+
+.header {
+    display: flex;
+}
+
+.flex-container {
+    display: flex;
+}
+
+
+
+.align-right {
+    margin-left: 5px; /* or use justify-content: flex-end; */
+}
+.form-row {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+    
+}
+
+.form-label {
+    width: 100px;
+    margin-right: 5px;
+}
+
+.buttons{
+    margin-top: 8%;
+}
+
+.card-body{
+    margin-top: 6%;
+}

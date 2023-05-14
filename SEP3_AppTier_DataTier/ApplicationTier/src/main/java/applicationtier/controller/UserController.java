@@ -49,7 +49,7 @@ public class UserController {
     }
 
     //get user by id
-    @GetMapping("/user/{id}")
+    @GetMapping("/user/id/{id}")
     public ResponseEntity<UserEntity> fetchUserById(@PathVariable("id") Long id) {
         try {
             return new ResponseEntity<>(userService.fetchUserById(id), HttpStatus.OK);
@@ -59,8 +59,9 @@ public class UserController {
     }
 
     //get user by username
-    @GetMapping("/user/{username}")
+    @GetMapping("/user/username/{username}")
     public ResponseEntity<UserEntity> fetchUserByUsername(@PathVariable("username") String username) {
+        System.out.println("in controller");
         try {
             UserEntity user = userService.fetchUserByUsername(username);
             return new ResponseEntity<>(user, HttpStatus.OK);
@@ -70,9 +71,10 @@ public class UserController {
     }
 
     //update user
-    @PutMapping("/user/update/{updatedUser}")
+    @PostMapping("/user/update")
     public ResponseEntity<UserEntity> updateUser(@RequestBody
                                                  UserEntity updatedUser) {
+        System.out.println("updated");
         try {
             return new ResponseEntity<>(userService.updateUser(updatedUser), HttpStatus.OK);
         } catch (Exception e) {
