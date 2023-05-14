@@ -66,7 +66,8 @@ public class UserService : IUserService
 
     public async Task<UserEntity> FetchUserByUsernameAsync(string username)
     {
-        HttpResponseMessage responseMessage = await client.GetAsync($"/user/{username}");
+        LoadClientWithToken();
+        HttpResponseMessage responseMessage = await client.GetAsync($"/user/username/{username}");
         string result = await responseMessage.Content.ReadAsStringAsync();
 
         if (!responseMessage.IsSuccessStatusCode)

@@ -60,7 +60,7 @@
             <div class="form-row buttons">
                 <div>
                     <button class="btn btn-primary" @onclick="SaveChanges">Save Changes</button>
-                    <button class="btn btn-primary  align-right">Cancel</button>
+                    <button class="btn btn-primary  align-right" @onclick="OnCancelled">Cancel</button>
                 </div>
                 <div>
                     @* @onclick:preventDefault -- prevent the default behavior of the button and prevent the page from reloading or submitting the form.
@@ -72,7 +72,7 @@
    
             
             <div class="mt-2">
-                <label class="form-label" style="color: @color">@error</label>
+                <label style="color: @color">@error</label>
             </div>
         </div>
 
@@ -82,15 +82,15 @@
 <Modal ShowModal="showModal">
     <form>
         <div class="mb-3">
-            <label class="form-label">Your current password</label>
+            <label >Your current password</label>
             <input type="text" class="form-control" @bind="currentPassword">
         </div>
         <div class="mb-3">
-            <label class="form-label">New password</label>
+            <label >New password</label>
             <input type="text" class="form-control" @bind="newPassword">
         </div>
         <div class="mb-3">
-            <label class="form-label">Confirm new password</label>
+            <label >Confirm new password</label>
             <input type="text" class="form-control" @bind="confirmNewPassword">
         </div>
     </form>
@@ -101,14 +101,22 @@
     <div class="mt-2">
         <label class="form-label" style="color: @color">@errorLabel</label>
     </div>
-    
 </Modal>
+
+<Modal ShowModal="confirmation">
+    <p >Your profile is updated successfully.</p>
+    <div>
+        <button class="button" @onclick="@GoBack">OK</button>
+    </div>
+</Modal>
+
 
 @code {
     private string username { get; set; }
     private UserEntity User { get; set; }
     private bool IsDisabled { get; set; } = true;
     private bool showModal;
+    private bool confirmation;
     private string password;
     private string fullName;
     private long cardNumber;
@@ -179,7 +187,16 @@
     }
     
     private void GoBack() {
+        currentPassword = string.Empty;
+        newPassword = string.Empty;
+        confirmNewPassword = string.Empty;
+        
         showModal = false;
+        confirmation = false;
+    }
+
+    private void OnCancelled() {
+        NavMgr.NavigateTo("/");
     }
     
     private async Task SaveChanges() {
@@ -194,6 +211,7 @@
     
         try {
             await UserService.UpdateUserAsync(userEntity);
+            confirmation = true;
         }
         catch (Exception e) {
             errorLabel = e.Message;
