@@ -59,14 +59,14 @@
 
             <div class="form-row buttons">
                 <div>
-                    <button class="btn btn-primary">Save Changes</button>
+                    <button class="btn btn-primary" @onclick="SaveChanges">Save Changes</button>
                     <button class="btn btn-primary  align-right">Cancel</button>
                 </div>
                 <div>
                     @* @onclick:preventDefault -- prevent the default behavior of the button and prevent the page from reloading or submitting the form.
                     It is necessary because there's a form submit or page reload happening that is resetting the form to its initial state. *@
-                    <button class="btn btn-primary edit-button" >Edit Profile</button>
-                    <button class="btn btn-primary align-right"  @onclick:preventDefault>Change Password</button>
+                    <button class="btn btn-primary edit-button" @onclick="Enable" >Edit Profile</button>
+                    <button class="btn btn-primary align-right" @onclick="ChangePassword" @onclick:preventDefault>Change Password</button>
                 </div>
             </div>
    
@@ -78,6 +78,31 @@
 
     </div>
 </div>
+
+<Modal ShowModal="showModal">
+    <form>
+        <div class="mb-3">
+            <label class="form-label">Your current password</label>
+            <input type="text" class="form-control" @bind="currentPassword">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">New password</label>
+            <input type="text" class="form-control" @bind="newPassword">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Confirm new password</label>
+            <input type="text" class="form-control" @bind="confirmNewPassword">
+        </div>
+    </form>
+    <div>
+        <button class="button" @onclick="@Proceed">OK</button>
+        <button class="button"  @onclick="@GoBack">Go Back</button>
+    </div>
+    <div class="mt-2">
+        <label class="form-label" style="color: @color">@errorLabel</label>
+    </div>
+    
+</Modal>
 
 @code {
     private string username { get; set; }
@@ -96,4 +121,83 @@
     private string errorLabel;
     private string error;
     private string color;
+    
+    protected override async Task OnInitializedAsync() {
+        AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
+        username = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
+        User = await UserService.FetchUserByUsernameAsync(username);
+        password = User.Password!;
+        cardNumber = User.Card!.CardNumber;
+        expiryDate = User.Card!.ExpiryDate!;
+        cvv = User.Card!.Cvv;
+        currentBalance = User.Balance;
+        fullName = User.FullName!;
+    }
+    
+    //enable the card input fields
+    private void Enable() {
+        IsDisabled = false;
+    }
+    
+     
+    private void Proceed() {
+        errorLabel = "";
+    // Extract the salt from the Java hashed password
+        string salt = password.Substring(0, 29);
+        int rounds = 10;
+        string hashedCurrentPassword = BCrypt.HashPassword(currentPassword, salt + rounds);
+        Console.WriteLine(password);
+        Console.WriteLine(hashedCurrentPassword);
+        
+        try {
+            if (!hashedCurrentPassword.Equals(password)) {
+                errorLabel = "Wrong current password!";
+                color = "red";
+            }
+    
+            if (!newPassword.Equals(confirmNewPassword)) {
+                throw new Exception("New password mismatch!");
+            }
+    
+            if (string.IsNullOrEmpty(errorLabel)) {
+                showModal = false;
+                error = "Password changed successfully!";
+                color = "green";
+                password = newPassword;
+            }
+            
+    
+        }
+        catch (Exception e) {
+            errorLabel = e.Message;
+            color = "red";
+        }
+        
+    }
+    
+    private void ChangePassword() {
+        showModal = true;
+    }
+    
+    private void GoBack() {
+        showModal = false;
+    }
+    
+    private async Task SaveChanges() {
+        DebitCardEntity cardEntity = new DebitCardEntity(cardNumber, expiryDate, cvv);
+        UserEntity userEntity = new() {
+            UserName = username,
+            Password = password,
+            Balance = currentBalance,
+            Card = cardEntity,
+            FullName = fullName
+        };
+    
+        try {
+            await UserService.UpdateUserAsync(userEntity);
+        }
+        catch (Exception e) {
+            errorLabel = e.Message;
+        }
+    }
 }
