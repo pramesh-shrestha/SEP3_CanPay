@@ -159,13 +159,13 @@
         {
             if (string.IsNullOrEmpty(receiver))
             {
-                errorLabel = "Receiver must be selected.";
-                color = "red";
+                throw new Exception("Receiver must be selected.");
+                
             }
             if (int.Parse(amount) <= 0)
             {
-                errorLabel = "Amount must be more than 0.";
-                color = "red";
+                throw new Exception("Amount must be more than 0.");
+                
             }
             if (string.IsNullOrEmpty(errorLabel))
             {

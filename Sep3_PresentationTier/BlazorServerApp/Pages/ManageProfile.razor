@@ -151,8 +151,7 @@
         
         try {
             if (!hashedCurrentPassword.Equals(password)) {
-                errorLabel = "Wrong current password!";
-                color = "red";
+                throw new Exception("Wrong current password!");
             }
     
             if (!newPassword.Equals(confirmNewPassword)) {
