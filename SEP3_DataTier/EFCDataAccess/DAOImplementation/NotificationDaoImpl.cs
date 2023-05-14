@@ -54,7 +54,7 @@ public class NotificationDaoImpl : INotificationDao
                 .Where(e => e.Receiver!.Username!.Equals(username)).Where(entity => !entity.IsRead).ToListAsync();
 
 
-            if (notificationEntities.Count != 0)
+            /*if (notificationEntities.Count != 0)
             {
                 foreach (NotificationEntity notificationEntity in notificationEntities)
                 {
@@ -62,7 +62,7 @@ public class NotificationDaoImpl : INotificationDao
                 }
 
                 await context.SaveChangesAsync();
-            }
+            }*/
 
             return notificationEntities;
         }
@@ -89,23 +89,23 @@ public class NotificationDaoImpl : INotificationDao
 
     public async Task MarkAllNotificationsAsReadAsync(List<NotificationEntity> notificationEntities)
     {
-        /*try
+        try
         {
             if (notificationEntities.Count != 0)
             {
                 foreach (NotificationEntity notificationEntity in notificationEntities)
                 {
                     notificationEntity.IsRead = true;
+                    context.Notifications.Update(notificationEntity);
                 }
-
-                await context.SaveChangesAsync();
             }
+            await context.SaveChangesAsync();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw new Exception(e.Message);
-        }*/
+        }
     }
 
     public async Task<bool> DeleteNotificationAsync(long notificationId)

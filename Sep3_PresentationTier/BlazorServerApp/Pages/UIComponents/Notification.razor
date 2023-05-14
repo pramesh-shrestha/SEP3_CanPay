@@ -12,10 +12,10 @@
             <span class="text">Welcome to Kanpay, @receiver</span>
         </div>
         <div class="container">
-            <img src="images/notification-bell.png" class="notification-icon" @onclick="@(() => showNotification = !showNotification)" alt="notification" style="cursor: pointer"/>
+            <img src="images/notification-bell.png" class="notification-icon" @onclick="@(HandleNotificationClick)" alt="notification" style="cursor: pointer"/>
             <div class="number-div">
                 <button class="number">
-                    <span class="noti_count">@notification!.Count</span>
+                    <span class="noti_count">@notifications!.Count</span>
                 </button>
             </div>
 
@@ -27,7 +27,7 @@
                 <label class="header">Notifications</label>
                 <hr class="hr1"/>
                 <div class="card">
-                    @foreach (var items in notification)
+                    @foreach (var items in notifications)
                     {
                         <div class="card-body">
                             <label class="date text-muted">@items.Date</label>
@@ -43,9 +43,9 @@
 @code {
     private UserEntity? senderUser;
     private string? receiver;
-    private ICollection<NotificationEntity>? notification = new List<NotificationEntity>();
+    private ICollection<NotificationEntity>? notifications = new List<NotificationEntity>();
     private bool showNotification = false;
-    
+
     // private UserEntity? receiverUser = new UserEntity();
     // private string? notificationType;
     // public string? Message = "";
@@ -59,12 +59,18 @@
             AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
             receiver = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
 
-            notification = await NotificationService.FetchAllNotificationsByReceiverAsync(receiver);
+            notifications = await NotificationService.FetchAllNotificationsByReceiverAsync(receiver);
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
         }
+    }
+
+    private void HandleNotificationClick()
+    {
+        showNotification = !showNotification;
+        NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
     }
 
 
@@ -83,4 +89,7 @@
             throw;
         }
     }*/
+
+
+
 }

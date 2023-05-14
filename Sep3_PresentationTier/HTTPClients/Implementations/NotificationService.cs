@@ -8,7 +8,6 @@ namespace HTTPClients.Implementations;
 
 public class NotificationService : INotificationService
 {
-    
     private readonly HttpClient client;
 
     public NotificationService(HttpClient client)
@@ -44,11 +43,12 @@ public class NotificationService : INotificationService
             throw new Exception(result);
         }
 
-        ICollection<NotificationEntity> notificationEntity = JsonSerializer.Deserialize<ICollection<NotificationEntity>>(result,
-            new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            })!;
+        ICollection<NotificationEntity> notificationEntity =
+            JsonSerializer.Deserialize<ICollection<NotificationEntity>>(result,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                })!;
 
         return notificationEntity;
     }
@@ -64,15 +64,31 @@ public class NotificationService : INotificationService
     //     }
     // }
     //
-    // public async Task MarkAllNotificationsAsReadAsync(List<NotificationEntity> notificationEntities)
-    // {
-    //     HttpResponseMessage responseMessage= await client.PutAsJsonAsync($"/notifications/markAllAsRead/{receivingUsername}")
-    // }
+    public async Task<ICollection<NotificationEntity>> MarkAllNotificationsAsReadAsync(
+        List<NotificationEntity>? notificationEntities)
+    {
+        HttpResponseMessage responseMessage =
+            await client.PostAsJsonAsync($"/notifications/markAllAsRead", notificationEntities);
+        string result = await responseMessage.Content.ReadAsStringAsync();
 
-    public Task<bool> DeleteNotificationAsync(long notificationId)  
+
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        ICollection<NotificationEntity> notificationEntity =
+            JsonSerializer.Deserialize<ICollection<NotificationEntity>>(result,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                })!;
+
+        return notificationEntity;
+    }
+
+    public Task<bool> DeleteNotificationAsync(long notificationId)
     {
         throw new NotImplementedException();
     }
-    
-   
 }

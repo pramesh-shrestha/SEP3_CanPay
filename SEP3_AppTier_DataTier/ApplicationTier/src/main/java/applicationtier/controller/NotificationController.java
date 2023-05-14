@@ -34,14 +34,14 @@ public class NotificationController {
     public ResponseEntity<List<NotificationEntity>> fetchAllNotificationsByReceiver(@PathVariable("receiverUsername") String receiverUsername) {
 
         try {
-            System.out.println("Notification Controller Here"+receiverUsername);
+            System.out.println("Notification Controller Here" + receiverUsername);
             return new ResponseEntity<>(notificationService.fetchAllNotificationsByReceiver(receiverUsername), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
-    @PutMapping("/notifications/markAsRead/{notification}")
+    /*@PutMapping("/notifications/markAsRead/{notification}")
     public ResponseEntity<?> markAsRead(@PathVariable("notification") NotificationEntity notification) {
         try {
             notificationService.markAsRead(notification);
@@ -49,17 +49,18 @@ public class NotificationController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-    }
+    }*/
 
-    /*@PutMapping("/notifications/markAllAsRead/{receivingUsername}")
-    public ResponseEntity<?> markAllAsRead(@PathVariable("receivingUsername") String receivingUsername){
-        try{
-            notificationService.markAllAsRead(receivingUsername);
+    @PostMapping("/notifications/markAllAsRead")
+    public ResponseEntity<?> markAllAsRead(@RequestBody List<NotificationEntity> allNotifications) {
+        try {
+            System.out.println("Notification Controller: " + allNotifications.size());
+            notificationService.markAllAsRead(allNotifications);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-    }*/
+    }
 
     @DeleteMapping("/notification/delete/{id}")
     public ResponseEntity<String> deleteNotification(@PathVariable("id") Long id) {

@@ -99,10 +99,10 @@ public class TransactionDaoImpl : ITransactionDao
             .Include(entity => entity.Receiver)
             .Where(te => te.Sender.Username.Equals(senderUsername)).ToListAsync();
 
-        if (transactionBySender.Count == 0)
+        /*if (transactionBySender.Count == 0)
         {
             throw new Exception($"No Transactions Sent By {senderUsername}");
-        }
+        }*/
 
         return transactionBySender;
     }
@@ -120,10 +120,10 @@ public class TransactionDaoImpl : ITransactionDao
             .Include(entity => entity.Receiver)
             .Where(entity => entity.Receiver.Username.Equals(receiverUsername)).ToListAsync();
 
-        if (transactionByReceiver.Count == 0)
+        /*if (transactionByReceiver.Count == 0)
         {
             throw new Exception($"No Transaction Received By {receiverUsername}");
-        }
+        }*/
 
         return transactionByReceiver;
     }
