@@ -61,12 +61,14 @@ public class UserService : IUserService
 
     public Task<UserEntity> FetchUserByIdAsync(long id)
     {
+        LoadClientWithToken();
         throw new NotImplementedException();
     }
 
     public async Task<UserEntity> FetchUserByUsernameAsync(string username)
     {
-        HttpResponseMessage responseMessage = await client.GetAsync($"/user/{username}");
+        LoadClientWithToken();
+        HttpResponseMessage responseMessage = await client.GetAsync($"/user/username/{username}");
         string result = await responseMessage.Content.ReadAsStringAsync();
 
         if (!responseMessage.IsSuccessStatusCode)
@@ -83,16 +85,30 @@ public class UserService : IUserService
         return userEntity;
     }
 
-    public Task<UserEntity> UpdateUserAsync(long id, UserEntity userEntity)
-    {
-        throw new NotImplementedException();
-    }
+ 
 
     public Task<Boolean> DeleteUserAsync(long id)
     {
         throw new NotImplementedException();
     }
 
+    public async Task<UserEntity> UpdateUserAsync(UserEntity userEntity) {
+        LoadClientWithToken();
+        HttpResponseMessage response = await client.PostAsJsonAsync("/user/update", userEntity);
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        UserEntity user = JsonSerializer.Deserialize<UserEntity>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+
+        return user;
+        
+    }
 
     //Send user credentials to the Application tier for validation
     public async Task<AuthenticationResponse> ValidateUser(string username, string password)
@@ -122,6 +138,8 @@ public class UserService : IUserService
 
         return authenticationResponse;
     }
+    
+
 
     private ClaimsPrincipal CreateClaimsPrincipal()
     {
@@ -182,6 +200,8 @@ public class UserService : IUserService
         OnAuthStateChanged.Invoke(claimsPrincipal);
         return Task.CompletedTask;
     }
+
+  
 
     public void LoadClientWithToken()
     {
