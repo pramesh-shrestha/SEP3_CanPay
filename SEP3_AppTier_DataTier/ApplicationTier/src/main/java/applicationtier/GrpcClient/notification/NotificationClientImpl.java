@@ -6,6 +6,7 @@ import applicationtier.entity.NotificationEntity;
 import applicationtier.protobuf.Notification;
 import applicationtier.protobuf.NotificationProtoServiceGrpc;
 import com.google.protobuf.BoolValue;
+import com.google.protobuf.Empty;
 import com.google.protobuf.Int64Value;
 import com.google.protobuf.StringValue;
 import io.grpc.ManagedChannel;
@@ -57,7 +58,8 @@ public class NotificationClientImpl implements INotificationClient {
             for (NotificationEntity notification : notifications) {
                 notificationListBuilder.addAllNotifications(fromEntityToProtoObj(notification));
             }
-            getNotificationBlockingStub().markAllAsRead(notificationListBuilder.build());
+
+            Empty empty = getNotificationBlockingStub().markAllAsRead(notificationListBuilder.build());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -67,7 +69,6 @@ public class NotificationClientImpl implements INotificationClient {
     @Override
     public List<NotificationEntity> fetchAllNotificationsByReceiver(String receiverUsername) {
         try {
-            System.out.println("grpc client"+receiverUsername);
             List<Notification.NotificationProtoObj> allNotificationsList = getNotificationBlockingStub().fetchAllNotificationsByReceiverAsync(StringValue.of(receiverUsername)).getAllNotificationsList();
             List<NotificationEntity> notificationEntities = new ArrayList<>();
             for (Notification.NotificationProtoObj notificationProtoObj : allNotificationsList) {

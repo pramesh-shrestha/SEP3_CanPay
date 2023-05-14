@@ -91,14 +91,27 @@ public class NotificationDaoImpl : INotificationDao
     {
         try
         {
-            if (notificationEntities.Count != 0)
+            /*if (notificationEntities.Count != 0)
             {
                 foreach (NotificationEntity notificationEntity in notificationEntities)
                 {
                     notificationEntity.IsRead = true;
                     context.Notifications.Update(notificationEntity);
+                    
+                }
+            }*/
+            if (notificationEntities.Count != 0)
+            {
+                var existingEntities = await context.Notifications
+                    .Where(n => notificationEntities.Select(ne => ne.Id).Contains(n.Id))
+                    .ToListAsync();
+
+                foreach (var existingEntity in existingEntities)
+                {
+                    existingEntity.IsRead = true;
                 }
             }
+
             await context.SaveChangesAsync();
         }
         catch (Exception e)

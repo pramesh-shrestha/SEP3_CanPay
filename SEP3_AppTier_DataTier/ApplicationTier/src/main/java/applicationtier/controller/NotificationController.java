@@ -34,7 +34,6 @@ public class NotificationController {
     public ResponseEntity<List<NotificationEntity>> fetchAllNotificationsByReceiver(@PathVariable("receiverUsername") String receiverUsername) {
 
         try {
-            System.out.println("Notification Controller Here" + receiverUsername);
             return new ResponseEntity<>(notificationService.fetchAllNotificationsByReceiver(receiverUsername), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -54,7 +53,7 @@ public class NotificationController {
     @PostMapping("/notifications/markAllAsRead")
     public ResponseEntity<?> markAllAsRead(@RequestBody List<NotificationEntity> allNotifications) {
         try {
-            System.out.println("Notification Controller: " + allNotifications.size());
+            System.out.println("Mark All As Read called in notification controller");
             notificationService.markAllAsRead(allNotifications);
             return ResponseEntity.ok().build();
         } catch (Exception e) {

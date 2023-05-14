@@ -22,7 +22,6 @@ public class NotificationService : INotificationService
         string result = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode)
         {
-            Console.WriteLine(responseMessage);
             throw new Exception(result);
         }
 
@@ -64,27 +63,11 @@ public class NotificationService : INotificationService
     //     }
     // }
     //
-    public async Task<ICollection<NotificationEntity>> MarkAllNotificationsAsReadAsync(
+    public async Task MarkAllNotificationsAsReadAsync(
         List<NotificationEntity>? notificationEntities)
     {
         HttpResponseMessage responseMessage =
             await client.PostAsJsonAsync($"/notifications/markAllAsRead", notificationEntities);
-        string result = await responseMessage.Content.ReadAsStringAsync();
-
-
-        if (!responseMessage.IsSuccessStatusCode)
-        {
-            throw new Exception(result);
-        }
-
-        ICollection<NotificationEntity> notificationEntity =
-            JsonSerializer.Deserialize<ICollection<NotificationEntity>>(result,
-                new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                })!;
-
-        return notificationEntity;
     }
 
     public Task<bool> DeleteNotificationAsync(long notificationId)

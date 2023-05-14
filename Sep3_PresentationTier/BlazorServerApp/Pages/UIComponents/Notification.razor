@@ -1,5 +1,6 @@
 ﻿@using Domains.Entity
 @using HTTPClients.ClientInterfaces
+@using System.Timers
 @namespace BlazorServerApp.Pages
 @inject INotificationService NotificationService;
 @inject NavigationManager NavMgr;
@@ -46,6 +47,8 @@
     private ICollection<NotificationEntity>? notifications = new List<NotificationEntity>();
     private bool showNotification = false;
 
+    private Timer timer;
+
     // private UserEntity? receiverUser = new UserEntity();
     // private string? notificationType;
     // public string? Message = "";
@@ -54,12 +57,33 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await UpdateNotifications();
+
+    // Start the timer to update notifications every 5 seconds
+        // timer = new Timer(5000);
+        // timer.Elapsed += TimerElapsedAsync;
+        // timer.Start();
+    }
+
+    // Method called when the timer's elapsed event is triggered
+
+    private async void TimerElapsedAsync(object? sender, ElapsedEventArgs e)
+    {
+        await UpdateNotifications();
+        Console.WriteLine("new notifications!!!");
+    }
+
+    private async Task UpdateNotifications()
+    {
         try
         {
             AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
             receiver = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
 
             notifications = await NotificationService.FetchAllNotificationsByReceiverAsync(receiver);
+
+    // Trigger UI Refresh
+            // await InvokeAsync(StateHasChanged);
         }
         catch (Exception e)
         {
@@ -67,10 +91,14 @@
         }
     }
 
-    private void HandleNotificationClick()
+    private async void HandleNotificationClick()
     {
         showNotification = !showNotification;
-        NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
+
+        if (notifications.Count != 0)
+        {
+            await NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
+        }
     }
 
 
@@ -89,7 +117,6 @@
             throw;
         }
     }*/
-
 
 
 }

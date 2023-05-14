@@ -33,7 +33,6 @@ public class TransactionService : ITransactionService
                 PropertyNameCaseInsensitive = true
             })!;
 
-        Console.WriteLine(entity.TransactionId.GetTypeCode());
 
         return entity;
     }
