@@ -3,6 +3,7 @@
 @using HTTPClients.ClientInterfaces
 @using UIComponents
 @using BCrypt.Net
+@using System.Text.RegularExpressions
 @inject AuthenticationStateProvider StateProvider;
 @inject IUserService UserService;
 @inject NavigationManager NavMgr;
@@ -12,7 +13,7 @@
     <div class="card">
 
         <div class="card-header">
-            <h2 class="card-title">Manage Profile</h2>
+            <h4 class="card-title">Manage Profile</h4>
         </div>
 
         <div class="card-body">
@@ -20,37 +21,37 @@
             <div class="form-row">
                 <div>
                     <label  class="form-label">Username</label>
-                    <input type="text"  @bind="username" disabled>
+                    <input type="text"  @bind="username" disabled class="fieldInput">
                     
                 </div>
                 
                 <div>
                     <label  class="form-label">Password</label>
-                    <input type="password" @bind="password" disabled >
+                    <input type="password" @bind="password" disabled class="fieldInput">
                 </div>
             </div>
             
             <div class="form-row">
                 <div>
                     <label class="form-label">Fullname</label>
-                    <input type="text"  @bind="fullName" disabled="@IsDisabled" >
+                    <input type="text"  @bind="fullName" disabled="@IsDisabled" class="fieldInput" style="background-color: @toChangeToWhite">
                 </div>
                             
                 <div>
                     <label  class="form-label">Card Number</label>
-                    <input type="text" @bind="cardNumber" disabled="@IsDisabled">
+                    <input type="text" @bind="cardNumber" disabled="@IsDisabled" class="fieldInput" style="background-color: @toChangeToWhite">
                 </div>
             </div>
             
             <div class="form-row">
                 <div>
                     <label class="form-label">Expiry Date</label>
-                    <input type="text"  @bind="expiryDate" disabled="@IsDisabled">
+                    <input type="text"  @bind="expiryDate" disabled="@IsDisabled" class="fieldInput" style="background-color:@toChangeToWhite">
                 </div>
                                         
                 <div>
                     <label  class="form-label">Cvv (3-digits)</label>
-                    <input type="text" @bind="cvv" disabled="@IsDisabled" >
+                    <input type="text" @bind="cvv" disabled="@IsDisabled" class="fieldInput" style="background-color: @toChangeToWhite">
                 </div>
             </div>
             
@@ -59,14 +60,14 @@
 
             <div class="form-row buttons">
                 <div>
-                    <button class="btn btn-primary" @onclick="SaveChanges">Save Changes</button>
-                    <button class="btn btn-primary  align-right" @onclick="OnCancelled">Cancel</button>
+                    <button class="buttonCard" @onclick="SaveChanges">Save Changes</button>
+                    <button class="buttonCard  align-right" @onclick="OnCancelled">Cancel</button>
                 </div>
                 <div>
                     @* @onclick:preventDefault -- prevent the default behavior of the button and prevent the page from reloading or submitting the form.
                     It is necessary because there's a form submit or page reload happening that is resetting the form to its initial state. *@
-                    <button class="btn btn-primary edit-button" @onclick="Enable" >Edit Profile</button>
-                    <button class="btn btn-primary align-right" @onclick="ChangePassword" @onclick:preventDefault>Change Password</button>
+                    <button class="buttonCard" @onclick="Enable">Edit Profile</button>
+                    <button class="buttonCard align-right" @onclick="ChangePassword" @onclick:preventDefault>Change Password</button>
                 </div>
             </div>
    
@@ -99,7 +100,7 @@
         <button class="button"  @onclick="@GoBack">Go Back</button>
     </div>
     <div class="mt-2">
-        <label class="form-label" style="color: @color">@errorLabel</label>
+        <label style="color: @color">@errorLabel</label>
     </div>
 </Modal>
 
@@ -113,23 +114,23 @@
 
 @code {
     private string username { get; set; }
-    private UserEntity User { get; set; }
+    private UserEntity? User { get; set; }
     private bool IsDisabled { get; set; } = true;
     private bool showModal;
     private bool confirmation;
-    private string password;
-    private string fullName;
+    private string? password;
+    private string? fullName;
     private long cardNumber;
-    private string expiryDate;
+    private string? expiryDate;
     private int cvv;
     private int currentBalance;
-    private string currentPassword;
-    private string newPassword;
-    private string confirmNewPassword;
-    private string errorLabel;
-    private string error;
-    private string color;
-    
+    private string? currentPassword = "";
+    private string? newPassword = "";
+    private string? confirmNewPassword = "";
+    private string? errorLabel;
+    private string? error;
+    private string? color;
+    private string? toChangeToWhite;
     protected override async Task OnInitializedAsync() {
         AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
         username = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
@@ -145,10 +146,12 @@
     //enable the card input fields
     private void Enable() {
         IsDisabled = false;
+        toChangeToWhite = "white";
     }
     
      
     private void Proceed() {
+        string? passwordRegex = @"^(?=.*\S).{6,}$";
         errorLabel = "";
     // Extract the salt from the Java hashed password
         string salt = password.Substring(0, 29);
@@ -158,6 +161,11 @@
         Console.WriteLine(hashedCurrentPassword);
         
         try {
+            
+            if (string.IsNullOrEmpty(currentPassword) || (string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmNewPassword))) {
+                throw new Exception("All fields required!");
+            }
+            
             if (!hashedCurrentPassword.Equals(password)) {
                 throw new Exception("Wrong current password!");
             }
@@ -165,11 +173,22 @@
             if (!newPassword.Equals(confirmNewPassword)) {
                 throw new Exception("New password mismatch!");
             }
+
+            if (!Regex.IsMatch(newPassword, passwordRegex)) {
+                throw new Exception("Password Must Be " +
+                                    " 6 Characters Long.");
+            }
+
+            if (newPassword.Equals(currentPassword)) {
+                throw new Exception("You must enter new password different from your current password.");
+            }
+               
+            
     
             if (string.IsNullOrEmpty(errorLabel)) {
                 showModal = false;
                 error = "Password changed successfully!";
-                color = "green";
+                color = "#79F400";
                 password = newPassword;
             }
             
