@@ -60,10 +60,15 @@
     {
         await UpdateNotifications();
 
+        AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
+
     // Start the timer to update notifications every 5 seconds
-        timer = new Timer(5000);
-        timer.Elapsed += TimerElapsedAsync;
-        timer.Start();
+        if (state.User.Identity!.IsAuthenticated)
+        {
+            timer = new Timer(5000);
+            timer.Elapsed += TimerElapsedAsync;
+            timer.Start();
+        }
     }
 
     // Method called when the timer's elapsed event is triggered
@@ -81,9 +86,7 @@
             receiver = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
 
             notifications = await NotificationService.FetchAllNotificationsByReceiverAsync(receiver);
-            Console.WriteLine($"before setting: {notificationCount}");
             notificationCount = notifications.Count;
-            Console.WriteLine($"after setting: {notificationCount}");
 
 
     // Trigger UI Refresh
@@ -102,6 +105,7 @@
         if (notifications.Count != 0)
         {
             await NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
+            await InvokeAsync(StateHasChanged);
         }
     }
 

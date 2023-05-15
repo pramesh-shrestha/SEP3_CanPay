@@ -90,7 +90,6 @@ public class NotificationDaoImpl : INotificationDao
     {
         try
         {
-            Console.WriteLine(notificationEntities.Count);
             /*if (notificationEntities.Count != 0)
             {
                 foreach (NotificationEntity notificationEntity in notificationEntities)
@@ -109,7 +108,6 @@ public class NotificationDaoImpl : INotificationDao
                 foreach (var existingEntity in existingEntities)
                 {
                     existingEntity.IsRead = true;
-                    Console.WriteLine($"Notification Dao Impl: {existingEntity.Id}  {existingEntity.IsRead}");
                 }
             }
 

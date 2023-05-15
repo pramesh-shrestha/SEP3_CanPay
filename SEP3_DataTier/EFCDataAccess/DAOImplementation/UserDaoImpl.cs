@@ -90,7 +90,6 @@ public class UserDaoImpl : IUserDao
     //update balance
     public async Task<bool> UpdateBalanceAsync(string username, int newBalance)
     {
-        //todo: balance adding and removing should be done in application tier. need to consult with group 
         UserEntity? user = await FetchUserByUsernameAsync(username);
         user.Balance = newBalance;
         await context.SaveChangesAsync();

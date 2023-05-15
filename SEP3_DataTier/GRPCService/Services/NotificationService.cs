@@ -43,10 +43,10 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
             ICollection<NotificationEntity> notificationEntities =
                 await notificationDao.FetchAllNotificationsByReceiverAsync(request.Value);
 
-            if (notificationEntities.Count == 0)
+            /*if (notificationEntities.Count == 0)
             {
                 throw new Exception("No Notifications for Receiver!!!");
-            }
+            }*/
 
             NotificationProtoObjList protoObjList = new NotificationProtoObjList
             {

@@ -120,7 +120,7 @@
             sender = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
 
             IEnumerable<UserEntity?> entities = userEntities.ToList();
-            senderUser = entities.FirstOrDefault(u => u.UserName.ToLower().Equals(sender));
+            senderUser = entities.FirstOrDefault(u => u.UserName.Equals(sender));
             cardNumber = senderUser.Card.CardNumber;
 
             usernames = entities.Select(u => u.UserName).ToList();
