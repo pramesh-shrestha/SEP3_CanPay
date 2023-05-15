@@ -60,14 +60,14 @@
 
             <div class="form-row buttons">
                 <div>
-                    <button class="buttonCard" @onclick="SaveChanges">Save Changes</button>
-                    <button class="buttonCard  align-right" @onclick="OnCancelled">Cancel</button>
+                    <button class="buttonCard"  @onclick="SaveChanges" disabled="@IsDisabled" style="color: @(IsDisabled ? "grey" : "white")">Save Changes</button>
+                    <button class="buttonCard  align-right" @onclick="@(() => NavMgr.NavigateTo("/"))">Cancel</button>
                 </div>
                 <div>
                     @* @onclick:preventDefault -- prevent the default behavior of the button and prevent the page from reloading or submitting the form.
                     It is necessary because there's a form submit or page reload happening that is resetting the form to its initial state. *@
-                    <button class="buttonCard" @onclick="Enable">Edit Profile</button>
-                    <button class="buttonCard align-right" @onclick="ChangePassword" @onclick:preventDefault>Change Password</button>
+                    <button class="buttonCard" @onclick="() => editProfile = true">Edit Profile</button>
+                    <button class="buttonCard align-right" @onclick="() => showModal = true" @onclick:preventDefault disabled="@IsDisabled" style="color: @(IsDisabled ? "grey" : "white")">Change Password</button>
                 </div>
             </div>
    
@@ -82,17 +82,17 @@
 
 <Modal ShowModal="showModal">
     <form>
-        <div class="mb-3">
-            <label >Your current password</label>
-            <input type="text" class="form-control" @bind="currentPassword">
-        </div>
+        @* <div class="mb-3"> *@
+        @*     <label >Your current password</label> *@
+        @*     <input type="text" class="form-control" @bind="currentPassword"> *@
+        @* </div> *@
         <div class="mb-3">
             <label >New password</label>
-            <input type="text" class="form-control" @bind="newPassword">
+            <input type="password" class="form-control" @bind="newPassword">
         </div>
         <div class="mb-3">
             <label >Confirm new password</label>
-            <input type="text" class="form-control" @bind="confirmNewPassword">
+            <input type="password" class="form-control" @bind="confirmNewPassword">
         </div>
     </form>
     <div>
@@ -111,6 +111,21 @@
     </div>
 </Modal>
 
+<Modal ShowModal="editProfile">
+    <div class="mb-3">
+        <label >Enter your password</label>
+        <input type="password" class="form-control" @bind="currentPassword">
+    </div>
+    <div>
+         <button class="button" @onclick="@CheckPassword">OK</button>
+        <button class="button" @onclick="() => editProfile=false">Cancel</button>
+    </div>
+    <div class="mt-2">
+        <label style="color: @color">@checkPasswordError</label>
+    </div>
+    
+    
+</Modal>
 
 @code {
     private string username { get; set; }
@@ -129,8 +144,14 @@
     private string? confirmNewPassword = "";
     private string? errorLabel;
     private string? error;
+    private string? checkPasswordError;
     private string? color;
     private string? toChangeToWhite;
+    private bool editProfile;
+    
+    
+    
+    
     protected override async Task OnInitializedAsync() {
         AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
         username = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
@@ -144,31 +165,58 @@
     }
     
     //enable the card input fields
-    private void Enable() {
-        IsDisabled = false;
-        toChangeToWhite = "white";
+    // private void Enable() {
+    //     editProfile = true;
+    //     string hashedCurrentPassword = HashedCurrentPassword();
+    //     IsDisabled = false;
+    //     toChangeToWhite = "white";
+    // }
+
+    private void CheckPassword() {
+        errorLabel = "";
+        try {
+            if (string.IsNullOrEmpty(currentPassword)) {
+                throw new Exception("You must enter your current password.");
+            }
+            
+            bool isPasswordValid = BCrypt.Verify(currentPassword, password);
+
+            if (isPasswordValid) {
+                password = currentPassword;
+                IsDisabled = false;
+                toChangeToWhite = "white";
+                editProfile = false;
+            }
+            
+            else {
+                throw new Exception("You entered wrong password!");
+            }
+        }
+        catch (Exception e) {
+            checkPasswordError = e.Message;
+            color = "red";
+        }
+        
     }
     
      
     private void Proceed() {
-        string? passwordRegex = @"^(?=.*\S).{6,}$";
+        string passwordRegex = @"^(?=.*\S).{6,}$";
         errorLabel = "";
-    // Extract the salt from the Java hashed password
-        string salt = password.Substring(0, 29);
-        int rounds = 10;
-        string hashedCurrentPassword = BCrypt.HashPassword(currentPassword, salt + rounds);
-        Console.WriteLine(password);
-        Console.WriteLine(hashedCurrentPassword);
+    
+        // string hashedCurrentPassword = HashedCurrentPassword();
+        // Console.WriteLine(password);
+        // Console.WriteLine(hashedCurrentPassword);
         
         try {
             
-            if (string.IsNullOrEmpty(currentPassword) || (string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmNewPassword))) {
+            if ((string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmNewPassword))) {
                 throw new Exception("All fields required!");
             }
             
-            if (!hashedCurrentPassword.Equals(password)) {
-                throw new Exception("Wrong current password!");
-            }
+            // if (!hashedCurrentPassword.Equals(password)) {
+            //     throw new Exception("Wrong current password!");
+            // }
     
             if (!newPassword.Equals(confirmNewPassword)) {
                 throw new Exception("New password mismatch!");
@@ -182,9 +230,7 @@
             if (newPassword.Equals(currentPassword)) {
                 throw new Exception("You must enter new password different from your current password.");
             }
-               
             
-    
             if (string.IsNullOrEmpty(errorLabel)) {
                 showModal = false;
                 error = "Password changed successfully!";
@@ -200,16 +246,22 @@
         }
         
     }
-    
-    private void ChangePassword() {
-        showModal = true;
+
+    // Extract the salt from the Java hashed password
+    private string HashedCurrentPassword() {
+        string salt = password.Substring(0, 29);
+        int rounds = 10;
+        return BCrypt.HashPassword(currentPassword, salt + rounds);
     }
+
+    // private void ChangePassword() {
+    //     showModal = true;
+    // }
     
     private void GoBack() {
         currentPassword = string.Empty;
         newPassword = string.Empty;
         confirmNewPassword = string.Empty;
-        
         showModal = false;
         confirmation = false;
     }
@@ -231,6 +283,7 @@
         try {
             await UserService.UpdateUserAsync(userEntity);
             confirmation = true;
+            IsDisabled = true;
         }
         catch (Exception e) {
             errorLabel = e.Message;
