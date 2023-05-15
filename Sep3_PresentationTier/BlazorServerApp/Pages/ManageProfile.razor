@@ -4,6 +4,7 @@
 @using UIComponents
 @using BCrypt.Net
 @using System.Text.RegularExpressions
+@using System.Globalization
 @inject AuthenticationStateProvider StateProvider;
 @inject IUserService UserService;
 @inject NavigationManager NavMgr;
@@ -39,19 +40,19 @@
                             
                 <div>
                     <label  class="form-label">Card Number</label>
-                    <input type="text" @bind="cardNumber" disabled="@IsDisabled" class="fieldInput" style="background-color: @toChangeToWhite">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" @bind="cardNumber" disabled="@IsDisabled" class="fieldInput" style="background-color: @toChangeToWhite">
                 </div>
             </div>
             
             <div class="form-row">
                 <div>
                     <label class="form-label">Expiry Date</label>
-                    <input type="text"  @bind="expiryDate" disabled="@IsDisabled" class="fieldInput" style="background-color:@toChangeToWhite">
+                    <input type="text" pattern="[0-9]*\/?" @bind="expiryDate" disabled="@IsDisabled" class="fieldInput" style="background-color:@toChangeToWhite">
                 </div>
                                         
                 <div>
                     <label  class="form-label">Cvv (3-digits)</label>
-                    <input type="text" @bind="cvv" disabled="@IsDisabled" class="fieldInput" style="background-color: @toChangeToWhite">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" @bind="cvv" disabled="@IsDisabled" class="fieldInput" style="background-color: @toChangeToWhite">
                 </div>
             </div>
             
@@ -151,12 +152,13 @@
     
     
     protected override async Task OnInitializedAsync() {
+       
         AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
         username = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
         User = await UserService.FetchUserByUsernameAsync(username);
         password = User.Password!;
         cardNumber = User.Card!.CardNumber;
-        expiryDate = User.Card!.ExpiryDate!;
+        expiryDate = User.Card!.ExpiryDate;
         cvv = User.Card!.Cvv;
         currentBalance = User.Balance;
         fullName = User.FullName!;
@@ -203,9 +205,7 @@
         errorLabel = "";
     
         // string hashedCurrentPassword = HashedCurrentPassword();
-        // Console.WriteLine(password);
-        // Console.WriteLine(hashedCurrentPassword);
-        
+
         try {
             
             if ((string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmNewPassword))) {
@@ -246,11 +246,11 @@
     }
 
     // Extract the salt from the Java hashed password
-    private string HashedCurrentPassword() {
-        string salt = password.Substring(0, 29);
-        int rounds = 10;
-        return BCrypt.HashPassword(currentPassword, salt + rounds);
-    }
+    // private string HashedCurrentPassword() {
+    //     string salt = password.Substring(0, 29);
+    //     int rounds = 10;
+    //     return BCrypt.HashPassword(currentPassword, salt + rounds);
+    // }
 
     // private void ChangePassword() {
     //     showModal = true;
@@ -264,16 +264,27 @@
         confirmation = false;
     }
 
-    private void OnCancelled() {
-        NavMgr.NavigateTo("/");
-    }
+    // private void OnCancelled() {
+    //     NavMgr.NavigateTo("/");
+    // }
     
     private async Task SaveChanges() {
+        // bool success = DateTime.TryParseExact(expiryDate, "MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime);
+        string pattern = @"^[0-9/]*$";
+        bool isMatch = Regex.IsMatch(expiryDate, pattern);
+        
         try {
             if (string.IsNullOrEmpty(fullName) || string.IsNullOrEmpty(expiryDate)) throw new Exception("Fullname or Expiry Date Fields Cannot Be Left Empty.");
             if (cardNumber == 0) throw new Exception("Card Number Cannot Be Empty");
             if (cvv == 0) throw new Exception("CVV Cannot Be Empty");
             if (cardNumber.ToString().Length != 16) throw new Exception("Card Number Must Be 16 Digits Long");
+            if (!isMatch) throw new Exception("Invalid Date");
+            if (isMatch) {
+                DateTime date = Convert.ToDateTime(expiryDate);
+                if (date.Year < DateTime.Now.Year || date.Year > 2099) {
+                    throw new Exception("Invalid Year");
+                }
+            }
             if (cvv.ToString().Length != 3) throw new Exception("CVV must be 3 digits long");
             
             DebitCardEntity cardEntity = new DebitCardEntity(cardNumber, expiryDate, cvv);
@@ -287,9 +298,12 @@
             await UserService.UpdateUserAsync(userEntity);
             confirmation = true;
             IsDisabled = true;
+            error = "";
+            toChangeToWhite = "lightblue";
         }
         catch (Exception e) {
-            errorLabel = e.Message;
+            error = e.Message;
+            color = "red";
         }
     }
 }
