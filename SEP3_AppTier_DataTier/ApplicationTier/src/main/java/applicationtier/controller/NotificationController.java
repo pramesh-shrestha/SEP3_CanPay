@@ -53,7 +53,6 @@ public class NotificationController {
     @PostMapping("/notifications/markAllAsRead")
     public ResponseEntity<?> markAllAsRead(@RequestBody List<NotificationEntity> allNotifications) {
         try {
-            System.out.println("Mark All As Read called in notification controller");
             notificationService.markAllAsRead(allNotifications);
             return ResponseEntity.ok().build();
         } catch (Exception e) {

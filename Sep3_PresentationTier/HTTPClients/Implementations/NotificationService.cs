@@ -68,6 +68,11 @@ public class NotificationService : INotificationService
     {
         HttpResponseMessage responseMessage =
             await client.PostAsJsonAsync($"/notifications/markAllAsRead", notificationEntities);
+
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            throw new Exception(responseMessage.Content.ReadAsStringAsync().ToString());
+        }
     }
 
     public Task<bool> DeleteNotificationAsync(long notificationId)

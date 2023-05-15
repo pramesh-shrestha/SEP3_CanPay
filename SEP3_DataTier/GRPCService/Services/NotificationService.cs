@@ -64,7 +64,7 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            // Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.Aborted, e.Message));
         }
     }

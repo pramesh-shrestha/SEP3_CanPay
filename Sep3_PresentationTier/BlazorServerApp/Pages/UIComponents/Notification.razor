@@ -16,7 +16,7 @@
             <img src="images/notification-bell.png" class="notification-icon" @onclick="@(HandleNotificationClick)" alt="notification" style="cursor: pointer"/>
             <div class="number-div">
                 <button class="number">
-                    <span class="noti_count">@notifications!.Count</span>
+                    <span class="noti_count">@notificationCount</span>
                 </button>
             </div>
 
@@ -46,6 +46,7 @@
     private string? receiver;
     private ICollection<NotificationEntity>? notifications = new List<NotificationEntity>();
     private bool showNotification = false;
+    private int notificationCount;
 
     private Timer timer;
 
@@ -60,9 +61,9 @@
         await UpdateNotifications();
 
     // Start the timer to update notifications every 5 seconds
-        // timer = new Timer(5000);
-        // timer.Elapsed += TimerElapsedAsync;
-        // timer.Start();
+        timer = new Timer(5000);
+        timer.Elapsed += TimerElapsedAsync;
+        timer.Start();
     }
 
     // Method called when the timer's elapsed event is triggered
@@ -70,7 +71,6 @@
     private async void TimerElapsedAsync(object? sender, ElapsedEventArgs e)
     {
         await UpdateNotifications();
-        Console.WriteLine("new notifications!!!");
     }
 
     private async Task UpdateNotifications()
@@ -81,9 +81,13 @@
             receiver = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
 
             notifications = await NotificationService.FetchAllNotificationsByReceiverAsync(receiver);
+            Console.WriteLine($"before setting: {notificationCount}");
+            notificationCount = notifications.Count;
+            Console.WriteLine($"after setting: {notificationCount}");
+
 
     // Trigger UI Refresh
-            // await InvokeAsync(StateHasChanged);
+            await InvokeAsync(StateHasChanged);
         }
         catch (Exception e)
         {
