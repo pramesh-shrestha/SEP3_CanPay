@@ -136,18 +136,24 @@ public class TransactionDaoImpl : ITransactionDao
     /// <returns>A collection of transaction entities involving the given user.</returns>
     public async Task<ICollection<TransactionEntity>> FetchAlLTransactionsInvolvingUserAsync(string username)
     {
-        // Get transactions where the user is sender
+        /*// Get transactions where the user is sender
         ICollection<TransactionEntity> sentTransaction = await FetchAlLTransactionsBySenderAsync(username);
 
         // Get transactions where the user is receiver
         ICollection<TransactionEntity> receivedTransaction = await FetchAllTransactionsByReceiverAsync(username);
 
-        ICollection<TransactionEntity> transactions = sentTransaction.Concat(receivedTransaction).ToList();
+        ICollection<TransactionEntity> transactions = sentTransaction.Concat(receivedTransaction).ToList();*/
 
-        if (transactions.Count == 0)
+        ICollection<TransactionEntity?> transactions = await context.Transactions
+            .AsNoTracking()
+            .Include(entity => entity.Sender).Include(entity => entity.Receiver)
+            .Where(entity => entity.Receiver.Username.Equals(username) || entity.Sender.Username.Equals(username))
+            .ToListAsync();
+
+        /*if (transactions.Count == 0)
         {
             throw new Exception($"No Transaction Involving {username}");
-        }
+        }*/
 
         return transactions;
     }

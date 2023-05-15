@@ -86,9 +86,7 @@
             receiver = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
 
             notifications = await NotificationService.FetchAllNotificationsByReceiverAsync(receiver);
-            Console.WriteLine($"before setting: {notificationCount}");
             notificationCount = notifications.Count;
-            Console.WriteLine($"after setting: {notificationCount}");
 
 
     // Trigger UI Refresh
@@ -107,6 +105,7 @@
         if (notifications.Count != 0)
         {
             await NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
+            await InvokeAsync(StateHasChanged);
         }
     }
 

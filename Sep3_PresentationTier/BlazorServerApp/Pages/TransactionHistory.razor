@@ -88,75 +88,76 @@
 
     </div>
 
-    <div class="table_box">
-        <table class="table table-borderless mt-4 ">
-            <thead>
-            <tr>
-                <th>Sender</th>
-                <th>Receiver</th>
-                <th>Date</th>
-                <th>Amount</th>
-            </tr>
-            </thead>
+    @if (filteredTransaction.Count != 0 && isHistoryLoaded)
+    {
+        <div class="table_box">
+            <table class="table table-borderless mt-4 ">
+                <thead>
+                <tr>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                </tr>
+                </thead>
 
-            <tbody>
-            @*@if (transactionList.Count == 0)
-        {
-            <span> Click on Load History Button to Load Transactions </span>
-        }
-        else
-        {*@
-            @foreach (var transactionEntity in filteredTransaction)
-            {
-                if (searchUsername.IsNullOrEmpty() ||
-                    transactionEntity.Sender.UserName!.Contains(searchUsername, StringComparison.OrdinalIgnoreCase) ||
-                    transactionEntity.Receiver!.UserName.Contains(searchUsername, StringComparison.OrdinalIgnoreCase))
+                <tbody>
+
+                @foreach (var transactionEntity in filteredTransaction)
                 {
-                    <tr>
-                        <td>
-                            <div class="user_info">
-                                <span>@transactionEntity.Sender.FullName</span>
-                                <span class="text-muted">@transactionEntity.Sender.UserName</span>
-                            </div>
-                        </td>
+                    if (searchUsername.IsNullOrEmpty() ||
+                        transactionEntity.Sender.UserName.Contains(searchUsername, StringComparison.OrdinalIgnoreCase) ||
+                        transactionEntity.Receiver.UserName.Contains(searchUsername, StringComparison.OrdinalIgnoreCase))
+                    {
+                        <tr>
+                            <td>
+                                <div class="user_info">
+                                    <span>@transactionEntity.Sender.FullName</span>
+                                    <span class="text-muted">@transactionEntity.Sender.UserName</span>
+                                </div>
+                            </td>
 
-                        <td>
-                            <div class="user_info">
-                                <span>@transactionEntity.Receiver!.FullName</span>
-                                <span class="text-muted">@transactionEntity.Receiver.UserName</span>
-                            </div>
-                        </td>
+                            <td>
+                                <div class="user_info">
+                                    <span>@transactionEntity.Receiver!.FullName</span>
+                                    <span class="text-muted">@transactionEntity.Receiver.UserName</span>
+                                </div>
+                            </td>
 
-                        <td>
-                            <span>@transactionEntity.Date</span>
-                        </td>
-                        <td>
+                            <td>
+                                <span>@transactionEntity.Date</span>
+                            </td>
+                            <td>
 
-                            @if (transactionEntity.Sender.UserName!.Equals(currentUser))
-                            {
-                                <img class="amount_icon" src="images/minus.png"/>
-                                <span class="amount" style="color: red">@transactionEntity.Amount</span>
-                            }
-                            else
-                            {
-                                <img class="amount_icon" src="images/plus.png"/>
-                                <span class="amount" style="color: #00ff00">@transactionEntity.Amount</span>
-                            }
+                                @if (transactionEntity.Sender.UserName!.Equals(currentUser))
+                                {
+                                    <img class="amount_icon" src="images/minus.png"/>
+                                    <span class="amount" style="color: red">@transactionEntity.Amount</span>
+                                }
+                                else
+                                {
+                                    <img class="amount_icon" src="images/plus.png"/>
+                                    <span class="amount" style="color: #00ff00">@transactionEntity.Amount</span>
+                                }
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    }
                 }
-            }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="field">
+            <label style="color: white">
+                <span>No Transactions Found for @currentUser</span>
+            </label>
+        </div>
+    }
 
-            <!-- Next button/link -->
-            @*@if (startIndex + transactionPerPage < transactionList.Count)
-        {
-            <button class="btn btn-primary" @onclick="LoadNextTransactions">Next</button>
-        }*@
 
-            </tbody>
-        </table>
-    </div>
 
 </div>
 
@@ -169,16 +170,13 @@
     private ICollection<TransactionEntity> transactionList = new List<TransactionEntity>();
     private string filterDate;
 
-    private bool isHistoryLoaded = false;
+    private bool isHistoryLoaded;
     private bool isCheckBoxSelected = false;
 
     private string searchUsername = "";
 
     private string errorLabel;
     private string color;
-
-    /*private const int transactionPerPage = 0;
-    private int startIndex = 0;*/
 
 
     protected override async Task OnInitializedAsync()
@@ -187,6 +185,7 @@
         {
             AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
             currentUser = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
+            isHistoryLoaded = false;
         }
         catch (Exception e)
         {
