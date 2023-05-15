@@ -59,7 +59,7 @@ public class UserController {
     }
 
     //get user by username
-    @GetMapping("/user/username/{username}")
+    @GetMapping("/user/{username}")
     public ResponseEntity<UserEntity> fetchUserByUsername(@PathVariable("username") String username) {
         try {
             UserEntity user = userService.fetchUserByUsername(username);
@@ -70,10 +70,9 @@ public class UserController {
     }
 
     //update user
-    @PostMapping("/user/update")
+    @PutMapping("/user/update/{updatedUser}")
     public ResponseEntity<UserEntity> updateUser(@RequestBody
                                                  UserEntity updatedUser) {
-        System.out.println("in update");
         try {
             return new ResponseEntity<>(userService.updateUser(updatedUser), HttpStatus.OK);
         } catch (Exception e) {

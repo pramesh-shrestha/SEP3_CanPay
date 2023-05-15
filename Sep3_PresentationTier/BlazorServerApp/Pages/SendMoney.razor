@@ -148,8 +148,8 @@
     }
 
     //send money to receiver
-    private async Task SendMoneyToReceiver() {
-        errorLabel = "";
+    private async Task SendMoneyToReceiver()
+    {
         receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
         string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
 
@@ -159,13 +159,13 @@
         {
             if (string.IsNullOrEmpty(receiver))
             {
-                throw new Exception("Receiver must be selected.");
-                
+                errorLabel = "Receiver must be selected.";
+                color = "red";
             }
             if (int.Parse(amount) <= 0)
             {
-                throw new Exception("Amount must be more than 0.");
-                
+                errorLabel = "Amount must be more than 0.";
+                color = "red";
             }
             if (string.IsNullOrEmpty(errorLabel))
             {
