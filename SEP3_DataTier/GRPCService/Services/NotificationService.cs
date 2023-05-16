@@ -43,10 +43,10 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
             ICollection<NotificationEntity> notificationEntities =
                 await notificationDao.FetchAllNotificationsByReceiverAsync(request.Value);
 
-            if (notificationEntities.Count == 0)
+            /*if (notificationEntities.Count == 0)
             {
                 throw new Exception("No Notifications for Receiver!!!");
-            }
+            }*/
 
             NotificationProtoObjList protoObjList = new NotificationProtoObjList
             {
@@ -64,7 +64,7 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            // Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.Aborted, e.Message));
         }
     }

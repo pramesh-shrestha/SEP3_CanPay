@@ -1,0 +1,127 @@
+.container {
+    width: 60%;
+
+}
+
+.mt-6 {
+    margin-top: 110px ;
+}
+
+
+.inline{
+    display: inline-block;
+}
+
+.header {
+    display: flex;
+}
+
+.flex-container {
+    display: flex;
+}
+
+/*styling for edit and change password button*/
+.align-right {
+    margin-left: 5px; /* or use justify-content: flex-end; */
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+    
+}
+
+.form-label {
+    width: 105px;
+    margin-right: 5px;
+    font-weight: bold;
+    color: white;
+}
+
+/*design of fields*/
+.fieldInput {
+    border-radius: 50px;
+    background-color: lightblue;
+    text-align: center;
+
+}
+
+/*buttons inside card body*/
+.buttons{
+    margin-top: 8%;
+}
+
+/*design of card body*/
+.card-body{
+    margin-top: 6%;
+}
+
+/*design for title*/
+.card-header {
+    background-color:  #006596;
+    color: #FCD34D;
+}
+
+.card{
+    background-color: #004B67;
+}
+
+/*button styling for buttons on pop up*/
+.button {
+    background: #006596;
+    width: 110px;
+    border-radius: 999px;
+    color: white;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji", NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    margin-right: 10px;
+    border: 0;
+}
+
+.button:hover,
+.button:focus {
+    background-color: #403fa3;
+}
+
+.card-header {
+    background-color: #326089;
+}
+
+/*button styling for buttons inside card holder*/
+.buttonCard{
+    background: #006596;
+    width: 160px;
+    border-radius: 999px;
+    color: white;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji", NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 10px;
+    margin-right: 10px;
+    border: 0;
+}
+
+.buttonCard:hover,
+.buttonCard:focus {
+    background-color: #403fa3;
+}
+
+.whiteBackground {
+    background-color: white;
+}
+

@@ -1,5 +1,6 @@
 ﻿@using Domains.Entity
 @using HTTPClients.ClientInterfaces
+@using System.Timers
 @namespace BlazorServerApp.Pages
 @inject INotificationService NotificationService;
 @inject NavigationManager NavMgr;
@@ -12,10 +13,10 @@
             <span class="text">Welcome to Kanpay, @receiver</span>
         </div>
         <div class="container">
-            <img src="images/notification-bell.png" class="notification-icon" @onclick="@(() => showNotification = !showNotification)" alt="notification" style="cursor: pointer"/>
+            <img src="images/notification-bell.png" class="notification-icon" @onclick="@(HandleNotificationClick)" alt="notification" style="cursor: pointer"/>
             <div class="number-div">
                 <button class="number">
-                    <span class="noti_count">@notification!.Count</span>
+                    <span class="noti_count">@notificationCount</span>
                 </button>
             </div>
 
@@ -27,7 +28,7 @@
                 <label class="header">Notifications</label>
                 <hr class="hr1"/>
                 <div class="card">
-                    @foreach (var items in notification)
+                    @foreach (var items in notifications)
                     {
                         <div class="card-body">
                             <label class="date text-muted">@items.Date</label>
@@ -43,9 +44,12 @@
 @code {
     private UserEntity? senderUser;
     private string? receiver;
-    private ICollection<NotificationEntity>? notification = new List<NotificationEntity>();
+    private ICollection<NotificationEntity>? notifications = new List<NotificationEntity>();
     private bool showNotification = false;
-    
+    private int notificationCount;
+
+    private Timer timer;
+
     // private UserEntity? receiverUser = new UserEntity();
     // private string? notificationType;
     // public string? Message = "";
@@ -54,16 +58,54 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await UpdateNotifications();
+
+        AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
+
+    // Start the timer to update notifications every 5 seconds
+        if (state.User.Identity!.IsAuthenticated)
+        {
+            timer = new Timer(5000);
+            timer.Elapsed += TimerElapsedAsync;
+            timer.Start();
+        }
+    }
+
+    // Method called when the timer's elapsed event is triggered
+
+    private async void TimerElapsedAsync(object? sender, ElapsedEventArgs e)
+    {
+        await UpdateNotifications();
+    }
+
+    private async Task UpdateNotifications()
+    {
         try
         {
             AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
             receiver = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
 
-            notification = await NotificationService.FetchAllNotificationsByReceiverAsync(receiver);
+            notifications = await NotificationService.FetchAllNotificationsByReceiverAsync(receiver);
+            notificationCount = notifications.Count;
+
+
+    // Trigger UI Refresh
+            await InvokeAsync(StateHasChanged);
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
+        }
+    }
+
+    private async void HandleNotificationClick()
+    {
+        showNotification = !showNotification;
+
+        if (notifications.Count != 0)
+        {
+            await NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
+            await InvokeAsync(StateHasChanged);
         }
     }
 
@@ -83,4 +125,6 @@
             throw;
         }
     }*/
+
+
 }

@@ -31,27 +31,33 @@ namespace SEP3_DataTier {
             "bHVlEiEKCnNlbmRlclVzZXIYAiABKAsyDS5Vc2VyUHJvdG9PYmoSIwoMcmVj",
             "ZWl2ZXJVc2VyGAMgASgLMg0uVXNlclByb3RvT2JqEisKBmFtb3VudBgEIAEo",
             "CzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlEioKBGRhdGUYBSABKAsy",
-            "HC5nb29nbGUucHJvdG9idWYuU3RyaW5nVmFsdWUiSAoXVHJhbnNhY3Rpb25Q",
-            "cm90b09iakxpc3QSLQoPYWxsVHJhbnNhY3Rpb25zGAEgAygLMhQuVHJhbnNh",
-            "Y3Rpb25Qcm90b09iajL4BAoXVHJhbnNhY3Rpb25Qcm90b1NlcnZpY2USRAoW",
-            "Q3JlYXRlVHJhbnNhY3Rpb25Bc3luYxIULlRyYW5zYWN0aW9uUHJvdG9PYmoa",
-            "FC5UcmFuc2FjdGlvblByb3RvT2JqEk4KGUZldGNoVHJhbnNhY3Rpb25CeUlk",
-            "QXN5bmMSGy5nb29nbGUucHJvdG9idWYuSW50NjRWYWx1ZRoULlRyYW5zYWN0",
-            "aW9uUHJvdG9PYmoSWwohRmV0Y2hBbExUcmFuc2FjdGlvbnNCeVNlbmRlckFz",
-            "eW5jEhwuZ29vZ2xlLnByb3RvYnVmLlN0cmluZ1ZhbHVlGhguVHJhbnNhY3Rp",
-            "b25Qcm90b09iakxpc3QSXQojRmV0Y2hBbGxUcmFuc2FjdGlvbnNCeVJlY2Vp",
-            "dmVyQXN5bmMSHC5nb29nbGUucHJvdG9idWYuU3RyaW5nVmFsdWUaGC5UcmFu",
-            "c2FjdGlvblByb3RvT2JqTGlzdBJgCiZGZXRjaEFsTFRyYW5zYWN0aW9uc0lu",
-            "dm9sdmluZ1VzZXJBc3luYxIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1",
-            "ZRoYLlRyYW5zYWN0aW9uUHJvdG9PYmpMaXN0ElYKHEZldGNoVHJhbnNhY3Rp",
-            "b25zQnlEYXRlQXN5bmMSHC5nb29nbGUucHJvdG9idWYuU3RyaW5nVmFsdWUa",
-            "GC5UcmFuc2FjdGlvblByb3RvT2JqTGlzdBJRChZEZWxldGVUcmFuc2FjdGlv",
-            "bkFzeW5jEhsuZ29vZ2xlLnByb3RvYnVmLkludDY0VmFsdWUaGi5nb29nbGUu",
-            "cHJvdG9idWYuQm9vbFZhbHVlQhCqAg1TRVAzX0RhdGFUaWVyYgZwcm90bzM="));
+            "HC5nb29nbGUucHJvdG9idWYuU3RyaW5nVmFsdWUieQobRmlsdGVyQnlVc2Vy",
+            "QW5kRGF0ZVByb3RvT2JqEi4KCHVzZXJuYW1lGAEgASgLMhwuZ29vZ2xlLnBy",
+            "b3RvYnVmLlN0cmluZ1ZhbHVlEioKBGRhdGUYAiABKAsyHC5nb29nbGUucHJv",
+            "dG9idWYuU3RyaW5nVmFsdWUiSAoXVHJhbnNhY3Rpb25Qcm90b09iakxpc3QS",
+            "LQoPYWxsVHJhbnNhY3Rpb25zGAEgAygLMhQuVHJhbnNhY3Rpb25Qcm90b09i",
+            "ajLWBQoXVHJhbnNhY3Rpb25Qcm90b1NlcnZpY2USRAoWQ3JlYXRlVHJhbnNh",
+            "Y3Rpb25Bc3luYxIULlRyYW5zYWN0aW9uUHJvdG9PYmoaFC5UcmFuc2FjdGlv",
+            "blByb3RvT2JqEk4KGUZldGNoVHJhbnNhY3Rpb25CeUlkQXN5bmMSGy5nb29n",
+            "bGUucHJvdG9idWYuSW50NjRWYWx1ZRoULlRyYW5zYWN0aW9uUHJvdG9PYmoS",
+            "WwohRmV0Y2hBbExUcmFuc2FjdGlvbnNCeVNlbmRlckFzeW5jEhwuZ29vZ2xl",
+            "LnByb3RvYnVmLlN0cmluZ1ZhbHVlGhguVHJhbnNhY3Rpb25Qcm90b09iakxp",
+            "c3QSXQojRmV0Y2hBbGxUcmFuc2FjdGlvbnNCeVJlY2VpdmVyQXN5bmMSHC5n",
+            "b29nbGUucHJvdG9idWYuU3RyaW5nVmFsdWUaGC5UcmFuc2FjdGlvblByb3Rv",
+            "T2JqTGlzdBJgCiZGZXRjaEFsTFRyYW5zYWN0aW9uc0ludm9sdmluZ1VzZXJB",
+            "c3luYxIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRoYLlRyYW5zYWN0",
+            "aW9uUHJvdG9PYmpMaXN0ElYKHEZldGNoVHJhbnNhY3Rpb25zQnlEYXRlQXN5",
+            "bmMSHC5nb29nbGUucHJvdG9idWYuU3RyaW5nVmFsdWUaGC5UcmFuc2FjdGlv",
+            "blByb3RvT2JqTGlzdBJcCiJGZXRjaFRyYW5zYWN0aW9uc0J5VXNlcm5hbWVB",
+            "bmREYXRlEhwuRmlsdGVyQnlVc2VyQW5kRGF0ZVByb3RvT2JqGhguVHJhbnNh",
+            "Y3Rpb25Qcm90b09iakxpc3QSUQoWRGVsZXRlVHJhbnNhY3Rpb25Bc3luYxIb",
+            "Lmdvb2dsZS5wcm90b2J1Zi5JbnQ2NFZhbHVlGhouZ29vZ2xlLnByb3RvYnVm",
+            "LkJvb2xWYWx1ZUIQqgINU0VQM19EYXRhVGllcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::SEP3_DataTier.UserReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.TransactionProtoObj), global::SEP3_DataTier.TransactionProtoObj.Parser, new[]{ "TransactionId", "SenderUser", "ReceiverUser", "Amount", "Date" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.FilterByUserAndDateProtoObj), global::SEP3_DataTier.FilterByUserAndDateProtoObj.Parser, new[]{ "Username", "Date" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.TransactionProtoObjList), global::SEP3_DataTier.TransactionProtoObjList.Parser, new[]{ "AllTransactions" }, null, null, null, null)
           }));
     }
@@ -438,6 +444,248 @@ namespace SEP3_DataTier {
 
   }
 
+  public sealed partial class FilterByUserAndDateProtoObj : pb::IMessage<FilterByUserAndDateProtoObj>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<FilterByUserAndDateProtoObj> _parser = new pb::MessageParser<FilterByUserAndDateProtoObj>(() => new FilterByUserAndDateProtoObj());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<FilterByUserAndDateProtoObj> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::SEP3_DataTier.TransactionReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public FilterByUserAndDateProtoObj() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public FilterByUserAndDateProtoObj(FilterByUserAndDateProtoObj other) : this() {
+      Username = other.Username;
+      Date = other.Date;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public FilterByUserAndDateProtoObj Clone() {
+      return new FilterByUserAndDateProtoObj(this);
+    }
+
+    /// <summary>Field number for the "username" field.</summary>
+    public const int UsernameFieldNumber = 1;
+    private static readonly pb::FieldCodec<string> _single_username_codec = pb::FieldCodec.ForClassWrapper<string>(10);
+    private string username_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Username {
+      get { return username_; }
+      set {
+        username_ = value;
+      }
+    }
+
+
+    /// <summary>Field number for the "date" field.</summary>
+    public const int DateFieldNumber = 2;
+    private static readonly pb::FieldCodec<string> _single_date_codec = pb::FieldCodec.ForClassWrapper<string>(18);
+    private string date_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Date {
+      get { return date_; }
+      set {
+        date_ = value;
+      }
+    }
+
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as FilterByUserAndDateProtoObj);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(FilterByUserAndDateProtoObj other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Username != other.Username) return false;
+      if (Date != other.Date) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (username_ != null) hash ^= Username.GetHashCode();
+      if (date_ != null) hash ^= Date.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (username_ != null) {
+        _single_username_codec.WriteTagAndValue(output, Username);
+      }
+      if (date_ != null) {
+        _single_date_codec.WriteTagAndValue(output, Date);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (username_ != null) {
+        _single_username_codec.WriteTagAndValue(ref output, Username);
+      }
+      if (date_ != null) {
+        _single_date_codec.WriteTagAndValue(ref output, Date);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (username_ != null) {
+        size += _single_username_codec.CalculateSizeWithTag(Username);
+      }
+      if (date_ != null) {
+        size += _single_date_codec.CalculateSizeWithTag(Date);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(FilterByUserAndDateProtoObj other) {
+      if (other == null) {
+        return;
+      }
+      if (other.username_ != null) {
+        if (username_ == null || other.Username != "") {
+          Username = other.Username;
+        }
+      }
+      if (other.date_ != null) {
+        if (date_ == null || other.Date != "") {
+          Date = other.Date;
+        }
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            string value = _single_username_codec.Read(input);
+            if (username_ == null || value != "") {
+              Username = value;
+            }
+            break;
+          }
+          case 18: {
+            string value = _single_date_codec.Read(input);
+            if (date_ == null || value != "") {
+              Date = value;
+            }
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            string value = _single_username_codec.Read(ref input);
+            if (username_ == null || value != "") {
+              Username = value;
+            }
+            break;
+          }
+          case 18: {
+            string value = _single_date_codec.Read(ref input);
+            if (date_ == null || value != "") {
+              Date = value;
+            }
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class TransactionProtoObjList : pb::IMessage<TransactionProtoObjList>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -452,7 +700,7 @@ namespace SEP3_DataTier {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::SEP3_DataTier.TransactionReflection.Descriptor.MessageTypes[1]; }
+      get { return global::SEP3_DataTier.TransactionReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +30,11 @@ public class JwtService {
     }
 
     public String generateToken(UserEntity userDetails) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 30);
+        Date expirationDate = calendar.getTime();
+
+
         Claims claims = Jwts.claims();
         claims.put(Claims.SUBJECT, userDetails.getUsername());
         claims.put("username", userDetails.getUserName());
@@ -36,7 +42,7 @@ public class JwtService {
 
         return Jwts.builder().setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .setExpiration(expirationDate)
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
     }
 

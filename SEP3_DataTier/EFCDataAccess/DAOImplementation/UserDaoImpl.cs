@@ -35,7 +35,7 @@ public class UserDaoImpl : IUserDao
     {
         //username is a primary key so we can use FindAsync
         UserEntity? user =
-            await context.Users.Include(entity => entity.Card)
+            await context.Users.AsNoTracking().Include(entity => entity.Card)
                 .FirstOrDefaultAsync(entity => entity.Username.ToLower().Equals(username.ToLower()));
 
         if (user == null)
@@ -49,7 +49,7 @@ public class UserDaoImpl : IUserDao
     //get user by id
     public async Task<UserEntity?> FetchUserByIdAsync(long id)
     {
-        UserEntity? user = await context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        UserEntity? user = await context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
         if (user == null)
         {
             throw new Exception("Username does not exists");
@@ -62,14 +62,40 @@ public class UserDaoImpl : IUserDao
     public async Task<ICollection<UserEntity?>> FetchUsersAsync()
     {
         if (!context.Users.Any()) throw new Exception("No users found");
-        ICollection<UserEntity?> users = await context.Users.Include(entity => entity.Card).ToListAsync();
+        ICollection<UserEntity?>
+            users = await context.Users.AsNoTracking().Include(entity => entity.Card).ToListAsync();
         return users;
     }
 
     //update user
     public async Task<UserEntity?> UpdateUserAsync(UserEntity? userEntity)
     {
-        context.Users.Update(userEntity);
+        // DebitCardEntity? entities =
+        //     await context.Cards.FirstOrDefaultAsync(entity => entity.CardId.Equals(userEntity.Card.CardId));
+        // entities.CardNumber = userEntity.Card.CardNumber;
+        // entities.ExpiryDate = userEntity.Card.ExpiryDate;
+        // entities.CVV = userEntity.Card.CVV;
+        //
+        // UserEntity? exisitingUser = await FetchUserByUsernameAsync(userEntity.Username);
+        // exisitingUser.Password = userEntity.Password;
+        // exisitingUser.Fullname = userEntity.Fullname;
+        // exisitingUser.Card = entities;
+        
+        long currentId = await context.Users.Where(u => u.Username.Equals(userEntity.Username)).Select(u => u.Id).FirstOrDefaultAsync();
+        
+        if (currentId != 0) {
+            userEntity.Id = currentId;
+        }
+        
+        if (!context.Users.Local.Contains(userEntity))
+        {
+            context.Users.Attach(userEntity);
+            context.Cards.Attach(userEntity.Card);
+        }
+        
+        context.Entry(userEntity.Card).State = EntityState.Modified; // Mark associated Card entity as modified
+        context.Entry(userEntity).State = EntityState.Modified; // Mark userEntity as modified
+        
         await context.SaveChangesAsync();
         return userEntity;
     }
@@ -90,7 +116,6 @@ public class UserDaoImpl : IUserDao
     //update balance
     public async Task<bool> UpdateBalanceAsync(string username, int newBalance)
     {
-        //todo: balance adding and removing should be done in application tier. need to consult with group 
         UserEntity? user = await FetchUserByUsernameAsync(username);
         user.Balance = newBalance;
         await context.SaveChangesAsync();

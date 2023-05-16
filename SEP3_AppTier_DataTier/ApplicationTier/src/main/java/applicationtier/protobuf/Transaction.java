@@ -1350,6 +1350,760 @@ public final class Transaction {
 
   }
 
+  public interface FilterByUserAndDateProtoObjOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:FilterByUserAndDateProtoObj)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .google.protobuf.StringValue username = 1;</code>
+     */
+    boolean hasUsername();
+    /**
+     * <code>optional .google.protobuf.StringValue username = 1;</code>
+     */
+    com.google.protobuf.StringValue getUsername();
+    /**
+     * <code>optional .google.protobuf.StringValue username = 1;</code>
+     */
+    com.google.protobuf.StringValueOrBuilder getUsernameOrBuilder();
+
+    /**
+     * <code>optional .google.protobuf.StringValue date = 2;</code>
+     */
+    boolean hasDate();
+    /**
+     * <code>optional .google.protobuf.StringValue date = 2;</code>
+     */
+    com.google.protobuf.StringValue getDate();
+    /**
+     * <code>optional .google.protobuf.StringValue date = 2;</code>
+     */
+    com.google.protobuf.StringValueOrBuilder getDateOrBuilder();
+  }
+  /**
+   * Protobuf type {@code FilterByUserAndDateProtoObj}
+   */
+  public  static final class FilterByUserAndDateProtoObj extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:FilterByUserAndDateProtoObj)
+      FilterByUserAndDateProtoObjOrBuilder {
+    // Use FilterByUserAndDateProtoObj.newBuilder() to construct.
+    private FilterByUserAndDateProtoObj(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private FilterByUserAndDateProtoObj() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private FilterByUserAndDateProtoObj(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.StringValue.Builder subBuilder = null;
+              if (username_ != null) {
+                subBuilder = username_.toBuilder();
+              }
+              username_ = input.readMessage(com.google.protobuf.StringValue.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(username_);
+                username_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              com.google.protobuf.StringValue.Builder subBuilder = null;
+              if (date_ != null) {
+                subBuilder = date_.toBuilder();
+              }
+              date_ = input.readMessage(com.google.protobuf.StringValue.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(date_);
+                date_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return applicationtier.protobuf.Transaction.internal_static_FilterByUserAndDateProtoObj_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return applicationtier.protobuf.Transaction.internal_static_FilterByUserAndDateProtoObj_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj.class, applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj.Builder.class);
+    }
+
+    public static final int USERNAME_FIELD_NUMBER = 1;
+    private com.google.protobuf.StringValue username_;
+    /**
+     * <code>optional .google.protobuf.StringValue username = 1;</code>
+     */
+    public boolean hasUsername() {
+      return username_ != null;
+    }
+    /**
+     * <code>optional .google.protobuf.StringValue username = 1;</code>
+     */
+    public com.google.protobuf.StringValue getUsername() {
+      return username_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : username_;
+    }
+    /**
+     * <code>optional .google.protobuf.StringValue username = 1;</code>
+     */
+    public com.google.protobuf.StringValueOrBuilder getUsernameOrBuilder() {
+      return getUsername();
+    }
+
+    public static final int DATE_FIELD_NUMBER = 2;
+    private com.google.protobuf.StringValue date_;
+    /**
+     * <code>optional .google.protobuf.StringValue date = 2;</code>
+     */
+    public boolean hasDate() {
+      return date_ != null;
+    }
+    /**
+     * <code>optional .google.protobuf.StringValue date = 2;</code>
+     */
+    public com.google.protobuf.StringValue getDate() {
+      return date_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : date_;
+    }
+    /**
+     * <code>optional .google.protobuf.StringValue date = 2;</code>
+     */
+    public com.google.protobuf.StringValueOrBuilder getDateOrBuilder() {
+      return getDate();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (username_ != null) {
+        output.writeMessage(1, getUsername());
+      }
+      if (date_ != null) {
+        output.writeMessage(2, getDate());
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (username_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getUsername());
+      }
+      if (date_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getDate());
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj)) {
+        return super.equals(obj);
+      }
+      applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj other = (applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj) obj;
+
+      boolean result = true;
+      result = result && (hasUsername() == other.hasUsername());
+      if (hasUsername()) {
+        result = result && getUsername()
+            .equals(other.getUsername());
+      }
+      result = result && (hasDate() == other.hasDate());
+      if (hasDate()) {
+        result = result && getDate()
+            .equals(other.getDate());
+      }
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (hasUsername()) {
+        hash = (37 * hash) + USERNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getUsername().hashCode();
+      }
+      if (hasDate()) {
+        hash = (37 * hash) + DATE_FIELD_NUMBER;
+        hash = (53 * hash) + getDate().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code FilterByUserAndDateProtoObj}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:FilterByUserAndDateProtoObj)
+        applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObjOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return applicationtier.protobuf.Transaction.internal_static_FilterByUserAndDateProtoObj_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return applicationtier.protobuf.Transaction.internal_static_FilterByUserAndDateProtoObj_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj.class, applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj.Builder.class);
+      }
+
+      // Construct using applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        if (usernameBuilder_ == null) {
+          username_ = null;
+        } else {
+          username_ = null;
+          usernameBuilder_ = null;
+        }
+        if (dateBuilder_ == null) {
+          date_ = null;
+        } else {
+          date_ = null;
+          dateBuilder_ = null;
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return applicationtier.protobuf.Transaction.internal_static_FilterByUserAndDateProtoObj_descriptor;
+      }
+
+      public applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj getDefaultInstanceForType() {
+        return applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj.getDefaultInstance();
+      }
+
+      public applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj build() {
+        applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj buildPartial() {
+        applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj result = new applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj(this);
+        if (usernameBuilder_ == null) {
+          result.username_ = username_;
+        } else {
+          result.username_ = usernameBuilder_.build();
+        }
+        if (dateBuilder_ == null) {
+          result.date_ = date_;
+        } else {
+          result.date_ = dateBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj) {
+          return mergeFrom((applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj other) {
+        if (other == applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj.getDefaultInstance()) return this;
+        if (other.hasUsername()) {
+          mergeUsername(other.getUsername());
+        }
+        if (other.hasDate()) {
+          mergeDate(other.getDate());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private com.google.protobuf.StringValue username_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> usernameBuilder_;
+      /**
+       * <code>optional .google.protobuf.StringValue username = 1;</code>
+       */
+      public boolean hasUsername() {
+        return usernameBuilder_ != null || username_ != null;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue username = 1;</code>
+       */
+      public com.google.protobuf.StringValue getUsername() {
+        if (usernameBuilder_ == null) {
+          return username_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : username_;
+        } else {
+          return usernameBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue username = 1;</code>
+       */
+      public Builder setUsername(com.google.protobuf.StringValue value) {
+        if (usernameBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          username_ = value;
+          onChanged();
+        } else {
+          usernameBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue username = 1;</code>
+       */
+      public Builder setUsername(
+          com.google.protobuf.StringValue.Builder builderForValue) {
+        if (usernameBuilder_ == null) {
+          username_ = builderForValue.build();
+          onChanged();
+        } else {
+          usernameBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue username = 1;</code>
+       */
+      public Builder mergeUsername(com.google.protobuf.StringValue value) {
+        if (usernameBuilder_ == null) {
+          if (username_ != null) {
+            username_ =
+              com.google.protobuf.StringValue.newBuilder(username_).mergeFrom(value).buildPartial();
+          } else {
+            username_ = value;
+          }
+          onChanged();
+        } else {
+          usernameBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue username = 1;</code>
+       */
+      public Builder clearUsername() {
+        if (usernameBuilder_ == null) {
+          username_ = null;
+          onChanged();
+        } else {
+          username_ = null;
+          usernameBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue username = 1;</code>
+       */
+      public com.google.protobuf.StringValue.Builder getUsernameBuilder() {
+        
+        onChanged();
+        return getUsernameFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue username = 1;</code>
+       */
+      public com.google.protobuf.StringValueOrBuilder getUsernameOrBuilder() {
+        if (usernameBuilder_ != null) {
+          return usernameBuilder_.getMessageOrBuilder();
+        } else {
+          return username_ == null ?
+              com.google.protobuf.StringValue.getDefaultInstance() : username_;
+        }
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue username = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> 
+          getUsernameFieldBuilder() {
+        if (usernameBuilder_ == null) {
+          usernameBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder>(
+                  getUsername(),
+                  getParentForChildren(),
+                  isClean());
+          username_ = null;
+        }
+        return usernameBuilder_;
+      }
+
+      private com.google.protobuf.StringValue date_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> dateBuilder_;
+      /**
+       * <code>optional .google.protobuf.StringValue date = 2;</code>
+       */
+      public boolean hasDate() {
+        return dateBuilder_ != null || date_ != null;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue date = 2;</code>
+       */
+      public com.google.protobuf.StringValue getDate() {
+        if (dateBuilder_ == null) {
+          return date_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : date_;
+        } else {
+          return dateBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue date = 2;</code>
+       */
+      public Builder setDate(com.google.protobuf.StringValue value) {
+        if (dateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          date_ = value;
+          onChanged();
+        } else {
+          dateBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue date = 2;</code>
+       */
+      public Builder setDate(
+          com.google.protobuf.StringValue.Builder builderForValue) {
+        if (dateBuilder_ == null) {
+          date_ = builderForValue.build();
+          onChanged();
+        } else {
+          dateBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue date = 2;</code>
+       */
+      public Builder mergeDate(com.google.protobuf.StringValue value) {
+        if (dateBuilder_ == null) {
+          if (date_ != null) {
+            date_ =
+              com.google.protobuf.StringValue.newBuilder(date_).mergeFrom(value).buildPartial();
+          } else {
+            date_ = value;
+          }
+          onChanged();
+        } else {
+          dateBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue date = 2;</code>
+       */
+      public Builder clearDate() {
+        if (dateBuilder_ == null) {
+          date_ = null;
+          onChanged();
+        } else {
+          date_ = null;
+          dateBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue date = 2;</code>
+       */
+      public com.google.protobuf.StringValue.Builder getDateBuilder() {
+        
+        onChanged();
+        return getDateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue date = 2;</code>
+       */
+      public com.google.protobuf.StringValueOrBuilder getDateOrBuilder() {
+        if (dateBuilder_ != null) {
+          return dateBuilder_.getMessageOrBuilder();
+        } else {
+          return date_ == null ?
+              com.google.protobuf.StringValue.getDefaultInstance() : date_;
+        }
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue date = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> 
+          getDateFieldBuilder() {
+        if (dateBuilder_ == null) {
+          dateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder>(
+                  getDate(),
+                  getParentForChildren(),
+                  isClean());
+          date_ = null;
+        }
+        return dateBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:FilterByUserAndDateProtoObj)
+    }
+
+    // @@protoc_insertion_point(class_scope:FilterByUserAndDateProtoObj)
+    private static final applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj();
+    }
+
+    public static applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<FilterByUserAndDateProtoObj>
+        PARSER = new com.google.protobuf.AbstractParser<FilterByUserAndDateProtoObj>() {
+      public FilterByUserAndDateProtoObj parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new FilterByUserAndDateProtoObj(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<FilterByUserAndDateProtoObj> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FilterByUserAndDateProtoObj> getParserForType() {
+      return PARSER;
+    }
+
+    public applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface TransactionProtoObjListOrBuilder extends
       // @@protoc_insertion_point(interface_extends:TransactionProtoObjList)
       com.google.protobuf.MessageOrBuilder {
@@ -2091,6 +2845,11 @@ public final class Transaction {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_TransactionProtoObj_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_FilterByUserAndDateProtoObj_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_FilterByUserAndDateProtoObj_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_TransactionProtoObjList_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -2112,25 +2871,31 @@ public final class Transaction {
       "oObj\022#\n\014receiverUser\030\003 \001(\0132\r.UserProtoOb" +
       "j\022+\n\006amount\030\004 \001(\0132\033.google.protobuf.Int3" +
       "2Value\022*\n\004date\030\005 \001(\0132\034.google.protobuf.S" +
-      "tringValue\"H\n\027TransactionProtoObjList\022-\n" +
-      "\017allTransactions\030\001 \003(\0132\024.TransactionProt",
-      "oObj2\370\004\n\027TransactionProtoService\022D\n\026Crea" +
-      "teTransactionAsync\022\024.TransactionProtoObj" +
-      "\032\024.TransactionProtoObj\022N\n\031FetchTransacti" +
-      "onByIdAsync\022\033.google.protobuf.Int64Value" +
-      "\032\024.TransactionProtoObj\022[\n!FetchAlLTransa" +
-      "ctionsBySenderAsync\022\034.google.protobuf.St" +
-      "ringValue\032\030.TransactionProtoObjList\022]\n#F" +
-      "etchAllTransactionsByReceiverAsync\022\034.goo" +
-      "gle.protobuf.StringValue\032\030.TransactionPr" +
-      "otoObjList\022`\n&FetchAlLTransactionsInvolv",
-      "ingUserAsync\022\034.google.protobuf.StringVal" +
-      "ue\032\030.TransactionProtoObjList\022V\n\034FetchTra" +
-      "nsactionsByDateAsync\022\034.google.protobuf.S" +
-      "tringValue\032\030.TransactionProtoObjList\022Q\n\026" +
-      "DeleteTransactionAsync\022\033.google.protobuf" +
-      ".Int64Value\032\032.google.protobuf.BoolValueB" +
-      "\034\n\030applicationtier.protobufP\000b\006proto3"
+      "tringValue\"y\n\033FilterByUserAndDateProtoOb" +
+      "j\022.\n\010username\030\001 \001(\0132\034.google.protobuf.St",
+      "ringValue\022*\n\004date\030\002 \001(\0132\034.google.protobu" +
+      "f.StringValue\"H\n\027TransactionProtoObjList" +
+      "\022-\n\017allTransactions\030\001 \003(\0132\024.TransactionP" +
+      "rotoObj2\327\005\n\027TransactionProtoService\022D\n\026C" +
+      "reateTransactionAsync\022\024.TransactionProto" +
+      "Obj\032\024.TransactionProtoObj\022N\n\031FetchTransa" +
+      "ctionByIdAsync\022\033.google.protobuf.Int64Va" +
+      "lue\032\024.TransactionProtoObj\022[\n!FetchAlLTra" +
+      "nsactionsBySenderAsync\022\034.google.protobuf" +
+      ".StringValue\032\030.TransactionProtoObjList\022]",
+      "\n#FetchAllTransactionsByReceiverAsync\022\034." +
+      "google.protobuf.StringValue\032\030.Transactio" +
+      "nProtoObjList\022`\n&FetchAlLTransactionsInv" +
+      "olvingUserAsync\022\034.google.protobuf.String" +
+      "Value\032\030.TransactionProtoObjList\022V\n\034Fetch" +
+      "TransactionsByDateAsync\022\034.google.protobu" +
+      "f.StringValue\032\030.TransactionProtoObjList\022" +
+      "]\n#FetchTransactionsByRecipientAndDate\022\034" +
+      ".FilterByUserAndDateProtoObj\032\030.Transacti" +
+      "onProtoObjList\022Q\n\026DeleteTransactionAsync",
+      "\022\033.google.protobuf.Int64Value\032\032.google.p" +
+      "rotobuf.BoolValueB\034\n\030applicationtier.pro" +
+      "tobufP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2153,8 +2918,14 @@ public final class Transaction {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_TransactionProtoObj_descriptor,
         new java.lang.String[] { "TransactionId", "SenderUser", "ReceiverUser", "Amount", "Date", });
-    internal_static_TransactionProtoObjList_descriptor =
+    internal_static_FilterByUserAndDateProtoObj_descriptor =
       getDescriptor().getMessageTypes().get(1);
+    internal_static_FilterByUserAndDateProtoObj_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_FilterByUserAndDateProtoObj_descriptor,
+        new java.lang.String[] { "Username", "Date", });
+    internal_static_TransactionProtoObjList_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_TransactionProtoObjList_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_TransactionProtoObjList_descriptor,

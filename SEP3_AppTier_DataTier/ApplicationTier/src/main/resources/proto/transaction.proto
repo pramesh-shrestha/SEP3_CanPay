@@ -17,6 +17,11 @@ message TransactionProtoObj {
   google.protobuf.StringValue date = 5;
 }
 
+message FilterByUserAndDateProtoObj {
+  google.protobuf.StringValue username = 1;
+  google.protobuf.StringValue date = 2;
+}
+
 service TransactionProtoService {
   rpc CreateTransactionAsync(TransactionProtoObj) returns (TransactionProtoObj);
   rpc FetchTransactionByIdAsync(google.protobuf.Int64Value) returns (TransactionProtoObj);
@@ -24,6 +29,7 @@ service TransactionProtoService {
   rpc FetchAllTransactionsByReceiverAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
   rpc FetchAlLTransactionsInvolvingUserAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
   rpc FetchTransactionsByDateAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+  rpc FetchTransactionsByRecipientAndDate(FilterByUserAndDateProtoObj) returns (TransactionProtoObjList);
   rpc DeleteTransactionAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
 }
 

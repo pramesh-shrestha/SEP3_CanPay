@@ -1,3 +1,5 @@
+using Entity;
+using Entity;
 using Entity.Model;
 
 namespace EFCDataAccess.DAOInterface;
@@ -11,4 +13,6 @@ public interface ITransactionDao
     Task<ICollection<TransactionEntity>> FetchAlLTransactionsInvolvingUserAsync(string username);
     Task<ICollection<TransactionEntity?>> FetchTransactionsByDateAsync(string date);
     Task<bool> DeleteTransactionAsync(long id);
+
+    Task<ICollection<TransactionEntity?>> fetchTransactionByUsernameAndDate(FilterDto filterDto);
 }

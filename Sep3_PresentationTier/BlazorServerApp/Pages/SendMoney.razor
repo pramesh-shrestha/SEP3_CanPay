@@ -120,15 +120,15 @@
             sender = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
 
             IEnumerable<UserEntity?> entities = userEntities.ToList();
-            senderUser = entities.FirstOrDefault(u => u.UserName.ToLower().Equals(sender));
+            senderUser = entities.FirstOrDefault(u => u.UserName.Equals(sender));
             cardNumber = senderUser.Card.CardNumber;
 
             usernames = entities.Select(u => u.UserName).ToList();
             usernames.Remove(senderUser.UserName);
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
+        catch (Exception e) {
+            errorLabel = e.Message;
+            color = "red";
         }
     }
 
@@ -159,13 +159,13 @@
         {
             if (string.IsNullOrEmpty(receiver))
             {
-                errorLabel = "Receiver must be selected.";
-                color = "red";
+                throw new Exception("Receiver must be selected.");
+                
             }
             if (int.Parse(amount) <= 0)
             {
-                errorLabel = "Amount must be more than 0.";
-                color = "red";
+                throw new Exception("Amount must be more than 0.");
+                
             }
             if (string.IsNullOrEmpty(errorLabel))
             {

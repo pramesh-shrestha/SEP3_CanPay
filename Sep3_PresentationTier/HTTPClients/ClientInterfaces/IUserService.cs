@@ -11,7 +11,6 @@ public interface IUserService
     Task<IEnumerable<UserEntity?>> FetchAllUsersAsync();
     Task<UserEntity> FetchUserByIdAsync(long id);
     Task<UserEntity> FetchUserByUsernameAsync(string username);
-    Task<UserEntity> UpdateUserAsync(long id, UserEntity userEntity);
     Task<Boolean> DeleteUserAsync(long id);
     Task<AuthenticationResponse> ValidateUser(string username, string password);
     Action<ClaimsPrincipal> OnAuthStateChanged { get; set; }
@@ -19,4 +18,6 @@ public interface IUserService
 
     Task LogoutAsync();
 
+    Task<UserEntity> UpdateUserAsync(UserEntity userEntity);
+    
 }

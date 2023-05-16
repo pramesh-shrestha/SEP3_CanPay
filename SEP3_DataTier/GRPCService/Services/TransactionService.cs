@@ -1,4 +1,5 @@
 using EFCDataAccess.DAOInterface;
+using Entity;
 using Entity.Model;
 using Google.Protobuf.Collections;
 using Google.Protobuf.WellKnownTypes;
@@ -125,6 +126,24 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         }
     }
 
+
+    public override async Task<TransactionProtoObjList> FetchTransactionsByUsernameAndDate(
+        FilterByUserAndDateProtoObj request, ServerCallContext context)
+    {
+        try
+        {
+            ICollection<TransactionEntity?> byDateAndUsername =
+                await transactionDao.fetchTransactionByUsernameAndDate(ConvertToFilterDto(request));
+            TransactionProtoObjList byDateAndReceiveProtoObjList = ConvertToProtoList(byDateAndUsername);
+            return byDateAndReceiveProtoObjList;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
+        }
+    }
+
     public override async Task<BoolValue> DeleteTransactionAsync(Int64Value request, ServerCallContext context)
     {
         try
@@ -168,6 +187,16 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             Date = transactionEntity.Date
         };
     }
+
+    public static FilterDto ConvertToFilterDto(FilterByUserAndDateProtoObj protoObj)
+    {
+        return new FilterDto()
+        {
+            Username = protoObj.Username,
+            Date = protoObj.Date
+        };
+    }
+
 
     private static TransactionProtoObjList ConvertToProtoList(ICollection<TransactionEntity> transactionEntities)
     {

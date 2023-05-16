@@ -88,6 +88,7 @@ public class UserServiceImplementation implements IUserService {
     @Override
     public UserEntity updateUser(UserEntity user) {
         try {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             return userClient.updateUser(user);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());

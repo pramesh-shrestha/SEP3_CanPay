@@ -1,0 +1,323 @@
+﻿@page "/ManageProfile"
+@using Domains.Entity
+@using HTTPClients.ClientInterfaces
+@using UIComponents
+@using BCrypt.Net
+@using System.Text.RegularExpressions
+@using System.Globalization
+@inject AuthenticationStateProvider StateProvider;
+@inject IUserService UserService;
+@inject NavigationManager NavMgr;
+
+
+<div class="container mt-6">
+    <div class="card">
+
+        <div class="card-header">
+            <h4 class="card-title">Manage Profile</h4>
+        </div>
+
+        <div class="card-body">
+
+            <div class="form-row">
+                <div>
+                    <label class="form-label">Username</label>
+                    <input type="text" @bind="username" disabled class="fieldInput">
+
+                </div>
+
+                <div>
+                    <label class="form-label">Password</label>
+                    <input type="password" @bind="password" disabled class="fieldInput">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label class="form-label">Fullname</label>
+                    <input type="text" @bind="fullName" disabled="@IsDisabled" class="fieldInput" style="background-color: @toChangeToWhite">
+                </div>
+
+                <div>
+                    <label class="form-label">Card Number</label>
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" @bind="cardNumber" disabled="@IsDisabled" class="fieldInput" style="background-color: @toChangeToWhite">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label class="form-label">Expiry Date</label>
+                    <input type="text" pattern="[0-9]*\/?" @bind="expiryDate" disabled="@IsDisabled" class="fieldInput" style="background-color:@toChangeToWhite">
+                </div>
+
+                <div>
+                    <label class="form-label">Cvv (3-digits)</label>
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" @bind="cvv" disabled="@IsDisabled" class="fieldInput" style="background-color: @toChangeToWhite">
+                </div>
+            </div>
+
+            <div class="form-row buttons">
+                <div>
+                    <button class="buttonCard" @onclick="SaveChanges" disabled="@IsDisabled" style="color: @(IsDisabled ? "grey" : "white")">Save Changes</button>
+                    <button class="buttonCard  align-right" @onclick="@(() => NavMgr.NavigateTo("/"))">Cancel</button>
+                </div>
+                <div>
+                    @* @onclick:preventDefault -- prevent the default behavior of the button and prevent the page from reloading or submitting the form.
+                    It is necessary because there's a form submit or page reload happening that is resetting the form to its initial state. *@
+                    <button class="buttonCard" @onclick="() => editProfile = true">Edit Profile</button>
+                    <button class="buttonCard align-right" @onclick="() => showModal = true" @onclick:preventDefault disabled="@IsDisabled" style="color: @(IsDisabled ? "grey" : "white")">Change Password</button>
+                </div>
+            </div>
+
+
+            <div class="mt-2">
+                <label style="color: @color">@error</label>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@* Modal for changing password *@
+<Modal ShowModal="showModal">
+    <form>
+        @* <div class="mb-3"> *@
+        @*     <label >Your current password</label> *@
+        @*     <input type="text" class="form-control" @bind="currentPassword"> *@
+        @* </div> *@
+        <div class="mb-3">
+            <label >New password</label>
+            <input type="password" class="form-control" @bind="newPassword">
+        </div>
+        <div class="mb-3">
+            <label >Confirm new password</label>
+            <input type="password" class="form-control" @bind="confirmNewPassword">
+        </div>
+    </form>
+    <div>
+        <button class="button" @onclick="@Proceed">OK</button>
+        <button class="button" @onclick="@GoBack">Go Back</button>
+    </div>
+    <div class="mt-2">
+        <label style="color: @color">@errorLabel</label>
+    </div>
+</Modal>
+
+@* Modal for confirmation after successful profile update *@
+<Modal ShowModal="confirmation">
+    <p >Your profile is updated successfully.</p>
+    <div>
+        <button class="button" @onclick="@GoBack">OK</button>
+    </div>
+</Modal>
+
+@* Modal for editing profile *@
+<Modal ShowModal="editProfile">
+    <div class="mb-3">
+        <label >Enter your password</label>
+        <input type="password" class="form-control" @bind="currentPassword">
+    </div>
+    <div>
+        <button class="button" @onclick="@CheckPassword">OK</button>
+        <button class="button" @onclick="() => editProfile = false">Cancel</button>
+    </div>
+    <div class="mt-2">
+        <label style="color: @color">@checkPasswordError</label>
+    </div>
+</Modal>
+
+@code {
+    private string username { get; set; }
+    private UserEntity? User { get; set; }
+    private bool IsDisabled { get; set; } = true;
+    private bool showModal;
+    private bool confirmation;
+    private string? password;
+    private string? fullName;
+    private long cardNumber;
+    private string? expiryDate;
+    private int cvv;
+    private int currentBalance;
+    private string? currentPassword = "";
+    private string? newPassword = "";
+    private string? confirmNewPassword = "";
+    private string? errorLabel;
+    private string? error;
+    private string? checkPasswordError;
+    private string? color;
+    private string? toChangeToWhite;
+    private bool editProfile;
+    private string tempPassword;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
+        username = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
+        User = await UserService.FetchUserByUsernameAsync(username);
+        password = User.Password!;
+        cardNumber = User.Card!.CardNumber;
+        expiryDate = User.Card!.ExpiryDate;
+        cvv = User.Card!.Cvv;
+        currentBalance = User.Balance;
+        fullName = User.FullName!;
+    }
+
+    //enable the card input fields
+    // private void Enable() {
+    //     editProfile = true;
+    //     string hashedCurrentPassword = HashedCurrentPassword();
+    //     IsDisabled = false;
+    //     toChangeToWhite = "white";
+    // }
+
+    //when edit profile button is clieked
+    private void CheckPassword()
+    {
+        errorLabel = "";
+        try
+        {
+            if (string.IsNullOrEmpty(currentPassword))
+            {
+                throw new Exception("You must enter your current password.");
+            }
+
+            bool isPasswordValid = BCrypt.Verify(currentPassword, password);
+
+            if (isPasswordValid)
+            {
+                IsDisabled = false;
+                toChangeToWhite = "white";
+                editProfile = false;
+            }
+
+            else
+            {
+                throw new Exception("You entered wrong password!");
+            }
+        }
+        catch (Exception e)
+        {
+            checkPasswordError = e.Message;
+            color = "red";
+        }
+    }
+
+
+    private void Proceed()
+    {
+        string passwordRegex = @"^(?=.*\S).{6,}$";
+        errorLabel = "";
+
+    // string hashedCurrentPassword = HashedCurrentPassword();
+
+        try
+        {
+            if ((string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmNewPassword)))
+            {
+                throw new Exception("All fields required!");
+            }
+
+    // if (!hashedCurrentPassword.Equals(password)) {
+    //     throw new Exception("Wrong current password!");
+    // }
+
+            if (!newPassword.Equals(confirmNewPassword))
+            {
+                throw new Exception("New password mismatch!");
+            }
+
+            if (!Regex.IsMatch(newPassword, passwordRegex))
+            {
+                throw new Exception("Password Must Be " +
+                                    " 6 Characters Long.");
+            }
+
+            if (newPassword.Equals(currentPassword))
+            {
+                throw new Exception("You must enter new password different from your current password.");
+            }
+
+            if (string.IsNullOrEmpty(errorLabel))
+            {
+                showModal = false;
+                error = "Password changed successfully!";
+                color = "#79F400";
+                currentPassword = newPassword;
+            }
+        }
+        catch (Exception e)
+        {
+            errorLabel = e.Message;
+            color = "red";
+        }
+    }
+
+    // Extract the salt from the Java hashed password
+    // private string HashedCurrentPassword() {
+    //     string salt = password.Substring(0, 29);
+    //     int rounds = 10;
+    //     return BCrypt.HashPassword(currentPassword, salt + rounds);
+    // }
+
+    // private void ChangePassword() {
+    //     showModal = true;
+    // }
+
+    private void GoBack()
+    {
+        newPassword = string.Empty;
+        confirmNewPassword = string.Empty;
+        showModal = false;
+        confirmation = false;
+    }
+
+    private async Task SaveChanges()
+    {
+    // bool success = DateTime.TryParseExact(expiryDate, "MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime);
+        string pattern = @"^[0-9/]*$";
+        bool isMatch = Regex.IsMatch(expiryDate, pattern);
+
+        try
+        {
+            if (string.IsNullOrEmpty(fullName) || string.IsNullOrEmpty(expiryDate)) throw new Exception("Fullname or Expiry Date Fields Cannot Be Left Empty.");
+            if (cardNumber == 0) throw new Exception("Card Number Cannot Be Empty");
+            if (cvv == 0) throw new Exception("CVV Cannot Be Empty");
+            if (cardNumber.ToString().Length != 16) throw new Exception("Card Number Must Be 16 Digits Long");
+            if (!isMatch) throw new Exception("Invalid Date");
+            if (isMatch)
+            {
+                DateTime date = Convert.ToDateTime(expiryDate);
+                if (date.Year < DateTime.Now.Year || date.Year > 2099)
+                {
+                    throw new Exception("Invalid Year");
+                }
+            }
+            if (cvv.ToString().Length != 3) throw new Exception("CVV must be 3 digits long");
+
+            DebitCardEntity cardEntity = new DebitCardEntity(cardNumber, expiryDate, cvv)
+            {
+                CardId = User.Card.CardId
+            };
+            UserEntity userEntity = new()
+            {
+                UserName = username,
+                Password = currentPassword,
+                Balance = currentBalance,
+                Card = cardEntity,
+                FullName = fullName
+            };
+            await UserService.UpdateUserAsync(userEntity);
+            confirmation = true;
+            IsDisabled = true;
+            error = "";
+            toChangeToWhite = "lightblue";
+        }
+        catch (Exception e)
+        {
+            error = e.Message;
+            color = "red";
+        }
+    }
+
+}

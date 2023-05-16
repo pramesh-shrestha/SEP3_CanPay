@@ -53,10 +53,8 @@ public class NotificationServiceImplementation implements INotificationService {
     @Override
     public List<NotificationEntity> fetchAllNotificationsByReceiver(String receiverUsername) {
         try {
-            System.out.println("service impl"+receiverUsername);
-            List<NotificationEntity> entities = notificationClient.fetchAllNotificationsByReceiver(receiverUsername);
-            markAllAsRead(entities);
-            return entities;
+            //            markAllAsRead(entities);
+            return notificationClient.fetchAllNotificationsByReceiver(receiverUsername);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -76,10 +74,7 @@ public class NotificationServiceImplementation implements INotificationService {
     @Override
     public void markAllAsRead(List<NotificationEntity> notificationList) {
         try {
-            for (NotificationEntity notification : notificationList) {
-                notification.setRead(true);
-//                notificationList.add(notification);
-            }
+
             notificationClient.markAllAsRead(notificationList);
         } catch (Exception e) {
             throw new RuntimeException(e);
