@@ -198,10 +198,10 @@
     {
         isHistoryLoaded = true;
         transactionList = await TransactionService.FetchAllTransactionInvolvingUserAsync(currentUser);
-        await ApplyFilter();
+         ApplyFilter();
     }
 
-    private async Task ApplyFilter()
+    private void ApplyFilter()
     {
         switch (selectedTransactionType!)
         {
@@ -230,7 +230,7 @@
     private async Task ChangeTransactionTypeValue(ChangeEventArgs obj)
     {
         selectedTransactionType = obj.Value.ToString();
-        await ApplyFilter();
+         ApplyFilter();
     }
 
     private async Task ChangeSelectedDate(ChangeEventArgs arg)
@@ -238,7 +238,7 @@
         selectedDate = arg.Value.ToString();
         DateTime parsedDate = DateTime.ParseExact(selectedDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
         filterDate = parsedDate.ToString("dd/M/yyyy");
-        await ApplyFilter();
+         ApplyFilter();
     }
 
 

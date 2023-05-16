@@ -35,7 +35,7 @@ public class UserDaoImpl : IUserDao
     {
         //username is a primary key so we can use FindAsync
         UserEntity? user =
-            await context.Users.Include(entity => entity.Card)
+            await context.Users.AsNoTracking().Include(entity => entity.Card)
                 .FirstOrDefaultAsync(entity => entity.Username.ToLower().Equals(username.ToLower()));
 
         if (user == null)
@@ -49,7 +49,7 @@ public class UserDaoImpl : IUserDao
     //get user by id
     public async Task<UserEntity?> FetchUserByIdAsync(long id)
     {
-        UserEntity? user = await context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        UserEntity? user = await context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
         if (user == null)
         {
             throw new Exception("Username does not exists");
@@ -62,14 +62,27 @@ public class UserDaoImpl : IUserDao
     public async Task<ICollection<UserEntity?>> FetchUsersAsync()
     {
         if (!context.Users.Any()) throw new Exception("No users found");
-        ICollection<UserEntity?> users = await context.Users.Include(entity => entity.Card).ToListAsync();
+        ICollection<UserEntity?>
+            users = await context.Users.AsNoTracking().Include(entity => entity.Card).ToListAsync();
         return users;
     }
 
     //update user
     public async Task<UserEntity?> UpdateUserAsync(UserEntity? userEntity)
     {
-        context.Users.Update(userEntity);
+        Console.WriteLine($"UserDaoImpl : {userEntity.Card.CardId}");
+        
+        DebitCardEntity? entities =
+            await context.Cards.FirstOrDefaultAsync(entity => entity.CardId.Equals(userEntity.Card.CardId));
+        entities.CardNumber = userEntity.Card.CardNumber;
+        entities.ExpiryDate = userEntity.Card.ExpiryDate;
+        entities.CVV = userEntity.Card.CVV;
+        
+        UserEntity? exisitingUser = await FetchUserByUsernameAsync(userEntity.Username);
+        exisitingUser.Password = userEntity.Password;
+        exisitingUser.Card = entities;
+
+        // context.Users.Update(userEntity);
         await context.SaveChangesAsync();
         return userEntity;
     }
