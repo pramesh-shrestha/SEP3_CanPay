@@ -147,6 +147,7 @@
     private string? color;
     private string? toChangeToWhite;
     private bool editProfile;
+    private string tempPassword;
 
 
     protected override async Task OnInitializedAsync()
@@ -170,6 +171,7 @@
     //     toChangeToWhite = "white";
     // }
 
+    //when edit profile button is clieked
     private void CheckPassword()
     {
         errorLabel = "";
@@ -184,7 +186,6 @@
 
             if (isPasswordValid)
             {
-                password = currentPassword;
                 IsDisabled = false;
                 toChangeToWhite = "white";
                 editProfile = false;
@@ -242,7 +243,7 @@
                 showModal = false;
                 error = "Password changed successfully!";
                 color = "#79F400";
-                password = newPassword;
+                currentPassword = newPassword;
             }
         }
         catch (Exception e)
@@ -265,16 +266,11 @@
 
     private void GoBack()
     {
-        currentPassword = string.Empty;
         newPassword = string.Empty;
         confirmNewPassword = string.Empty;
         showModal = false;
         confirmation = false;
     }
-
-    // private void OnCancelled() {
-    //     NavMgr.NavigateTo("/");
-    // }
 
     private async Task SaveChanges()
     {
@@ -306,7 +302,7 @@
             UserEntity userEntity = new()
             {
                 UserName = username,
-                Password = password,
+                Password = currentPassword,
                 Balance = currentBalance,
                 Card = cardEntity,
                 FullName = fullName

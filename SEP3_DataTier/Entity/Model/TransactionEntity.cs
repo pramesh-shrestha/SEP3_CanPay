@@ -9,6 +9,5 @@ public class TransactionEntity
     public UserEntity? Sender { get; set; }
     public UserEntity? Receiver { get; set; }
     [Required] public int? Amount { get; set; }
-
     public string Date { get; set; }
 }

@@ -70,19 +70,32 @@ public class UserDaoImpl : IUserDao
     //update user
     public async Task<UserEntity?> UpdateUserAsync(UserEntity? userEntity)
     {
-        Console.WriteLine($"UserDaoImpl : {userEntity.Card.CardId}");
+        // DebitCardEntity? entities =
+        //     await context.Cards.FirstOrDefaultAsync(entity => entity.CardId.Equals(userEntity.Card.CardId));
+        // entities.CardNumber = userEntity.Card.CardNumber;
+        // entities.ExpiryDate = userEntity.Card.ExpiryDate;
+        // entities.CVV = userEntity.Card.CVV;
+        //
+        // UserEntity? exisitingUser = await FetchUserByUsernameAsync(userEntity.Username);
+        // exisitingUser.Password = userEntity.Password;
+        // exisitingUser.Fullname = userEntity.Fullname;
+        // exisitingUser.Card = entities;
         
-        DebitCardEntity? entities =
-            await context.Cards.FirstOrDefaultAsync(entity => entity.CardId.Equals(userEntity.Card.CardId));
-        entities.CardNumber = userEntity.Card.CardNumber;
-        entities.ExpiryDate = userEntity.Card.ExpiryDate;
-        entities.CVV = userEntity.Card.CVV;
+        long currentId = await context.Users.Where(u => u.Username.Equals(userEntity.Username)).Select(u => u.Id).FirstOrDefaultAsync();
         
-        UserEntity? exisitingUser = await FetchUserByUsernameAsync(userEntity.Username);
-        exisitingUser.Password = userEntity.Password;
-        exisitingUser.Card = entities;
-
-        // context.Users.Update(userEntity);
+        if (currentId != 0) {
+            userEntity.Id = currentId;
+        }
+        
+        if (!context.Users.Local.Contains(userEntity))
+        {
+            context.Users.Attach(userEntity);
+            context.Cards.Attach(userEntity.Card);
+        }
+        
+        context.Entry(userEntity.Card).State = EntityState.Modified; // Mark associated Card entity as modified
+        context.Entry(userEntity).State = EntityState.Modified; // Mark userEntity as modified
+        
         await context.SaveChangesAsync();
         return userEntity;
     }
