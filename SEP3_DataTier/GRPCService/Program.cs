@@ -15,6 +15,7 @@ builder.Services.AddScoped<IUserDao, UserDaoImpl>();
 builder.Services.AddScoped<ICardDao, CardDaoImpl>();
 builder.Services.AddScoped<ITransactionDao, TransactionDaoImpl>();
 builder.Services.AddScoped<INotificationDao, NotificationDaoImpl>();
+builder.Services.AddScoped<IRequestDao, RequestDaoImpl>();
 
 var app = builder.Build();
 
@@ -23,6 +24,7 @@ app.MapGrpcService<DebitCardService>();
 app.MapGrpcService<UserService>();
 app.MapGrpcService<TransactionService>();
 app.MapGrpcService<NotificationService>();
+app.MapGrpcService<RequestService>();
 
 app.MapGet("/",
     () =>

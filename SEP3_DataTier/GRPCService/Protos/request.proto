@@ -21,7 +21,7 @@ message RequestProtoObjList{
 service RequestProtoService{
   rpc CreateRequestAsync(RequestProtoObj) returns (RequestProtoObj);
   rpc FetchAllRequestsAsync(google.protobuf.Empty) returns (RequestProtoObjList);
-  rpc FetchRequestByIdAsync(google.protobuf.Int32Value) returns (RequestProtoObj);
+  rpc FetchRequestByIdAsync(google.protobuf.Int64Value) returns (RequestProtoObj);
   rpc FetchRequestByUsername(google.protobuf.StringValue) returns (RequestProtoObj);
   rpc UpdateRequestAsync(RequestProtoObj) returns (RequestProtoObj);
   rpc DeleteRequestAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);

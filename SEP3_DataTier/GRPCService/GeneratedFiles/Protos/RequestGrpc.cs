@@ -52,11 +52,9 @@ namespace SEP3_DataTier {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::SEP3_DataTier.RequestProtoObjList> __Marshaller_RequestProtoObjList = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.RequestProtoObjList.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Int32Value> __Marshaller_google_protobuf_Int32Value = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Int32Value.Parser));
+    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Int64Value> __Marshaller_google_protobuf_Int64Value = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Int64Value.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.StringValue> __Marshaller_google_protobuf_StringValue = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.StringValue.Parser));
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Int64Value> __Marshaller_google_protobuf_Int64Value = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Int64Value.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.BoolValue> __Marshaller_google_protobuf_BoolValue = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.BoolValue.Parser));
 
@@ -77,11 +75,11 @@ namespace SEP3_DataTier {
         __Marshaller_RequestProtoObjList);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Int32Value, global::SEP3_DataTier.RequestProtoObj> __Method_FetchRequestByIdAsync = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Int32Value, global::SEP3_DataTier.RequestProtoObj>(
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Int64Value, global::SEP3_DataTier.RequestProtoObj> __Method_FetchRequestByIdAsync = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Int64Value, global::SEP3_DataTier.RequestProtoObj>(
         grpc::MethodType.Unary,
         __ServiceName,
         "FetchRequestByIdAsync",
-        __Marshaller_google_protobuf_Int32Value,
+        __Marshaller_google_protobuf_Int64Value,
         __Marshaller_RequestProtoObj);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
@@ -131,7 +129,7 @@ namespace SEP3_DataTier {
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.RequestProtoObj> FetchRequestByIdAsync(global::Google.Protobuf.WellKnownTypes.Int32Value request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.RequestProtoObj> FetchRequestByIdAsync(global::Google.Protobuf.WellKnownTypes.Int64Value request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -179,7 +177,7 @@ namespace SEP3_DataTier {
     {
       serviceBinder.AddMethod(__Method_CreateRequestAsync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.RequestProtoObj, global::SEP3_DataTier.RequestProtoObj>(serviceImpl.CreateRequestAsync));
       serviceBinder.AddMethod(__Method_FetchAllRequestsAsync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Empty, global::SEP3_DataTier.RequestProtoObjList>(serviceImpl.FetchAllRequestsAsync));
-      serviceBinder.AddMethod(__Method_FetchRequestByIdAsync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Int32Value, global::SEP3_DataTier.RequestProtoObj>(serviceImpl.FetchRequestByIdAsync));
+      serviceBinder.AddMethod(__Method_FetchRequestByIdAsync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Int64Value, global::SEP3_DataTier.RequestProtoObj>(serviceImpl.FetchRequestByIdAsync));
       serviceBinder.AddMethod(__Method_FetchRequestByUsername, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.StringValue, global::SEP3_DataTier.RequestProtoObj>(serviceImpl.FetchRequestByUsername));
       serviceBinder.AddMethod(__Method_UpdateRequestAsync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.RequestProtoObj, global::SEP3_DataTier.RequestProtoObj>(serviceImpl.UpdateRequestAsync));
       serviceBinder.AddMethod(__Method_DeleteRequestAsync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Int64Value, global::Google.Protobuf.WellKnownTypes.BoolValue>(serviceImpl.DeleteRequestAsync));
