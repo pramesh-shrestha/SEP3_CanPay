@@ -1,7 +1,6 @@
 using EFCDataAccess.DAOInterface;
 using Entity;
 using Entity.Model;
-using Google.Protobuf.Collections;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using SEP3_DataTier;
@@ -166,7 +165,7 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             Receiver = UserService.FromProtoToEntity(transactionProtoObj.ReceiverUser),
             Amount = transactionProtoObj.Amount,
             Date = transactionProtoObj.Date,
-            Comment = requestProtoObj.Comment,
+            Comment = transactionProtoObj.Comment
         };
 
         if (transactionProtoObj.TransactionId != 0)
@@ -186,7 +185,7 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             ReceiverUser = UserService.FromEntityToProto(transactionEntity.Receiver),
             Amount = transactionEntity.Amount,
             Date = transactionEntity.Date,
-            Comment = requestEntity.Comment
+            Comment = transactionEntity.Comment
         };
     }
 
