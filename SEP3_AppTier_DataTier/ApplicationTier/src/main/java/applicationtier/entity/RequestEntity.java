@@ -23,6 +23,9 @@ public class RequestEntity {
         this.requestSender = requestSender;
     }
 
+    public RequestEntity() {
+    }
+
     public Long getId() {
         return id;
     }
