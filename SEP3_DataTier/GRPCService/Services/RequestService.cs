@@ -95,7 +95,7 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase {
             Status = requestProtoObj.Status,
             Amount = requestProtoObj.Amount,
             Comment = requestProtoObj.Comment,
-            Payer = UserService.FromProtoToEntity(requestProtoObj.Payer)
+            RequestReceiver = UserService.FromProtoToEntity(requestProtoObj.RequestReceiver)
         };
         
         if (requestProtoObj.RequestId != 0) {
@@ -113,7 +113,7 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase {
             Status = requestEntity.Status,
             Amount = requestEntity.Amount,
             Comment = requestEntity.Comment,
-            Payer = UserService.FromEntityToProto(requestEntity.Payer)
+            RequestReceiver = UserService.FromEntityToProto(requestEntity.RequestReceiver)
         };
     }
     

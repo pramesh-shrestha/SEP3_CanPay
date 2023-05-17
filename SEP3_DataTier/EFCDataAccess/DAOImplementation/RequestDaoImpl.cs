@@ -16,9 +16,13 @@ public class RequestDaoImpl : IRequestDao {
     public async Task<RequestEntity> CreateRequestAsync(RequestEntity requestEntity) {
         try {
             //Attach the payer(user) entity to the context if not attached already
-            if (!context.Users.Local.Contains(requestEntity.Payer)) {
-                context.Users.Attach(requestEntity.Payer);
-                context.Cards.Attach(requestEntity.Payer!.Card);
+            if (!context.Users.Local.Contains(requestEntity.RequestReceiver)) {
+                context.Users.Attach(requestEntity.RequestReceiver);
+                context.Cards.Attach(requestEntity.RequestReceiver!.Card);
+            }
+            if (!context.Users.Local.Contains(requestEntity.RequestSender)) {
+                context.Users.Attach(requestEntity.RequestSender);
+                context.Cards.Attach(requestEntity.RequestSender!.Card);
             }
 
             EntityEntry<RequestEntity> addedRequest = await context.Requests.AddAsync(requestEntity);
@@ -33,7 +37,7 @@ public class RequestDaoImpl : IRequestDao {
 
     public async Task<ICollection<RequestEntity>> FetchAllRequestsAsync() {
         try {
-            ICollection<RequestEntity> requestEntities = await context.Requests.Include(e => e.Payer).ToListAsync();
+            ICollection<RequestEntity> requestEntities = await context.Requests.Include(e => e.RequestReceiver).ToListAsync();
             return requestEntities;
         }
         catch (Exception e) {
@@ -55,7 +59,7 @@ public class RequestDaoImpl : IRequestDao {
 
     public async Task<RequestEntity> FetchRequestByUsernameAsync(string username) {
         try {
-            RequestEntity? requestEntity = await context.Requests.FirstOrDefaultAsync(e => e.Payer!.Username.Equals(username));
+            RequestEntity? requestEntity = await context.Requests.FirstOrDefaultAsync(e => e.RequestReceiver!.Username.Equals(username));
             return requestEntity;
         }
         catch (Exception e) {
@@ -72,8 +76,10 @@ public class RequestDaoImpl : IRequestDao {
         //Attach the payer(user) entity to the context if not attached already
         if (!context.Requests.Local.Contains(requestEntity)) {
             context.Requests.Attach(requestEntity);
-            context.Users.Attach(requestEntity.Payer);
-            context.Cards.Attach(requestEntity.Payer!.Card);
+            context.Users.Attach(requestEntity.RequestSender);
+            context.Cards.Attach(requestEntity.RequestSender!.Card);
+            context.Users.Attach(requestEntity.RequestReceiver);
+            context.Cards.Attach(requestEntity.RequestReceiver!.Card);
             
         }
 

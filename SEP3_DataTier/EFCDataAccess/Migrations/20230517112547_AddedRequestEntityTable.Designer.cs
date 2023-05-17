@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EFCDataAccess.Migrations
 {
     [DbContext(typeof(CanPayDbAccess))]
-    [Migration("20230516184625_AddedRequestEntityTable")]
+    [Migration("20230517112547_AddedRequestEntityTable")]
     partial class AddedRequestEntityTable
     {
         /// <inheritdoc />
@@ -105,7 +105,13 @@ namespace EFCDataAccess.Migrations
                     b.Property<bool>("IsApproved")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("PayerUsername")
+                    b.Property<string>("RequestReceiverUsername")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RequestSenderUsername")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RequestedDate")
                         .HasColumnType("text");
 
                     b.Property<string>("Status")
@@ -113,7 +119,9 @@ namespace EFCDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PayerUsername");
+                    b.HasIndex("RequestReceiverUsername");
+
+                    b.HasIndex("RequestSenderUsername");
 
                     b.ToTable("Requests", "CanPay");
                 });
@@ -198,11 +206,17 @@ namespace EFCDataAccess.Migrations
 
             modelBuilder.Entity("Entity.Model.RequestEntity", b =>
                 {
-                    b.HasOne("Entity.Model.UserEntity", "Payer")
+                    b.HasOne("Entity.Model.UserEntity", "RequestReceiver")
                         .WithMany()
-                        .HasForeignKey("PayerUsername");
+                        .HasForeignKey("RequestReceiverUsername");
 
-                    b.Navigation("Payer");
+                    b.HasOne("Entity.Model.UserEntity", "RequestSender")
+                        .WithMany()
+                        .HasForeignKey("RequestSenderUsername");
+
+                    b.Navigation("RequestReceiver");
+
+                    b.Navigation("RequestSender");
                 });
 
             modelBuilder.Entity("Entity.Model.TransactionEntity", b =>

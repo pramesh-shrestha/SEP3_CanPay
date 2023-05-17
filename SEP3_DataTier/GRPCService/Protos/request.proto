@@ -11,7 +11,9 @@ message RequestProtoObj {
   string status = 3;
   int32 amount = 4;
   string comment = 5;
-  UserProtoObj payer = 6;
+  UserProtoObj requestSender = 6;
+  UserProtoObj requestReceiver = 7;
+  string requestedDate = 8;
 }
 
 message RequestProtoObjList{

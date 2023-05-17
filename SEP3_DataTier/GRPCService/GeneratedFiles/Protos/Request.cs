@@ -26,25 +26,27 @@ namespace SEP3_DataTier {
           string.Concat(
             "ChRQcm90b3MvcmVxdWVzdC5wcm90bxoeZ29vZ2xlL3Byb3RvYnVmL3dyYXBw",
             "ZXJzLnByb3RvGhFQcm90b3MvdXNlci5wcm90bxobZ29vZ2xlL3Byb3RvYnVm",
-            "L2VtcHR5LnByb3RvIocBCg9SZXF1ZXN0UHJvdG9PYmoSEQoJcmVxdWVzdElk",
+            "L2VtcHR5LnByb3RvIs4BCg9SZXF1ZXN0UHJvdG9PYmoSEQoJcmVxdWVzdElk",
             "GAEgASgDEhIKCmlzQXBwcm92ZWQYAiABKAgSDgoGc3RhdHVzGAMgASgJEg4K",
-            "BmFtb3VudBgEIAEoBRIPCgdjb21tZW50GAUgASgJEhwKBXBheWVyGAYgASgL",
-            "Mg0uVXNlclByb3RvT2JqIjkKE1JlcXVlc3RQcm90b09iakxpc3QSIgoIcmVx",
-            "dWVzdHMYASADKAsyEC5SZXF1ZXN0UHJvdG9PYmoysQMKE1JlcXVlc3RQcm90",
-            "b1NlcnZpY2USOAoSQ3JlYXRlUmVxdWVzdEFzeW5jEhAuUmVxdWVzdFByb3Rv",
-            "T2JqGhAuUmVxdWVzdFByb3RvT2JqEkUKFUZldGNoQWxsUmVxdWVzdHNBc3lu",
-            "YxIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoULlJlcXVlc3RQcm90b09iakxp",
-            "c3QSRgoVRmV0Y2hSZXF1ZXN0QnlJZEFzeW5jEhsuZ29vZ2xlLnByb3RvYnVm",
-            "LkludDY0VmFsdWUaEC5SZXF1ZXN0UHJvdG9PYmoSSAoWRmV0Y2hSZXF1ZXN0",
-            "QnlVc2VybmFtZRIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRoQLlJl",
-            "cXVlc3RQcm90b09iahI4ChJVcGRhdGVSZXF1ZXN0QXN5bmMSEC5SZXF1ZXN0",
-            "UHJvdG9PYmoaEC5SZXF1ZXN0UHJvdG9PYmoSTQoSRGVsZXRlUmVxdWVzdEFz",
-            "eW5jEhsuZ29vZ2xlLnByb3RvYnVmLkludDY0VmFsdWUaGi5nb29nbGUucHJv",
-            "dG9idWYuQm9vbFZhbHVlQhCqAg1TRVAzX0RhdGFUaWVyYgZwcm90bzM="));
+            "BmFtb3VudBgEIAEoBRIPCgdjb21tZW50GAUgASgJEiQKDXJlcXVlc3RTZW5k",
+            "ZXIYBiABKAsyDS5Vc2VyUHJvdG9PYmoSJgoPcmVxdWVzdFJlY2VpdmVyGAcg",
+            "ASgLMg0uVXNlclByb3RvT2JqEhUKDXJlcXVlc3RlZERhdGUYCCABKAkiOQoT",
+            "UmVxdWVzdFByb3RvT2JqTGlzdBIiCghyZXF1ZXN0cxgBIAMoCzIQLlJlcXVl",
+            "c3RQcm90b09iajKxAwoTUmVxdWVzdFByb3RvU2VydmljZRI4ChJDcmVhdGVS",
+            "ZXF1ZXN0QXN5bmMSEC5SZXF1ZXN0UHJvdG9PYmoaEC5SZXF1ZXN0UHJvdG9P",
+            "YmoSRQoVRmV0Y2hBbGxSZXF1ZXN0c0FzeW5jEhYuZ29vZ2xlLnByb3RvYnVm",
+            "LkVtcHR5GhQuUmVxdWVzdFByb3RvT2JqTGlzdBJGChVGZXRjaFJlcXVlc3RC",
+            "eUlkQXN5bmMSGy5nb29nbGUucHJvdG9idWYuSW50NjRWYWx1ZRoQLlJlcXVl",
+            "c3RQcm90b09iahJIChZGZXRjaFJlcXVlc3RCeVVzZXJuYW1lEhwuZ29vZ2xl",
+            "LnByb3RvYnVmLlN0cmluZ1ZhbHVlGhAuUmVxdWVzdFByb3RvT2JqEjgKElVw",
+            "ZGF0ZVJlcXVlc3RBc3luYxIQLlJlcXVlc3RQcm90b09iahoQLlJlcXVlc3RQ",
+            "cm90b09iahJNChJEZWxldGVSZXF1ZXN0QXN5bmMSGy5nb29nbGUucHJvdG9i",
+            "dWYuSW50NjRWYWx1ZRoaLmdvb2dsZS5wcm90b2J1Zi5Cb29sVmFsdWVCEKoC",
+            "DVNFUDNfRGF0YVRpZXJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::SEP3_DataTier.UserReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.RequestProtoObj), global::SEP3_DataTier.RequestProtoObj.Parser, new[]{ "RequestId", "IsApproved", "Status", "Amount", "Comment", "Payer" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.RequestProtoObj), global::SEP3_DataTier.RequestProtoObj.Parser, new[]{ "RequestId", "IsApproved", "Status", "Amount", "Comment", "RequestSender", "RequestReceiver", "RequestedDate" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.RequestProtoObjList), global::SEP3_DataTier.RequestProtoObjList.Parser, new[]{ "Requests" }, null, null, null, null)
           }));
     }
@@ -91,7 +93,9 @@ namespace SEP3_DataTier {
       status_ = other.status_;
       amount_ = other.amount_;
       comment_ = other.comment_;
-      payer_ = other.payer_ != null ? other.payer_.Clone() : null;
+      requestSender_ = other.requestSender_ != null ? other.requestSender_.Clone() : null;
+      requestReceiver_ = other.requestReceiver_ != null ? other.requestReceiver_.Clone() : null;
+      requestedDate_ = other.requestedDate_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -161,15 +165,39 @@ namespace SEP3_DataTier {
       }
     }
 
-    /// <summary>Field number for the "payer" field.</summary>
-    public const int PayerFieldNumber = 6;
-    private global::SEP3_DataTier.UserProtoObj payer_;
+    /// <summary>Field number for the "requestSender" field.</summary>
+    public const int RequestSenderFieldNumber = 6;
+    private global::SEP3_DataTier.UserProtoObj requestSender_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::SEP3_DataTier.UserProtoObj Payer {
-      get { return payer_; }
+    public global::SEP3_DataTier.UserProtoObj RequestSender {
+      get { return requestSender_; }
       set {
-        payer_ = value;
+        requestSender_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "requestReceiver" field.</summary>
+    public const int RequestReceiverFieldNumber = 7;
+    private global::SEP3_DataTier.UserProtoObj requestReceiver_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::SEP3_DataTier.UserProtoObj RequestReceiver {
+      get { return requestReceiver_; }
+      set {
+        requestReceiver_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "requestedDate" field.</summary>
+    public const int RequestedDateFieldNumber = 8;
+    private string requestedDate_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string RequestedDate {
+      get { return requestedDate_; }
+      set {
+        requestedDate_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -193,7 +221,9 @@ namespace SEP3_DataTier {
       if (Status != other.Status) return false;
       if (Amount != other.Amount) return false;
       if (Comment != other.Comment) return false;
-      if (!object.Equals(Payer, other.Payer)) return false;
+      if (!object.Equals(RequestSender, other.RequestSender)) return false;
+      if (!object.Equals(RequestReceiver, other.RequestReceiver)) return false;
+      if (RequestedDate != other.RequestedDate) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -206,7 +236,9 @@ namespace SEP3_DataTier {
       if (Status.Length != 0) hash ^= Status.GetHashCode();
       if (Amount != 0) hash ^= Amount.GetHashCode();
       if (Comment.Length != 0) hash ^= Comment.GetHashCode();
-      if (payer_ != null) hash ^= Payer.GetHashCode();
+      if (requestSender_ != null) hash ^= RequestSender.GetHashCode();
+      if (requestReceiver_ != null) hash ^= RequestReceiver.GetHashCode();
+      if (RequestedDate.Length != 0) hash ^= RequestedDate.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -245,9 +277,17 @@ namespace SEP3_DataTier {
         output.WriteRawTag(42);
         output.WriteString(Comment);
       }
-      if (payer_ != null) {
+      if (requestSender_ != null) {
         output.WriteRawTag(50);
-        output.WriteMessage(Payer);
+        output.WriteMessage(RequestSender);
+      }
+      if (requestReceiver_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(RequestReceiver);
+      }
+      if (RequestedDate.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(RequestedDate);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -279,9 +319,17 @@ namespace SEP3_DataTier {
         output.WriteRawTag(42);
         output.WriteString(Comment);
       }
-      if (payer_ != null) {
+      if (requestSender_ != null) {
         output.WriteRawTag(50);
-        output.WriteMessage(Payer);
+        output.WriteMessage(RequestSender);
+      }
+      if (requestReceiver_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(RequestReceiver);
+      }
+      if (RequestedDate.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(RequestedDate);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -308,8 +356,14 @@ namespace SEP3_DataTier {
       if (Comment.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Comment);
       }
-      if (payer_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Payer);
+      if (requestSender_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RequestSender);
+      }
+      if (requestReceiver_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RequestReceiver);
+      }
+      if (RequestedDate.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(RequestedDate);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -338,11 +392,20 @@ namespace SEP3_DataTier {
       if (other.Comment.Length != 0) {
         Comment = other.Comment;
       }
-      if (other.payer_ != null) {
-        if (payer_ == null) {
-          Payer = new global::SEP3_DataTier.UserProtoObj();
+      if (other.requestSender_ != null) {
+        if (requestSender_ == null) {
+          RequestSender = new global::SEP3_DataTier.UserProtoObj();
         }
-        Payer.MergeFrom(other.Payer);
+        RequestSender.MergeFrom(other.RequestSender);
+      }
+      if (other.requestReceiver_ != null) {
+        if (requestReceiver_ == null) {
+          RequestReceiver = new global::SEP3_DataTier.UserProtoObj();
+        }
+        RequestReceiver.MergeFrom(other.RequestReceiver);
+      }
+      if (other.RequestedDate.Length != 0) {
+        RequestedDate = other.RequestedDate;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -380,10 +443,21 @@ namespace SEP3_DataTier {
             break;
           }
           case 50: {
-            if (payer_ == null) {
-              Payer = new global::SEP3_DataTier.UserProtoObj();
+            if (requestSender_ == null) {
+              RequestSender = new global::SEP3_DataTier.UserProtoObj();
             }
-            input.ReadMessage(Payer);
+            input.ReadMessage(RequestSender);
+            break;
+          }
+          case 58: {
+            if (requestReceiver_ == null) {
+              RequestReceiver = new global::SEP3_DataTier.UserProtoObj();
+            }
+            input.ReadMessage(RequestReceiver);
+            break;
+          }
+          case 66: {
+            RequestedDate = input.ReadString();
             break;
           }
         }
@@ -422,10 +496,21 @@ namespace SEP3_DataTier {
             break;
           }
           case 50: {
-            if (payer_ == null) {
-              Payer = new global::SEP3_DataTier.UserProtoObj();
+            if (requestSender_ == null) {
+              RequestSender = new global::SEP3_DataTier.UserProtoObj();
             }
-            input.ReadMessage(Payer);
+            input.ReadMessage(RequestSender);
+            break;
+          }
+          case 58: {
+            if (requestReceiver_ == null) {
+              RequestReceiver = new global::SEP3_DataTier.UserProtoObj();
+            }
+            input.ReadMessage(RequestReceiver);
+            break;
+          }
+          case 66: {
+            RequestedDate = input.ReadString();
             break;
           }
         }
