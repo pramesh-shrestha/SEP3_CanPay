@@ -1,6 +1,7 @@
 ﻿@using Domains.Entity
 @using HTTPClients.ClientInterfaces
 @using System.Timers
+@using UIComponents
 @namespace BlazorServerApp.Pages
 @inject INotificationService NotificationService;
 @inject NavigationManager NavMgr;
@@ -22,14 +23,12 @@
 
 
         </div>
-        @if (showNotification)
-        {
+        @if (showNotification) {
             <div class="noti-body ">
                 <label class="header">Notifications</label>
                 <hr class="hr1"/>
                 <div class="card">
-                    @foreach (var items in notifications)
-                    {
+                    @foreach (var items in notifications) {
                         <div class="card-body">
                             <label class="date text-muted">@items.Date</label>
                             <label class="notification-table">@items.Message</label>
@@ -39,6 +38,24 @@
             </div>
         }
     </Authorized>
+    <Modal ShowModal="">
+        <p>La bhai yeha chai receiver le yeti request garecha bhana</p>
+        <div class="wrapper_loaded">
+            <div class="container-button">
+                <a href="#" class="popUp-button">
+                    <span class=" icon check-icon">&#10004;</span>
+                    <span>Accept</span>
+                </a>
+            </div>
+
+            <div class="container-button">
+                <a href="#" class="popUp-button">
+                    <span class="icon cross-icon">&#10007;</span>
+                    <span>Reject</span>
+                </a>
+            </div>
+        </div>
+    </Modal>
 </AuthorizeView>
 
 @code {
@@ -56,15 +73,13 @@
     // private DateTime dateTime = DateTime.Now.Date;
     // public bool IsRead;
 
-    protected override async Task OnInitializedAsync()
-    {
+    protected override async Task OnInitializedAsync() {
         await UpdateNotifications();
 
         AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
 
     // Start the timer to update notifications every 5 seconds
-        if (state.User.Identity!.IsAuthenticated)
-        {
+        if (state.User.Identity!.IsAuthenticated) {
             timer = new Timer(5000);
             timer.Elapsed += TimerElapsedAsync;
             timer.Start();
@@ -73,15 +88,12 @@
 
     // Method called when the timer's elapsed event is triggered
 
-    private async void TimerElapsedAsync(object? sender, ElapsedEventArgs e)
-    {
+    private async void TimerElapsedAsync(object? sender, ElapsedEventArgs e) {
         await UpdateNotifications();
     }
 
-    private async Task UpdateNotifications()
-    {
-        try
-        {
+    private async Task UpdateNotifications() {
+        try {
             AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
             receiver = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
 
@@ -92,18 +104,15 @@
     // Trigger UI Refresh
             await InvokeAsync(StateHasChanged);
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             Console.WriteLine(e.Message);
         }
     }
 
-    private async void HandleNotificationClick()
-    {
+    private async void HandleNotificationClick() {
         showNotification = !showNotification;
 
-        if (notifications.Count != 0)
-        {
+        if (notifications.Count != 0) {
             await NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
             await InvokeAsync(StateHasChanged);
         }
