@@ -10,6 +10,8 @@
 @inject AuthenticationStateProvider StateProvider;
 @inject NavigationManager NavMgr;
 @inject INotificationService NotificationService;
+@inject IRequestService RequestService;
+
 <AuthorizeView>
     <Authorized>
 
@@ -240,17 +242,37 @@
 
     private async Task SendMoneyRequest()
     {
-        receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
-        string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
-
-        RequestEntity entity = new RequestEntity()
+        try
         {
-            Amount = Convert.ToInt32(amount),
-            Comment = comment,
-            Payer = receiverUser,
-            Status = RequestStatus.Pending.ToString(),
-            IsApproved = false
-        };
+            if (string.IsNullOrEmpty(receiver)) throw new Exception("Receiver must be selected.");
+            if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
+
+            receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
+            string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
+
+            RequestEntity entity = new RequestEntity()
+            {
+                Amount = Convert.ToInt32(amount),
+                Comment = comment,
+                RequestReceiver = receiverUser,
+                RequestSender = senderUser,
+                Status = RequestStatus.Pending.ToString(),
+                IsApproved = false,
+                RequestedDate = date
+            };
+
+            if (string.IsNullOrEmpty(errorLabel))
+            {
+                await RequestService.CreateRequestAsync(entity);
+                await CreateNotification();
+                showModal = true;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new Exception(e.Message);
+        }
     }
 
 

@@ -10,5 +10,7 @@ public class RequestEntity
     public string? Status { get; set; }
     public int Amount { get; set; }
     public string? Comment { get; set; }
-    public UserEntity? Payer { get; set; }
+    public UserEntity? RequestSender { get; set; }
+    public UserEntity? RequestReceiver { get; set; }
+    public string? RequestedDate { get; set; }
 }

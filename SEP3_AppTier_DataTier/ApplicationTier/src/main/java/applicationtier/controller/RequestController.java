@@ -21,63 +21,59 @@ public class RequestController {
     }
 
     @PostMapping("/request/create")
-   public ResponseEntity<RequestEntity> createRequest(@RequestBody RequestEntity request){
+    public ResponseEntity<RequestEntity> createRequest(@RequestBody RequestEntity request) {
         try {
-            RequestEntity requestEntity=requestService.createRequest(request);
-            return new ResponseEntity<>(request, HttpStatus.OK);
-        }
-        catch (Exception e){
+            RequestEntity requestEntity = requestService.createRequest(request);
+            return new ResponseEntity<>(requestEntity, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-   }
+    }
 
-   @GetMapping("/request")
-   public ResponseEntity<List<RequestEntity>> fetchAllRequest()
-   {
-       try {
-           List<RequestEntity> requestEntities= requestService.fetchAllRequest();
-           return new ResponseEntity<>(requestEntities,HttpStatus.OK);
-       }catch (Exception e){
-           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-       }
-   }
-
-   @GetMapping("/request/id/{id}")
-   public ResponseEntity<RequestEntity> fetchRequestById(@PathVariable("id") Long id){
+    @GetMapping("/request")
+    public ResponseEntity<List<RequestEntity>> fetchAllRequest() {
         try {
-            return new ResponseEntity<>(requestService.fetchRequestById(id),HttpStatus.OK);
-        }
-        catch (Exception e){
+            List<RequestEntity> requestEntities = requestService.fetchAllRequest();
+            return new ResponseEntity<>(requestEntities, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-   }
+    }
 
-   @GetMapping("/request/username/{username}")
-   public ResponseEntity<RequestEntity> fetchRequestByUsername(@PathVariable("username") String username){
+    @GetMapping("/request/id/{id}")
+    public ResponseEntity<RequestEntity> fetchRequestById(@PathVariable("id") Long id) {
         try {
-            return new ResponseEntity<>(requestService.fetchRequestByUsername(username),HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(requestService.fetchRequestById(id), HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-   }
+    }
 
-   @PostMapping("/request/update")
-   public ResponseEntity<RequestEntity> updateRequest(@RequestBody RequestEntity request){
+    @GetMapping("/request/username/{username}")
+    public ResponseEntity<RequestEntity> fetchRequestByUsername(@PathVariable("username") String username) {
         try {
-            return new ResponseEntity<>(requestService.updateRequest(request),HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(requestService.fetchRequestByUsername(username), HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-   }
+    }
 
-   @DeleteMapping("/request/delete/{id}")
-   public ResponseEntity<String> deleteRequest(@PathVariable("id") Long id){
+    @PostMapping("/request/update")
+    public ResponseEntity<RequestEntity> updateRequest(@RequestBody RequestEntity request) {
+        try {
+            return new ResponseEntity<>(requestService.updateRequest(request), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/request/delete/{id}")
+    public ResponseEntity<String> deleteRequest(@PathVariable("id") Long id) {
         try {
             requestService.deleteRequest(id);
-            return new ResponseEntity<>("Request has been deleted",HttpStatus.OK);
-        }
-        catch (Exception e){
+            return new ResponseEntity<>("Request has been deleted", HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-   }
+    }
 }
