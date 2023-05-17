@@ -166,6 +166,7 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             Receiver = UserService.FromProtoToEntity(transactionProtoObj.ReceiverUser),
             Amount = transactionProtoObj.Amount,
             Date = transactionProtoObj.Date,
+            Comment = requestProtoObj.Comment,
         };
 
         if (transactionProtoObj.TransactionId != 0)
@@ -184,7 +185,8 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             SenderUser = UserService.FromEntityToProto(transactionEntity!.Sender),
             ReceiverUser = UserService.FromEntityToProto(transactionEntity.Receiver),
             Amount = transactionEntity.Amount,
-            Date = transactionEntity.Date
+            Date = transactionEntity.Date,
+            Comment = requestEntity.Comment
         };
     }
 

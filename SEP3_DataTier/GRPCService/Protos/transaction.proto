@@ -12,6 +12,7 @@ message TransactionProtoObj {
   UserProtoObj receiverUser = 3;
   google.protobuf.Int32Value amount = 4;
   google.protobuf.StringValue date = 5;
+  google.protobuf.StringValue comment = 6;
 }
 
 message FilterByUserAndDateProtoObj {

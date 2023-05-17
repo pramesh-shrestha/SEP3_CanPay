@@ -10,4 +10,5 @@ public class TransactionEntity
     public UserEntity? Receiver { get; set; }
     [Required] public int? Amount { get; set; }
     public string Date { get; set; }
+    public string Comment { get; set; }
 }
