@@ -33,7 +33,7 @@ public class RequestProtoServiceGrpc {
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
-              "RequestProtoService", "CreateRequestAsync"),
+              "RequestProtoService", "createRequestAsync"),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObj.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObj.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
@@ -42,7 +42,7 @@ public class RequestProtoServiceGrpc {
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
-              "RequestProtoService", "FetchAllRequestsAsync"),
+              "RequestProtoService", "fetchAllRequestsAsync"),
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Empty.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObjList.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
@@ -51,7 +51,7 @@ public class RequestProtoServiceGrpc {
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
-              "RequestProtoService", "FetchRequestByIdAsync"),
+              "RequestProtoService", "fetchRequestByIdAsync"),
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int32Value.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObj.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
@@ -60,7 +60,7 @@ public class RequestProtoServiceGrpc {
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
-              "RequestProtoService", "FetchRequestByUsername"),
+              "RequestProtoService", "fetchRequestByUsername"),
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.StringValue.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObj.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
@@ -69,7 +69,7 @@ public class RequestProtoServiceGrpc {
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
-              "RequestProtoService", "UpdateRequestAsync"),
+              "RequestProtoService", "updateRequestAsync"),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObj.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObj.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
@@ -78,7 +78,7 @@ public class RequestProtoServiceGrpc {
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
-              "RequestProtoService", "DeleteRequestAsync"),
+              "RequestProtoService", "deleteRequestAsync"),
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int64Value.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.BoolValue.getDefaultInstance()));
 

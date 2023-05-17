@@ -7,21 +7,48 @@ public class RequestEntity {
     private String status;
     private int amount;
     private String comment;
-    private UserEntity payer;
+    private UserEntity requestSender;
+    private UserEntity requestReceiver;
+    private String requestedDate;
 
 
-    public RequestEntity(Long id, boolean isApproved, String status, int amount, String comment, UserEntity payer) {
+    public RequestEntity(Long id, boolean isApproved, String status, int amount, String comment, UserEntity requestReceiver, UserEntity requestSender) {
 
         this.id = id;
         this.isApproved = isApproved;
         this.status = status;
         this.amount = amount;
         this.comment = comment;
-        this.payer = payer;
+        this.requestReceiver = requestReceiver;
+        this.requestSender = requestSender;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public UserEntity getRequestSender() {
+        return requestSender;
+    }
+
+    public void setRequestSender(UserEntity requestSender) {
+        this.requestSender = requestSender;
+    }
+
+    public UserEntity getRequestReceiver() {
+        return requestReceiver;
+    }
+
+    public void setRequestReceiver(UserEntity requestReceiver) {
+        this.requestReceiver = requestReceiver;
+    }
+
+    public String getRequestedDate() {
+        return requestedDate;
+    }
+
+    public void setRequestedDate(String requestedDate) {
+        this.requestedDate = requestedDate;
     }
 
     public void setId(Long id) {
@@ -60,11 +87,7 @@ public class RequestEntity {
         this.comment = comment;
     }
 
-    public UserEntity getPayer() {
-        return payer;
-    }
 
-    public void setPayer(UserEntity payer) {
-        this.payer = payer;
-    }
+
+
 }

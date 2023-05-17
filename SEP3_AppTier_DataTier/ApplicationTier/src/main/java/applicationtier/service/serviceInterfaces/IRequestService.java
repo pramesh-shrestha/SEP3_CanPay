@@ -9,9 +9,9 @@ import java.util.List;
 public interface IRequestService {
 
     RequestEntity createRequest(RequestEntity requestEntity);
-    List<RequestEntity> FetchAllRequest();
-    RequestEntity FetchRequestById(Long id);
-    RequestEntity FetchRequestByUsername(String username);
-    RequestEntity UpdateRequest(RequestEntity requestEntity);
-    boolean DeleteRequest(Long id);
+    List<RequestEntity> fetchAllRequest();
+    RequestEntity fetchRequestById(Long id);
+    RequestEntity fetchRequestByUsername(String username);
+    RequestEntity updateRequest(RequestEntity requestEntity);
+    boolean deleteRequest(Long id);
 }

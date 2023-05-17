@@ -14,7 +14,9 @@ message RequestProtoObj {
   string status = 3;
   int32 amount = 4;
   string comment = 5;
-  UserProtoObj payer = 6;
+  UserProtoObj requestSender = 6;
+  UserProtoObj requestReceiver = 7;
+  string requestedDate = 8;
 }
 
 message RequestProtoObjList{
@@ -22,10 +24,10 @@ message RequestProtoObjList{
 }
 
 service RequestProtoService{
-  rpc CreateRequestAsync(RequestProtoObj) returns (RequestProtoObj);
-  rpc FetchAllRequestsAsync(google.protobuf.Empty) returns (RequestProtoObjList);
-  rpc FetchRequestByIdAsync(google.protobuf.Int32Value) returns (RequestProtoObj);
-  rpc FetchRequestByUsername(google.protobuf.StringValue) returns (RequestProtoObj);
-  rpc UpdateRequestAsync(RequestProtoObj) returns (RequestProtoObj);
-  rpc DeleteRequestAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
+  rpc createRequestAsync(RequestProtoObj) returns (RequestProtoObj);
+  rpc fetchAllRequestsAsync(google.protobuf.Empty) returns (RequestProtoObjList);
+  rpc fetchRequestByIdAsync(google.protobuf.Int32Value) returns (RequestProtoObj);
+  rpc fetchRequestByUsername(google.protobuf.StringValue) returns (RequestProtoObj);
+  rpc updateRequestAsync(RequestProtoObj) returns (RequestProtoObj);
+  rpc deleteRequestAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
 }
