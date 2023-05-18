@@ -48,7 +48,6 @@ public class NotificationDaoImpl : INotificationDao
     {
         try
         {
-            Console.WriteLine($"Notification Dao Impl: {requestValue}");
             NotificationEntity? notificationEntity =
                 await context.Notifications.Include(entity => entity.Sender)
                     .Include(entity => entity.Receiver)

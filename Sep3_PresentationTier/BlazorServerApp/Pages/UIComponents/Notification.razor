@@ -1,7 +1,8 @@
-﻿@using Domains.Entity
-@using HTTPClients.ClientInterfaces
-@using System.Timers
+﻿@using HTTPClients.ClientInterfaces
 @using UIComponents
+@using Domains.Entity
+@using Domains.Enums
+@using System.Timers
 @namespace BlazorServerApp.Pages
 @inject INotificationService NotificationService;
 @inject NavigationManager NavMgr;
@@ -31,7 +32,7 @@
                 <div class="card">
                     @foreach (var items in notifications)
                     {
-                        <div class="card-body" @onclick="() => OnNotificationClicked(items.Id)">
+                        <div class="card-body" @onclick="() => OnNotificationClicked(items.Id, items.NotificationType)">
                             <label class="date text-muted">@items.Date</label>
                             <label class="notification-table">@items.Message</label>
                         </div>
@@ -39,25 +40,49 @@
                 </div>
             </div>
         }
-    </Authorized>
-    @*<Modal ShowModal="">
-        <p>La bhai yeha chai receiver le yeti request garecha bhana</p>
-        <div class="wrapper_loaded">
-            <div class="container-button">
-                <a href="#" class="popUp-button">
-                    <span class=" icon check-icon">&#10004;</span>
-                    <span>Accept</span>
-                </a>
-            </div>
 
-            <div class="container-button">
-                <a href="#" class="popUp-button">
-                    <span class="icon cross-icon">&#10007;</span>
-                    <span>Reject</span>
-                </a>
-            </div>
-        </div>
-    </Modal>*@
+
+
+
+        @if (clickedNotificationType!.Equals(TypesOfTransaction.RequestMoney.ToString()))
+        {
+            <Modal ShowModal="@showModal">
+                @* <p>La bhai yeha chai receiver le yeti request garecha bhana</p> *@
+                <div class="notificationInputField">
+                    <input @bind="clickedNotificationSender" type="text" disabled=""/>
+                    <label class="notificationLabel">Sent By</label>
+                </div>
+
+                <div class="notificationInputField">
+                    <input type="text" disabled=""/>
+                    <label class="notificationLabel">Amount</label>
+                </div>
+
+                <div class="notificationInputField">
+                    <input @bind="clickedNotificationDate" type="text" disabled=""/>
+                    <label class="notificationLabel">Sent Date</label>
+                </div>
+
+
+                <div class="wrapper_loaded">
+                    <div class="container-button">
+                        <a href="#" class="popUp-button">
+                            <span class=" icon check-icon">&#10004;</span>
+                            <span>Accept</span>
+                        </a>
+                    </div>
+
+                    <div class="container-button">
+                        <a href="#" class="popUp-button">
+                            <span class="icon cross-icon">&#10007;</span>
+                            <span>Reject</span>
+                        </a>
+                    </div>
+                </div>
+            </Modal>
+        }
+    </Authorized>
+
 </AuthorizeView>
 
 @code {
@@ -66,11 +91,15 @@
     private ICollection<NotificationEntity>? notifications = new List<NotificationEntity>();
     private bool showNotification = false;
     private int notificationCount;
+    private Timer timer;
 
     // properties for notification popup
     private long clickedNotificationId;
+    private bool showModal = false;
+    private string? clickedNotificationType = "";
+    private string? clickedNotificationDate = "";
+    private string? clickedNotificationSender = "";
 
-    private Timer timer;
 
     // private UserEntity? receiverUser = new UserEntity();
     // private string? notificationType;
@@ -111,11 +140,15 @@
         }
     }
 
-
-    private async Task OnNotificationClicked(long itemsId)
+    private async Task OnNotificationClicked(long itemsId, string? itemsNotificationType)
     {
         clickedNotificationId = itemsId;
+        clickedNotificationType = itemsNotificationType;
+
         NotificationEntity byId = await NotificationService.FetchNotificationById(clickedNotificationId);
+        clickedNotificationDate = byId.Date;
+        clickedNotificationSender = byId.Sender!.UserName;
+        showModal = true;
     }
 
 
@@ -132,7 +165,7 @@
 
         if (notifications.Count != 0)
         {
-            await NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
+    // await NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
             await InvokeAsync(StateHasChanged);
         }
     }
