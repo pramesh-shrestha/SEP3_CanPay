@@ -7,13 +7,15 @@ public class TransactionEntity {
     private UserEntity receiver;
     private int amount;
     private String date;
+    private String comment;
 
-    public TransactionEntity(Long TransactionId, UserEntity sender, UserEntity receiver, int amount, String date) {
+    public TransactionEntity(Long TransactionId, UserEntity sender, UserEntity receiver, int amount, String date, String comment) {
         this.transactionId = TransactionId;
         this.sender = sender;
         this.receiver = receiver;
         this.amount = amount;
         this.date = date;
+        this.comment = comment;
     }
 
     public TransactionEntity() {
@@ -58,4 +60,13 @@ public class TransactionEntity {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
 }
