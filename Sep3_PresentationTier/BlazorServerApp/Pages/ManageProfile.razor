@@ -272,6 +272,21 @@
         confirmation = false;
     }
 
+ //For testing purpose only
+    public async Task<String> GetErrorMessage()
+    {
+        try
+        {
+            await SaveChanges();
+        }
+        catch (Exception e)
+        {
+            return e.Message;
+        }
+
+        return null;
+    }
+    
     private async Task SaveChanges()
     {
     // bool success = DateTime.TryParseExact(expiryDate, "MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime);
