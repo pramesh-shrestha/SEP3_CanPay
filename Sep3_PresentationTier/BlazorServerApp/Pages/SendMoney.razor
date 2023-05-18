@@ -10,6 +10,8 @@
 @inject AuthenticationStateProvider StateProvider;
 @inject NavigationManager NavMgr;
 @inject INotificationService NotificationService;
+@inject IRequestService RequestService;
+
 <AuthorizeView>
     <Authorized>
 
@@ -79,6 +81,12 @@
                             <div class="inputFields">
                                 <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
                             </div>
+                            
+                            <label>Comment</label>
+                                <div class="inputFields">
+                                    <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment">
+                                </div>
+                            
                         </div>
                     }
                     else if (transactionType.Equals(TypesOfTransaction.RequestMoney.ToString()))
@@ -109,11 +117,16 @@
                                     <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
                                 </div>
 
-                                <label>To</label>
+                                @* <label>To</label> *@
+                                @* <div class="inputFields"> *@
+                                @*     <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment"> *@
+                                @* </div> *@
+                                
+                                <label>Comment</label>
                                 <div class="inputFields">
                                     <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment">
                                 </div>
-
+                                
                             </div>
                         </div>
                     }
@@ -216,8 +229,7 @@
         receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
         string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
 
-        TransactionEntity transactionEntity = new TransactionEntity(senderUser, receiverUser, int.Parse(amount), date);
-
+        TransactionEntity transactionEntity = new TransactionEntity(senderUser, receiverUser, int.Parse(amount), date,comment);
         try
         {
             if (string.IsNullOrEmpty(receiver)) throw new Exception("Receiver must be selected.");
@@ -240,17 +252,37 @@
 
     private async Task SendMoneyRequest()
     {
-        receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
-        string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
-
-        RequestEntity entity = new RequestEntity()
+        try
         {
-            Amount = Convert.ToInt32(amount),
-            Comment = comment,
-            Payer = receiverUser,
-            Status = RequestStatus.Pending.ToString(),
-            IsApproved = false
-        };
+            if (string.IsNullOrEmpty(receiver)) throw new Exception("Receiver must be selected.");
+            if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
+
+            receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
+            string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
+
+            RequestEntity entity = new RequestEntity()
+            {
+                Amount = Convert.ToInt32(amount),
+                Comment = comment,
+                RequestReceiver = receiverUser,
+                RequestSender = senderUser,
+                Status = RequestStatus.Pending.ToString(),
+                IsApproved = false,
+                RequestedDate = date
+            };
+
+            if (string.IsNullOrEmpty(errorLabel))
+            {
+                await RequestService.CreateRequestAsync(entity);
+                await CreateNotification();
+                showModal = true;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new Exception(e.Message);
+        }
     }
 
 

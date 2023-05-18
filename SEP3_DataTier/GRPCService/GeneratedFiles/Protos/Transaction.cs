@@ -26,37 +26,38 @@ namespace SEP3_DataTier {
           string.Concat(
             "ChhQcm90b3MvdHJhbnNhY3Rpb24ucHJvdG8aHmdvb2dsZS9wcm90b2J1Zi93",
             "cmFwcGVycy5wcm90bxoRUHJvdG9zL3VzZXIucHJvdG8aG2dvb2dsZS9wcm90",
-            "b2J1Zi9lbXB0eS5wcm90byLrAQoTVHJhbnNhY3Rpb25Qcm90b09iahIzCg50",
+            "b2J1Zi9lbXB0eS5wcm90byKaAgoTVHJhbnNhY3Rpb25Qcm90b09iahIzCg50",
             "cmFuc2FjdGlvbl9pZBgBIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQ2NFZh",
             "bHVlEiEKCnNlbmRlclVzZXIYAiABKAsyDS5Vc2VyUHJvdG9PYmoSIwoMcmVj",
             "ZWl2ZXJVc2VyGAMgASgLMg0uVXNlclByb3RvT2JqEisKBmFtb3VudBgEIAEo",
             "CzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlEioKBGRhdGUYBSABKAsy",
-            "HC5nb29nbGUucHJvdG9idWYuU3RyaW5nVmFsdWUieQobRmlsdGVyQnlVc2Vy",
-            "QW5kRGF0ZVByb3RvT2JqEi4KCHVzZXJuYW1lGAEgASgLMhwuZ29vZ2xlLnBy",
-            "b3RvYnVmLlN0cmluZ1ZhbHVlEioKBGRhdGUYAiABKAsyHC5nb29nbGUucHJv",
-            "dG9idWYuU3RyaW5nVmFsdWUiSAoXVHJhbnNhY3Rpb25Qcm90b09iakxpc3QS",
-            "LQoPYWxsVHJhbnNhY3Rpb25zGAEgAygLMhQuVHJhbnNhY3Rpb25Qcm90b09i",
-            "ajLWBQoXVHJhbnNhY3Rpb25Qcm90b1NlcnZpY2USRAoWQ3JlYXRlVHJhbnNh",
-            "Y3Rpb25Bc3luYxIULlRyYW5zYWN0aW9uUHJvdG9PYmoaFC5UcmFuc2FjdGlv",
-            "blByb3RvT2JqEk4KGUZldGNoVHJhbnNhY3Rpb25CeUlkQXN5bmMSGy5nb29n",
-            "bGUucHJvdG9idWYuSW50NjRWYWx1ZRoULlRyYW5zYWN0aW9uUHJvdG9PYmoS",
-            "WwohRmV0Y2hBbExUcmFuc2FjdGlvbnNCeVNlbmRlckFzeW5jEhwuZ29vZ2xl",
-            "LnByb3RvYnVmLlN0cmluZ1ZhbHVlGhguVHJhbnNhY3Rpb25Qcm90b09iakxp",
-            "c3QSXQojRmV0Y2hBbGxUcmFuc2FjdGlvbnNCeVJlY2VpdmVyQXN5bmMSHC5n",
-            "b29nbGUucHJvdG9idWYuU3RyaW5nVmFsdWUaGC5UcmFuc2FjdGlvblByb3Rv",
-            "T2JqTGlzdBJgCiZGZXRjaEFsTFRyYW5zYWN0aW9uc0ludm9sdmluZ1VzZXJB",
+            "HC5nb29nbGUucHJvdG9idWYuU3RyaW5nVmFsdWUSLQoHY29tbWVudBgGIAEo",
+            "CzIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZSJ5ChtGaWx0ZXJCeVVz",
+            "ZXJBbmREYXRlUHJvdG9PYmoSLgoIdXNlcm5hbWUYASABKAsyHC5nb29nbGUu",
+            "cHJvdG9idWYuU3RyaW5nVmFsdWUSKgoEZGF0ZRgCIAEoCzIcLmdvb2dsZS5w",
+            "cm90b2J1Zi5TdHJpbmdWYWx1ZSJIChdUcmFuc2FjdGlvblByb3RvT2JqTGlz",
+            "dBItCg9hbGxUcmFuc2FjdGlvbnMYASADKAsyFC5UcmFuc2FjdGlvblByb3Rv",
+            "T2JqMtYFChdUcmFuc2FjdGlvblByb3RvU2VydmljZRJEChZDcmVhdGVUcmFu",
+            "c2FjdGlvbkFzeW5jEhQuVHJhbnNhY3Rpb25Qcm90b09iahoULlRyYW5zYWN0",
+            "aW9uUHJvdG9PYmoSTgoZRmV0Y2hUcmFuc2FjdGlvbkJ5SWRBc3luYxIbLmdv",
+            "b2dsZS5wcm90b2J1Zi5JbnQ2NFZhbHVlGhQuVHJhbnNhY3Rpb25Qcm90b09i",
+            "ahJbCiFGZXRjaEFsTFRyYW5zYWN0aW9uc0J5U2VuZGVyQXN5bmMSHC5nb29n",
+            "bGUucHJvdG9idWYuU3RyaW5nVmFsdWUaGC5UcmFuc2FjdGlvblByb3RvT2Jq",
+            "TGlzdBJdCiNGZXRjaEFsbFRyYW5zYWN0aW9uc0J5UmVjZWl2ZXJBc3luYxIc",
+            "Lmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRoYLlRyYW5zYWN0aW9uUHJv",
+            "dG9PYmpMaXN0EmAKJkZldGNoQWxMVHJhbnNhY3Rpb25zSW52b2x2aW5nVXNl",
+            "ckFzeW5jEhwuZ29vZ2xlLnByb3RvYnVmLlN0cmluZ1ZhbHVlGhguVHJhbnNh",
+            "Y3Rpb25Qcm90b09iakxpc3QSVgocRmV0Y2hUcmFuc2FjdGlvbnNCeURhdGVB",
             "c3luYxIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRoYLlRyYW5zYWN0",
-            "aW9uUHJvdG9PYmpMaXN0ElYKHEZldGNoVHJhbnNhY3Rpb25zQnlEYXRlQXN5",
-            "bmMSHC5nb29nbGUucHJvdG9idWYuU3RyaW5nVmFsdWUaGC5UcmFuc2FjdGlv",
-            "blByb3RvT2JqTGlzdBJcCiJGZXRjaFRyYW5zYWN0aW9uc0J5VXNlcm5hbWVB",
-            "bmREYXRlEhwuRmlsdGVyQnlVc2VyQW5kRGF0ZVByb3RvT2JqGhguVHJhbnNh",
-            "Y3Rpb25Qcm90b09iakxpc3QSUQoWRGVsZXRlVHJhbnNhY3Rpb25Bc3luYxIb",
-            "Lmdvb2dsZS5wcm90b2J1Zi5JbnQ2NFZhbHVlGhouZ29vZ2xlLnByb3RvYnVm",
-            "LkJvb2xWYWx1ZUIQqgINU0VQM19EYXRhVGllcmIGcHJvdG8z"));
+            "aW9uUHJvdG9PYmpMaXN0ElwKIkZldGNoVHJhbnNhY3Rpb25zQnlVc2VybmFt",
+            "ZUFuZERhdGUSHC5GaWx0ZXJCeVVzZXJBbmREYXRlUHJvdG9PYmoaGC5UcmFu",
+            "c2FjdGlvblByb3RvT2JqTGlzdBJRChZEZWxldGVUcmFuc2FjdGlvbkFzeW5j",
+            "EhsuZ29vZ2xlLnByb3RvYnVmLkludDY0VmFsdWUaGi5nb29nbGUucHJvdG9i",
+            "dWYuQm9vbFZhbHVlQhCqAg1TRVAzX0RhdGFUaWVyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::SEP3_DataTier.UserReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.TransactionProtoObj), global::SEP3_DataTier.TransactionProtoObj.Parser, new[]{ "TransactionId", "SenderUser", "ReceiverUser", "Amount", "Date" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.TransactionProtoObj), global::SEP3_DataTier.TransactionProtoObj.Parser, new[]{ "TransactionId", "SenderUser", "ReceiverUser", "Amount", "Date", "Comment" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.FilterByUserAndDateProtoObj), global::SEP3_DataTier.FilterByUserAndDateProtoObj.Parser, new[]{ "Username", "Date" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SEP3_DataTier.TransactionProtoObjList), global::SEP3_DataTier.TransactionProtoObjList.Parser, new[]{ "AllTransactions" }, null, null, null, null)
           }));
@@ -104,6 +105,7 @@ namespace SEP3_DataTier {
       receiverUser_ = other.receiverUser_ != null ? other.receiverUser_.Clone() : null;
       Amount = other.Amount;
       Date = other.Date;
+      Comment = other.Comment;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -179,6 +181,20 @@ namespace SEP3_DataTier {
     }
 
 
+    /// <summary>Field number for the "comment" field.</summary>
+    public const int CommentFieldNumber = 6;
+    private static readonly pb::FieldCodec<string> _single_comment_codec = pb::FieldCodec.ForClassWrapper<string>(50);
+    private string comment_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Comment {
+      get { return comment_; }
+      set {
+        comment_ = value;
+      }
+    }
+
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -199,6 +215,7 @@ namespace SEP3_DataTier {
       if (!object.Equals(ReceiverUser, other.ReceiverUser)) return false;
       if (Amount != other.Amount) return false;
       if (Date != other.Date) return false;
+      if (Comment != other.Comment) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -211,6 +228,7 @@ namespace SEP3_DataTier {
       if (receiverUser_ != null) hash ^= ReceiverUser.GetHashCode();
       if (amount_ != null) hash ^= Amount.GetHashCode();
       if (date_ != null) hash ^= Date.GetHashCode();
+      if (comment_ != null) hash ^= Comment.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -246,6 +264,9 @@ namespace SEP3_DataTier {
       if (date_ != null) {
         _single_date_codec.WriteTagAndValue(output, Date);
       }
+      if (comment_ != null) {
+        _single_comment_codec.WriteTagAndValue(output, Comment);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -273,6 +294,9 @@ namespace SEP3_DataTier {
       if (date_ != null) {
         _single_date_codec.WriteTagAndValue(ref output, Date);
       }
+      if (comment_ != null) {
+        _single_comment_codec.WriteTagAndValue(ref output, Comment);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -297,6 +321,9 @@ namespace SEP3_DataTier {
       }
       if (date_ != null) {
         size += _single_date_codec.CalculateSizeWithTag(Date);
+      }
+      if (comment_ != null) {
+        size += _single_comment_codec.CalculateSizeWithTag(Comment);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -335,6 +362,11 @@ namespace SEP3_DataTier {
       if (other.date_ != null) {
         if (date_ == null || other.Date != "") {
           Date = other.Date;
+        }
+      }
+      if (other.comment_ != null) {
+        if (comment_ == null || other.Comment != "") {
+          Comment = other.Comment;
         }
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -387,6 +419,13 @@ namespace SEP3_DataTier {
             }
             break;
           }
+          case 50: {
+            string value = _single_comment_codec.Read(input);
+            if (comment_ == null || value != "") {
+              Comment = value;
+            }
+            break;
+          }
         }
       }
     #endif
@@ -434,6 +473,13 @@ namespace SEP3_DataTier {
             string value = _single_date_codec.Read(ref input);
             if (date_ == null || value != "") {
               Date = value;
+            }
+            break;
+          }
+          case 50: {
+            string value = _single_comment_codec.Read(ref input);
+            if (comment_ == null || value != "") {
+              Comment = value;
             }
             break;
           }

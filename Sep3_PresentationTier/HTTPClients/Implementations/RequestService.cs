@@ -13,7 +13,7 @@ public class RequestService : IRequestService
     public RequestService(HttpClient client)
     {
         this.client = client;
-        this.client.DefaultRequestHeaders.Authorization =
+        client.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Bearer", UserService.Jwt);
     }
 

@@ -21,7 +21,7 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
     {
         try
         {
-            NotificationEntity createdNotification =
+            NotificationEntity? createdNotification =
                 await notificationDao.CreateNotificationAsync(FromProtoToEntity(request));
 
             NotificationProtoObj notificationProtoObj = FromEntityToProto(createdNotification);
@@ -35,18 +35,29 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
         }
     }
 
+    public override async Task<NotificationProtoObj> FetchNotificationByIdAsync(Int64Value request,
+        ServerCallContext context)
+    {
+        try
+        {
+            NotificationEntity? notificationById
+                = await notificationDao.FetchNotificationByIdAsync(request.Value);
+            return FromEntityToProto(notificationById);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new RpcException(new Status(StatusCode.Internal, e.Message));
+        }
+    }
+
     public override async Task<NotificationProtoObjList> FetchAllNotificationsByReceiverAsync(StringValue request,
         ServerCallContext context)
     {
         try
         {
-            ICollection<NotificationEntity> notificationEntities =
+            ICollection<NotificationEntity?> notificationEntities =
                 await notificationDao.FetchAllNotificationsByReceiverAsync(request.Value);
-
-            /*if (notificationEntities.Count == 0)
-            {
-                throw new Exception("No Notifications for Receiver!!!");
-            }*/
 
             NotificationProtoObjList protoObjList = new NotificationProtoObjList
             {
@@ -99,9 +110,9 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
         }
     }
 
-    public static NotificationEntity FromProtoToEntity(NotificationProtoObj notificationProtoObj)
+    public static NotificationEntity? FromProtoToEntity(NotificationProtoObj notificationProtoObj)
     {
-        NotificationEntity entity = new NotificationEntity
+        NotificationEntity? entity = new NotificationEntity
         {
             Date = notificationProtoObj.Date,
             IsRead = (bool)notificationProtoObj.IsRead!,
@@ -119,7 +130,7 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
         return entity;
     }
 
-    public static NotificationProtoObj FromEntityToProto(NotificationEntity entity)
+    public static NotificationProtoObj FromEntityToProto(NotificationEntity? entity)
     {
         NotificationProtoObj protoObj = new NotificationProtoObj
         {

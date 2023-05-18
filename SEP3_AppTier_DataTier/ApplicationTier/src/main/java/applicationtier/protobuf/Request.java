@@ -2137,7 +2137,7 @@ public final class Request {
       "nc\022\020.RequestProtoObj\032\020.RequestProtoObj\022E" +
       "\n\025fetchAllRequestsAsync\022\026.google.protobu" +
       "f.Empty\032\024.RequestProtoObjList\022F\n\025fetchRe" +
-      "questByIdAsync\022\033.google.protobuf.Int32Va" +
+      "questByIdAsync\022\033.google.protobuf.Int64Va" +
       "lue\032\020.RequestProtoObj\022H\n\026fetchRequestByU" +
       "sername\022\034.google.protobuf.StringValue\032\020." +
       "RequestProtoObj\0228\n\022updateRequestAsync\022\020." +

@@ -1,11 +1,9 @@
 package applicationtier.service.serviceInterfaces;
 
 import applicationtier.entity.RequestEntity;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public interface IRequestService {
 
     RequestEntity createRequest(RequestEntity requestEntity);

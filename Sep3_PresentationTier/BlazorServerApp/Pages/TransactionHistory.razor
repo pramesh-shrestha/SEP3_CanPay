@@ -98,6 +98,7 @@
                     <th>Receiver</th>
                     <th>Date</th>
                     <th>Amount</th>
+                    <th>Comments</th>
                 </tr>
                 </thead>
 
@@ -140,6 +141,10 @@
                                     <span class="amount" style="color: #00ff00">@transactionEntity.Amount</span>
                                 }
 
+                            </td>
+                            
+                            <td>
+                                @transactionEntity.Comment
                             </td>
                         </tr>
                     }

@@ -48,13 +48,13 @@ namespace SEP3_DataTier {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::SEP3_DataTier.NotificationProtoObj> __Marshaller_NotificationProtoObj = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.NotificationProtoObj.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Int64Value> __Marshaller_google_protobuf_Int64Value = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Int64Value.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.StringValue> __Marshaller_google_protobuf_StringValue = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.StringValue.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::SEP3_DataTier.NotificationProtoObjList> __Marshaller_NotificationProtoObjList = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::SEP3_DataTier.NotificationProtoObjList.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Empty> __Marshaller_google_protobuf_Empty = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Empty.Parser));
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Int64Value> __Marshaller_google_protobuf_Int64Value = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Int64Value.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.BoolValue> __Marshaller_google_protobuf_BoolValue = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.BoolValue.Parser));
 
@@ -64,6 +64,14 @@ namespace SEP3_DataTier {
         __ServiceName,
         "CreateNotificationAsync",
         __Marshaller_NotificationProtoObj,
+        __Marshaller_NotificationProtoObj);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Int64Value, global::SEP3_DataTier.NotificationProtoObj> __Method_FetchNotificationByIdAsync = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Int64Value, global::SEP3_DataTier.NotificationProtoObj>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "FetchNotificationByIdAsync",
+        __Marshaller_google_protobuf_Int64Value,
         __Marshaller_NotificationProtoObj);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
@@ -115,6 +123,12 @@ namespace SEP3_DataTier {
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.NotificationProtoObj> FetchNotificationByIdAsync(global::Google.Protobuf.WellKnownTypes.Int64Value request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::SEP3_DataTier.NotificationProtoObjList> FetchAllNotificationsByReceiverAsync(global::Google.Protobuf.WellKnownTypes.StringValue request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -147,6 +161,7 @@ namespace SEP3_DataTier {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_CreateNotificationAsync, serviceImpl.CreateNotificationAsync)
+          .AddMethod(__Method_FetchNotificationByIdAsync, serviceImpl.FetchNotificationByIdAsync)
           .AddMethod(__Method_FetchAllNotificationsByReceiverAsync, serviceImpl.FetchAllNotificationsByReceiverAsync)
           .AddMethod(__Method_MarkAsRead, serviceImpl.MarkAsRead)
           .AddMethod(__Method_MarkAllAsRead, serviceImpl.MarkAllAsRead)
@@ -161,6 +176,7 @@ namespace SEP3_DataTier {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, NotificationProtoServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_CreateNotificationAsync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.NotificationProtoObj, global::SEP3_DataTier.NotificationProtoObj>(serviceImpl.CreateNotificationAsync));
+      serviceBinder.AddMethod(__Method_FetchNotificationByIdAsync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Int64Value, global::SEP3_DataTier.NotificationProtoObj>(serviceImpl.FetchNotificationByIdAsync));
       serviceBinder.AddMethod(__Method_FetchAllNotificationsByReceiverAsync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.StringValue, global::SEP3_DataTier.NotificationProtoObjList>(serviceImpl.FetchAllNotificationsByReceiverAsync));
       serviceBinder.AddMethod(__Method_MarkAsRead, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.NotificationProtoObj, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.MarkAsRead));
       serviceBinder.AddMethod(__Method_MarkAllAsRead, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::SEP3_DataTier.NotificationProtoObjList, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.MarkAllAsRead));

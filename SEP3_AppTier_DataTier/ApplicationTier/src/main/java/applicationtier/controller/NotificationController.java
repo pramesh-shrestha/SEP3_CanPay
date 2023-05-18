@@ -30,6 +30,16 @@ public class NotificationController {
         }
     }
 
+    @GetMapping("/notification/id/{id}")
+    public ResponseEntity<NotificationEntity> fetchNotificationById(@PathVariable("id") long id) {
+        try {
+            ResponseEntity<NotificationEntity> responseEntity = new ResponseEntity<>(notificationService.fetchNotificationById(id), HttpStatus.OK);
+            return responseEntity;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error creating notification", e);
+        }
+    }
+
     @GetMapping("/notification/receiver/{receiverUsername}")
     public ResponseEntity<List<NotificationEntity>> fetchAllNotificationsByReceiver(@PathVariable("receiverUsername") String receiverUsername) {
 

@@ -1,4 +1,5 @@
 package applicationtier.entity;
+
 public class NotificationEntity {
 
     private Long id;
@@ -12,8 +13,7 @@ public class NotificationEntity {
 
     private boolean isRead;
 
-    public NotificationEntity(Long id, UserEntity sender, UserEntity receiver, String date, String message, String notificationType, boolean isRead) {
-        this.id = id;
+    public NotificationEntity(UserEntity sender, UserEntity receiver, String date, String message, String notificationType, boolean isRead) {
         this.sender = sender;
         this.receiver = receiver;
         this.date = date;
@@ -21,7 +21,9 @@ public class NotificationEntity {
         this.notificationType = notificationType;
         this.isRead = isRead;
     }
-    public NotificationEntity(){}
+
+    public NotificationEntity() {
+    }
 
     public Long getId() {
         return id;

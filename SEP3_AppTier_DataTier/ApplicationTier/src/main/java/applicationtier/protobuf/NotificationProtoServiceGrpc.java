@@ -37,6 +37,15 @@ public class NotificationProtoServiceGrpc {
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Notification.NotificationProtoObj.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Notification.NotificationProtoObj.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<com.google.protobuf.Int64Value,
+      applicationtier.protobuf.Notification.NotificationProtoObj> METHOD_FETCH_NOTIFICATION_BY_ID_ASYNC =
+      io.grpc.MethodDescriptor.create(
+          io.grpc.MethodDescriptor.MethodType.UNARY,
+          generateFullMethodName(
+              "NotificationProtoService", "FetchNotificationByIdAsync"),
+          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int64Value.getDefaultInstance()),
+          io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Notification.NotificationProtoObj.getDefaultInstance()));
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<com.google.protobuf.StringValue,
       applicationtier.protobuf.Notification.NotificationProtoObjList> METHOD_FETCH_ALL_NOTIFICATIONS_BY_RECEIVER_ASYNC =
       io.grpc.MethodDescriptor.create(
@@ -109,6 +118,13 @@ public class NotificationProtoServiceGrpc {
 
     /**
      */
+    public void fetchNotificationByIdAsync(com.google.protobuf.Int64Value request,
+        io.grpc.stub.StreamObserver<applicationtier.protobuf.Notification.NotificationProtoObj> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_FETCH_NOTIFICATION_BY_ID_ASYNC, responseObserver);
+    }
+
+    /**
+     */
     public void fetchAllNotificationsByReceiverAsync(com.google.protobuf.StringValue request,
         io.grpc.stub.StreamObserver<applicationtier.protobuf.Notification.NotificationProtoObjList> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_FETCH_ALL_NOTIFICATIONS_BY_RECEIVER_ASYNC, responseObserver);
@@ -144,6 +160,13 @@ public class NotificationProtoServiceGrpc {
                 applicationtier.protobuf.Notification.NotificationProtoObj,
                 applicationtier.protobuf.Notification.NotificationProtoObj>(
                   this, METHODID_CREATE_NOTIFICATION_ASYNC)))
+          .addMethod(
+            METHOD_FETCH_NOTIFICATION_BY_ID_ASYNC,
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.google.protobuf.Int64Value,
+                applicationtier.protobuf.Notification.NotificationProtoObj>(
+                  this, METHODID_FETCH_NOTIFICATION_BY_ID_ASYNC)))
           .addMethod(
             METHOD_FETCH_ALL_NOTIFICATIONS_BY_RECEIVER_ASYNC,
             asyncUnaryCall(
@@ -200,6 +223,14 @@ public class NotificationProtoServiceGrpc {
         io.grpc.stub.StreamObserver<applicationtier.protobuf.Notification.NotificationProtoObj> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_CREATE_NOTIFICATION_ASYNC, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void fetchNotificationByIdAsync(com.google.protobuf.Int64Value request,
+        io.grpc.stub.StreamObserver<applicationtier.protobuf.Notification.NotificationProtoObj> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_FETCH_NOTIFICATION_BY_ID_ASYNC, getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -262,6 +293,13 @@ public class NotificationProtoServiceGrpc {
 
     /**
      */
+    public applicationtier.protobuf.Notification.NotificationProtoObj fetchNotificationByIdAsync(com.google.protobuf.Int64Value request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_FETCH_NOTIFICATION_BY_ID_ASYNC, getCallOptions(), request);
+    }
+
+    /**
+     */
     public applicationtier.protobuf.Notification.NotificationProtoObjList fetchAllNotificationsByReceiverAsync(com.google.protobuf.StringValue request) {
       return blockingUnaryCall(
           getChannel(), METHOD_FETCH_ALL_NOTIFICATIONS_BY_RECEIVER_ASYNC, getCallOptions(), request);
@@ -317,6 +355,14 @@ public class NotificationProtoServiceGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.Notification.NotificationProtoObj> fetchNotificationByIdAsync(
+        com.google.protobuf.Int64Value request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_FETCH_NOTIFICATION_BY_ID_ASYNC, getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.Notification.NotificationProtoObjList> fetchAllNotificationsByReceiverAsync(
         com.google.protobuf.StringValue request) {
       return futureUnaryCall(
@@ -349,10 +395,11 @@ public class NotificationProtoServiceGrpc {
   }
 
   private static final int METHODID_CREATE_NOTIFICATION_ASYNC = 0;
-  private static final int METHODID_FETCH_ALL_NOTIFICATIONS_BY_RECEIVER_ASYNC = 1;
-  private static final int METHODID_MARK_AS_READ = 2;
-  private static final int METHODID_MARK_ALL_AS_READ = 3;
-  private static final int METHODID_DELETE_NOTIFICATION_ASYNC = 4;
+  private static final int METHODID_FETCH_NOTIFICATION_BY_ID_ASYNC = 1;
+  private static final int METHODID_FETCH_ALL_NOTIFICATIONS_BY_RECEIVER_ASYNC = 2;
+  private static final int METHODID_MARK_AS_READ = 3;
+  private static final int METHODID_MARK_ALL_AS_READ = 4;
+  private static final int METHODID_DELETE_NOTIFICATION_ASYNC = 5;
 
   private static class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -373,6 +420,10 @@ public class NotificationProtoServiceGrpc {
       switch (methodId) {
         case METHODID_CREATE_NOTIFICATION_ASYNC:
           serviceImpl.createNotificationAsync((applicationtier.protobuf.Notification.NotificationProtoObj) request,
+              (io.grpc.stub.StreamObserver<applicationtier.protobuf.Notification.NotificationProtoObj>) responseObserver);
+          break;
+        case METHODID_FETCH_NOTIFICATION_BY_ID_ASYNC:
+          serviceImpl.fetchNotificationByIdAsync((com.google.protobuf.Int64Value) request,
               (io.grpc.stub.StreamObserver<applicationtier.protobuf.Notification.NotificationProtoObj>) responseObserver);
           break;
         case METHODID_FETCH_ALL_NOTIFICATIONS_BY_RECEIVER_ASYNC:
@@ -410,6 +461,7 @@ public class NotificationProtoServiceGrpc {
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     return new io.grpc.ServiceDescriptor(SERVICE_NAME,
         METHOD_CREATE_NOTIFICATION_ASYNC,
+        METHOD_FETCH_NOTIFICATION_BY_ID_ASYNC,
         METHOD_FETCH_ALL_NOTIFICATIONS_BY_RECEIVER_ASYNC,
         METHOD_MARK_AS_READ,
         METHOD_MARK_ALL_AS_READ,

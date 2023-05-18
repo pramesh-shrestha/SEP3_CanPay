@@ -15,7 +15,7 @@ public class NotificationDaoImpl : INotificationDao
         this.context = context;
     }
 
-    public async Task<NotificationEntity> CreateNotificationAsync(NotificationEntity notificationEntity)
+    public async Task<NotificationEntity?> CreateNotificationAsync(NotificationEntity? notificationEntity)
     {
         try
         {
@@ -33,7 +33,7 @@ public class NotificationDaoImpl : INotificationDao
             }
 
 
-            EntityEntry<NotificationEntity> createdNotification =
+            EntityEntry<NotificationEntity?> createdNotification =
                 await context.Notifications.AddAsync(notificationEntity);
             await context.SaveChangesAsync();
             return createdNotification.Entity;
@@ -44,11 +44,28 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
-    public async Task<ICollection<NotificationEntity>> FetchAllNotificationsByReceiverAsync(string username)
+    public async Task<NotificationEntity?> FetchNotificationByIdAsync(long requestValue)
     {
         try
         {
-            ICollection<NotificationEntity> notificationEntities = await context.Notifications
+            NotificationEntity? notificationEntity =
+                await context.Notifications.Include(entity => entity.Sender)
+                    .Include(entity => entity.Receiver)
+                    .FirstOrDefaultAsync(entity => entity.Id == requestValue);
+            return notificationEntity;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new Exception(e.Message);
+        }
+    }
+
+    public async Task<ICollection<NotificationEntity?>> FetchAllNotificationsByReceiverAsync(string username)
+    {
+        try
+        {
+            ICollection<NotificationEntity?> notificationEntities = await context.Notifications
                 .Include(entity => entity.Sender).Include(entity => entity.Receiver)
                 .Where(e => e.Receiver!.Username!.Equals(username)).Where(entity => !entity.IsRead).ToListAsync();
 
@@ -72,7 +89,7 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
-    public async Task MarkNotificationAsReadAsync(NotificationEntity notificationEntity)
+    public async Task MarkNotificationAsReadAsync(NotificationEntity? notificationEntity)
     {
         /*try
         {

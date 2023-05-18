@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RequestClientImpl implements IRequestClient{
+public class RequestClientImpl implements IRequestClient {
 
     private RequestProtoServiceGrpc.RequestProtoServiceBlockingStub requestProtoBlockingStub;
 
@@ -27,14 +27,16 @@ public class RequestClientImpl implements IRequestClient{
         }
         return requestProtoBlockingStub;
     }
+
     @Override
     public RequestEntity createRequest(RequestEntity requestEntity) {
         try {
-            Request.RequestProtoObj requestProtoObj= fromEntityToProtoObj(requestEntity);
+            Request.RequestProtoObj requestProtoObj = fromEntityToProtoObj(requestEntity);
+            Request.RequestProtoObj protoObj = getRequestBlockingStub().createRequestAsync(requestProtoObj);
 
-            Request.RequestProtoObj protoObj=getRequestBlockingStub().createRequestAsync(requestProtoObj);
+
             return fromProtoObjToEntity(protoObj);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -42,15 +44,15 @@ public class RequestClientImpl implements IRequestClient{
     @Override
     public List<RequestEntity> FetchAllRequest() {
         try {
-            Request.RequestProtoObjList allRequest=getRequestBlockingStub().fetchAllRequestsAsync(Empty.newBuilder().build());
-            List<RequestEntity> requestEntities=new ArrayList<>();
+            Request.RequestProtoObjList allRequest = getRequestBlockingStub().fetchAllRequestsAsync(Empty.newBuilder().build());
+            List<RequestEntity> requestEntities = new ArrayList<>();
 
             for (Request.RequestProtoObj requestProtoObj : allRequest.getRequestsList()) {
-                RequestEntity request=fromProtoObjToEntity(requestProtoObj);
+                RequestEntity request = fromProtoObjToEntity(requestProtoObj);
                 requestEntities.add(request);
             }
             return requestEntities;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -58,9 +60,9 @@ public class RequestClientImpl implements IRequestClient{
     @Override
     public RequestEntity FetchRequestById(Long id) {
         try {
-            Request.RequestProtoObj requestProtoObj=getRequestBlockingStub().fetchRequestByIdAsync(Int64Value.of(id));
+            Request.RequestProtoObj requestProtoObj = getRequestBlockingStub().fetchRequestByIdAsync(Int64Value.of(id));
             return fromProtoObjToEntity(requestProtoObj);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -68,9 +70,9 @@ public class RequestClientImpl implements IRequestClient{
     @Override
     public RequestEntity FetchRequestByUsername(String username) {
         try {
-            Request.RequestProtoObj requestProtoObj= getRequestBlockingStub().fetchRequestByUsername(StringValue.of(username));
+            Request.RequestProtoObj requestProtoObj = getRequestBlockingStub().fetchRequestByUsername(StringValue.of(username));
             return fromProtoObjToEntity(requestProtoObj);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -78,9 +80,9 @@ public class RequestClientImpl implements IRequestClient{
     @Override
     public RequestEntity UpdateRequest(RequestEntity requestEntity) {
         try {
-            Request.RequestProtoObj requestProtoObj=getRequestBlockingStub().updateRequestAsync(fromEntityToProtoObj(requestEntity));
+            Request.RequestProtoObj requestProtoObj = getRequestBlockingStub().updateRequestAsync(fromEntityToProtoObj(requestEntity));
             return fromProtoObjToEntity(requestProtoObj);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -88,32 +90,45 @@ public class RequestClientImpl implements IRequestClient{
     @Override
     public boolean DeleteRequest(Long id) {
         try {
-            BoolValue requestProtoObj= getRequestBlockingStub().deleteRequestAsync(Int64Value.of(id));
+            BoolValue requestProtoObj = getRequestBlockingStub().deleteRequestAsync(Int64Value.of(id));
             return requestProtoObj.toBuilder().getValue();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     //from entity to proto
-    public static RequestEntity fromProtoObjToEntity(Request.RequestProtoObj requestProtoObj){
-        RequestEntity requestEntity= new RequestEntity();
+    public static RequestEntity fromProtoObjToEntity(Request.RequestProtoObj requestProtoObj) {
+        RequestEntity requestEntity = new RequestEntity();
         requestEntity.setAmount(requestProtoObj.getAmount());
         requestEntity.setApproved(requestProtoObj.getIsApproved());
         requestEntity.setComment(requestProtoObj.getComment());
         requestEntity.setRequestReceiver(UserClientImpl.fromProtoObjToEntity(requestProtoObj.getRequestReceiver()));
         requestEntity.setStatus(requestProtoObj.getStatus());
+        requestEntity.setRequestSender(UserClientImpl.fromProtoObjToEntity(requestProtoObj.getRequestSender()));
+        requestEntity.setRequestedDate(requestEntity.getRequestedDate());
+
+        if (requestProtoObj.getRequestId() != 0) {
+            requestEntity.setId(requestProtoObj.getRequestId());
+        }
         return requestEntity;
     }
 
     //from entity to proto
-    public static Request.RequestProtoObj fromEntityToProtoObj(RequestEntity request){
-        Request.RequestProtoObj.Builder requestBuilder=Request.RequestProtoObj.newBuilder()
-                .setRequestId(request.getId())
+    public static Request.RequestProtoObj fromEntityToProtoObj(RequestEntity request) {
+        Request.RequestProtoObj.Builder requestBuilder = Request.RequestProtoObj.newBuilder()
                 .setAmount(request.getAmount())
                 .setComment(request.getComment())
                 .setRequestReceiver(UserClientImpl.fromEntityToProtoObj(request.getRequestReceiver()))
-                .setIsApproved(request.isApproved());
+                .setRequestSender(UserClientImpl.fromEntityToProtoObj(request.getRequestSender()))
+                .setRequestedDate(request.getRequestedDate())
+                .setIsApproved(request.isApproved())
+                .setStatus(request.getStatus());
+
+        if (request.getId() != 0) {
+            requestBuilder.setRequestId(request.getId());
+        }
+
         return requestBuilder.build();
     }
 }
