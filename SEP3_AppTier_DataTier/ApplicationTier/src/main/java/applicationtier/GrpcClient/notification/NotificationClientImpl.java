@@ -43,6 +43,17 @@ public class NotificationClientImpl implements INotificationClient {
     }
 
     @Override
+    public NotificationEntity fetchNotificationById(long id) {
+        try {
+            Notification.NotificationProtoObj notificationProtoObj = getNotificationBlockingStub().
+                    fetchNotificationByIdAsync(Int64Value.of(id));
+            return fromProtoObjToEntity(notificationProtoObj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public void markAsRead(NotificationEntity notification) {
         try {
             getNotificationBlockingStub().markAsRead(fromEntityToProtoObj(notification));
@@ -50,6 +61,7 @@ public class NotificationClientImpl implements INotificationClient {
             throw new RuntimeException(e);
         }
     }
+
 
     @Override
     public void markAllAsRead(List<NotificationEntity> notifications) {
@@ -90,6 +102,7 @@ public class NotificationClientImpl implements INotificationClient {
             throw new RuntimeException(e);
         }
     }
+
 
     //from proto to entity
     public static NotificationEntity fromProtoObjToEntity(Notification.NotificationProtoObj notificationProtoObj) {

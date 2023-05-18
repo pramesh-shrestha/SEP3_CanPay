@@ -13,5 +13,8 @@ public interface INotificationService {
 
     boolean deleteNotification(Long id);
 
+    NotificationEntity fetchNotificationById(long id);
+
+
 //    void markAllAsRead(String receivingUsername);
 }

@@ -182,12 +182,16 @@ public class UserService : UserProtoService.UserProtoServiceBase
     {
         UserProtoObj protoObj = new UserProtoObj()
         {
-            UserId = userEntity.Id,
             FullName = userEntity.Fullname,
             UserName = userEntity.Username,
             Password = userEntity.Password,
             Balance = userEntity.Balance
         };
+
+        if (userEntity.Id != 0)
+        {
+            protoObj.UserId = userEntity.Id;
+        }
 
         if (userEntity.Card != null)
         {

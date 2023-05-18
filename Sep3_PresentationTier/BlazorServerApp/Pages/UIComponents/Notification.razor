@@ -23,13 +23,15 @@
 
 
         </div>
-        @if (showNotification) {
+        @if (showNotification)
+        {
             <div class="noti-body ">
                 <label class="header">Notifications</label>
                 <hr class="hr1"/>
                 <div class="card">
-                    @foreach (var items in notifications) {
-                        <div class="card-body">
+                    @foreach (var items in notifications)
+                    {
+                        <div class="card-body" @onclick="() => OnNotificationClicked(items.Id)">
                             <label class="date text-muted">@items.Date</label>
                             <label class="notification-table">@items.Message</label>
                         </div>
@@ -65,6 +67,9 @@
     private bool showNotification = false;
     private int notificationCount;
 
+    // properties for notification popup
+    private long clickedNotificationId;
+
     private Timer timer;
 
     // private UserEntity? receiverUser = new UserEntity();
@@ -73,67 +78,64 @@
     // private DateTime dateTime = DateTime.Now.Date;
     // public bool IsRead;
 
-    protected override async Task OnInitializedAsync() {
+    protected override async Task OnInitializedAsync()
+    {
         await UpdateNotifications();
 
         AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
 
     // Start the timer to update notifications every 5 seconds
-        if (state.User.Identity!.IsAuthenticated) {
+        if (state.User.Identity!.IsAuthenticated)
+        {
             timer = new Timer(5000);
             timer.Elapsed += TimerElapsedAsync;
             timer.Start();
         }
     }
 
-    // Method called when the timer's elapsed event is triggered
-
-    private async void TimerElapsedAsync(object? sender, ElapsedEventArgs e) {
-        await UpdateNotifications();
-    }
-
-    private async Task UpdateNotifications() {
-        try {
+    private async Task UpdateNotifications()
+    {
+        try
+        {
             AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
             receiver = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
 
             notifications = await NotificationService.FetchAllNotificationsByReceiverAsync(receiver);
             notificationCount = notifications.Count;
 
-
-    // Trigger UI Refresh
             await InvokeAsync(StateHasChanged);
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             Console.WriteLine(e.Message);
         }
     }
 
-    private async void HandleNotificationClick() {
+
+    private async Task OnNotificationClicked(long itemsId)
+    {
+        clickedNotificationId = itemsId;
+        NotificationEntity byId = await NotificationService.FetchNotificationById(clickedNotificationId);
+    }
+
+
+    // Method called when the timer's elapsed event is triggered
+    private async void TimerElapsedAsync(object? sender, ElapsedEventArgs e)
+    {
+        await UpdateNotifications();
+    }
+
+
+    private async void HandleNotificationClick()
+    {
         showNotification = !showNotification;
 
-        if (notifications.Count != 0) {
+        if (notifications.Count != 0)
+        {
             await NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
             await InvokeAsync(StateHasChanged);
         }
     }
-
-
-    /*public async Task CreateNotification()
-    {
-        try
-        {
-            Message = "someone has sent you money bororo";
-            string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
-            NotificationEntity notificationEntity = new NotificationEntity
-                (notificationId, senderUser, receiverUser, Message, notificationType, date, IsRead);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }*/
 
 
 }

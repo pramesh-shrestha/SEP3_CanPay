@@ -1,7 +1,6 @@
 package applicationtier.service.serviceInterfaces;
 
 import applicationtier.entity.RequestEntity;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

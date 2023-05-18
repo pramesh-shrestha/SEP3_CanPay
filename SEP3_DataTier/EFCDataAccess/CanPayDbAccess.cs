@@ -8,7 +8,7 @@ public class CanPayDbAccess : DbContext
     public DbSet<UserEntity?> Users { get; set; }
     public DbSet<DebitCardEntity> Cards { get; set; }
     public DbSet<TransactionEntity?> Transactions { get; set; }
-    public DbSet<NotificationEntity> Notifications { get; set; }
+    public DbSet<NotificationEntity?> Notifications { get; set; }
     
     public DbSet<RequestEntity> Requests { get; set; }
 

@@ -52,6 +52,26 @@ public class NotificationService : INotificationService
         return notificationEntity;
     }
 
+    public async Task<NotificationEntity> FetchNotificationById(long id)
+    {
+        HttpResponseMessage responseMessage = await client.GetAsync($"/notification/id/{id}");
+        string result = await responseMessage.Content.ReadAsStringAsync();
+
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        NotificationEntity notificationEntity =
+            JsonSerializer.Deserialize<NotificationEntity>(result,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                })!;
+
+        return notificationEntity;
+    }
+
     // public async Task MarkNotificationAsReadAsync(NotificationEntity notificationEntity)
     // {
     //     HttpResponseMessage responseMessage =
