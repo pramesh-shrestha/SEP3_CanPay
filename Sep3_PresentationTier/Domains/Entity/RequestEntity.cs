@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Domains.Entity;
-
 namespace Entity.Model;
 
 public class RequestEntity
