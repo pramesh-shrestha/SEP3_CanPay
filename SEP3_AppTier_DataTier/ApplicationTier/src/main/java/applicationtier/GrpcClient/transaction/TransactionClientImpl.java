@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TransactionClientImpl implements ITransactionClient {
+    public class TransactionClientImpl implements ITransactionClient {
 
     private TransactionProtoServiceGrpc.TransactionProtoServiceBlockingStub transactionBlockingStub;
 
@@ -169,6 +169,8 @@ public class TransactionClientImpl implements ITransactionClient {
         transaction.setAmount(transactionProtoObj.getAmount().getValue());
         transaction.setDate(transactionProtoObj.getDate().getValue());
         transaction.setTransactionId(transactionProtoObj.getTransactionId().getValue());
+        transaction.setComment(transactionProtoObj.getComment().getValue());
+
         return transaction;
     }
 
@@ -178,7 +180,9 @@ public class TransactionClientImpl implements ITransactionClient {
                 .setReceiverUser(UserClientImpl.fromEntityToProtoObj(transaction.getReceiver()))
                 .setSenderUser(UserClientImpl.fromEntityToProtoObj(transaction.getSender()))
                 .setDate(StringValue.of(transaction.getDate()))
-                .setAmount(Int32Value.of(transaction.getAmount()));
+                .setAmount(Int32Value.of(transaction.getAmount()))
+                .setComment(StringValue.of(transaction.getComment()));
+
 
         if (transaction.getTransactionId() != null || transaction.getTransactionId() != 0) {
             transactionBuilder.setTransactionId(Int64Value.of(transaction.getTransactionId()));
