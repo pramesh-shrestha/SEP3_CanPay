@@ -13,7 +13,7 @@
         <Protobuf Include="Protos\transaction.proto" OutputDir="GeneratedFiles" Namespace="GrpcService" GrpcServices="Server" />
         <Protobuf Include="Protos\notification.proto" OutputDir="GeneratedFiles" Namespace="GrpcService" GrpcServices="Server" />
         <Protobuf Include="Protos\request.proto" OutputDir="GeneratedFiles" Namespace="GrpcService" GrpcServices="Server" />
-        
+        <Protobuf Include="Protos\bill_transaction.proto" OutputDir="GeneratedFiles" Namespace="GrpcService" GrpcServices="Server" />
     </ItemGroup>
     
     <ItemGroup>

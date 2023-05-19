@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option csharp_namespace = "SEP3_DataTier";
+
+import "google/protobuf/wrappers.proto";
+import "Protos/user.proto";
+import "google/protobuf/empty.proto";
+
+message BillPaymentProtoObj {
+  google.protobuf.Int64Value BillPayment_id = 1;
+  UserProtoObj senderUser = 2;
+  google.protobuf.StringValue payeeName = 3;
+  google.protobuf.Int32Value amount = 4;
+  google.protobuf.Int64Value accountNumber = 5;
+  google.protobuf.StringValue date = 6;
+  google.protobuf.StringValue reference = 7;
+}
+
+service BillPaymentProtoService {
+  rpc CreateBillPaymentAsync(BillPaymentProtoObj) returns (BillPaymentProtoObj);
+  rpc FetchBillPaymentByIdAsync(google.protobuf.Int64Value) returns (BillPaymentProtoObj);
+  rpc FetchAlLBillPaymentsBySenderAsync(google.protobuf.StringValue) returns (BillPaymentProtoObjList);
+  rpc FetchAllBillPaymentsByReceiverAsync(google.protobuf.StringValue) returns (BillPaymentProtoObjList);
+  rpc FetchAlLBillPaymentsInvolvingUserAsync(google.protobuf.StringValue) returns (BillPaymentProtoObjList);
+  rpc FetchBillPaymentsByDateAsync(google.protobuf.StringValue) returns (BillPaymentProtoObjList);
+  rpc DeleteBillPaymentAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
+}
+
+message  BillPaymentProtoObjList {
+  repeated BillPaymentProtoObj allBillPayments = 1;
+}
+

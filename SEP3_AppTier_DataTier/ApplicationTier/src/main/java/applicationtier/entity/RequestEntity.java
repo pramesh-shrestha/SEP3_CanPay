@@ -12,9 +12,7 @@ public class RequestEntity {
     private String requestedDate;
 
 
-    public RequestEntity(Long id, boolean isApproved, String status, int amount, String comment, UserEntity requestReceiver, UserEntity requestSender) {
-
-        this.id = id;
+    public RequestEntity(boolean isApproved, String status, int amount, String comment, UserEntity requestReceiver, UserEntity requestSender) {
         this.isApproved = isApproved;
         this.status = status;
         this.amount = amount;
