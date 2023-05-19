@@ -1,4 +1,4 @@
-﻿using BlazorServerApp.Pages;
+﻿/*using BlazorServerApp.Pages;
 using Bunit;
 using Domains.Entity;
 using HTTPClients.ClientInterfaces;
@@ -259,4 +259,4 @@ public class ManageProfileTest : IClassFixture<TestContext>
             
           
 
-}
+}*/

@@ -32,6 +32,7 @@ public class NotificationDaoImpl : INotificationDao
                 context.Cards.Attach(notificationEntity.Receiver!.Card);
             }
 
+            Console.WriteLine($"Notification Dao Impl: {notificationEntity.Message}");
 
             EntityEntry<NotificationEntity?> createdNotification =
                 await context.Notifications.AddAsync(notificationEntity);

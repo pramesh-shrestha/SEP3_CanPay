@@ -19,8 +19,8 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
     {
         try
         {
-            RequestEntity requestEntity = FromProtoToRequestEntity(request);
-            RequestEntity addedRequest = await requestDao.CreateRequestAsync(requestEntity);
+            RequestEntity? requestEntity = FromProtoToRequestEntity(request);
+            RequestEntity? addedRequest = await requestDao.CreateRequestAsync(requestEntity);
             RequestProtoObj requestProtoObj = FromRequestEntityToProto(addedRequest);
 
             return requestProtoObj;
@@ -36,10 +36,10 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
     {
         try
         {
-            ICollection<RequestEntity> allRequests = await requestDao.FetchAllRequestsAsync();
+            ICollection<RequestEntity?> allRequests = await requestDao.FetchAllRequestsAsync();
             RequestProtoObjList requestProtoObjList = new RequestProtoObjList();
 
-            foreach (RequestEntity requestEntity in allRequests)
+            foreach (RequestEntity? requestEntity in allRequests)
             {
                 RequestProtoObj requestProtoObj = FromRequestEntityToProto(requestEntity);
                 requestProtoObjList.Requests.Add(requestProtoObj);
@@ -58,7 +58,7 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
     {
         try
         {
-            RequestEntity requestEntity = await requestDao.FetchRequestByIdAsync(request.Value);
+            RequestEntity? requestEntity = await requestDao.FetchRequestByIdAsync(request.Value);
             RequestProtoObj requestProtoObj = FromRequestEntityToProto(requestEntity);
             return requestProtoObj;
         }
@@ -73,7 +73,7 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
     {
         try
         {
-            RequestEntity requestEntity = await requestDao.FetchRequestByUsernameAsync(request.Value);
+            RequestEntity? requestEntity = await requestDao.FetchRequestByUsernameAsync(request.Value);
             RequestProtoObj requestProtoObj = FromRequestEntityToProto(requestEntity);
             return requestProtoObj;
         }
@@ -86,8 +86,8 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
 
     public override async Task<RequestProtoObj> UpdateRequestAsync(RequestProtoObj request, ServerCallContext context)
     {
-        RequestEntity requestEntity = FromProtoToRequestEntity(request);
-        RequestEntity toUpdateRequest = await requestDao.UpdateRequest(requestEntity);
+        RequestEntity? requestEntity = FromProtoToRequestEntity(request);
+        RequestEntity? toUpdateRequest = await requestDao.UpdateRequest(requestEntity);
         RequestProtoObj requestProtoObj = FromRequestEntityToProto(toUpdateRequest);
         requestProtoObj.RequestId = toUpdateRequest.Id;
         return requestProtoObj;
@@ -107,9 +107,9 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
         }
     }
 
-    public static RequestEntity FromProtoToRequestEntity(RequestProtoObj requestProtoObj)
+    public static RequestEntity? FromProtoToRequestEntity(RequestProtoObj requestProtoObj)
     {
-        RequestEntity requestEntity = new RequestEntity()
+        RequestEntity? requestEntity = new RequestEntity()
         {
             IsApproved = requestProtoObj.IsApproved,
             Status = requestProtoObj.Status,
@@ -128,7 +128,7 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
         return requestEntity;
     }
 
-    public static RequestProtoObj FromRequestEntityToProto(RequestEntity requestEntity)
+    public static RequestProtoObj FromRequestEntityToProto(RequestEntity? requestEntity)
     {
         RequestProtoObj protoObj = new RequestProtoObj()
         {

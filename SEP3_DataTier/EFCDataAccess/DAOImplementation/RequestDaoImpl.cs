@@ -14,7 +14,7 @@ public class RequestDaoImpl : IRequestDao
         this.context = context;
     }
 
-    public async Task<RequestEntity> CreateRequestAsync(RequestEntity requestEntity)
+    public async Task<RequestEntity?> CreateRequestAsync(RequestEntity? requestEntity)
     {
         try
         {
@@ -31,7 +31,7 @@ public class RequestDaoImpl : IRequestDao
                 context.Cards.Attach(requestEntity.RequestSender!.Card);
             }
 
-            EntityEntry<RequestEntity> addedRequest = await context.Requests.AddAsync(requestEntity);
+            EntityEntry<RequestEntity?> addedRequest = await context.Requests.AddAsync(requestEntity);
             await context.SaveChangesAsync();
             return addedRequest.Entity;
         }
@@ -42,11 +42,11 @@ public class RequestDaoImpl : IRequestDao
         }
     }
 
-    public async Task<ICollection<RequestEntity>> FetchAllRequestsAsync()
+    public async Task<ICollection<RequestEntity?>> FetchAllRequestsAsync()
     {
         try
         {
-            ICollection<RequestEntity> requestEntities =
+            ICollection<RequestEntity?> requestEntities =
                 await context.Requests.Include(e => e.RequestReceiver).ToListAsync();
             return requestEntities;
         }
@@ -57,11 +57,14 @@ public class RequestDaoImpl : IRequestDao
         }
     }
 
-    public async Task<RequestEntity> FetchRequestByIdAsync(long id)
+    public async Task<RequestEntity?> FetchRequestByIdAsync(long id)
     {
         try
         {
-            RequestEntity? requestEntity = await context.Requests.FindAsync(id);
+            RequestEntity? requestEntity = await context.Requests.Include(entity => entity.RequestSender)
+                .Include(entity => entity.RequestSender.Card)
+                .Include(entity => entity.RequestReceiver.Card)
+                .Include(entity => entity.RequestReceiver).FirstOrDefaultAsync(entity => entity.Id == id);
             return requestEntity;
         }
         catch (Exception e)
@@ -71,7 +74,7 @@ public class RequestDaoImpl : IRequestDao
         }
     }
 
-    public async Task<RequestEntity> FetchRequestByUsernameAsync(string username)
+    public async Task<RequestEntity?> FetchRequestByUsernameAsync(string username)
     {
         try
         {
@@ -86,7 +89,7 @@ public class RequestDaoImpl : IRequestDao
         }
     }
 
-    public async Task<RequestEntity> UpdateRequest(RequestEntity requestEntity)
+    public async Task<RequestEntity?> UpdateRequest(RequestEntity? requestEntity)
     {
         long currentId = await context.Requests.Where(e => e.Id == requestEntity.Id).Select(e => e.Id)
             .FirstOrDefaultAsync();

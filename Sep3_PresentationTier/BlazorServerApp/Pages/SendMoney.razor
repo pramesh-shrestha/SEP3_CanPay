@@ -3,6 +3,7 @@
 @using Domains.Enums
 @using Entity.Model
 @using HTTPClients.ClientInterfaces
+@using Microsoft.IdentityModel.Tokens
 @using UIComponents
 
 @inject IUserService UserService;
@@ -11,6 +12,7 @@
 @inject NavigationManager NavMgr;
 @inject INotificationService NotificationService;
 @inject IRequestService RequestService;
+@inject TransferValues TransferValues;
 
 <AuthorizeView>
     <Authorized>
@@ -22,7 +24,7 @@
 
                 @* all transactions radio *@
                 <div class="radio_container">
-                    <input class="radio_option" type="radio" name="btn" checked="" value="@TypesOfTransaction.SendMoney"
+                    <input class="radio_option" type="radio" name="btn" checked="" value="@TypesOfNotification.SEND_MONEY"
                            @onchange="ChangeTransactionType"/>
                     <div class="filter_btn">
                         <span class="span">Send Money</span>
@@ -32,7 +34,7 @@
                 @* sent transactions radio *@
                 <div class="radio_container">
                     <input class="radio_option" type="radio" name="btn"
-                           value="@TypesOfTransaction.RequestMoney" @onchange="ChangeTransactionType"/>
+                           value="@TypesOfNotification.REQUEST_MONEY" @onchange="ChangeTransactionType"/>
                     <div class="filter_btn">
                         <span class="span">Request Money</span>
                     </div>
@@ -55,7 +57,7 @@
                 <div class="col-md-6">
 
                     <!-- 8 Columns -->
-                    @if (transactionType!.Equals(TypesOfTransaction.SendMoney.ToString()))
+                    @if (transactionType!.Equals(TypesOfNotification.SEND_MONEY.ToString()))
                     {
                         <div class="form-group">
                             <div>
@@ -81,15 +83,15 @@
                             <div class="inputFields">
                                 <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
                             </div>
-                            
+
                             <label>Comment</label>
-                                <div class="inputFields">
-                                    <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment">
-                                </div>
-                            
+                            <div class="inputFields">
+                                <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment">
+                            </div>
+
                         </div>
                     }
-                    else if (transactionType.Equals(TypesOfTransaction.RequestMoney.ToString()))
+                    else if (transactionType.Equals(TypesOfNotification.REQUEST_MONEY.ToString()))
                     {
                         <div class="col-md-6">
                             <div class="form-group">
@@ -121,12 +123,12 @@
                                 @* <div class="inputFields"> *@
                                 @*     <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment"> *@
                                 @* </div> *@
-                                
+
                                 <label>Comment</label>
                                 <div class="inputFields">
                                     <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment">
                                 </div>
-                                
+
                             </div>
                         </div>
                     }
@@ -183,6 +185,8 @@
     private DateTime dateTime = DateTime.Now.Date;
     private long cardNumber;
     private string? comment = "";
+    private long createdTransactionId = 0;
+    private long createdRequestId = 0;
 
     // list of username
     private IEnumerable<UserEntity?> userEntities = new List<UserEntity?>();
@@ -191,7 +195,7 @@
     private UserEntity? receiverUser = new UserEntity();
 
     // radio buttons properties
-    private string? transactionType = TypesOfTransaction.SendMoney.ToString();
+    private string? transactionType = TypesOfNotification.SEND_MONEY.ToString();
 
     // extras
     public string? errorLabel = "";
@@ -214,9 +218,16 @@
 
             usernames = entities.Select(u => u.UserName).ToList();
             usernames.Remove(senderUser.UserName);
+
+            if (TransferValues.RequestSender != null)
+            {
+                receiver = TransferValues.RequestSender.UserName;
+                amount = TransferValues.RequestedAmount.ToString();
+            }
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             errorLabel = e.Message;
             color = "red";
         }
@@ -229,7 +240,7 @@
         receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
         string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
 
-        TransactionEntity transactionEntity = new TransactionEntity(senderUser, receiverUser, int.Parse(amount), date,comment);
+        TransactionEntity transactionEntity = new TransactionEntity(senderUser, receiverUser, int.Parse(amount), date, comment);
         try
         {
             if (string.IsNullOrEmpty(receiver)) throw new Exception("Receiver must be selected.");
@@ -237,7 +248,8 @@
 
             if (string.IsNullOrEmpty(errorLabel))
             {
-                await TransactionService.CreateTransactionAsync(transactionEntity);
+                TransactionEntity transactionAsync = await TransactionService.CreateTransactionAsync(transactionEntity);
+                createdTransactionId = transactionAsync.TransactionId;
                 await CreateNotification();
                 showModal = true;
             }
@@ -266,14 +278,16 @@
                 Comment = comment,
                 RequestReceiver = receiverUser,
                 RequestSender = senderUser,
-                Status = RequestStatus.Pending.ToString(),
+                Status = RequestStatus.PENDING.ToString(),
                 IsApproved = false,
                 RequestedDate = date
             };
 
             if (string.IsNullOrEmpty(errorLabel))
             {
-                await RequestService.CreateRequestAsync(entity);
+                RequestEntity? requestEntity = await RequestService.CreateRequestAsync(entity);
+                createdRequestId = requestEntity.Id;
+
                 await CreateNotification();
                 showModal = true;
             }
@@ -300,13 +314,14 @@
 
             switch (transactionType)
             {
-                case nameof(TypesOfTransaction.SendMoney):
-                    notificationEntity.NotificationType = TypesOfTransaction.SendMoney.ToString();
-                    notificationEntity.Message = $"{senderUser.FullName} has sent you  {amount} dollar";
+                case nameof(TypesOfNotification.SEND_MONEY):
+                    notificationEntity.NotificationType = TypesOfNotification.SEND_MONEY.ToString();
+                    notificationEntity.Message = $"Transaction {createdTransactionId} Received: You received ${amount} CAD  from {senderUser.FullName}.";
                     break;
-                case nameof(TypesOfTransaction.RequestMoney):
-                    notificationEntity.NotificationType = TypesOfTransaction.RequestMoney.ToString();
-                    notificationEntity.Message = $"{senderUser.FullName} has asked you  {amount} dollar";
+                case nameof(TypesOfNotification.REQUEST_MONEY):
+                    notificationEntity.NotificationType = TypesOfNotification.REQUEST_MONEY.ToString();
+                    notificationEntity.Message = $"Request {createdRequestId} Received: {senderUser.FullName} asked you for ${amount} CAD.";
+                    ;
                     break;
             }
 
@@ -323,10 +338,10 @@
     {
         switch (transactionType)
         {
-            case nameof(TypesOfTransaction.SendMoney):
+            case nameof(TypesOfNotification.SEND_MONEY):
                 await SendMoneyToReceiver();
                 break;
-            case nameof(TypesOfTransaction.RequestMoney):
+            case nameof(TypesOfNotification.REQUEST_MONEY):
                 await SendMoneyRequest();
                 break;
         }
@@ -365,7 +380,5 @@
 
         return null;
     }
-
-
 
 }

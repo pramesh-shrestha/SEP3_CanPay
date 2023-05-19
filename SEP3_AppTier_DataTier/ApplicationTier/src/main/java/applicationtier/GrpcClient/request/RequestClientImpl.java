@@ -34,7 +34,6 @@ public class RequestClientImpl implements IRequestClient {
             Request.RequestProtoObj requestProtoObj = fromEntityToProtoObj(requestEntity);
             Request.RequestProtoObj protoObj = getRequestBlockingStub().createRequestAsync(requestProtoObj);
 
-
             return fromProtoObjToEntity(protoObj);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -61,7 +60,8 @@ public class RequestClientImpl implements IRequestClient {
     public RequestEntity FetchRequestById(Long id) {
         try {
             Request.RequestProtoObj requestProtoObj = getRequestBlockingStub().fetchRequestByIdAsync(Int64Value.of(id));
-            return fromProtoObjToEntity(requestProtoObj);
+            RequestEntity entity = fromProtoObjToEntity(requestProtoObj);
+            return entity;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -106,7 +106,7 @@ public class RequestClientImpl implements IRequestClient {
         requestEntity.setRequestReceiver(UserClientImpl.fromProtoObjToEntity(requestProtoObj.getRequestReceiver()));
         requestEntity.setStatus(requestProtoObj.getStatus());
         requestEntity.setRequestSender(UserClientImpl.fromProtoObjToEntity(requestProtoObj.getRequestSender()));
-        requestEntity.setRequestedDate(requestEntity.getRequestedDate());
+        requestEntity.setRequestedDate(requestProtoObj.getRequestedDate());
 
         if (requestProtoObj.getRequestId() != 0) {
             requestEntity.setId(requestProtoObj.getRequestId());

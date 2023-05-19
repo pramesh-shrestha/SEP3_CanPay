@@ -167,7 +167,7 @@
             if (string.IsNullOrEmpty(Password)) throw new Exception("Password Cannot Be Empty");
             if (string.IsNullOrEmpty(RepeatPassword)) throw new Exception("Repeat Password Cannot Be Empty");
             if (!Regex.IsMatch(Password, passwordRegex))
-                throw new Exception("Password Must Be " +
+                throw new Exception("Password Must Be More Than " +
                                     " 6 Characters Long.");
             if (!Password.Equals(RepeatPassword)) throw new Exception("Password and Repeat Password doesn't match!!");
             step = 2;

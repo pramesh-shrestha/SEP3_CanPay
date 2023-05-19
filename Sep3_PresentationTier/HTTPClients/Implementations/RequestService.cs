@@ -35,4 +35,42 @@ public class RequestService : IRequestService
 
         return createdRequestEntity;
     }
+
+    public async Task<RequestEntity?> UpdateRequestAsync(RequestEntity requestEntity)
+    {
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/request/update", requestEntity);
+        string result = await responseMessage.Content.ReadAsStringAsync();
+
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        RequestEntity? createdRequestEntity = JsonSerializer.Deserialize<RequestEntity>(result,
+            new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+        return createdRequestEntity;
+    }
+
+    public async Task<RequestEntity> FetchRequestById(long id)
+    {
+        HttpResponseMessage responseMessage = await client.GetAsync($"/request/id/{id}");
+        string result = await responseMessage.Content.ReadAsStringAsync();
+
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        RequestEntity? createdRequestEntity = JsonSerializer.Deserialize<RequestEntity>(result,
+            new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            })!;
+
+        return createdRequestEntity;
+    }
 }

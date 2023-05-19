@@ -10,7 +10,7 @@ public class CanPayDbAccess : DbContext
     public DbSet<TransactionEntity?> Transactions { get; set; }
     public DbSet<NotificationEntity?> Notifications { get; set; }
     
-    public DbSet<RequestEntity> Requests { get; set; }
+    public DbSet<RequestEntity?> Requests { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
