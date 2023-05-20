@@ -3,7 +3,6 @@
 @using Domains.Enums
 @using Entity.Model
 @using HTTPClients.ClientInterfaces
-@using Microsoft.IdentityModel.Tokens
 @using UIComponents
 
 @inject IUserService UserService;
@@ -43,7 +42,6 @@
 
             <div class="row">
                 <div class="col-md-3 first-box">
-
                     <div class="icon-image">
                         <img src="images/KANPAY logo.png" alt="">
                     </div>
@@ -99,11 +97,6 @@
                                     <span>@sender.ToUpper()</span>
                                 </div>
 
-                                @*<label>From</label>
-
-                            <div class="inputFields">
-                                <input type="text" class="fieldLength" @bind="cardNumber" disabled="">
-                            </div>*@
                                 <label>To</label>
                                 <div class="inputFields">
                                     <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
@@ -118,11 +111,6 @@
                                 <div class="inputFields">
                                     <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
                                 </div>
-
-                                @* <label>To</label> *@
-                                @* <div class="inputFields"> *@
-                                @*     <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment"> *@
-                                @* </div> *@
 
                                 <label>Comment</label>
                                 <div class="inputFields">
@@ -161,7 +149,14 @@
         </div>
 
         <Modal ShowModal="showModal">
-            <p >You have successfully transferred the amount!</p>
+            @if (transactionType.Equals(TypesOfNotification.SEND_MONEY.ToString()))
+            {
+                <p>You have successfully transferred the amount!</p>
+            }
+            else if (transactionType.Equals(TypesOfNotification.REQUEST_MONEY.ToString()))
+            {
+                <p >You have successfully requested the amount!</p>
+            }
             <div>
                 <button class="button" @onclick="@Proceed">OK</button>
             </div>
@@ -234,7 +229,9 @@
     }
 
 
-    //send money to receiver
+    /// <summary>
+    /// Send money to the receiver.
+    /// </summary>
     private async Task SendMoneyToReceiver()
     {
         receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
@@ -261,7 +258,9 @@
         }
     }
 
-
+    /// <summary>
+    /// Send a money request.
+    /// </summary>
     private async Task SendMoneyRequest()
     {
         try
@@ -299,7 +298,9 @@
         }
     }
 
-
+    /// <summary>
+    /// Create a notification.
+    /// </summary>
     private async Task CreateNotification()
     {
         try
@@ -333,6 +334,9 @@
         }
     }
 
+    /// <summary>
+    /// Handle the send button click based on the transaction type.
+    /// </summary>
     private async Task HandleSendButtonClick()
     {
         switch (transactionType)
@@ -347,26 +351,39 @@
     }
 
 
-    //navigate back to home page
+    /// <summary>
+    /// Navigate back to the home page.
+    /// </summary>
     private void BackToHome()
     {
         NavMgr.NavigateTo("/");
     }
 
+    /// <summary>
+    /// Proceed with the operation after closing the modal.
+    /// </summary>
     private void Proceed()
     {
         showModal = false;
         NavMgr.NavigateTo("/");
     }
 
+    /// <summary>
+    /// Change the transaction type based on the selected value.
+    /// </summary>
+    /// <param name="arg">The selected transaction type.</param>
     private void ChangeTransactionType(ChangeEventArgs arg)
     {
         transactionType = arg.Value!.ToString();
         InvokeAsync(StateHasChanged);
     }
 
+    /// <summary>
+    /// Get the error message for testing purposes.
+    /// </summary>
+    /// <returns>The error message, or null if no error occurred.</returns>
     //For testing purpose only
-    public async Task<String> GetErrorMessage()
+        public async Task<String> GetErrorMessage()
     {
         try
         {

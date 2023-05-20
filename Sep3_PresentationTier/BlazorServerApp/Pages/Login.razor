@@ -9,7 +9,7 @@
 <div class="form-content">
     <div class="container ">
         <div class="row">
-            <!-- Sign In button container-->
+            @* Sign In button container *@
             <div class="col-md-3 side-container">
 
                 <div class="icon-image">
@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <!--    login info-->
+            @* login info *@
             <div class="col-md-9 ">
                 <div class="form-container">
                     <h3 class="title">Sign in</h3>
@@ -92,23 +92,23 @@
         return null;
     }
 
+    /// <summary>
+    /// Handles the login process.
+    /// </summary>
     private async Task LoginAsync()
     {
         errorLabel = "";
         try
         {
             if (string.IsNullOrEmpty(username) && string.IsNullOrEmpty(password))
-            {
                 throw new Exception("Both Username and Password are left blank");
-            }
+
             if (string.IsNullOrEmpty(username))
-            {
                 throw new Exception("Username cannot be empty");
-            }
+
             if (string.IsNullOrEmpty(password))
-            {
                 throw new Exception("Password cannot be empty");
-            }
+
             try
             {
                 await UserService.ValidateUser(username, password);
@@ -128,7 +128,10 @@
         }
     }
 
-
+    /// <summary>
+    /// Displays an error message and triggers its dismissal after a certain time.
+    /// </summary>
+    /// <param name="errorMessage">The error message to display.</param>
     private void DisplayMessage(string errorMessage)
     {
         errorLabel = $"Error: {errorMessage}";
@@ -136,6 +139,10 @@
         timer = new Timer(OnTimerElapsed, null, messageDisplayTime, Timeout.Infinite);
     }
 
+    /// <summary>
+    /// Clears the error message and updates the UI state.
+    /// </summary>
+    /// <param name="state">The state object passed by the timer.</param>
     private void OnTimerElapsed(object state)
     {
         timer?.DisposeAsync();

@@ -17,18 +17,20 @@
 <AuthorizeView>
     <Authorized>
         <div class="container-text">
-            <span class="text">Welcome to Kanpay, @currentUser<!doctype html>
-            <html lang="en">
-            <head>
-            <meta charset="UTF-8">
-                         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-                                     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                         <title>Document</title>
-            </head>
-            <body>
-              
-            </body>
-            </html>.FullName</span>
+            <span class="text">
+                Welcome to Kanpay, @currentUser<!doctype html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                    <title>Document</title>
+                </head>
+                <body>
+
+                </body>
+                </html>.FullName
+            </span>
         </div>
 
         @* Notification bell  *@
@@ -154,6 +156,10 @@
 
     </Authorized>
 
+    <NotAuthorized>
+        <h3>We are sorry, you must be logged in to access this page.</h3>
+    </NotAuthorized>
+
 </AuthorizeView>
 
 @code {
@@ -181,7 +187,7 @@
 
     // Fetch current user from authentication state
         AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
-        string username = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
+        string? username = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
         currentUser = await UserService.FetchUserByUsernameAsync(username);
 
     // Start the timer to update notifications every 5 seconds
@@ -344,4 +350,5 @@
     {
         await UpdateNotifications();
     }
+
 }

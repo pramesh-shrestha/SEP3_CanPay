@@ -64,7 +64,7 @@ public class UserService : IUserService
         throw new NotImplementedException();
     }
 
-    public async Task<UserEntity> FetchUserByUsernameAsync(string username)
+    public async Task<UserEntity> FetchUserByUsernameAsync(string? username)
     {
         LoadClientWithToken();
         HttpResponseMessage responseMessage = await client.GetAsync($"/user/username/{username}");
