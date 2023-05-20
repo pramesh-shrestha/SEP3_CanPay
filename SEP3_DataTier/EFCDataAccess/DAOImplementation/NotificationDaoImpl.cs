@@ -32,7 +32,6 @@ public class NotificationDaoImpl : INotificationDao
                 context.Cards.Attach(notificationEntity.Receiver!.Card);
             }
 
-            Console.WriteLine($"Notification Dao Impl: {notificationEntity.Message}");
 
             EntityEntry<NotificationEntity?> createdNotification =
                 await context.Notifications.AddAsync(notificationEntity);
@@ -51,6 +50,8 @@ public class NotificationDaoImpl : INotificationDao
         {
             NotificationEntity? notificationEntity =
                 await context.Notifications.Include(entity => entity.Sender)
+                    .Include(entity => entity.Sender.Card)
+                    .Include(entity => entity.Receiver.Card)
                     .Include(entity => entity.Receiver)
                     .FirstOrDefaultAsync(entity => entity.Id == requestValue);
             return notificationEntity;
@@ -92,31 +93,24 @@ public class NotificationDaoImpl : INotificationDao
 
     public async Task MarkNotificationAsReadAsync(NotificationEntity? notificationEntity)
     {
-        /*try
+        try
         {
-            context.Notifications.Update(notificationEntity);
+            var existingEntities = await context.Notifications
+                .FirstOrDefaultAsync(entity => entity.Id == notificationEntity.Id);
+            existingEntities.IsRead = true;
             await context.SaveChangesAsync();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw new Exception(e.Message);
-        }*/
+        }
     }
 
     public async Task MarkAllNotificationsAsReadAsync(List<NotificationEntity> notificationEntities)
     {
         try
         {
-            /*if (notificationEntities.Count != 0)
-            {
-                foreach (NotificationEntity notificationEntity in notificationEntities)
-                {
-                    notificationEntity.IsRead = true;
-                    context.Notifications.Update(notificationEntity);
-                    
-                }
-            }*/
             if (notificationEntities.Count != 0)
             {
                 var existingEntities = await context.Notifications

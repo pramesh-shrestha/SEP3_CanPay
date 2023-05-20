@@ -72,17 +72,17 @@ public class NotificationService : INotificationService
         return notificationEntity;
     }
 
-    // public async Task MarkNotificationAsReadAsync(NotificationEntity notificationEntity)
-    // {
-    //     HttpResponseMessage responseMessage =
-    //         await client.PutAsJsonAsync($"/notifications/markAsRead/{notificationEntity}", notificationEntity);
-    //     string result = await responseMessage.Content.ReadAsStringAsync();
-    //     if (!responseMessage.IsSuccessStatusCode)
-    //     {
-    //         throw new Exception(result);
-    //     }
-    // }
-    //
+    public async Task MarkNotificationAsReadAsync(NotificationEntity notificationEntity)
+    {
+        HttpResponseMessage responseMessage =
+            await client.PostAsJsonAsync($"/notifications/markAsRead",notificationEntity);
+        string result = await responseMessage.Content.ReadAsStringAsync();
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+    }
+
     public async Task MarkAllNotificationsAsReadAsync(
         List<NotificationEntity>? notificationEntities)
     {

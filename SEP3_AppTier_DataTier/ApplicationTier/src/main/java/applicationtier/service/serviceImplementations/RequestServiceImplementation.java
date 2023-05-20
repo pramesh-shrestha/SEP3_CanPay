@@ -20,7 +20,7 @@ public class RequestServiceImplementation implements IRequestService {
     public RequestEntity createRequest(RequestEntity requestEntity) {
         try {
             return requestClient.createRequest(requestEntity);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -29,16 +29,18 @@ public class RequestServiceImplementation implements IRequestService {
     public List<RequestEntity> fetchAllRequest() {
         try {
             return requestClient.FetchAllRequest();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
     public RequestEntity fetchRequestById(Long id) {
-        try{
-            return requestClient.FetchRequestById(id);
-        }catch (Exception e){
+        try {
+            RequestEntity entity = requestClient.FetchRequestById(id);
+            return entity;
+
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -47,7 +49,7 @@ public class RequestServiceImplementation implements IRequestService {
     public RequestEntity fetchRequestByUsername(String username) {
         try {
             return requestClient.FetchRequestByUsername(username);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -56,7 +58,7 @@ public class RequestServiceImplementation implements IRequestService {
     public RequestEntity updateRequest(RequestEntity requestEntity) {
         try {
             return requestClient.UpdateRequest(requestEntity);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -65,7 +67,7 @@ public class RequestServiceImplementation implements IRequestService {
     public boolean deleteRequest(Long id) {
         try {
             return requestClient.DeleteRequest(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }

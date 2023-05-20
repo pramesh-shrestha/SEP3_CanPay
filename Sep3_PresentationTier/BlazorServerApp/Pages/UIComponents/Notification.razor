@@ -6,16 +6,18 @@
 @using System.Text.RegularExpressions
 @using Entity.Model
 @namespace BlazorServerApp.Pages
+
 @inject INotificationService NotificationService;
 @inject NavigationManager NavMgr;
 @inject AuthenticationStateProvider StateProvider;
 @inject IRequestService RequestService;
+@inject IUserService UserService;
 
 
 <AuthorizeView>
     <Authorized>
         <div class="container-text">
-            <span class="text">Welcome to Kanpay, @receiver</span>
+            <span class="text">Welcome to Kanpay, @currentUser.FullName</span>
         </div>
         <div class="container">
             <img src="images/notification-bell.png" class="notification-icon" @onclick="@(HandleNotificationClick)" alt="notification" style="cursor: pointer"/>
@@ -42,6 +44,12 @@
                     }
                 </div>
             </div>
+            
+            @*<div class="notification_heading">
+                <span> Notifcations </span>
+                <button class="mark_all_as_read_btn">Mark All As Read</button>
+
+            </div>*@
         }
 
 
@@ -50,10 +58,8 @@
         @if (clickedNotificationType!.Equals(TypesOfNotification.REQUEST_MONEY.ToString()))
         {
             <Modal ShowModal="@showModal">
-                @* <p>La bhai yeha chai receiver le yeti request garecha bhana</p> *@
-
                 <div class="notificationInputField">
-                    <input @bind="clickedNotificationRequestSender!.FullName" type="text" disabled=""/>
+                    <input @bind="clickedNotificationEntity!.Sender!.FullName" type="text" disabled=""/>
                     <label class="notificationLabel">Sent By</label>
                 </div>
 
@@ -63,7 +69,7 @@
                 </div>
 
                 <div class="notificationInputField">
-                    <input @bind="clickedNotificationDate" type="text" disabled=""/>
+                    <input @bind="clickedNotificationEntity!.Date" type="text" disabled=""/>
                     <label class="notificationLabel">Sent Date</label>
                 </div>
 
@@ -85,13 +91,14 @@
                 </div>
             </Modal>
         }
+
     </Authorized>
 
 </AuthorizeView>
 
 @code {
-    private UserEntity? senderUser;
-    private string? receiver;
+    // private UserEntity? senderUser;
+    private UserEntity? currentUser = new UserEntity();
     private ICollection<NotificationEntity>? notifications = new List<NotificationEntity>();
     private bool showNotification = false;
     private int notificationCount;
@@ -101,26 +108,22 @@
     private long clickedNotificationId;
     private bool showModal = false;
     private string? clickedNotificationType = "";
-    private string? clickedNotificationDate;
-    private UserEntity? clickedNotificationRequestSender = new UserEntity();
-    private UserEntity? clickedNotificationRequestReceiver = new UserEntity();
+    // private string? clickedNotificationDate;
+    // private UserEntity? clickedNotificationRequestSender = new UserEntity();
     private int clickedNotificationAmount;
     private long clickedNotificationForRequestId;
-    private RequestEntity? requestById;
+    private RequestEntity? requestById = new RequestEntity();
+    private NotificationEntity? clickedNotificationEntity = new NotificationEntity();
 
-
-    // private UserEntity? receiverUser = new UserEntity();
-    // private string? notificationType;
-    // public string? Message = "";
-    // private DateTime dateTime = DateTime.Now.Date;
-    // public bool IsRead;
 
     protected override async Task OnInitializedAsync()
     {
         await UpdateNotifications();
 
         AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
-        receiver = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
+        string username = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
+
+        currentUser = await UserService.FetchUserByUsernameAsync(username);
 
 
     // Start the timer to update notifications every 5 seconds
@@ -136,7 +139,7 @@
     {
         try
         {
-            notifications = await NotificationService.FetchAllNotificationsByReceiverAsync(receiver);
+            notifications = await NotificationService.FetchAllNotificationsByReceiverAsync(currentUser.UserName);
             notificationCount = notifications.Count;
 
             await InvokeAsync(StateHasChanged);
@@ -152,11 +155,10 @@
         clickedNotificationId = itemsId;
         clickedNotificationType = itemsNotificationType;
 
-        NotificationEntity byId = await NotificationService.FetchNotificationById(clickedNotificationId);
-        clickedNotificationDate = byId.Date;
-        clickedNotificationRequestSender = byId.Sender!;
-        clickedNotificationAmount = ExtractAmountFromMessage(byId.Message);
-        clickedNotificationForRequestId = ExtractIdFromMessage(byId.Message);
+        clickedNotificationEntity = await NotificationService.FetchNotificationById(clickedNotificationId);
+    // clickedNotificationRequestSender = clickedNotificationEntity.Sender!;
+        clickedNotificationAmount = ExtractAmountFromMessage(clickedNotificationEntity.Message);
+        clickedNotificationForRequestId = ExtractIdFromMessage(clickedNotificationEntity.Message);
         showModal = true;
     }
 
@@ -213,30 +215,30 @@
 
     private async Task HandleAccept()
     {
-        TransferValues.RequestSender = clickedNotificationRequestSender;
+        TransferValues.RequestSender = clickedNotificationEntity!.Sender;
         TransferValues.RequestedAmount = clickedNotificationAmount;
         showModal = false;
 
         await UpdateRequestStatus(clickedNotificationForRequestId, RequestStatus.APPROVED.ToString(), true);
+        await NotificationService.MarkNotificationAsReadAsync(clickedNotificationEntity);
         NavMgr.NavigateTo("/SendMoney");
     }
 
     private async Task HandleReject()
     {
-        DateTime dateTime = DateTime.Now;
-
         NotificationEntity notificationEntity = new NotificationEntity()
         {
-            Sender = clickedNotificationRequestReceiver,
-            Receiver = clickedNotificationRequestSender,
-            Date = clickedNotificationDate,
-            Message = $"{clickedNotificationRequestReceiver.FullName} rejected your money request for {clickedNotificationAmount}",
+            Sender = currentUser,
+            Receiver = clickedNotificationEntity.Sender!,
+            Date = DateTime.Now.Date.ToString(),
+            Message = $"{currentUser.FullName} rejected your money request for ${clickedNotificationAmount} CAD.",
             IsRead = false,
             NotificationType = TypesOfNotification.REQUEST_REJECT.ToString()
         };
 
 
         await NotificationService.CreateNotificationAsync(notificationEntity);
+        await NotificationService.MarkNotificationAsReadAsync(clickedNotificationEntity);
         await UpdateRequestStatus(clickedNotificationForRequestId, RequestStatus.DECLINED.ToString(), false);
         showModal = false;
     }

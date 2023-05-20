@@ -42,7 +42,8 @@ public class RequestController {
     @GetMapping("/request/id/{id}")
     public ResponseEntity<RequestEntity> fetchRequestById(@PathVariable("id") Long id) {
         try {
-            return new ResponseEntity<>(requestService.fetchRequestById(id), HttpStatus.OK);
+            ResponseEntity<RequestEntity> entity = new ResponseEntity<>(requestService.fetchRequestById(id), HttpStatus.OK);
+            return entity;
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

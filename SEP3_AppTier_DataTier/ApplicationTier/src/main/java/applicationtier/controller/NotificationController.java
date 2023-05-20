@@ -33,8 +33,7 @@ public class NotificationController {
     @GetMapping("/notification/id/{id}")
     public ResponseEntity<NotificationEntity> fetchNotificationById(@PathVariable("id") long id) {
         try {
-            ResponseEntity<NotificationEntity> responseEntity = new ResponseEntity<>(notificationService.fetchNotificationById(id), HttpStatus.OK);
-            return responseEntity;
+            return new ResponseEntity<>(notificationService.fetchNotificationById(id), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error creating notification", e);
         }
@@ -50,15 +49,16 @@ public class NotificationController {
         }
     }
 
-    /*@PutMapping("/notifications/markAsRead/{notification}")
-    public ResponseEntity<?> markAsRead(@PathVariable("notification") NotificationEntity notification) {
+    @PostMapping("/notifications/markAsRead")
+    public ResponseEntity<?> markAsRead(@RequestBody NotificationEntity notification) {
         try {
+            System.out.println("In mark as read notification controller");
             notificationService.markAsRead(notification);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-    }*/
+    }
 
     @PostMapping("/notifications/markAllAsRead")
     public ResponseEntity<?> markAllAsRead(@RequestBody List<NotificationEntity> allNotifications) {

@@ -145,6 +145,23 @@
     background-color: #edede9;
 }
 
+
+/*Notification List Styling*/
+.notification_heading {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 2px #e0e1dd;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+    height: 300px;
+    width: 300px;
+    background-color: white;
+}
+
 /*Pop up styling*/
 .wrapper_loaded {
     display: flex;
