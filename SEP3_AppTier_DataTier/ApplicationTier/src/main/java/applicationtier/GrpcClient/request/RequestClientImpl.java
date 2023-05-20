@@ -106,7 +106,7 @@ public class RequestClientImpl implements IRequestClient {
         requestEntity.setRequestReceiver(UserClientImpl.fromProtoObjToEntity(requestProtoObj.getRequestReceiver()));
         requestEntity.setStatus(requestProtoObj.getStatus());
         requestEntity.setRequestSender(UserClientImpl.fromProtoObjToEntity(requestProtoObj.getRequestSender()));
-        requestEntity.setRequestedDate(requestEntity.getRequestedDate());
+        requestEntity.setRequestedDate(requestProtoObj.getRequestedDate());
 
         if (requestProtoObj.getRequestId() != 0) {
             requestEntity.setId(requestProtoObj.getRequestId());
