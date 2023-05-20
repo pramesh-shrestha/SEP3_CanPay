@@ -178,6 +178,14 @@ public class TransactionDaoImpl : ITransactionDao
     }
 
 
+    /**
+        Fetches a collection of transactions asynchronously based on the provided username and date.
+        @param filterDto The FilterDto object containing the username and date for filtering the transactions.
+        @return A Task representing the asynchronous operation. 
+        The task result contains a collection of TransactionEntity objects matching the filter criteria.
+        @throws Exception If an error occurs during the fetch operation or no transactions are found.
+*/
+    
     public async Task<ICollection<TransactionEntity?>> FetchTransactionByUsernameAndDateAsync(FilterDto filterDto)
     {
         List<TransactionEntity?> transactionByDateAndReceiver =

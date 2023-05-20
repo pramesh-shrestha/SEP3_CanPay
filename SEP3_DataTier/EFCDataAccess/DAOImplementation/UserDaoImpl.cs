@@ -15,7 +15,12 @@ public class UserDaoImpl : IUserDao
         this.context = context;
     }
 
-    //create usernjqattew
+    /**
+     Creates a new user asynchronously.
+     @param userEntity The UserEntity object representing the user to be created.
+     @return A Task representing the asynchronous operation. The task result contains the created UserEntity object.
+     @throws Exception If an error occurs during the user creation process.
+    */
     public async Task<UserEntity?> CreateUserAsync(UserEntity? userEntity)
     {
         try
@@ -30,7 +35,13 @@ public class UserDaoImpl : IUserDao
         }
     }
 
-    //get user by username
+    /**
+        Fetches a user asynchronously based on the provided username.
+        @param username The username of the user to fetch.
+        @return A Task representing the asynchronous operation. 
+        The task result contains the UserEntity object matching the provided username.
+        @throws Exception If an error occurs during the fetch operation or no user is found with the specified username.
+    */
     public async Task<UserEntity?> FetchUserByUsernameAsync(string username)
     {
         //username is a primary key so we can use FindAsync
@@ -46,7 +57,13 @@ public class UserDaoImpl : IUserDao
         return user;
     }
 
-    //get user by id
+    /**
+        Fetches a user asynchronously based on the provided user ID.
+        @param id The ID of the user to fetch.
+        @return A Task representing the asynchronous operation. 
+        The task result contains the UserEntity object matching the provided user ID.
+        @throws Exception If an error occurs during the fetch operation or no user is found with the specified ID.
+    */
     public async Task<UserEntity?> FetchUserByIdAsync(long id)
     {
         UserEntity? user = await context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
@@ -58,7 +75,12 @@ public class UserDaoImpl : IUserDao
         return user;
     }
 
-    //get all users
+    /**
+        Fetches all users asynchronously.
+        @return A Task representing the asynchronous operation.
+         The task result contains a collection of UserEntity objects representing all the users.
+        @throws Exception If an error occurs during the fetch operation or no users are found.
+    */
     public async Task<ICollection<UserEntity?>> FetchUsersAsync()
     {
         if (!context.Users.Any()) throw new Exception("No users found");
@@ -67,7 +89,12 @@ public class UserDaoImpl : IUserDao
         return users;
     }
 
-    //update user
+    /**
+        Updates a user asynchronously.
+        @param userEntity The UserEntity object representing the user to be updated.
+        @return A Task representing the asynchronous operation. The task result contains the updated UserEntity object.
+        @throws Exception If an error occurs during the update process.
+    */
     public async Task<UserEntity?> UpdateUserAsync(UserEntity? userEntity)
     {
         // DebitCardEntity? entities =
@@ -100,7 +127,12 @@ public class UserDaoImpl : IUserDao
         return userEntity;
     }
 
-    //delete user
+    /**
+        Deletes a user asynchronously based on the provided user ID.
+        @param id The ID of the user to delete.
+        @return A Task representing the asynchronous operation.
+        @throws Exception If an error occurs during the delete operation or no user is found with the specified ID.
+    */
     public async Task DeleteUserAsync(long id)
     {
         UserEntity? existingUserEntity = await FetchUserByIdAsync(id);
@@ -113,7 +145,13 @@ public class UserDaoImpl : IUserDao
         await context.SaveChangesAsync();
     }
 
-    //update balance
+    /**
+    Updates the balance of a user asynchronously.
+    @param username The username of the user whose balance needs to be updated.
+    @param newBalance The new balance value to be set for the user.
+    @return A Task representing the asynchronous operation. The task result indicates whether the balance update was successful.
+    @throws Exception If an error occurs during the update process or no user is found with the specified username.
+*/
     public async Task<bool> UpdateBalanceAsync(string username, int newBalance)
     {
         UserEntity? user = await FetchUserByUsernameAsync(username);
@@ -147,7 +185,12 @@ public class UserDaoImpl : IUserDao
         return false;*/
     }
 
-    //get balance by username
+    /**
+    Fetches the balance of a user asynchronously based on the provided username.
+    @param username The username of the user whose balance needs to be fetched.
+    @return A Task representing the asynchronous operation. The task result contains the balance value of the user.
+    @throws Exception If an error occurs during the fetch operation or no user is found with the specified username.
+*/
     public async Task<int> FetchBalanceByUsername(string username)
     {
         UserEntity? userEntity = await context.Users.FindAsync(username);

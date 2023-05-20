@@ -18,7 +18,7 @@ public class BillPaymentService : IBillPaymentService
     //Todo need to change the uri according to application tier
     public async Task<BillPaymentEntity> CreateAsync(BillPaymentEntity billPaymentEntity)
     {
-        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/bill/create", billPaymentEntity);
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/billPayment/create", billPaymentEntity);
         string result = await responseMessage.Content.ReadAsStringAsync();
 
         if (!responseMessage.IsSuccessStatusCode)
@@ -35,7 +35,7 @@ public class BillPaymentService : IBillPaymentService
 
     public async Task<BillPaymentEntity> FetchBillPaymentsById(long id)
     {
-        HttpResponseMessage response = await client.GetAsync($"/bill/{id}");
+        HttpResponseMessage response = await client.GetAsync("/billPayment/{id}}");
         string result = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)
@@ -54,7 +54,7 @@ public class BillPaymentService : IBillPaymentService
     
     public async Task<ICollection<BillPaymentEntity>> FetchAllTransactionsInvolvingUser(string? username)
     {
-        HttpResponseMessage response = await client.GetAsync($"/bill/user/{username}");
+        HttpResponseMessage response = await client.GetAsync("/billPayment/user/{username}");
         string result = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)

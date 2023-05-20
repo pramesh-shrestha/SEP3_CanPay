@@ -123,6 +123,13 @@ public class NotificationDaoImpl : INotificationDao
         }*/
     }
 
+    /**
+    Marks all notifications in the provided list as read asynchronously.
+    @param notificationEntities A list of NotificationEntity objects representing the notifications to be marked as read.
+    @return A Task representing the asynchronous operation.
+    @throws Exception If an error occurs during the marking process.
+*/
+    
     public async Task MarkAllNotificationsAsReadAsync(List<NotificationEntity> notificationEntities)
     {
         try
@@ -157,6 +164,13 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
+    /**
+    Deletes a notification asynchronously based on the provided notification ID.
+    @param notificationId The ID of the notification to be deleted.
+    @return A Task representing the asynchronous operation. The task result is a boolean indicating whether the deletion was successful (true) or not (false).
+    @throws Exception If an error occurs during the deletion process.
+*/
+    
     public async Task<bool> DeleteNotificationAsync(long notificationId)
     {
         try
