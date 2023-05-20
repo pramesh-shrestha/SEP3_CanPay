@@ -10,6 +10,7 @@ public class BillPaymentEntity
     public long  accountNumber { get; set; }
     public string  Reference { get; set; }
 
+    
     public BillPaymentEntity(string date, UserEntity senderUser, string payee, int amount, long accountNumber, string reference)
     {
         this.date = date;
