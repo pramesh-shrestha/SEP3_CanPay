@@ -15,6 +15,13 @@ public class NotificationDaoImpl : INotificationDao
         this.context = context;
     }
 
+    /**
+        Creates a notification asynchronously.
+        @param notificationEntity The NotificationEntity object representing the notification to be created.
+        @return A Task representing the asynchronous operation. 
+        The task result contains the created NotificationEntity object, or null if no notification was created.
+        @throws Exception If an error occurs during the creation process.
+    */
     public async Task<NotificationEntity?> CreateNotificationAsync(NotificationEntity? notificationEntity)
     {
         try
@@ -44,6 +51,13 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
+    /**
+        Fetches a notification asynchronously based on the provided notification ID.
+        @param requestValue The ID of the notification to be fetched.
+        @return A Task representing the asynchronous operation. The task result contains the fetched NotificationEntity object, or null if no notification was found.
+        @throws Exception If an error occurs during the fetch operation.
+    */
+    
     public async Task<NotificationEntity?> FetchNotificationByIdAsync(long requestValue)
     {
         try
@@ -61,6 +75,12 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
+    /**
+        Fetches a notification asynchronously based on the provided notification ID.
+        @param requestValue The ID of the notification to be fetched.
+        @return A Task representing the asynchronous operation. The task result contains the fetched NotificationEntity object, or null if no notification was found.
+        @throws Exception If an error occurs during the fetch operation.
+    */
     public async Task<ICollection<NotificationEntity?>> FetchAllNotificationsByReceiverAsync(string username)
     {
         try
