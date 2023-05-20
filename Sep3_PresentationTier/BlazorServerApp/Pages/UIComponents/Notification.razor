@@ -20,7 +20,8 @@
             <span class="text">Welcome to Kanpay, @currentUser.FullName</span>
         </div>
         <div class="container">
-            <img src="images/notification-bell.png" class="notification-icon" @onclick="@(HandleNotificationClick)" alt="notification" style="cursor: pointer"/>
+            <img src="images/notification-bell.png" class="notification-icon" @onclick="@(() => showNotification = !showNotification)"
+                 alt="notification" style="cursor: pointer"/>
             <div class="number-div">
                 <button class="number">
                     <span class="noti_count">@notificationCount</span>
@@ -31,25 +32,46 @@
         </div>
         @if (showNotification)
         {
-            <div class="noti-body ">
-                <label class="header">Notifications</label>
-                <hr class="hr1"/>
-                <div class="card">
-                    @foreach (var items in notifications)
-                    {
-                        <div class="card-body" @onclick="() => OnNotificationClicked(items.Id, items.NotificationType)">
-                            <label class="date text-muted">@items.Date</label>
-                            <label class="notification-table">@items.Message</label>
-                        </div>
-                    }
-                </div>
-            </div>
-            
-            @*<div class="notification_heading">
-                <span> Notifcations </span>
-                <button class="mark_all_as_read_btn">Mark All As Read</button>
+            <div class="notification_container">
 
-            </div>*@
+                <div class="notification_heading">
+                    <span> Notifications </span>
+                    <button class="mark_as_read_btn" @onclick="HandleMarkRead">Mark Read</button>
+                </div>
+
+                @foreach (var items in notifications)
+                {
+                    <div class="notification_body " @onclick="() => OnNotificationClicked(items.Id, items.NotificationType)">
+                        <div class="notification_type_icon">
+                            @if (items.NotificationType!.Equals(TypesOfNotification.REQUEST_MONEY.ToString()))
+                            {
+                                <img src="images/request_money.png" alt=""/>
+                            }
+                            else if (items.NotificationType!.Equals(TypesOfNotification.SEND_MONEY.ToString()))
+                            {
+                                <img src="images/receive-amount.png" alt=""/>
+                            }
+                            else if (items.NotificationType!.Equals(TypesOfNotification.REQUEST_REJECT.ToString()))
+                            {
+                                <img src="images/declined.png" alt=""/>
+                            }
+                        </div>
+
+                        <div class="notification_details">
+                            <div class="message">
+                                <div class="sender">
+                                    @items.Date | @items.NotificationType
+                                </div>
+                                @if (items.Message!.Contains(":"))
+
+                                {
+                                    <p>@items.Message.Substring(@items.Message.IndexOf(":", StringComparison.Ordinal) + 1).Trim()</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
         }
 
 
@@ -91,6 +113,40 @@
                 </div>
             </Modal>
         }
+        else if (clickedNotificationType!.Equals(TypesOfNotification.SEND_MONEY.ToString())
+                 || clickedNotificationType.Equals(TypesOfNotification.REQUEST_REJECT.ToString()))
+        {
+            <Modal ShowModal="@showModal">
+                <div class="notificationInputField">
+                    <input @bind="clickedNotificationEntity!.Sender!.FullName" type="text" disabled=""/>
+                    <label class="notificationLabel">Sent By</label>
+                </div>
+
+                <div class="notificationInputField">
+                    @* <input type="textarea" @bind="clickedNotificationEntity.Message" disabled=""/> *@
+                    <textarea rows="2" cols="50" @bind="clickedNotificationEntity.Message" disabled=""></textarea>
+                    <label class="notificationLabelMessage">Message</label>
+                </div>
+
+                <div class="notificationInputField">
+                    <input @bind="clickedNotificationEntity!.Date" type="text" disabled=""/>
+                    <label class="notificationLabel">Sent Date</label>
+                </div>
+
+
+                <div class="wrapper_loaded">
+                    @*<div class="container-button">
+                        <a href="#" class="popUp-button" @onclick="HandleReject">
+                            <span class="icon cross-icon">&#10007;</span>
+                            <span>Reject</span>
+                        </a>
+                    </div>*@
+                    <button class="ok_button" @onclick="HandleOk">
+                        OK
+                    </button>
+                </div>
+            </Modal>
+        }
 
     </Authorized>
 
@@ -111,7 +167,7 @@
     // private string? clickedNotificationDate;
     // private UserEntity? clickedNotificationRequestSender = new UserEntity();
     private int clickedNotificationAmount;
-    private long clickedNotificationForRequestId;
+    private long clickedNotificationRequestId;
     private RequestEntity? requestById = new RequestEntity();
     private NotificationEntity? clickedNotificationEntity = new NotificationEntity();
 
@@ -158,7 +214,7 @@
         clickedNotificationEntity = await NotificationService.FetchNotificationById(clickedNotificationId);
     // clickedNotificationRequestSender = clickedNotificationEntity.Sender!;
         clickedNotificationAmount = ExtractAmountFromMessage(clickedNotificationEntity.Message);
-        clickedNotificationForRequestId = ExtractIdFromMessage(clickedNotificationEntity.Message);
+        clickedNotificationRequestId = ExtractIdFromMessage(clickedNotificationEntity.Message);
         showModal = true;
     }
 
@@ -182,8 +238,8 @@
 
     private int ExtractIdFromMessage(string? byIdMessage)
     {
-        int startIndex = byIdMessage!.IndexOf("Request ", StringComparison.Ordinal) + "Request ".Length;
-        int endIndex = byIdMessage.IndexOf(" Received", StringComparison.Ordinal);
+        int startIndex = byIdMessage!.IndexOf(" ", StringComparison.Ordinal) + 1;
+        int endIndex = byIdMessage.IndexOf(" ", startIndex, StringComparison.Ordinal);
 
         if (startIndex != -1 && endIndex != -1)
         {
@@ -204,12 +260,6 @@
     private async void HandleNotificationClick()
     {
         showNotification = !showNotification;
-
-        if (notifications.Count != 0)
-        {
-    // await NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
-            await InvokeAsync(StateHasChanged);
-        }
     }
 
 
@@ -219,7 +269,7 @@
         TransferValues.RequestedAmount = clickedNotificationAmount;
         showModal = false;
 
-        await UpdateRequestStatus(clickedNotificationForRequestId, RequestStatus.APPROVED.ToString(), true);
+        await UpdateRequestStatus(clickedNotificationRequestId, RequestStatus.APPROVED.ToString(), true);
         await NotificationService.MarkNotificationAsReadAsync(clickedNotificationEntity);
         NavMgr.NavigateTo("/SendMoney");
     }
@@ -230,8 +280,8 @@
         {
             Sender = currentUser,
             Receiver = clickedNotificationEntity.Sender!,
-            Date = DateTime.Now.Date.ToString(),
-            Message = $"{currentUser.FullName} rejected your money request for ${clickedNotificationAmount} CAD.",
+            Date = DateOnly.FromDateTime(DateTime.Now).ToString(),
+            Message = $"Request {clickedNotificationRequestId} : {currentUser.FullName} rejected your money request for ${clickedNotificationAmount} CAD.",
             IsRead = false,
             NotificationType = TypesOfNotification.REQUEST_REJECT.ToString()
         };
@@ -239,8 +289,14 @@
 
         await NotificationService.CreateNotificationAsync(notificationEntity);
         await NotificationService.MarkNotificationAsReadAsync(clickedNotificationEntity);
-        await UpdateRequestStatus(clickedNotificationForRequestId, RequestStatus.DECLINED.ToString(), false);
+        await UpdateRequestStatus(clickedNotificationRequestId, RequestStatus.DECLINED.ToString(), false);
         showModal = false;
+    }
+
+    private async Task HandleOk()
+    {
+        showModal = false;
+        await NotificationService.MarkNotificationAsReadAsync(clickedNotificationEntity);
     }
 
     private async Task UpdateRequestStatus(long requestId, string? status, bool isApproved)
@@ -249,6 +305,13 @@
         requestEntity.Status = status;
         requestEntity.IsApproved = isApproved;
         await RequestService.UpdateRequestAsync(requestEntity);
+    }
+
+
+    private async Task HandleMarkRead()
+    {
+        await NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
+        await InvokeAsync(StateHasChanged);
     }
 
 }

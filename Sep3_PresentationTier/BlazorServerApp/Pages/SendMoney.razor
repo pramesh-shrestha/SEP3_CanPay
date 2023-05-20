@@ -321,7 +321,6 @@
                 case nameof(TypesOfNotification.REQUEST_MONEY):
                     notificationEntity.NotificationType = TypesOfNotification.REQUEST_MONEY.ToString();
                     notificationEntity.Message = $"Request {createdRequestId} Received: {senderUser.FullName} asked you for ${amount} CAD.";
-                    ;
                     break;
             }
 
