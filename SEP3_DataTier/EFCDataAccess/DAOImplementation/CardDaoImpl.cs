@@ -15,13 +15,11 @@ public class CardDaoImpl : ICardDao
     }
 
 
-    /**
-        Creates a debit card asynchronously.
-        @param debitCardEntity The DebitCardEntity object representing the debit card to be created.
-        @return A Task representing the asynchronous operation. 
-        The task result contains the created DebitCardEntity object.
-        @throws Exception If the card already exists.
-    */
+    /// <summary>
+    /// Creates a debit card asynchronously.
+    /// </summary>
+    /// <param name="debitCardEntity">The debit card entity to create.</param>
+    /// <returns>The created debit card entity.</returns>
     public async Task<DebitCardEntity> CreateCardAsync(DebitCardEntity debitCardEntity)
     {
         try
@@ -38,12 +36,11 @@ public class CardDaoImpl : ICardDao
 
     
     
-    /**
-        Fetches a debit card asynchronously based on the provided username.
-        @param username The username associated with the debit card to be fetched.
-        @return A Task representing the asynchronous operation. The task result contains the fetched DebitCardEntity object.
-        @throws Exception If the card doesn't exist.
-    */
+    /// <summary>
+    /// Fetches a debit card by username asynchronously.
+    /// </summary>
+    /// <param name="username">The username associated with the debit card.</param>
+    /// <returns>The fetched debit card entity.</returns>
     public async Task<DebitCardEntity> FetchCardByUsernameAsync(string username)
     {
         DebitCardEntity? debitCard = await context.Cards.FindAsync(username);
@@ -55,11 +52,11 @@ public class CardDaoImpl : ICardDao
         return debitCard;
     }
 
-    /**
-        Updates a debit card asynchronously.
-        @param debitCardEntity The DebitCardEntity object representing the updated debit card information.
-        @return A Task representing the asynchronous operation. The task result contains the updated DebitCardEntity object.
-    */
+    /// <summary>
+    /// Updates a debit card asynchronously.
+    /// </summary>
+    /// <param name="debitCardEntity">The debit card entity to update.</param>
+    /// <returns>The updated debit card entity.</returns>
     public async Task<DebitCardEntity> UpdateCardAsync(DebitCardEntity debitCardEntity)
     {
         context.Cards.Update(debitCardEntity);
@@ -67,12 +64,11 @@ public class CardDaoImpl : ICardDao
         return debitCardEntity;
     }
 
-    /**
-        Deletes a debit card asynchronously based on the provided card ID.
-        @param id The ID of the card to be deleted.
-        @return A Task representing the asynchronous operation.
-        @throws Exception If the card with the specified ID doesn't exist.
-    */
+    /// <summary>
+    /// Deletes a debit card asynchronously.
+    /// </summary>
+    /// <param name="id">The ID of the debit card to delete.</param>
+    /// <returns>A task representing the asynchronous delete operation.</returns>
     public async Task DeleteCardAsync(long id)
     {
         DebitCardEntity? existedCardEntity = await context.Cards.FirstOrDefaultAsync(card => card.CardId == id);

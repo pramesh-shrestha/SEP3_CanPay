@@ -14,13 +14,11 @@ public class RequestDaoImpl : IRequestDao
         this.context = context;
     }
 
-    /**
-        Creates a request asynchronously.
-        @param requestEntity The RequestEntity object representing the request to be created.
-        @return A Task representing the asynchronous operation. 
-        The task result contains the created RequestEntity object.
-        @throws Exception If an error occurs during the creation process.
-    */
+    /// <summary>
+    /// Creates a request asynchronously.
+    /// </summary>
+    /// <param name="requestEntity">The request entity to create.</param>
+    /// <returns>The created request entity.</returns>
     public async Task<RequestEntity> CreateRequestAsync(RequestEntity requestEntity)
     {
         try
@@ -49,11 +47,10 @@ public class RequestDaoImpl : IRequestDao
         }
     }
 
-    /**
-        Fetches all requests asynchronously.
-        @return A Task representing the asynchronous operation. The task result contains a collection of RequestEntity objects representing all the requests.
-        @throws Exception If an error occurs during the fetch operation or no requests are found.
-    */
+    /// <summary>
+    /// Fetches all requests asynchronously.
+    /// </summary>
+    /// <returns>A collection of request entities.</returns>
     public async Task<ICollection<RequestEntity>> FetchAllRequestsAsync()
     {
         try
@@ -69,12 +66,11 @@ public class RequestDaoImpl : IRequestDao
         }
     }
 
-    /**
-        Fetches a request asynchronously based on the provided request ID.
-        @param id The ID of the request to be fetched.
-        @return A Task representing the asynchronous operation. The task result contains the fetched RequestEntity object.
-        @throws Exception If an error occurs during the fetch operation or no request is found with the specified ID.
-    */
+    /// <summary>
+    /// Fetches a request by its ID asynchronously.
+    /// </summary>
+    /// <param name="id">The ID of the request to fetch.</param>
+    /// <returns>The fetched request entity.</returns>
     public async Task<RequestEntity> FetchRequestByIdAsync(long id)
     {
         try
@@ -89,12 +85,11 @@ public class RequestDaoImpl : IRequestDao
         }
     }
 
-    /**
-        Fetches a request asynchronously based on the provided username.
-        @param username The username associated with the request to be fetched.
-        @return A Task representing the asynchronous operation. The task result contains the fetched RequestEntity object.
-        @throws Exception If an error occurs during the fetch operation or no request is found with the specified username.
-    */
+    /// <summary>
+    /// Fetches a request by username asynchronously.
+    /// </summary>
+    /// <param name="username">The username of the request receiver.</param>
+    /// <returns>The fetched request entity.</returns>
     public async Task<RequestEntity> FetchRequestByUsernameAsync(string username)
     {
         try
@@ -110,12 +105,11 @@ public class RequestDaoImpl : IRequestDao
         }
     }
 
-    /**
-        Updates a request asynchronously.
-        @param requestEntity The RequestEntity object representing the updated request information.
-        @return A Task representing the asynchronous operation. 
-        The task result contains the updated RequestEntity object.
-    */
+    /// <summary>
+    /// Updates a request asynchronously.
+    /// </summary>
+    /// <param name="requestEntity">The request entity to update.</param>
+    /// <returns>The updated request entity.</returns>
     public async Task<RequestEntity> UpdateRequest(RequestEntity requestEntity)
     {
         long currentId = await context.Requests.Where(e => e.Id == requestEntity.Id).Select(e => e.Id)
@@ -140,13 +134,10 @@ public class RequestDaoImpl : IRequestDao
         return requestEntity;
     }
 
-    /**
-        Deletes a request asynchronously based on the provided request ID.
-        @param id The ID of the request to be deleted.
-        @return A Task representing the asynchronous operation.
-        The task result is a boolean indicating whether the deletion was successful (true) or not (false).
-        @throws Exception If an error occurs during the deletion process or no request is found with the specified ID.
-    */
+    /// <summary>
+    /// Deletes a request asynchronously.
+    /// </summary>
+    /// <param name="id">The ID of the request to delete.</param>
     public async Task<bool> DeleteRequest(long id)
     {
         RequestEntity? requestEntity = await context.Requests.FindAsync(id);

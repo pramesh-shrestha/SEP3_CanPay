@@ -13,6 +13,10 @@ public class CanPayDbAccess : DbContext
     public DbSet<RequestEntity> Requests { get; set; }
 
 
+    /// <summary>
+    /// Configures the database context options.
+    /// </summary>
+    /// <param name="optionsBuilder">The options builder.</param>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseNpgsql(
@@ -21,6 +25,10 @@ public class CanPayDbAccess : DbContext
         optionsBuilder.EnableSensitiveDataLogging();
     }
 
+    /// <summary>
+    /// Configures the model for the database context.
+    /// </summary>
+    /// <param name="modelBuilder">The model builder instance to use for configuration.</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("CanPay");

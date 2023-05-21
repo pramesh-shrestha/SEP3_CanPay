@@ -16,6 +16,12 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         this.transactionDao = transactionDao;
     }
 
+    /// <summary>
+    /// Creates a new transaction based on the provided TransactionProtoObj.
+    /// </summary>
+    /// <param name="request">The TransactionProtoObj containing the transaction details.</param>
+    /// <param name="context">The ServerCallContext.</param>
+    /// <returns>The created TransactionProtoObj.</returns>
     public override async Task<TransactionProtoObj> CreateTransactionAsync(TransactionProtoObj request,
         ServerCallContext context)
     {
@@ -35,6 +41,12 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         }
     }
 
+    /// <summary>
+    /// Fetches a transaction by its ID.
+    /// </summary>
+    /// <param name="request">The ID of the transaction to fetch.</param>
+    /// <param name="context">The ServerCallContext.</param>
+    /// <returns>The TransactionProtoObj representing the fetched transaction.</returns>
     public override async Task<TransactionProtoObj> FetchTransactionByIdAsync(Int64Value request,
         ServerCallContext context)
     {
@@ -53,6 +65,12 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         }
     }
 
+    /// <summary>
+    /// Fetches all transactions by the sender's username.
+    /// </summary>
+    /// <param name="request">The username of the sender.</param>
+    /// <param name="context">The ServerCallContext.</param>
+    /// <returns>The TransactionProtoObjList representing the fetched transactions.</returns>
     public override async Task<TransactionProtoObjList> FetchAlLTransactionsBySenderAsync(StringValue request,
         ServerCallContext context)
     {
@@ -71,6 +89,12 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         }
     }
 
+    /// <summary>
+    /// Fetches all transactions by the receiver's username.
+    /// </summary>
+    /// <param name="request">The username of the receiver.</param>
+    /// <param name="context">The ServerCallContext.</param>
+    /// <returns>The TransactionProtoObjList representing the fetched transactions.</returns>
     public override async Task<TransactionProtoObjList> FetchAllTransactionsByReceiverAsync(StringValue request,
         ServerCallContext context)
     {
@@ -89,7 +113,12 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         }
     }
 
-
+    /// <summary>
+    /// Fetches all transactions involving a user.
+    /// </summary>
+    /// <param name="request">The username of the user.</param>
+    /// <param name="context">The ServerCallContext.</param>
+    /// <returns>The TransactionProtoObjList representing the fetched transactions.</returns>
     public override async Task<TransactionProtoObjList> FetchAlLTransactionsInvolvingUserAsync(StringValue request,
         ServerCallContext context)
     {
@@ -108,6 +137,12 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         }
     }
 
+    /// <summary>
+    /// Fetches transactions by date.
+    /// </summary>
+    /// <param name="request">The date of the transactions.</param>
+    /// <param name="context">The ServerCallContext.</param>
+    /// <returns>The TransactionProtoObjList representing the fetched transactions.</returns>
     public override async Task<TransactionProtoObjList> FetchTransactionsByDateAsync(StringValue request,
         ServerCallContext context)
     {
@@ -125,7 +160,12 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         }
     }
 
-
+    /// <summary>
+    /// Fetches transactions by username and date.
+    /// </summary>
+    /// <param name="request">The filter criteria containing the username and date.</param>
+    /// <param name="context">The ServerCallContext.</param>
+    /// <returns>The TransactionProtoObjList representing the fetched transactions.</returns>
     public override async Task<TransactionProtoObjList> FetchTransactionsByUsernameAndDate(
         FilterByUserAndDateProtoObj request, ServerCallContext context)
     {
@@ -143,6 +183,12 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         }
     }
 
+    /// <summary>
+    /// Deletes a transaction by ID.
+    /// </summary>
+    /// <param name="request">The ID of the transaction to delete.</param>
+    /// <param name="context">The ServerCallContext.</param>
+    /// <returns>A BoolValue indicating whether the transaction was deleted successfully.</returns>
     public override async Task<BoolValue> DeleteTransactionAsync(Int64Value request, ServerCallContext context)
     {
         try
@@ -157,6 +203,11 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         }
     }
 
+    /// <summary>
+    /// Converts a TransactionProtoObj to a TransactionEntity.
+    /// </summary>
+    /// <param name="transactionProtoObj">The TransactionProtoObj to convert.</param>
+    /// <returns>The converted TransactionEntity.</returns>
     public static TransactionEntity? FromProtoToEntity(TransactionProtoObj transactionProtoObj)
     {
         TransactionEntity transactionEntity = new TransactionEntity()
@@ -176,6 +227,11 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         return transactionEntity;
     }
 
+    /// <summary>
+    /// Converts a TransactionEntity to a TransactionProtoObj.
+    /// </summary>
+    /// <param name="transactionEntity">The TransactionEntity to convert.</param>
+    /// <returns>The converted TransactionProtoObj.</returns>
     public static TransactionProtoObj FromEntityToProto(TransactionEntity? transactionEntity)
     {
         return new TransactionProtoObj()
@@ -189,6 +245,11 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         };
     }
 
+    /// <summary>
+    /// Converts a FilterByUserAndDateProtoObj to a FilterDto.
+    /// </summary>
+    /// <param name="protoObj">The FilterByUserAndDateProtoObj to convert.</param>
+    /// <returns>The converted FilterDto.</returns>
     public static FilterDto ConvertToFilterDto(FilterByUserAndDateProtoObj protoObj)
     {
         return new FilterDto()
@@ -197,8 +258,12 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             Date = protoObj.Date
         };
     }
-
-
+    
+    /// <summary>
+    /// Converts a collection of TransactionEntity objects to a TransactionProtoObjList.
+    /// </summary>
+    /// <param name="transactionEntities">The collection of TransactionEntity objects to convert.</param>
+    /// <returns>The converted TransactionProtoObjList.</returns>
     private static TransactionProtoObjList ConvertToProtoList(ICollection<TransactionEntity> transactionEntities)
     {
         TransactionProtoObjList transactionProtoObjList = new TransactionProtoObjList

@@ -15,13 +15,11 @@ public class NotificationDaoImpl : INotificationDao
         this.context = context;
     }
 
-    /**
-        Creates a notification asynchronously.
-        @param notificationEntity The NotificationEntity object representing the notification to be created.
-        @return A Task representing the asynchronous operation. 
-        The task result contains the created NotificationEntity object, or null if no notification was created.
-        @throws Exception If an error occurs during the creation process.
-    */
+    /// <summary>
+    /// Creates a notification asynchronously.
+    /// </summary>
+    /// <param name="notificationEntity">The notification entity to create.</param>
+    /// <returns>The created notification entity.</returns>
     public async Task<NotificationEntity?> CreateNotificationAsync(NotificationEntity? notificationEntity)
     {
         try
@@ -51,13 +49,11 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
-    /**
-        Fetches a notification asynchronously based on the provided notification ID.
-        @param requestValue The ID of the notification to be fetched.
-        @return A Task representing the asynchronous operation. The task result contains the fetched NotificationEntity object, or null if no notification was found.
-        @throws Exception If an error occurs during the fetch operation.
-    */
-    
+    /// <summary>
+    /// Fetches a notification by its ID asynchronously.
+    /// </summary>
+    /// <param name="requestValue">The ID of the notification to fetch.</param>
+    /// <returns>The fetched notification entity.</returns>
     public async Task<NotificationEntity?> FetchNotificationByIdAsync(long requestValue)
     {
         try
@@ -75,12 +71,11 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
-    /**
-        Fetches a notification asynchronously based on the provided notification ID.
-        @param requestValue The ID of the notification to be fetched.
-        @return A Task representing the asynchronous operation. The task result contains the fetched NotificationEntity object, or null if no notification was found.
-        @throws Exception If an error occurs during the fetch operation.
-    */
+    /// <summary>
+    /// Fetches all notifications by receiver username asynchronously.
+    /// </summary>
+    /// <param name="username">The username of the receiver.</param>
+    /// <returns>A collection of notification entities.</returns>
     public async Task<ICollection<NotificationEntity?>> FetchAllNotificationsByReceiverAsync(string username)
     {
         try
@@ -88,17 +83,6 @@ public class NotificationDaoImpl : INotificationDao
             ICollection<NotificationEntity?> notificationEntities = await context.Notifications
                 .Include(entity => entity.Sender).Include(entity => entity.Receiver)
                 .Where(e => e.Receiver!.Username!.Equals(username)).Where(entity => !entity.IsRead).ToListAsync();
-
-
-            /*if (notificationEntities.Count != 0)
-            {
-                foreach (NotificationEntity notificationEntity in notificationEntities)
-                {
-                    notificationEntity.IsRead = true;
-                }
-
-                await context.SaveChangesAsync();
-            }*/
 
             return notificationEntities;
         }
@@ -123,26 +107,15 @@ public class NotificationDaoImpl : INotificationDao
         }*/
     }
 
-    /**
-    Marks all notifications in the provided list as read asynchronously.
-    @param notificationEntities A list of NotificationEntity objects representing the notifications to be marked as read.
-    @return A Task representing the asynchronous operation.
-    @throws Exception If an error occurs during the marking process.
-*/
-    
+    /// <summary>
+    /// Marks all notifications as read asynchronously.
+    /// </summary>
+    /// <param name="notificationEntities">The list of notification entities to mark as read.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public async Task MarkAllNotificationsAsReadAsync(List<NotificationEntity> notificationEntities)
     {
         try
         {
-            /*if (notificationEntities.Count != 0)
-            {
-                foreach (NotificationEntity notificationEntity in notificationEntities)
-                {
-                    notificationEntity.IsRead = true;
-                    context.Notifications.Update(notificationEntity);
-                    
-                }
-            }*/
             if (notificationEntities.Count != 0)
             {
                 var existingEntities = await context.Notifications
@@ -164,13 +137,11 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
-    /**
-    Deletes a notification asynchronously based on the provided notification ID.
-    @param notificationId The ID of the notification to be deleted.
-    @return A Task representing the asynchronous operation. The task result is a boolean indicating whether the deletion was successful (true) or not (false).
-    @throws Exception If an error occurs during the deletion process.
-*/
-    
+    /// <summary>
+    /// Deletes a notification asynchronously.
+    /// </summary>
+    /// <param name="notificationId">The ID of the notification to delete.</param>
+    /// <returns>True if the notification was successfully deleted; otherwise, false.</returns>
     public async Task<bool> DeleteNotificationAsync(long notificationId)
     {
         try

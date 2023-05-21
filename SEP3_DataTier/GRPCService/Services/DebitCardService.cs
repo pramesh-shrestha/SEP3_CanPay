@@ -15,6 +15,12 @@ public class DebitCardService : DebitCardProtoService.DebitCardProtoServiceBase
         this.cardDao = cardDao;
     }
 
+    /// <summary>
+    /// Creates a debit card based on the provided proto object.
+    /// </summary>
+    /// <param name="request">The proto object representing the debit card.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>The created debit card as a proto object.</returns>
     public override async Task<DebitCardProtoObj> CreateCard(DebitCardProtoObj request, ServerCallContext context)
     {
         try
@@ -31,6 +37,12 @@ public class DebitCardService : DebitCardProtoService.DebitCardProtoServiceBase
         }
     }
 
+    /// <summary>
+    /// Fetches a debit card by username.
+    /// </summary>
+    /// <param name="request">The username as a string value.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>The debit card as a proto object.</returns>
     public override async Task<DebitCardProtoObj> FetchCardByUsername(StringValue request, ServerCallContext context)
     {
         try
@@ -50,6 +62,12 @@ public class DebitCardService : DebitCardProtoService.DebitCardProtoServiceBase
         return base.UpdateCardDetails(request, context);
     }
 
+    /// <summary>
+    /// Deletes a debit card by ID.
+    /// </summary>
+    /// <param name="request">The ID of the debit card as a 64-bit integer value.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>A boolean value indicating the success of the deletion operation.</returns>
     public override async Task<BoolValue> DeleteCard(Int64Value request, ServerCallContext context)
     {
         try
@@ -64,6 +82,11 @@ public class DebitCardService : DebitCardProtoService.DebitCardProtoServiceBase
         }
     }
 
+    /// <summary>
+    /// Converts a DebitCardProtoObj object to a DebitCardEntity object.
+    /// </summary>
+    /// <param name="debitCard">The DebitCardProtoObj object to convert.</param>
+    /// <returns>A DebitCardEntity object converted from the provided DebitCardProtoObj.</returns>
     public static DebitCardEntity FromProtoToEntity(DebitCardProtoObj debitCard)
     {
         DebitCardEntity cardEntity = new DebitCardEntity
@@ -82,6 +105,11 @@ public class DebitCardService : DebitCardProtoService.DebitCardProtoServiceBase
     }
 
 
+    /// <summary>
+    /// Converts a DebitCardEntity object to a DebitCardProtoObj object.
+    /// </summary>
+    /// <param name="cardEntity">The DebitCardEntity object to convert.</param>
+    /// <returns>A DebitCardProtoObj object converted from the provided DebitCardEntity.</returns>
     public static DebitCardProtoObj FromEntityToProto(DebitCardEntity cardEntity)
     {
         return new DebitCardProtoObj()
