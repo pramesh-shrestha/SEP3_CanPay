@@ -109,8 +109,8 @@
                         @foreach (var transactionEntity in filteredTransaction)
                         {
                             if (searchUsername.IsNullOrEmpty() ||
-                                transactionEntity.Sender.UserName.Contains(searchUsername, StringComparison.OrdinalIgnoreCase) ||
-                                transactionEntity.Receiver.UserName.Contains(searchUsername, StringComparison.OrdinalIgnoreCase))
+                                transactionEntity.Sender.UserName!.Contains(searchUsername, StringComparison.OrdinalIgnoreCase) ||
+                                transactionEntity.Receiver!.UserName!.Contains(searchUsername, StringComparison.OrdinalIgnoreCase))
                             {
                                 <tr>
                                     <td>
@@ -134,12 +134,12 @@
 
                                         @if (transactionEntity.Sender.UserName!.Equals(currentUser))
                                         {
-                                            <img class="amount_icon" src="images/minus.png"/>
+                                            <img class="amount_icon" src="images/minus.png" alt=""/>
                                             <span class="amount" style="color: red">@transactionEntity.Amount</span>
                                         }
                                         else
                                         {
-                                            <img class="amount_icon" src="images/plus.png"/>
+                                            <img class="amount_icon" src="images/plus.png" alt=""/>
                                             <span class="amount" style="color: #00ff00">@transactionEntity.Amount</span>
                                         }
 
@@ -177,22 +177,28 @@
 
 
 @code {
-    private string currentUser;
-    private string selectedDate;
-    private string selectedTransactionType = "all";
+    private string? currentUser;
+
+    // filter properties
+    private string? selectedDate;
+    private string? selectedTransactionType = "all";
     private ICollection<TransactionEntity> filteredTransaction = new List<TransactionEntity>();
     private ICollection<TransactionEntity> transactionList = new List<TransactionEntity>();
-    private string filterDate;
+    private string? filterDate;
 
+    // checkbox
     private bool isHistoryLoaded;
     private bool isCheckBoxSelected = false;
 
     private string searchUsername = "";
 
-    private string errorLabel;
-    private string color;
+    // error styling
+    private string? errorLabel;
+    private string? color;
 
-
+    /// <summary>
+    /// Initializes the component asynchronously.
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
         try
@@ -208,6 +214,9 @@
         }
     }
 
+    /// <summary>
+    /// Loads all transactions involving the current user.
+    /// </summary>
     private async Task LoadAllTransactions()
     {
         isHistoryLoaded = true;
@@ -215,6 +224,9 @@
         ApplyFilter();
     }
 
+    /// <summary>
+    /// Applies the selected filter to the transaction list.
+    /// </summary>
     private void ApplyFilter()
     {
         switch (selectedTransactionType!)
@@ -227,11 +239,10 @@
                 break;
             case "received":
             {
-                filteredTransaction = transactionList.Where(entity => entity.Receiver.UserName!.Equals(currentUser)).ToList();
+                filteredTransaction = transactionList.Where(entity => entity.Receiver!.UserName!.Equals(currentUser)).ToList();
                 break;
             }
         }
-
 
     // filter based on selected date
         if (isCheckBoxSelected && !filterDate.IsNullOrEmpty())
@@ -240,53 +251,32 @@
         }
     }
 
-
-    private async Task ChangeTransactionTypeValue(ChangeEventArgs obj)
+    /// <summary>
+    /// Handles the change event of the transaction type dropdown.
+    /// </summary>
+    private void ChangeTransactionTypeValue(ChangeEventArgs obj)
     {
-        selectedTransactionType = obj.Value.ToString();
+        selectedTransactionType = obj.Value!.ToString();
         ApplyFilter();
     }
 
-    private async Task ChangeSelectedDate(ChangeEventArgs arg)
+    /// <summary>
+    /// Handles the change event of the selected date.
+    /// </summary>
+    private void ChangeSelectedDate(ChangeEventArgs arg)
     {
-        selectedDate = arg.Value.ToString();
-        DateTime parsedDate = DateTime.ParseExact(selectedDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+        selectedDate = arg.Value!.ToString();
+        DateTime parsedDate = DateTime.ParseExact(selectedDate!, "yyyy-MM-dd", CultureInfo.InvariantCulture);
         filterDate = parsedDate.ToString("dd/M/yyyy");
         ApplyFilter();
     }
 
-
+    /// <summary>
+    /// Toggles the value of the checkbox.
+    /// </summary>
     private void ToggleCheckboxValue(ChangeEventArgs e)
     {
         isCheckBoxSelected = (bool)e.Value!;
     }
-
-    /*private async Task LoadReceivedTransactionsByCurrentUser()
-    {
-        Console.WriteLine("received called");
-        selectedTransactionType = "received";
-        transactionList = await TransactionService.FetchAllTransactionByReceiverAsync(currentUser);
-    
-    /*if (selectedDate.HasValue && isCheckBoxSelected)
-        {
-            LoadTransactionsByDate();
-        } #1#
-    } */
-
-
-    /*private async Task LoadSendTransactionsByCurrentUser()
-    {
-        Console.WriteLine("sent called");
-        selectedTransactionType = "sent";
-        transactionList = await TransactionService.FetchAllTransactionBySenderAsync(currentUser);
-    
-        if (selectedDate.HasValue && isCheckBoxSelected)
-        {
-            string filterDate = $"{selectedDate!.Value.Day}/{selectedDate.Value.Month}/{selectedDate.Value.Year}";
-            transactionList = transactionList.Where(entity => entity.Date.Equals(filterDate)).ToList();
-        }
-    }*/
-
-
 
 }
