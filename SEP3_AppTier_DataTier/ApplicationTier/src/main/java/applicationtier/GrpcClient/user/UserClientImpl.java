@@ -36,7 +36,6 @@ public class UserClientImpl implements IUserClient {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override

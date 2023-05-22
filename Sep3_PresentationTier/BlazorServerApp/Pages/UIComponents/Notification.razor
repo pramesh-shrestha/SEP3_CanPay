@@ -199,6 +199,14 @@
         }
     }
 
+    /// <summary>
+    /// Event handler for the timer's elapsed event.
+    /// </summary>
+    private async void TimerElapsedAsync(object? sender, ElapsedEventArgs e)
+    {
+        await UpdateNotifications();
+    }
+
     /// Updates the notifications asynchronously.
     private async Task UpdateNotifications()
     {
@@ -343,12 +351,6 @@
         await InvokeAsync(StateHasChanged);
     }
 
-    /// <summary>
-    /// Event handler for the timer's elapsed event.
-    /// </summary>
-    private async void TimerElapsedAsync(object? sender, ElapsedEventArgs e)
-    {
-        await UpdateNotifications();
-    }
+
 
 }
