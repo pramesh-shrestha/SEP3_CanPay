@@ -9,7 +9,9 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace EFCDataAccess.DAOImplementation;
 
-
+/// <summary>
+/// Implementation of the <see cref="IBillTransactionDao"/> interface for managing bill payment transactions in a database.
+/// </summary>
 public class BillTransactionDaoImpl : IBillTransactionDao {
     private readonly CanPayDbAccess context;
 
