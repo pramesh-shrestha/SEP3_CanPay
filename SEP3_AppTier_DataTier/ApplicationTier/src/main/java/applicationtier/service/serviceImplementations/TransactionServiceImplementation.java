@@ -18,7 +18,8 @@ public class TransactionServiceImplementation implements ITransactionService {
     private IUserClient userClient;
 
     @Autowired
-    public TransactionServiceImplementation(ITransactionClient transactionClient, IUserClient userClient) {
+    public TransactionServiceImplementation(ITransactionClient transactionClient
+        , IUserClient userClient) {
         this.transactionClient = transactionClient;
         this.userClient = userClient;
     }

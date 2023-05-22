@@ -19,6 +19,13 @@ public class RequestController {
         this.requestService = requestService;
     }
 
+    /**
+     * Create a new request.
+     *
+     * @param request The request entity to be created.
+     * @return ResponseEntity containing the created request entity in the response body with HTTP status 200 (OK),
+     *         or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @PostMapping("/request/create")
     public ResponseEntity<RequestEntity> createRequest(@RequestBody RequestEntity request) {
         try {
@@ -29,6 +36,12 @@ public class RequestController {
         }
     }
 
+    /**
+     * Fetch all requests.
+     *
+     * @return ResponseEntity containing a list of all request entities in the response body with HTTP status 200 (OK),
+     *         or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @GetMapping("/request")
     public ResponseEntity<List<RequestEntity>> fetchAllRequest() {
         try {
@@ -39,6 +52,13 @@ public class RequestController {
         }
     }
 
+    /**
+     * Fetch a request by ID.
+     *
+     * @param id The ID of the request to be fetched.
+     * @return ResponseEntity containing the request entity with the specified ID in the response body
+     *         with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @GetMapping("/request/id/{id}")
     public ResponseEntity<RequestEntity> fetchRequestById(@PathVariable("id") Long id) {
         try {
@@ -49,6 +69,13 @@ public class RequestController {
         }
     }
 
+    /**
+     * Fetch a request by username.
+     *
+     * @param username The username of the request.
+     * @return ResponseEntity containing the request entity with the specified username in the response body
+     *         with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @GetMapping("/request/username/{username}")
     public ResponseEntity<RequestEntity> fetchRequestByUsername(@PathVariable("username") String username) {
         try {
@@ -58,6 +85,13 @@ public class RequestController {
         }
     }
 
+    /**
+     * Update a request.
+     *
+     * @param request The request entity to be updated.
+     * @return ResponseEntity containing the updated request entity in the response body with HTTP status 200 (OK),
+     *         or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @PostMapping("/request/update")
     public ResponseEntity<RequestEntity> updateRequest(@RequestBody RequestEntity request) {
         try {
@@ -67,6 +101,13 @@ public class RequestController {
         }
     }
 
+    /**
+     * Delete a request by ID.
+     *
+     * @param id The ID of the request to be deleted.
+     * @return ResponseEntity with a success message in the response body with HTTP status 200 (OK),
+     *         or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @DeleteMapping("/request/delete/{id}")
     public ResponseEntity<String> deleteRequest(@PathVariable("id") Long id) {
         try {

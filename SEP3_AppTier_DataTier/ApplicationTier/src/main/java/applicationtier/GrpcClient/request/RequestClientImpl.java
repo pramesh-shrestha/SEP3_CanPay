@@ -20,6 +20,11 @@ public class RequestClientImpl implements IRequestClient {
 
     private RequestProtoServiceGrpc.RequestProtoServiceBlockingStub requestProtoBlockingStub;
 
+    /**
+     * Retrieves the RequestProtoServiceBlockingStub instance.
+     *
+     * @return The RequestProtoServiceBlockingStub instance.
+     */
     private RequestProtoServiceGrpc.RequestProtoServiceBlockingStub getRequestBlockingStub() {
         if (requestProtoBlockingStub == null) {
             ManagedChannel channel = ManagedChannelProvider.getChannel();
@@ -28,6 +33,13 @@ public class RequestClientImpl implements IRequestClient {
         return requestProtoBlockingStub;
     }
 
+    /**
+     * Creates a new request.
+     *
+     * @param requestEntity The RequestEntity object representing the request.
+     * @return The created RequestEntity object.
+     * @throws RuntimeException If an exception occurs during the creation process.
+     */
     @Override
     public RequestEntity createRequest(RequestEntity requestEntity) {
         try {
@@ -40,6 +52,12 @@ public class RequestClientImpl implements IRequestClient {
         }
     }
 
+    /**
+     * Fetches all requests.
+     *
+     * @return A list of RequestEntity objects representing all the requests.
+     * @throws RuntimeException If an exception occurs during the fetch process.
+     */
     @Override
     public List<RequestEntity> FetchAllRequest() {
         try {
@@ -56,6 +74,13 @@ public class RequestClientImpl implements IRequestClient {
         }
     }
 
+    /**
+     * Fetches a request by its ID.
+     *
+     * @param id The ID of the request to fetch.
+     * @return The RequestEntity object representing the fetched request.
+     * @throws RuntimeException If an exception occurs during the fetch process.
+     */
     @Override
     public RequestEntity FetchRequestById(Long id) {
         try {
@@ -67,6 +92,13 @@ public class RequestClientImpl implements IRequestClient {
         }
     }
 
+    /**
+     * Fetches a request by username.
+     *
+     * @param username The username of the request to fetch.
+     * @return The RequestEntity object representing the fetched request.
+     * @throws RuntimeException If an exception occurs during the fetch process.
+     */
     @Override
     public RequestEntity FetchRequestByUsername(String username) {
         try {
@@ -77,6 +109,13 @@ public class RequestClientImpl implements IRequestClient {
         }
     }
 
+    /**
+     * Updates a request.
+     *
+     * @param requestEntity The RequestEntity object representing the request to update.
+     * @return The updated RequestEntity object.
+     * @throws RuntimeException If an exception occurs during the update process.
+     */
     @Override
     public RequestEntity UpdateRequest(RequestEntity requestEntity) {
         try {
@@ -87,6 +126,13 @@ public class RequestClientImpl implements IRequestClient {
         }
     }
 
+    /**
+     * Deletes a request by its ID.
+     *
+     * @param id The ID of the request to delete.
+     * @return true if the request was successfully deleted, false otherwise.
+     * @throws RuntimeException If an exception occurs during the delete process.
+     */
     @Override
     public boolean DeleteRequest(Long id) {
         try {
@@ -97,7 +143,12 @@ public class RequestClientImpl implements IRequestClient {
         }
     }
 
-    //from entity to proto
+    /**
+     * Converts a Request.RequestProtoObj object to a RequestEntity object.
+     *
+     * @param requestProtoObj The Request.RequestProtoObj object to convert.
+     * @return The converted RequestEntity object.
+     */
     public static RequestEntity fromProtoObjToEntity(Request.RequestProtoObj requestProtoObj) {
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setAmount(requestProtoObj.getAmount());
@@ -114,7 +165,12 @@ public class RequestClientImpl implements IRequestClient {
         return requestEntity;
     }
 
-    //from entity to proto
+    /**
+     * Converts a RequestEntity object to a Request.RequestProtoObj object.
+     *
+     * @param request The RequestEntity object to convert.
+     * @return The converted Request.RequestProtoObj object.
+     */
     public static Request.RequestProtoObj fromEntityToProtoObj(RequestEntity request) {
         Request.RequestProtoObj.Builder requestBuilder = Request.RequestProtoObj.newBuilder()
                 .setAmount(request.getAmount())
