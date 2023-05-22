@@ -19,7 +19,14 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    //Create transaction
+
+    /**
+     * Create a new transaction.
+     *
+     * @param transaction The transaction entity to be created.
+     * @return ResponseEntity containing the created transaction entity in the response body with HTTP status 200 (OK),
+     *         or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @PostMapping("/transaction/create")
     public ResponseEntity<TransactionEntity> createTransaction(@RequestBody TransactionEntity transaction) {
         try {
@@ -31,6 +38,13 @@ public class TransactionController {
         }
     }
 
+    /**
+     * Fetch a transaction by ID.
+     *
+     * @param id The ID of the transaction to be fetched.
+     * @return ResponseEntity containing the transaction entity with the specified ID in the response body
+     *         with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @GetMapping("/transaction/{id}")
     public ResponseEntity<TransactionEntity> fetchTransactionById(@PathVariable("id") Long id) {
         try {
@@ -40,6 +54,13 @@ public class TransactionController {
         }
     }
 
+    /**
+     * Fetch all transactions by sender username.
+     *
+     * @param senderUsername The username of the sender.
+     * @return ResponseEntity containing a list of transaction entities with the specified sender username
+     *         in the response body with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @GetMapping("/transaction/sender/{senderUsername}")
     public ResponseEntity<List<TransactionEntity>> fetchAllTransactionBySender(@PathVariable("senderUsername") String senderUsername) {
         try {
@@ -49,6 +70,13 @@ public class TransactionController {
         }
     }
 
+    /**
+     * Fetch all transactions by receiver username.
+     *
+     * @param receiverUsername The username of the receiver.
+     * @return ResponseEntity containing a list of transaction entities with the specified receiver username
+     *         in the response body with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @GetMapping("/transaction/receiver/{receiverUsername}")
     public ResponseEntity<List<TransactionEntity>> fetchAllTransactionByReceiver(@PathVariable("receiverUsername") String receiverUsername) {
 
@@ -59,6 +87,13 @@ public class TransactionController {
         }
     }
 
+    /**
+     * Fetch all transactions involving a user.
+     *
+     * @param username The username of the user.
+     * @return ResponseEntity containing a list of transaction entities involving the specified user
+     *         in the response body with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @GetMapping("/transaction/user/{username}")
     public ResponseEntity<List<TransactionEntity>> fetchAllTransactionInvolvingUser(@PathVariable("username") String username) {
 
@@ -69,6 +104,13 @@ public class TransactionController {
         }
     }
 
+    /**
+     * Fetch transactions by date.
+     *
+     * @param date The date of the transactions.
+     * @return ResponseEntity containing a list of transaction entities with the specified date
+     *         in the response body with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @GetMapping("/transaction/date/{date}")
     public ResponseEntity<List<TransactionEntity>> fetchTransactionByDate(@PathVariable("date") String date) {
 
@@ -78,6 +120,15 @@ public class TransactionController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    /**
+     * Fetch transactions by date and username.
+     *
+     * @param date     The date of the transactions.
+     * @param username The username of the user.
+     * @return ResponseEntity containing a list of transaction entities with the specified date and username
+     *         in the response body with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @GetMapping("/transaction/date/{date}/username/{username}")
     public ResponseEntity<List<TransactionEntity>> fetchTransactionsByDateAndUsername(
             @PathVariable String date,
@@ -92,6 +143,13 @@ public class TransactionController {
     }
 
 
+    /**
+     * Delete a transaction by ID.
+     *
+     * @param id The ID of the transaction to be deleted.
+     * @return ResponseEntity with a success message in the response body with HTTP status 200 (OK),
+     *         or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @DeleteMapping("/transaction/delete/{id}")
     public ResponseEntity<String> deleterTransaction(@PathVariable("id") Long id) {
 
