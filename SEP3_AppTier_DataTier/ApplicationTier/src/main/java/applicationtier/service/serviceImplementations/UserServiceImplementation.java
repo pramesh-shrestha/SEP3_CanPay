@@ -86,14 +86,14 @@ public class UserServiceImplementation implements IUserService {
      * @return The fetched user entity.
      * @throws RuntimeException If an error occurs during the fetching process.
      */
-    @Override
+    /*@Override
     public UserEntity fetchUserById(Long id) {
         try {
             return userClient.FetchUserById(id);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
-    }
+    }*/
 
     /**
      * Fetches a user by their username.
@@ -137,14 +137,14 @@ public class UserServiceImplementation implements IUserService {
      * @return True if the deletion is successful, false otherwise.
      * @throws RuntimeException If an error occurs during the deletion process.
      */
-    @Override
+    /*@Override
     public boolean deleteUser(Long id) {
         try {
             return userClient.deleteUser(id);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
-    }
+    }*/
 
 
     /**

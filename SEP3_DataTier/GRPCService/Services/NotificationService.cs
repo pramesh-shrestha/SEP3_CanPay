@@ -96,7 +96,7 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
         return new Empty();
     }
 
-    public override async Task<BoolValue> DeleteNotificationAsync(Int64Value request, ServerCallContext context)
+    /*public override async Task<BoolValue> DeleteNotificationAsync(Int64Value request, ServerCallContext context)
     {
         try
         {
@@ -108,7 +108,7 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.Aborted, e.Message));
         }
-    }
+    }*/
 
     public static NotificationEntity? FromProtoToEntity(NotificationProtoObj notificationProtoObj)
     {

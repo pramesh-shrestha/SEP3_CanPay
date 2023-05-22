@@ -42,7 +42,7 @@ public class RequestDaoImpl : IRequestDao
         }
     }
 
-    public async Task<ICollection<RequestEntity?>> FetchAllRequestsAsync()
+    /*public async Task<ICollection<RequestEntity?>> FetchAllRequestsAsync()
     {
         try
         {
@@ -55,7 +55,7 @@ public class RequestDaoImpl : IRequestDao
             Console.WriteLine(e);
             throw new Exception("No request made.");
         }
-    }
+    }*/
 
     public async Task<RequestEntity?> FetchRequestByIdAsync(long id)
     {
@@ -74,7 +74,7 @@ public class RequestDaoImpl : IRequestDao
         }
     }
 
-    public async Task<RequestEntity?> FetchRequestByUsernameAsync(string username)
+    /*public async Task<RequestEntity?> FetchRequestByUsernameAsync(string username)
     {
         try
         {
@@ -87,7 +87,7 @@ public class RequestDaoImpl : IRequestDao
             Console.WriteLine(e);
             throw new Exception($"No request with username: {username} found.");
         }
-    }
+    }*/
 
     public async Task<RequestEntity?> UpdateRequest(RequestEntity? requestEntity)
     {
@@ -113,7 +113,7 @@ public class RequestDaoImpl : IRequestDao
         return requestEntity;
     }
 
-    public async Task<bool> DeleteRequest(long id)
+    /*public async Task<bool> DeleteRequest(long id)
     {
         RequestEntity? requestEntity = await context.Requests.FindAsync(id);
         if (requestEntity == null)
@@ -123,5 +123,5 @@ public class RequestDaoImpl : IRequestDao
 
         context.Requests.Remove(requestEntity);
         return true;
-    }
+    }*/
 }

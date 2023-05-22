@@ -37,15 +37,6 @@ public class RequestProtoServiceGrpc {
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObj.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObj.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.google.protobuf.Empty,
-      applicationtier.protobuf.Request.RequestProtoObjList> METHOD_FETCH_ALL_REQUESTS_ASYNC =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "RequestProtoService", "fetchAllRequestsAsync"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Empty.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObjList.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<com.google.protobuf.Int64Value,
       applicationtier.protobuf.Request.RequestProtoObj> METHOD_FETCH_REQUEST_BY_ID_ASYNC =
       io.grpc.MethodDescriptor.create(
@@ -53,15 +44,6 @@ public class RequestProtoServiceGrpc {
           generateFullMethodName(
               "RequestProtoService", "fetchRequestByIdAsync"),
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int64Value.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObj.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.google.protobuf.StringValue,
-      applicationtier.protobuf.Request.RequestProtoObj> METHOD_FETCH_REQUEST_BY_USERNAME =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "RequestProtoService", "fetchRequestByUsername"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.StringValue.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObj.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<applicationtier.protobuf.Request.RequestProtoObj,
@@ -72,15 +54,6 @@ public class RequestProtoServiceGrpc {
               "RequestProtoService", "updateRequestAsync"),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObj.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Request.RequestProtoObj.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.google.protobuf.Int64Value,
-      com.google.protobuf.BoolValue> METHOD_DELETE_REQUEST_ASYNC =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "RequestProtoService", "deleteRequestAsync"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int64Value.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.BoolValue.getDefaultInstance()));
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -117,13 +90,9 @@ public class RequestProtoServiceGrpc {
     }
 
     /**
-     */
-    public void fetchAllRequestsAsync(com.google.protobuf.Empty request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Request.RequestProtoObjList> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_FETCH_ALL_REQUESTS_ASYNC, responseObserver);
-    }
-
-    /**
+     * <pre>
+     *  rpc fetchAllRequestsAsync(google.protobuf.Empty) returns (RequestProtoObjList);
+     * </pre>
      */
     public void fetchRequestByIdAsync(com.google.protobuf.Int64Value request,
         io.grpc.stub.StreamObserver<applicationtier.protobuf.Request.RequestProtoObj> responseObserver) {
@@ -131,24 +100,13 @@ public class RequestProtoServiceGrpc {
     }
 
     /**
-     */
-    public void fetchRequestByUsername(com.google.protobuf.StringValue request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Request.RequestProtoObj> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_FETCH_REQUEST_BY_USERNAME, responseObserver);
-    }
-
-    /**
+     * <pre>
+     *  rpc fetchRequestByUsername(google.protobuf.StringValue) returns (RequestProtoObj);
+     * </pre>
      */
     public void updateRequestAsync(applicationtier.protobuf.Request.RequestProtoObj request,
         io.grpc.stub.StreamObserver<applicationtier.protobuf.Request.RequestProtoObj> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_UPDATE_REQUEST_ASYNC, responseObserver);
-    }
-
-    /**
-     */
-    public void deleteRequestAsync(com.google.protobuf.Int64Value request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_DELETE_REQUEST_ASYNC, responseObserver);
     }
 
     @java.lang.Override public io.grpc.ServerServiceDefinition bindService() {
@@ -161,13 +119,6 @@ public class RequestProtoServiceGrpc {
                 applicationtier.protobuf.Request.RequestProtoObj>(
                   this, METHODID_CREATE_REQUEST_ASYNC)))
           .addMethod(
-            METHOD_FETCH_ALL_REQUESTS_ASYNC,
-            asyncUnaryCall(
-              new MethodHandlers<
-                com.google.protobuf.Empty,
-                applicationtier.protobuf.Request.RequestProtoObjList>(
-                  this, METHODID_FETCH_ALL_REQUESTS_ASYNC)))
-          .addMethod(
             METHOD_FETCH_REQUEST_BY_ID_ASYNC,
             asyncUnaryCall(
               new MethodHandlers<
@@ -175,26 +126,12 @@ public class RequestProtoServiceGrpc {
                 applicationtier.protobuf.Request.RequestProtoObj>(
                   this, METHODID_FETCH_REQUEST_BY_ID_ASYNC)))
           .addMethod(
-            METHOD_FETCH_REQUEST_BY_USERNAME,
-            asyncUnaryCall(
-              new MethodHandlers<
-                com.google.protobuf.StringValue,
-                applicationtier.protobuf.Request.RequestProtoObj>(
-                  this, METHODID_FETCH_REQUEST_BY_USERNAME)))
-          .addMethod(
             METHOD_UPDATE_REQUEST_ASYNC,
             asyncUnaryCall(
               new MethodHandlers<
                 applicationtier.protobuf.Request.RequestProtoObj,
                 applicationtier.protobuf.Request.RequestProtoObj>(
                   this, METHODID_UPDATE_REQUEST_ASYNC)))
-          .addMethod(
-            METHOD_DELETE_REQUEST_ASYNC,
-            asyncUnaryCall(
-              new MethodHandlers<
-                com.google.protobuf.Int64Value,
-                com.google.protobuf.BoolValue>(
-                  this, METHODID_DELETE_REQUEST_ASYNC)))
           .build();
     }
   }
@@ -226,14 +163,9 @@ public class RequestProtoServiceGrpc {
     }
 
     /**
-     */
-    public void fetchAllRequestsAsync(com.google.protobuf.Empty request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Request.RequestProtoObjList> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_FETCH_ALL_REQUESTS_ASYNC, getCallOptions()), request, responseObserver);
-    }
-
-    /**
+     * <pre>
+     *  rpc fetchAllRequestsAsync(google.protobuf.Empty) returns (RequestProtoObjList);
+     * </pre>
      */
     public void fetchRequestByIdAsync(com.google.protobuf.Int64Value request,
         io.grpc.stub.StreamObserver<applicationtier.protobuf.Request.RequestProtoObj> responseObserver) {
@@ -242,27 +174,14 @@ public class RequestProtoServiceGrpc {
     }
 
     /**
-     */
-    public void fetchRequestByUsername(com.google.protobuf.StringValue request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Request.RequestProtoObj> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_FETCH_REQUEST_BY_USERNAME, getCallOptions()), request, responseObserver);
-    }
-
-    /**
+     * <pre>
+     *  rpc fetchRequestByUsername(google.protobuf.StringValue) returns (RequestProtoObj);
+     * </pre>
      */
     public void updateRequestAsync(applicationtier.protobuf.Request.RequestProtoObj request,
         io.grpc.stub.StreamObserver<applicationtier.protobuf.Request.RequestProtoObj> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_UPDATE_REQUEST_ASYNC, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void deleteRequestAsync(com.google.protobuf.Int64Value request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_DELETE_REQUEST_ASYNC, getCallOptions()), request, responseObserver);
     }
   }
 
@@ -292,13 +211,9 @@ public class RequestProtoServiceGrpc {
     }
 
     /**
-     */
-    public applicationtier.protobuf.Request.RequestProtoObjList fetchAllRequestsAsync(com.google.protobuf.Empty request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_FETCH_ALL_REQUESTS_ASYNC, getCallOptions(), request);
-    }
-
-    /**
+     * <pre>
+     *  rpc fetchAllRequestsAsync(google.protobuf.Empty) returns (RequestProtoObjList);
+     * </pre>
      */
     public applicationtier.protobuf.Request.RequestProtoObj fetchRequestByIdAsync(com.google.protobuf.Int64Value request) {
       return blockingUnaryCall(
@@ -306,24 +221,13 @@ public class RequestProtoServiceGrpc {
     }
 
     /**
-     */
-    public applicationtier.protobuf.Request.RequestProtoObj fetchRequestByUsername(com.google.protobuf.StringValue request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_FETCH_REQUEST_BY_USERNAME, getCallOptions(), request);
-    }
-
-    /**
+     * <pre>
+     *  rpc fetchRequestByUsername(google.protobuf.StringValue) returns (RequestProtoObj);
+     * </pre>
      */
     public applicationtier.protobuf.Request.RequestProtoObj updateRequestAsync(applicationtier.protobuf.Request.RequestProtoObj request) {
       return blockingUnaryCall(
           getChannel(), METHOD_UPDATE_REQUEST_ASYNC, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public com.google.protobuf.BoolValue deleteRequestAsync(com.google.protobuf.Int64Value request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_DELETE_REQUEST_ASYNC, getCallOptions(), request);
     }
   }
 
@@ -354,14 +258,9 @@ public class RequestProtoServiceGrpc {
     }
 
     /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.Request.RequestProtoObjList> fetchAllRequestsAsync(
-        com.google.protobuf.Empty request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_FETCH_ALL_REQUESTS_ASYNC, getCallOptions()), request);
-    }
-
-    /**
+     * <pre>
+     *  rpc fetchAllRequestsAsync(google.protobuf.Empty) returns (RequestProtoObjList);
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.Request.RequestProtoObj> fetchRequestByIdAsync(
         com.google.protobuf.Int64Value request) {
@@ -370,36 +269,20 @@ public class RequestProtoServiceGrpc {
     }
 
     /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.Request.RequestProtoObj> fetchRequestByUsername(
-        com.google.protobuf.StringValue request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_FETCH_REQUEST_BY_USERNAME, getCallOptions()), request);
-    }
-
-    /**
+     * <pre>
+     *  rpc fetchRequestByUsername(google.protobuf.StringValue) returns (RequestProtoObj);
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.Request.RequestProtoObj> updateRequestAsync(
         applicationtier.protobuf.Request.RequestProtoObj request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_UPDATE_REQUEST_ASYNC, getCallOptions()), request);
     }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.BoolValue> deleteRequestAsync(
-        com.google.protobuf.Int64Value request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_DELETE_REQUEST_ASYNC, getCallOptions()), request);
-    }
   }
 
   private static final int METHODID_CREATE_REQUEST_ASYNC = 0;
-  private static final int METHODID_FETCH_ALL_REQUESTS_ASYNC = 1;
-  private static final int METHODID_FETCH_REQUEST_BY_ID_ASYNC = 2;
-  private static final int METHODID_FETCH_REQUEST_BY_USERNAME = 3;
-  private static final int METHODID_UPDATE_REQUEST_ASYNC = 4;
-  private static final int METHODID_DELETE_REQUEST_ASYNC = 5;
+  private static final int METHODID_FETCH_REQUEST_BY_ID_ASYNC = 1;
+  private static final int METHODID_UPDATE_REQUEST_ASYNC = 2;
 
   private static class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -422,25 +305,13 @@ public class RequestProtoServiceGrpc {
           serviceImpl.createRequestAsync((applicationtier.protobuf.Request.RequestProtoObj) request,
               (io.grpc.stub.StreamObserver<applicationtier.protobuf.Request.RequestProtoObj>) responseObserver);
           break;
-        case METHODID_FETCH_ALL_REQUESTS_ASYNC:
-          serviceImpl.fetchAllRequestsAsync((com.google.protobuf.Empty) request,
-              (io.grpc.stub.StreamObserver<applicationtier.protobuf.Request.RequestProtoObjList>) responseObserver);
-          break;
         case METHODID_FETCH_REQUEST_BY_ID_ASYNC:
           serviceImpl.fetchRequestByIdAsync((com.google.protobuf.Int64Value) request,
-              (io.grpc.stub.StreamObserver<applicationtier.protobuf.Request.RequestProtoObj>) responseObserver);
-          break;
-        case METHODID_FETCH_REQUEST_BY_USERNAME:
-          serviceImpl.fetchRequestByUsername((com.google.protobuf.StringValue) request,
               (io.grpc.stub.StreamObserver<applicationtier.protobuf.Request.RequestProtoObj>) responseObserver);
           break;
         case METHODID_UPDATE_REQUEST_ASYNC:
           serviceImpl.updateRequestAsync((applicationtier.protobuf.Request.RequestProtoObj) request,
               (io.grpc.stub.StreamObserver<applicationtier.protobuf.Request.RequestProtoObj>) responseObserver);
-          break;
-        case METHODID_DELETE_REQUEST_ASYNC:
-          serviceImpl.deleteRequestAsync((com.google.protobuf.Int64Value) request,
-              (io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -461,11 +332,8 @@ public class RequestProtoServiceGrpc {
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     return new io.grpc.ServiceDescriptor(SERVICE_NAME,
         METHOD_CREATE_REQUEST_ASYNC,
-        METHOD_FETCH_ALL_REQUESTS_ASYNC,
         METHOD_FETCH_REQUEST_BY_ID_ASYNC,
-        METHOD_FETCH_REQUEST_BY_USERNAME,
-        METHOD_UPDATE_REQUEST_ASYNC,
-        METHOD_DELETE_REQUEST_ASYNC);
+        METHOD_UPDATE_REQUEST_ASYNC);
   }
 
 }

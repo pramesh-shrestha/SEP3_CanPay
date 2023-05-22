@@ -5,8 +5,6 @@ import applicationtier.entity.RequestEntity;
 import applicationtier.service.serviceInterfaces.IRequestService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class RequestServiceImplementation implements IRequestService {
 
@@ -38,14 +36,14 @@ public class RequestServiceImplementation implements IRequestService {
      * @return The list of fetched request entities.
      * @throws RuntimeException If an error occurs during the fetching process.
      */
-    @Override
+    /*@Override
     public List<RequestEntity> fetchAllRequest() {
         try {
             return requestClient.FetchAllRequest();
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
-    }
+    }*/
 
     /**
      * Fetches a request by its ID.
@@ -73,14 +71,14 @@ public class RequestServiceImplementation implements IRequestService {
      * @return The fetched request entity.
      * @throws RuntimeException If an error occurs during the fetching process.
      */
-    @Override
+   /* @Override
     public RequestEntity fetchRequestByUsername(String username) {
         try {
             return requestClient.FetchRequestByUsername(username);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
-    }
+    }*/
 
     /**
      * Updates a request.
@@ -105,7 +103,7 @@ public class RequestServiceImplementation implements IRequestService {
      * @return True if the deletion is successful, false otherwise.
      * @throws RuntimeException If an error occurs during the deletion process.
      */
-    @Override
+    /*@Override
     public boolean deleteRequest(Long id) {
         try {
             return requestClient.DeleteRequest(id);
@@ -113,6 +111,6 @@ public class RequestServiceImplementation implements IRequestService {
             throw new RuntimeException(e.getMessage());
         }
     }
-
+*/
 
 }

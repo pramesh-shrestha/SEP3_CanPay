@@ -13,6 +13,7 @@ namespace EFCDataAccess.DAOImplementation;
 public class TransactionDaoImpl : ITransactionDao
 {
     private readonly CanPayDbAccess context;
+    private ITransactionDao transactionDaoImplementation;
 
     public TransactionDaoImpl(CanPayDbAccess context)
     {
@@ -29,17 +30,6 @@ public class TransactionDaoImpl : ITransactionDao
     {
         try
         {
-            /*EntityEntry<UserEntity?> senderEntity = context.Users.Attach(transaction.Sender);
-            EntityEntry<UserEntity?> receiverEntity = context.Users.Attach(transaction.Receiver);
-            EntityEntry<DebitCardEntity> senderCardEntity = context.Cards.Attach(transaction.Sender!.Card);
-            EntityEntry<DebitCardEntity> receiverCardEntity = context.Cards.Attach(transaction.Receiver!.Card);
-
-
-            transaction.Sender = senderEntity.Entity;
-            transaction.Sender!.Card = senderCardEntity.Entity;
-            transaction.Receiver = receiverEntity.Entity;
-            transaction.Receiver!.Card = receiverCardEntity.Entity;*/
-
             // Attach the sender and receiver entities to the context if they are not already attached
             if (!context.Users.Local.Contains(transaction.Sender))
             {
@@ -67,12 +57,13 @@ public class TransactionDaoImpl : ITransactionDao
     }
 
 
+    // ReSharper disable once InvalidXmlDocComment
     /// <summary>
     /// Fetches a transaction by its unique identifier from the database.
     /// </summary>
     /// <param name="id">The unique identifier of the transaction to fetch.</param>
     /// <returns>The transaction entity, or null if it does not exist.</returns>
-    public async Task<TransactionEntity?> FetchTransactionByIdAsync(long id)
+    /*public async Task<TransactionEntity?> FetchTransactionByIdAsync(long id)
     {
         try
         {
@@ -84,7 +75,7 @@ public class TransactionDaoImpl : ITransactionDao
             Console.WriteLine(e);
             throw new Exception($"Transaction with {id} not found!!");
         }
-    }
+    }*/
 
 
     /// <summary>
@@ -92,7 +83,7 @@ public class TransactionDaoImpl : ITransactionDao
     /// </summary>
     /// <param name="senderUsername">The username of the sender to filter transactions by.</param>
     /// <returns>A collection of transaction entities sent by the given user.</returns>
-    public async Task<ICollection<TransactionEntity>> FetchAlLTransactionsBySenderAsync(string senderUsername)
+    /*public async Task<ICollection<TransactionEntity>> FetchAlLTransactionsBySenderAsync(string senderUsername)
     {
         // should include information about sender and receiver user
         ICollection<TransactionEntity> transactionBySender = await context.Transactions.Include(t => t.Sender)
@@ -102,10 +93,10 @@ public class TransactionDaoImpl : ITransactionDao
         /*if (transactionBySender.Count == 0)
         {
             throw new Exception($"No Transactions Sent By {senderUsername}");
-        }*/
+        }#1#
 
         return transactionBySender;
-    }
+    }*/
 
 
     /// <summary>
@@ -113,7 +104,7 @@ public class TransactionDaoImpl : ITransactionDao
     /// </summary>
     /// <param name="receiverUsername">The username of the receiver to filter transactions by.</param>
     /// <returns>A collection of transaction entities received by the given user.</returns>
-    public async Task<ICollection<TransactionEntity>> FetchAllTransactionsByReceiverAsync(string receiverUsername)
+    /*public async Task<ICollection<TransactionEntity>> FetchAllTransactionsByReceiverAsync(string receiverUsername)
     {
         // should include information about sender and receiver user
         ICollection<TransactionEntity> transactionByReceiver = await context.Transactions.Include(t => t.Sender)
@@ -123,10 +114,10 @@ public class TransactionDaoImpl : ITransactionDao
         /*if (transactionByReceiver.Count == 0)
         {
             throw new Exception($"No Transaction Received By {receiverUsername}");
-        }*/
+        }#1#
 
         return transactionByReceiver;
-    }
+    }*/
 
 
     /// <summary>
@@ -136,35 +127,23 @@ public class TransactionDaoImpl : ITransactionDao
     /// <returns>A collection of transaction entities involving the given user.</returns>
     public async Task<ICollection<TransactionEntity>> FetchAlLTransactionsInvolvingUserAsync(string username)
     {
-        /*// Get transactions where the user is sender
-        ICollection<TransactionEntity> sentTransaction = await FetchAlLTransactionsBySenderAsync(username);
-
-        // Get transactions where the user is receiver
-        ICollection<TransactionEntity> receivedTransaction = await FetchAllTransactionsByReceiverAsync(username);
-
-        ICollection<TransactionEntity> transactions = sentTransaction.Concat(receivedTransaction).ToList();*/
-
         ICollection<TransactionEntity?> transactions = await context.Transactions
             .AsNoTracking()
             .Include(entity => entity.Sender).Include(entity => entity.Receiver)
             .Where(entity => entity.Receiver.Username.Equals(username) || entity.Sender.Username.Equals(username))
             .ToListAsync();
 
-        /*if (transactions.Count == 0)
-        {
-            throw new Exception($"No Transaction Involving {username}");
-        }*/
-
         return transactions;
     }
 
 
+    // ReSharper disable once InvalidXmlDocComment
     /// <summary>
     /// Fetches all transactions made on a specific date from the database.
     /// </summary>
     /// <param name="date">The date to filter transactions by.</param>
     /// <returns>A collection of transaction entities made on the given date.</returns>
-    public async Task<ICollection<TransactionEntity?>> FetchTransactionsByDateAsync(string date)
+    /*public async Task<ICollection<TransactionEntity?>> FetchTransactionsByDateAsync(string date)
     {
         List<TransactionEntity?> transactionByDate =
             await context.Transactions.Where(entity => entity.Date.Equals(date)).ToListAsync();
@@ -175,10 +154,10 @@ public class TransactionDaoImpl : ITransactionDao
         }
 
         return transactionByDate;
-    }
+    }*/
 
 
-    public async Task<ICollection<TransactionEntity?>> FetchTransactionByUsernameAndDateAsync(FilterDto filterDto)
+    /*public async Task<ICollection<TransactionEntity?>> FetchTransactionByUsernameAndDateAsync(FilterDto filterDto)
     {
         List<TransactionEntity?> transactionByDateAndReceiver =
             await context.Transactions.Where(entity => entity.Date.Equals(filterDto.Date))
@@ -190,7 +169,7 @@ public class TransactionDaoImpl : ITransactionDao
         }
 
         return transactionByDateAndReceiver;
-    }
+    }*/
 
 
     /// <summary>
@@ -198,7 +177,7 @@ public class TransactionDaoImpl : ITransactionDao
     /// </summary>
     /// <param name="id">The unique identifier of the transaction to delete.</param>
     /// <returns>A boolean indicating whether the transaction was successfully deleted.</returns>
-    public async Task<bool> DeleteTransactionAsync(long id)
+    /*public async Task<bool> DeleteTransactionAsync(long id)
     {
         TransactionEntity? byIdAsync = await FetchTransactionByIdAsync(id);
 
@@ -211,11 +190,5 @@ public class TransactionDaoImpl : ITransactionDao
         context.Transactions.Remove(byIdAsync);
         await context.SaveChangesAsync();
         return true;
-    }
-
-
-    public Task<ICollection<TransactionEntity?>> fetchTransactionByUsernameAndDate(FilterDto filterDto)
-    {
-        throw new NotImplementedException();
-    }
+    }*/
 }

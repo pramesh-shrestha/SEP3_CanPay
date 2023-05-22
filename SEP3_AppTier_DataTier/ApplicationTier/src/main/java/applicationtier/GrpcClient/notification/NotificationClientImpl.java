@@ -155,7 +155,7 @@ public class NotificationClientImpl implements INotificationClient {
      * @return true if the deletion is successful, false otherwise.
      * @throws RuntimeException if an exception occurs during the deletion process.
      */
-    @Override
+    /*@Override
     public boolean deleteNotification(Long id) {
         try {
             BoolValue notificationProtoObj = getNotificationBlockingStub().deleteNotificationAsync(Int64Value.of(id));
@@ -163,7 +163,7 @@ public class NotificationClientImpl implements INotificationClient {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
 
     /**

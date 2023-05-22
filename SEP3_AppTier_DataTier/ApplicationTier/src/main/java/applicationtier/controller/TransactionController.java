@@ -1,6 +1,5 @@
 package applicationtier.controller;
 
-import applicationtier.dto.FilterDto;
 import applicationtier.entity.TransactionEntity;
 import applicationtier.service.serviceInterfaces.ITransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +44,14 @@ public class TransactionController {
      * @return ResponseEntity containing the transaction entity with the specified ID in the response body
      *         with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
      */
-    @GetMapping("/transaction/{id}")
+    /*@GetMapping("/transaction/{id}")
     public ResponseEntity<TransactionEntity> fetchTransactionById(@PathVariable("id") Long id) {
         try {
             return new ResponseEntity<>(transactionService.fetchTransactionById(id), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
+    }*/
 
     /**
      * Fetch all transactions by sender username.
@@ -61,14 +60,14 @@ public class TransactionController {
      * @return ResponseEntity containing a list of transaction entities with the specified sender username
      *         in the response body with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
      */
-    @GetMapping("/transaction/sender/{senderUsername}")
+    /*@GetMapping("/transaction/sender/{senderUsername}")
     public ResponseEntity<List<TransactionEntity>> fetchAllTransactionBySender(@PathVariable("senderUsername") String senderUsername) {
         try {
             return new ResponseEntity<>(transactionService.fetchAlLTransactionsBySender(senderUsername), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
+    }*/
 
     /**
      * Fetch all transactions by receiver username.
@@ -77,7 +76,7 @@ public class TransactionController {
      * @return ResponseEntity containing a list of transaction entities with the specified receiver username
      *         in the response body with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
      */
-    @GetMapping("/transaction/receiver/{receiverUsername}")
+    /*@GetMapping("/transaction/receiver/{receiverUsername}")
     public ResponseEntity<List<TransactionEntity>> fetchAllTransactionByReceiver(@PathVariable("receiverUsername") String receiverUsername) {
 
         try {
@@ -85,7 +84,7 @@ public class TransactionController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
+    }*/
 
     /**
      * Fetch all transactions involving a user.
@@ -111,7 +110,7 @@ public class TransactionController {
      * @return ResponseEntity containing a list of transaction entities with the specified date
      *         in the response body with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
      */
-    @GetMapping("/transaction/date/{date}")
+    /*@GetMapping("/transaction/date/{date}")
     public ResponseEntity<List<TransactionEntity>> fetchTransactionByDate(@PathVariable("date") String date) {
 
         try {
@@ -119,7 +118,7 @@ public class TransactionController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
+    }*/
 
     /**
      * Fetch transactions by date and username.
@@ -129,7 +128,7 @@ public class TransactionController {
      * @return ResponseEntity containing a list of transaction entities with the specified date and username
      *         in the response body with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
      */
-    @GetMapping("/transaction/date/{date}/username/{username}")
+    /*@GetMapping("/transaction/date/{date}/username/{username}")
     public ResponseEntity<List<TransactionEntity>> fetchTransactionsByDateAndUsername(
             @PathVariable String date,
             @PathVariable String username) {
@@ -140,7 +139,7 @@ public class TransactionController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
+    }*/
 
 
     /**
@@ -150,7 +149,7 @@ public class TransactionController {
      * @return ResponseEntity with a success message in the response body with HTTP status 200 (OK),
      *         or HTTP status 400 (Bad Request) if an exception occurs.
      */
-    @DeleteMapping("/transaction/delete/{id}")
+    /*@DeleteMapping("/transaction/delete/{id}")
     public ResponseEntity<String> deleterTransaction(@PathVariable("id") Long id) {
 
         try {
@@ -159,5 +158,5 @@ public class TransactionController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
+    }*/
 }

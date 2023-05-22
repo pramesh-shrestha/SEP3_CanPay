@@ -7,8 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 public class RequestController {
 
@@ -42,7 +40,7 @@ public class RequestController {
      * @return ResponseEntity containing a list of all request entities in the response body with HTTP status 200 (OK),
      *         or HTTP status 400 (Bad Request) if an exception occurs.
      */
-    @GetMapping("/request")
+    /*@GetMapping("/request")
     public ResponseEntity<List<RequestEntity>> fetchAllRequest() {
         try {
             List<RequestEntity> requestEntities = requestService.fetchAllRequest();
@@ -50,7 +48,7 @@ public class RequestController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
+    }*/
 
     /**
      * Fetch a request by ID.
@@ -62,8 +60,7 @@ public class RequestController {
     @GetMapping("/request/id/{id}")
     public ResponseEntity<RequestEntity> fetchRequestById(@PathVariable("id") Long id) {
         try {
-            ResponseEntity<RequestEntity> entity = new ResponseEntity<>(requestService.fetchRequestById(id), HttpStatus.OK);
-            return entity;
+            return new ResponseEntity<>(requestService.fetchRequestById(id), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -76,14 +73,14 @@ public class RequestController {
      * @return ResponseEntity containing the request entity with the specified username in the response body
      *         with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
      */
-    @GetMapping("/request/username/{username}")
+    /*@GetMapping("/request/username/{username}")
     public ResponseEntity<RequestEntity> fetchRequestByUsername(@PathVariable("username") String username) {
         try {
             return new ResponseEntity<>(requestService.fetchRequestByUsername(username), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
+    }*/
 
     /**
      * Update a request.
@@ -108,7 +105,7 @@ public class RequestController {
      * @return ResponseEntity with a success message in the response body with HTTP status 200 (OK),
      *         or HTTP status 400 (Bad Request) if an exception occurs.
      */
-    @DeleteMapping("/request/delete/{id}")
+   /* @DeleteMapping("/request/delete/{id}")
     public ResponseEntity<String> deleteRequest(@PathVariable("id") Long id) {
         try {
             requestService.deleteRequest(id);
@@ -116,5 +113,5 @@ public class RequestController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
+    }*/
 }

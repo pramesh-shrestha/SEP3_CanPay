@@ -111,7 +111,7 @@ public class NotificationController {
      * @return ResponseEntity with a success message in the response body with HTTP status 200 (OK),
      *         or HTTP status 400 (Bad Request) if an exception occurs.
      */
-    @DeleteMapping("/notification/delete/{id}")
+    /*@DeleteMapping("/notification/delete/{id}")
     public ResponseEntity<String> deleteNotification(@PathVariable("id") Long id) {
 
         try {
@@ -120,5 +120,5 @@ public class NotificationController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
+    }*/
 }

@@ -35,7 +35,7 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         }
     }
 
-    public override async Task<TransactionProtoObj> FetchTransactionByIdAsync(Int64Value request,
+    /*public override async Task<TransactionProtoObj> FetchTransactionByIdAsync(Int64Value request,
         ServerCallContext context)
     {
         try
@@ -51,9 +51,9 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
-    }
+    }*/
 
-    public override async Task<TransactionProtoObjList> FetchAlLTransactionsBySenderAsync(StringValue request,
+    /*public override async Task<TransactionProtoObjList> FetchAlLTransactionsBySenderAsync(StringValue request,
         ServerCallContext context)
     {
         try
@@ -69,9 +69,9 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
-    }
+    }*/
 
-    public override async Task<TransactionProtoObjList> FetchAllTransactionsByReceiverAsync(StringValue request,
+    /*public override async Task<TransactionProtoObjList> FetchAllTransactionsByReceiverAsync(StringValue request,
         ServerCallContext context)
     {
         try
@@ -87,7 +87,7 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
-    }
+    }*/
 
 
     public override async Task<TransactionProtoObjList> FetchAlLTransactionsInvolvingUserAsync(StringValue request,
@@ -108,7 +108,7 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         }
     }
 
-    public override async Task<TransactionProtoObjList> FetchTransactionsByDateAsync(StringValue request,
+    /*public override async Task<TransactionProtoObjList> FetchTransactionsByDateAsync(StringValue request,
         ServerCallContext context)
     {
         try
@@ -123,16 +123,16 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
-    }
+    }*/
 
 
-    public override async Task<TransactionProtoObjList> FetchTransactionsByUsernameAndDate(
+    /*public override async Task<TransactionProtoObjList> FetchTransactionsByUsernameAndDate(
         FilterByUserAndDateProtoObj request, ServerCallContext context)
     {
         try
         {
             ICollection<TransactionEntity?> byDateAndUsername =
-                await transactionDao.fetchTransactionByUsernameAndDate(ConvertToFilterDto(request));
+                await transactionDao.FetchTransactionByUsernameAndDate(ConvertToFilterDto(request));
             TransactionProtoObjList byDateAndReceiveProtoObjList = ConvertToProtoList(byDateAndUsername);
             return byDateAndReceiveProtoObjList;
         }
@@ -141,9 +141,9 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
-    }
+    }*/
 
-    public override async Task<BoolValue> DeleteTransactionAsync(Int64Value request, ServerCallContext context)
+    /*public override async Task<BoolValue> DeleteTransactionAsync(Int64Value request, ServerCallContext context)
     {
         try
         {
@@ -155,7 +155,7 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.Aborted, e.Message));
         }
-    }
+    }*/
 
     public static TransactionEntity? FromProtoToEntity(TransactionProtoObj transactionProtoObj)
     {
@@ -189,14 +189,14 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         };
     }
 
-    public static FilterDto ConvertToFilterDto(FilterByUserAndDateProtoObj protoObj)
+    /*public static FilterDto ConvertToFilterDto(FilterByUserAndDateProtoObj protoObj)
     {
         return new FilterDto()
         {
             Username = protoObj.Username,
             Date = protoObj.Date
         };
-    }
+    }*/
 
 
     private static TransactionProtoObjList ConvertToProtoList(ICollection<TransactionEntity> transactionEntities)

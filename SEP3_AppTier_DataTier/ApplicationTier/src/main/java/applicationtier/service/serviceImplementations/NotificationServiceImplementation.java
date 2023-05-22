@@ -112,7 +112,7 @@ public class NotificationServiceImplementation implements INotificationService {
      * @return True if the deletion is successful, false otherwise.
      * @throws RuntimeException If an error occurs during the deletion process.
      */
-    @Override
+    /*@Override
     public boolean deleteNotification(Long id) {
         try {
             return notificationClient.deleteNotification(id);
@@ -120,6 +120,6 @@ public class NotificationServiceImplementation implements INotificationService {
             throw new RuntimeException(e.getMessage());
         }
     }
-
+*/
 
 }

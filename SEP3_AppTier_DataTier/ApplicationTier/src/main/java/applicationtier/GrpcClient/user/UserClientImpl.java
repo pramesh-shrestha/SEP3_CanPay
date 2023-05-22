@@ -98,7 +98,7 @@ public class UserClientImpl implements IUserClient {
      * @return The fetched UserEntity object.
      * @throws RuntimeException If an exception occurs during the fetch process.
      */
-    @Override
+    /*@Override
     public UserEntity FetchUserById(Long id) {
         try {
             User.UserProtoObj userProtoObj = getUserBlockingStub().fetchUserById(Int64Value.of(id));
@@ -106,7 +106,7 @@ public class UserClientImpl implements IUserClient {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     /**
      * Updates a user.
@@ -132,7 +132,7 @@ public class UserClientImpl implements IUserClient {
      * @return True if the deletion was successful, false otherwise.
      * @throws RuntimeException If an exception occurs during the deletion process.
      */
-    @Override
+   /* @Override
     public boolean deleteUser(Long id) {
         try {
             BoolValue userProtoObj = getUserBlockingStub().deleteUser(Int64Value.of(id));
@@ -141,7 +141,7 @@ public class UserClientImpl implements IUserClient {
             throw new RuntimeException(e);
         }
     }
-
+*/
 
     /**
      * Converts a UserEntity object to a User.UserProtoObj object.

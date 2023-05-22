@@ -32,7 +32,7 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
         }
     }
 
-    public override async Task<RequestProtoObjList> FetchAllRequestsAsync(Empty request, ServerCallContext context)
+    /*public override async Task<RequestProtoObjList> FetchAllRequestsAsync(Empty request, ServerCallContext context)
     {
         try
         {
@@ -52,7 +52,7 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.AlreadyExists, e.Message));
         }
-    }
+    }*/
 
     public override async Task<RequestProtoObj> FetchRequestByIdAsync(Int64Value request, ServerCallContext context)
     {
@@ -69,7 +69,7 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
         }
     }
 
-    public override async Task<RequestProtoObj> FetchRequestByUsername(StringValue request, ServerCallContext context)
+    /*public override async Task<RequestProtoObj> FetchRequestByUsername(StringValue request, ServerCallContext context)
     {
         try
         {
@@ -82,7 +82,7 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
-    }
+    }*/
 
     public override async Task<RequestProtoObj> UpdateRequestAsync(RequestProtoObj request, ServerCallContext context)
     {
@@ -93,7 +93,7 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
         return requestProtoObj;
     }
 
-    public override async Task<BoolValue> DeleteRequestAsync(Int64Value request, ServerCallContext context)
+    /*public override async Task<BoolValue> DeleteRequestAsync(Int64Value request, ServerCallContext context)
     {
         try
         {
@@ -105,10 +105,10 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
-    }
+    }*/
 
     public static RequestEntity? FromProtoToRequestEntity(RequestProtoObj requestProtoObj)
-    {
+        {
         RequestEntity? requestEntity = new RequestEntity()
         {
             IsApproved = requestProtoObj.IsApproved,

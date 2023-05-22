@@ -37,33 +37,6 @@ public class TransactionProtoServiceGrpc {
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Transaction.TransactionProtoObj.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Transaction.TransactionProtoObj.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.google.protobuf.Int64Value,
-      applicationtier.protobuf.Transaction.TransactionProtoObj> METHOD_FETCH_TRANSACTION_BY_ID_ASYNC =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "TransactionProtoService", "FetchTransactionByIdAsync"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int64Value.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Transaction.TransactionProtoObj.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.google.protobuf.StringValue,
-      applicationtier.protobuf.Transaction.TransactionProtoObjList> METHOD_FETCH_AL_LTRANSACTIONS_BY_SENDER_ASYNC =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "TransactionProtoService", "FetchAlLTransactionsBySenderAsync"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.StringValue.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Transaction.TransactionProtoObjList.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.google.protobuf.StringValue,
-      applicationtier.protobuf.Transaction.TransactionProtoObjList> METHOD_FETCH_ALL_TRANSACTIONS_BY_RECEIVER_ASYNC =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "TransactionProtoService", "FetchAllTransactionsByReceiverAsync"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.StringValue.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Transaction.TransactionProtoObjList.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<com.google.protobuf.StringValue,
       applicationtier.protobuf.Transaction.TransactionProtoObjList> METHOD_FETCH_AL_LTRANSACTIONS_INVOLVING_USER_ASYNC =
       io.grpc.MethodDescriptor.create(
@@ -72,33 +45,6 @@ public class TransactionProtoServiceGrpc {
               "TransactionProtoService", "FetchAlLTransactionsInvolvingUserAsync"),
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.StringValue.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Transaction.TransactionProtoObjList.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.google.protobuf.StringValue,
-      applicationtier.protobuf.Transaction.TransactionProtoObjList> METHOD_FETCH_TRANSACTIONS_BY_DATE_ASYNC =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "TransactionProtoService", "FetchTransactionsByDateAsync"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.StringValue.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Transaction.TransactionProtoObjList.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj,
-      applicationtier.protobuf.Transaction.TransactionProtoObjList> METHOD_FETCH_TRANSACTIONS_BY_RECIPIENT_AND_DATE =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "TransactionProtoService", "FetchTransactionsByRecipientAndDate"),
-          io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Transaction.TransactionProtoObjList.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.google.protobuf.Int64Value,
-      com.google.protobuf.BoolValue> METHOD_DELETE_TRANSACTION_ASYNC =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "TransactionProtoService", "DeleteTransactionAsync"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int64Value.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.BoolValue.getDefaultInstance()));
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -135,52 +81,15 @@ public class TransactionProtoServiceGrpc {
     }
 
     /**
-     */
-    public void fetchTransactionByIdAsync(com.google.protobuf.Int64Value request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObj> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_FETCH_TRANSACTION_BY_ID_ASYNC, responseObserver);
-    }
-
-    /**
-     */
-    public void fetchAlLTransactionsBySenderAsync(com.google.protobuf.StringValue request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_FETCH_AL_LTRANSACTIONS_BY_SENDER_ASYNC, responseObserver);
-    }
-
-    /**
-     */
-    public void fetchAllTransactionsByReceiverAsync(com.google.protobuf.StringValue request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_FETCH_ALL_TRANSACTIONS_BY_RECEIVER_ASYNC, responseObserver);
-    }
-
-    /**
+     * <pre>
+     *  rpc FetchTransactionByIdAsync(google.protobuf.Int64Value) returns (TransactionProtoObj);
+     *  rpc FetchAlLTransactionsBySenderAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+     *  rpc FetchAllTransactionsByReceiverAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+     * </pre>
      */
     public void fetchAlLTransactionsInvolvingUserAsync(com.google.protobuf.StringValue request,
         io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_FETCH_AL_LTRANSACTIONS_INVOLVING_USER_ASYNC, responseObserver);
-    }
-
-    /**
-     */
-    public void fetchTransactionsByDateAsync(com.google.protobuf.StringValue request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_FETCH_TRANSACTIONS_BY_DATE_ASYNC, responseObserver);
-    }
-
-    /**
-     */
-    public void fetchTransactionsByRecipientAndDate(applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_FETCH_TRANSACTIONS_BY_RECIPIENT_AND_DATE, responseObserver);
-    }
-
-    /**
-     */
-    public void deleteTransactionAsync(com.google.protobuf.Int64Value request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_DELETE_TRANSACTION_ASYNC, responseObserver);
     }
 
     @java.lang.Override public io.grpc.ServerServiceDefinition bindService() {
@@ -193,54 +102,12 @@ public class TransactionProtoServiceGrpc {
                 applicationtier.protobuf.Transaction.TransactionProtoObj>(
                   this, METHODID_CREATE_TRANSACTION_ASYNC)))
           .addMethod(
-            METHOD_FETCH_TRANSACTION_BY_ID_ASYNC,
-            asyncUnaryCall(
-              new MethodHandlers<
-                com.google.protobuf.Int64Value,
-                applicationtier.protobuf.Transaction.TransactionProtoObj>(
-                  this, METHODID_FETCH_TRANSACTION_BY_ID_ASYNC)))
-          .addMethod(
-            METHOD_FETCH_AL_LTRANSACTIONS_BY_SENDER_ASYNC,
-            asyncUnaryCall(
-              new MethodHandlers<
-                com.google.protobuf.StringValue,
-                applicationtier.protobuf.Transaction.TransactionProtoObjList>(
-                  this, METHODID_FETCH_AL_LTRANSACTIONS_BY_SENDER_ASYNC)))
-          .addMethod(
-            METHOD_FETCH_ALL_TRANSACTIONS_BY_RECEIVER_ASYNC,
-            asyncUnaryCall(
-              new MethodHandlers<
-                com.google.protobuf.StringValue,
-                applicationtier.protobuf.Transaction.TransactionProtoObjList>(
-                  this, METHODID_FETCH_ALL_TRANSACTIONS_BY_RECEIVER_ASYNC)))
-          .addMethod(
             METHOD_FETCH_AL_LTRANSACTIONS_INVOLVING_USER_ASYNC,
             asyncUnaryCall(
               new MethodHandlers<
                 com.google.protobuf.StringValue,
                 applicationtier.protobuf.Transaction.TransactionProtoObjList>(
                   this, METHODID_FETCH_AL_LTRANSACTIONS_INVOLVING_USER_ASYNC)))
-          .addMethod(
-            METHOD_FETCH_TRANSACTIONS_BY_DATE_ASYNC,
-            asyncUnaryCall(
-              new MethodHandlers<
-                com.google.protobuf.StringValue,
-                applicationtier.protobuf.Transaction.TransactionProtoObjList>(
-                  this, METHODID_FETCH_TRANSACTIONS_BY_DATE_ASYNC)))
-          .addMethod(
-            METHOD_FETCH_TRANSACTIONS_BY_RECIPIENT_AND_DATE,
-            asyncUnaryCall(
-              new MethodHandlers<
-                applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj,
-                applicationtier.protobuf.Transaction.TransactionProtoObjList>(
-                  this, METHODID_FETCH_TRANSACTIONS_BY_RECIPIENT_AND_DATE)))
-          .addMethod(
-            METHOD_DELETE_TRANSACTION_ASYNC,
-            asyncUnaryCall(
-              new MethodHandlers<
-                com.google.protobuf.Int64Value,
-                com.google.protobuf.BoolValue>(
-                  this, METHODID_DELETE_TRANSACTION_ASYNC)))
           .build();
     }
   }
@@ -272,59 +139,16 @@ public class TransactionProtoServiceGrpc {
     }
 
     /**
-     */
-    public void fetchTransactionByIdAsync(com.google.protobuf.Int64Value request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObj> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_FETCH_TRANSACTION_BY_ID_ASYNC, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void fetchAlLTransactionsBySenderAsync(com.google.protobuf.StringValue request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_FETCH_AL_LTRANSACTIONS_BY_SENDER_ASYNC, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void fetchAllTransactionsByReceiverAsync(com.google.protobuf.StringValue request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_FETCH_ALL_TRANSACTIONS_BY_RECEIVER_ASYNC, getCallOptions()), request, responseObserver);
-    }
-
-    /**
+     * <pre>
+     *  rpc FetchTransactionByIdAsync(google.protobuf.Int64Value) returns (TransactionProtoObj);
+     *  rpc FetchAlLTransactionsBySenderAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+     *  rpc FetchAllTransactionsByReceiverAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+     * </pre>
      */
     public void fetchAlLTransactionsInvolvingUserAsync(com.google.protobuf.StringValue request,
         io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_FETCH_AL_LTRANSACTIONS_INVOLVING_USER_ASYNC, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void fetchTransactionsByDateAsync(com.google.protobuf.StringValue request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_FETCH_TRANSACTIONS_BY_DATE_ASYNC, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void fetchTransactionsByRecipientAndDate(applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj request,
-        io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_FETCH_TRANSACTIONS_BY_RECIPIENT_AND_DATE, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void deleteTransactionAsync(com.google.protobuf.Int64Value request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_DELETE_TRANSACTION_ASYNC, getCallOptions()), request, responseObserver);
     }
   }
 
@@ -354,52 +178,15 @@ public class TransactionProtoServiceGrpc {
     }
 
     /**
-     */
-    public applicationtier.protobuf.Transaction.TransactionProtoObj fetchTransactionByIdAsync(com.google.protobuf.Int64Value request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_FETCH_TRANSACTION_BY_ID_ASYNC, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public applicationtier.protobuf.Transaction.TransactionProtoObjList fetchAlLTransactionsBySenderAsync(com.google.protobuf.StringValue request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_FETCH_AL_LTRANSACTIONS_BY_SENDER_ASYNC, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public applicationtier.protobuf.Transaction.TransactionProtoObjList fetchAllTransactionsByReceiverAsync(com.google.protobuf.StringValue request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_FETCH_ALL_TRANSACTIONS_BY_RECEIVER_ASYNC, getCallOptions(), request);
-    }
-
-    /**
+     * <pre>
+     *  rpc FetchTransactionByIdAsync(google.protobuf.Int64Value) returns (TransactionProtoObj);
+     *  rpc FetchAlLTransactionsBySenderAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+     *  rpc FetchAllTransactionsByReceiverAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+     * </pre>
      */
     public applicationtier.protobuf.Transaction.TransactionProtoObjList fetchAlLTransactionsInvolvingUserAsync(com.google.protobuf.StringValue request) {
       return blockingUnaryCall(
           getChannel(), METHOD_FETCH_AL_LTRANSACTIONS_INVOLVING_USER_ASYNC, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public applicationtier.protobuf.Transaction.TransactionProtoObjList fetchTransactionsByDateAsync(com.google.protobuf.StringValue request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_FETCH_TRANSACTIONS_BY_DATE_ASYNC, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public applicationtier.protobuf.Transaction.TransactionProtoObjList fetchTransactionsByRecipientAndDate(applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_FETCH_TRANSACTIONS_BY_RECIPIENT_AND_DATE, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public com.google.protobuf.BoolValue deleteTransactionAsync(com.google.protobuf.Int64Value request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_DELETE_TRANSACTION_ASYNC, getCallOptions(), request);
     }
   }
 
@@ -430,70 +217,21 @@ public class TransactionProtoServiceGrpc {
     }
 
     /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.Transaction.TransactionProtoObj> fetchTransactionByIdAsync(
-        com.google.protobuf.Int64Value request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_FETCH_TRANSACTION_BY_ID_ASYNC, getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.Transaction.TransactionProtoObjList> fetchAlLTransactionsBySenderAsync(
-        com.google.protobuf.StringValue request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_FETCH_AL_LTRANSACTIONS_BY_SENDER_ASYNC, getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.Transaction.TransactionProtoObjList> fetchAllTransactionsByReceiverAsync(
-        com.google.protobuf.StringValue request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_FETCH_ALL_TRANSACTIONS_BY_RECEIVER_ASYNC, getCallOptions()), request);
-    }
-
-    /**
+     * <pre>
+     *  rpc FetchTransactionByIdAsync(google.protobuf.Int64Value) returns (TransactionProtoObj);
+     *  rpc FetchAlLTransactionsBySenderAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+     *  rpc FetchAllTransactionsByReceiverAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.Transaction.TransactionProtoObjList> fetchAlLTransactionsInvolvingUserAsync(
         com.google.protobuf.StringValue request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_FETCH_AL_LTRANSACTIONS_INVOLVING_USER_ASYNC, getCallOptions()), request);
     }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.Transaction.TransactionProtoObjList> fetchTransactionsByDateAsync(
-        com.google.protobuf.StringValue request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_FETCH_TRANSACTIONS_BY_DATE_ASYNC, getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<applicationtier.protobuf.Transaction.TransactionProtoObjList> fetchTransactionsByRecipientAndDate(
-        applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_FETCH_TRANSACTIONS_BY_RECIPIENT_AND_DATE, getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.BoolValue> deleteTransactionAsync(
-        com.google.protobuf.Int64Value request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_DELETE_TRANSACTION_ASYNC, getCallOptions()), request);
-    }
   }
 
   private static final int METHODID_CREATE_TRANSACTION_ASYNC = 0;
-  private static final int METHODID_FETCH_TRANSACTION_BY_ID_ASYNC = 1;
-  private static final int METHODID_FETCH_AL_LTRANSACTIONS_BY_SENDER_ASYNC = 2;
-  private static final int METHODID_FETCH_ALL_TRANSACTIONS_BY_RECEIVER_ASYNC = 3;
-  private static final int METHODID_FETCH_AL_LTRANSACTIONS_INVOLVING_USER_ASYNC = 4;
-  private static final int METHODID_FETCH_TRANSACTIONS_BY_DATE_ASYNC = 5;
-  private static final int METHODID_FETCH_TRANSACTIONS_BY_RECIPIENT_AND_DATE = 6;
-  private static final int METHODID_DELETE_TRANSACTION_ASYNC = 7;
+  private static final int METHODID_FETCH_AL_LTRANSACTIONS_INVOLVING_USER_ASYNC = 1;
 
   private static class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -516,33 +254,9 @@ public class TransactionProtoServiceGrpc {
           serviceImpl.createTransactionAsync((applicationtier.protobuf.Transaction.TransactionProtoObj) request,
               (io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObj>) responseObserver);
           break;
-        case METHODID_FETCH_TRANSACTION_BY_ID_ASYNC:
-          serviceImpl.fetchTransactionByIdAsync((com.google.protobuf.Int64Value) request,
-              (io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObj>) responseObserver);
-          break;
-        case METHODID_FETCH_AL_LTRANSACTIONS_BY_SENDER_ASYNC:
-          serviceImpl.fetchAlLTransactionsBySenderAsync((com.google.protobuf.StringValue) request,
-              (io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList>) responseObserver);
-          break;
-        case METHODID_FETCH_ALL_TRANSACTIONS_BY_RECEIVER_ASYNC:
-          serviceImpl.fetchAllTransactionsByReceiverAsync((com.google.protobuf.StringValue) request,
-              (io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList>) responseObserver);
-          break;
         case METHODID_FETCH_AL_LTRANSACTIONS_INVOLVING_USER_ASYNC:
           serviceImpl.fetchAlLTransactionsInvolvingUserAsync((com.google.protobuf.StringValue) request,
               (io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList>) responseObserver);
-          break;
-        case METHODID_FETCH_TRANSACTIONS_BY_DATE_ASYNC:
-          serviceImpl.fetchTransactionsByDateAsync((com.google.protobuf.StringValue) request,
-              (io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList>) responseObserver);
-          break;
-        case METHODID_FETCH_TRANSACTIONS_BY_RECIPIENT_AND_DATE:
-          serviceImpl.fetchTransactionsByRecipientAndDate((applicationtier.protobuf.Transaction.FilterByUserAndDateProtoObj) request,
-              (io.grpc.stub.StreamObserver<applicationtier.protobuf.Transaction.TransactionProtoObjList>) responseObserver);
-          break;
-        case METHODID_DELETE_TRANSACTION_ASYNC:
-          serviceImpl.deleteTransactionAsync((com.google.protobuf.Int64Value) request,
-              (io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -563,13 +277,7 @@ public class TransactionProtoServiceGrpc {
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     return new io.grpc.ServiceDescriptor(SERVICE_NAME,
         METHOD_CREATE_TRANSACTION_ASYNC,
-        METHOD_FETCH_TRANSACTION_BY_ID_ASYNC,
-        METHOD_FETCH_AL_LTRANSACTIONS_BY_SENDER_ASYNC,
-        METHOD_FETCH_ALL_TRANSACTIONS_BY_RECEIVER_ASYNC,
-        METHOD_FETCH_AL_LTRANSACTIONS_INVOLVING_USER_ASYNC,
-        METHOD_FETCH_TRANSACTIONS_BY_DATE_ASYNC,
-        METHOD_FETCH_TRANSACTIONS_BY_RECIPIENT_AND_DATE,
-        METHOD_DELETE_TRANSACTION_ASYNC);
+        METHOD_FETCH_AL_LTRANSACTIONS_INVOLVING_USER_ASYNC);
   }
 
 }

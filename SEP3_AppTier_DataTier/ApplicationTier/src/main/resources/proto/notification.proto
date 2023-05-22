@@ -28,5 +28,5 @@ service NotificationProtoService {
   rpc FetchAllNotificationsByReceiverAsync(google.protobuf.StringValue) returns (NotificationProtoObjList);
   rpc MarkAsRead(NotificationProtoObj) returns (google.protobuf.Empty);
   rpc MarkAllAsRead(NotificationProtoObjList) returns (google.protobuf.Empty);
-  rpc DeleteNotificationAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
+//  rpc DeleteNotificationAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
 }

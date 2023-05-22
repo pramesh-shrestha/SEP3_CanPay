@@ -5,15 +5,9 @@ import applicationtier.GrpcClient.user.UserClientImpl;
 import applicationtier.entity.RequestEntity;
 import applicationtier.protobuf.Request;
 import applicationtier.protobuf.RequestProtoServiceGrpc;
-import com.google.protobuf.BoolValue;
-import com.google.protobuf.Empty;
 import com.google.protobuf.Int64Value;
-import com.google.protobuf.StringValue;
 import io.grpc.ManagedChannel;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class RequestClientImpl implements IRequestClient {
@@ -58,7 +52,7 @@ public class RequestClientImpl implements IRequestClient {
      * @return A list of RequestEntity objects representing all the requests.
      * @throws RuntimeException If an exception occurs during the fetch process.
      */
-    @Override
+    /*@Override
     public List<RequestEntity> FetchAllRequest() {
         try {
             Request.RequestProtoObjList allRequest = getRequestBlockingStub().fetchAllRequestsAsync(Empty.newBuilder().build());
@@ -72,7 +66,7 @@ public class RequestClientImpl implements IRequestClient {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     /**
      * Fetches a request by its ID.
@@ -99,7 +93,7 @@ public class RequestClientImpl implements IRequestClient {
      * @return The RequestEntity object representing the fetched request.
      * @throws RuntimeException If an exception occurs during the fetch process.
      */
-    @Override
+   /* @Override
     public RequestEntity FetchRequestByUsername(String username) {
         try {
             Request.RequestProtoObj requestProtoObj = getRequestBlockingStub().fetchRequestByUsername(StringValue.of(username));
@@ -107,7 +101,7 @@ public class RequestClientImpl implements IRequestClient {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     /**
      * Updates a request.
@@ -133,7 +127,7 @@ public class RequestClientImpl implements IRequestClient {
      * @return true if the request was successfully deleted, false otherwise.
      * @throws RuntimeException If an exception occurs during the delete process.
      */
-    @Override
+    /*@Override
     public boolean DeleteRequest(Long id) {
         try {
             BoolValue requestProtoObj = getRequestBlockingStub().deleteRequestAsync(Int64Value.of(id));
@@ -141,7 +135,7 @@ public class RequestClientImpl implements IRequestClient {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     /**
      * Converts a Request.RequestProtoObj object to a RequestEntity object.

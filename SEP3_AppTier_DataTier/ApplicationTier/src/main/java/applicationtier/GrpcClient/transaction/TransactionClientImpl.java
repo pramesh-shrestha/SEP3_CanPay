@@ -5,7 +5,6 @@ import applicationtier.GrpcClient.user.UserClientImpl;
 import applicationtier.entity.TransactionEntity;
 import applicationtier.protobuf.Transaction;
 import applicationtier.protobuf.TransactionProtoServiceGrpc;
-import com.google.protobuf.BoolValue;
 import com.google.protobuf.Int32Value;
 import com.google.protobuf.Int64Value;
 import com.google.protobuf.StringValue;
@@ -60,7 +59,7 @@ import java.util.List;
      * @return The TransactionEntity object representing the fetched transaction.
      * @throws RuntimeException If an exception occurs during the fetch process.
      */
-    @Override
+    /*@Override
     public TransactionEntity fetchTransactionById(Long id) {
         try {
             Transaction.TransactionProtoObj transactionProtoObj = getTransactionBlockingStub().fetchTransactionByIdAsync(Int64Value.of(id));
@@ -68,7 +67,7 @@ import java.util.List;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     /**
      * Fetches all transactions by sender username.
@@ -77,7 +76,7 @@ import java.util.List;
      * @return A list of TransactionEntity objects representing all the transactions sent by the sender.
      * @throws RuntimeException If an exception occurs during the fetch process.
      */
-    @Override
+    /*@Override
     public List<TransactionEntity> fetchAlLTransactionsBySender(String senderUsername) {
         try {
             List<Transaction.TransactionProtoObj> allTransactionsList = getTransactionBlockingStub().fetchAlLTransactionsBySenderAsync(StringValue.of(senderUsername)).getAllTransactionsList();
@@ -90,7 +89,7 @@ import java.util.List;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
 
     /**
@@ -100,7 +99,7 @@ import java.util.List;
      * @return A list of TransactionEntity objects representing all the transactions received by the receiver.
      * @throws RuntimeException If an exception occurs during the fetch process.
      */
-    @Override
+    /*@Override
     public List<TransactionEntity> fetchAllTransactionByReceiver(String receiverUsername) {
         try {
             List<Transaction.TransactionProtoObj> allTransactionsList = getTransactionBlockingStub().fetchAllTransactionsByReceiverAsync(StringValue.of(receiverUsername)).getAllTransactionsList();
@@ -112,7 +111,7 @@ import java.util.List;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
 
     /**
@@ -143,7 +142,7 @@ import java.util.List;
      * @return A list of TransactionEntity objects representing the transactions on the specified date.
      * @throws RuntimeException If an exception occurs during the fetch process.
      */
-    @Override
+    /*@Override
     public List<TransactionEntity> fetchTransactionByDate(String date) {
         try {
             List<Transaction.TransactionProtoObj> transactionsList1 = getTransactionBlockingStub().
@@ -156,7 +155,7 @@ import java.util.List;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     /**
      * Fetches transactions by date and username.
@@ -166,7 +165,7 @@ import java.util.List;
      * @return A list of TransactionEntity objects representing the transactions on the specified date involving the user.
      * @throws RuntimeException If an exception occurs during the fetch process.
      */
-    @Override
+    /*@Override
     public List<TransactionEntity> fetchTransactionByDateAndUsername(String date, String username) {
         try {
             List<Transaction.TransactionProtoObj> transactionsList = getTransactionBlockingStub()
@@ -183,7 +182,7 @@ import java.util.List;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
 
 
@@ -194,7 +193,7 @@ import java.util.List;
      * @return true if the transaction was successfully deleted, false otherwise.
      * @throws RuntimeException If an exception occurs during the delete process.
      */
-    @Override
+    /*@Override
     public boolean deleteTransaction(Long id) {
         try {
             BoolValue transactionProtoObj = getTransactionBlockingStub().deleteTransactionAsync(Int64Value.of(id));
@@ -202,7 +201,7 @@ import java.util.List;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
 
     /**

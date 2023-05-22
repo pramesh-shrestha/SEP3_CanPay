@@ -2132,19 +2132,14 @@ public final class Request {
       "requestSender\030\006 \001(\0132\r.UserProtoObj\022&\n\017re" +
       "questReceiver\030\007 \001(\0132\r.UserProtoObj\022\025\n\rre" +
       "questedDate\030\010 \001(\t\"9\n\023RequestProtoObjList" +
-      "\022\"\n\010requests\030\001 \003(\0132\020.RequestProtoObj2\261\003\n" +
+      "\022\"\n\010requests\030\001 \003(\0132\020.RequestProtoObj2\321\001\n" +
       "\023RequestProtoService\0228\n\022createRequestAsy",
-      "nc\022\020.RequestProtoObj\032\020.RequestProtoObj\022E" +
-      "\n\025fetchAllRequestsAsync\022\026.google.protobu" +
-      "f.Empty\032\024.RequestProtoObjList\022F\n\025fetchRe" +
-      "questByIdAsync\022\033.google.protobuf.Int64Va" +
-      "lue\032\020.RequestProtoObj\022H\n\026fetchRequestByU" +
-      "sername\022\034.google.protobuf.StringValue\032\020." +
-      "RequestProtoObj\0228\n\022updateRequestAsync\022\020." +
-      "RequestProtoObj\032\020.RequestProtoObj\022M\n\022del" +
-      "eteRequestAsync\022\033.google.protobuf.Int64V" +
-      "alue\032\032.google.protobuf.BoolValueB\034\n\030appl",
-      "icationtier.protobufP\000b\006proto3"
+      "nc\022\020.RequestProtoObj\032\020.RequestProtoObj\022F" +
+      "\n\025fetchRequestByIdAsync\022\033.google.protobu" +
+      "f.Int64Value\032\020.RequestProtoObj\0228\n\022update" +
+      "RequestAsync\022\020.RequestProtoObj\032\020.Request" +
+      "ProtoObjB\034\n\030applicationtier.protobufP\000b\006" +
+      "proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

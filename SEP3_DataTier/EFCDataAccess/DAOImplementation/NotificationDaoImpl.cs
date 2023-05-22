@@ -71,17 +71,6 @@ public class NotificationDaoImpl : INotificationDao
                 .Include(entity => entity.Sender).Include(entity => entity.Receiver)
                 .Where(e => e.Receiver!.Username!.Equals(username)).Where(entity => !entity.IsRead).ToListAsync();
 
-
-            /*if (notificationEntities.Count != 0)
-            {
-                foreach (NotificationEntity notificationEntity in notificationEntities)
-                {
-                    notificationEntity.IsRead = true;
-                }
-
-                await context.SaveChangesAsync();
-            }*/
-
             return notificationEntities;
         }
         catch (Exception e)
@@ -132,7 +121,7 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
-    public async Task<bool> DeleteNotificationAsync(long notificationId)
+    /*public async Task<bool> DeleteNotificationAsync(long notificationId)
     {
         try
         {
@@ -146,5 +135,5 @@ public class NotificationDaoImpl : INotificationDao
             Console.WriteLine(e);
             throw new Exception(e.Message);
         }
-    }
+    }*/
 }

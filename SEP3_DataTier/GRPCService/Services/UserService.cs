@@ -153,11 +153,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
     }
-
-    /*public override Task<BoolValue> UpdateBalance(Int32Value request, ServerCallContext context)
-    {
-        return base.UpdateBalance(request, context);
-    }*/
+    
 
     public static UserEntity? FromProtoToEntity(UserProtoObj userProtoObj)
     {

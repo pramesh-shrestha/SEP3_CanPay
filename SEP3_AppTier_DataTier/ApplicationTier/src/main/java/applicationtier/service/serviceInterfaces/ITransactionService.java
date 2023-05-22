@@ -1,6 +1,5 @@
 package applicationtier.service.serviceInterfaces;
 
-import applicationtier.dto.FilterDto;
 import applicationtier.entity.TransactionEntity;
 
 import java.util.List;
@@ -8,12 +7,12 @@ import java.util.List;
 public interface ITransactionService {
 
     TransactionEntity createTransaction(TransactionEntity transaction);
-    TransactionEntity fetchTransactionById(Long id);
+    List<TransactionEntity> fetchAllTransactionInvolvingUser(String username);
+
+/*    TransactionEntity fetchTransactionById(Long id);
     List<TransactionEntity> fetchAlLTransactionsBySender(String senderUsername);
     List<TransactionEntity> fetchAllTransactionByReceiver(String receiverUsername);
-    List<TransactionEntity> fetchAllTransactionInvolvingUser(String username);
-    List<TransactionEntity> fetchTransactionByDate(String date);
-    boolean deleteTransaction(Long id);
-
-    List<TransactionEntity> fetchTransactionByDateAndUsername(FilterDto filterDto);
+   List<TransactionEntity> fetchTransactionByDate(String date);
+   boolean deleteTransaction(Long id);
+  List<TransactionEntity> fetchTransactionByDateAndUsername(FilterDto filterDto);*/
 }
