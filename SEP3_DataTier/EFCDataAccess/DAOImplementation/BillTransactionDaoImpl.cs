@@ -18,9 +18,13 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
     public BillTransactionDaoImpl(CanPayDbAccess context)
     {
         this.context = context;
-    }
-
-
+    } 
+    
+    /// <summary>
+    /// Creates a new bill transaction in the database.
+    /// </summary>
+    /// <param name="billTransaction">The bill transaction to be created.</param>
+    /// <returns>The created bill transaction entity.</returns>
     public async Task<BillTransactionEntity?> CreateBillTransactionAsync(BillTransactionEntity? billTransaction)
     {
         try
@@ -43,6 +47,11 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
         }
     }
     
+    /// <summary>
+    /// Fetches a bill transaction by its ID from the database.
+    /// </summary>
+    /// <param name="id">The ID of the bill transaction to fetch.</param>
+    /// <returns>The bill transaction entity, or null if not found.</returns>
     public async Task<BillTransactionEntity?> FetchBillTransactionByIdAsync(long id)
     {
         try
@@ -57,6 +66,11 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
         }
     }
     
+    /// <summary>
+    /// Fetches all bill transactions associated with a specific payer from the database.
+    /// </summary>
+    /// <param name="payerUsername">The username of the payer.</param>
+    /// <returns>A collection of bill transaction entities.</returns>
     public async Task<ICollection<BillTransactionEntity>> FetchAllBillTransactionsByPayerAsync(string payerUsername)
     {
         ICollection<BillTransactionEntity> billTransactions = await context.BillTransactions.Include(bt => bt.Payer)
@@ -65,6 +79,11 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
         return billTransactions;
     }
     
+    /// <summary>
+    /// Fetches all bill transactions involving a specific user from the database.
+    /// </summary>
+    /// <param name="username">The username of the user.</param>
+    /// <returns>A collection of bill transaction entities.</returns>
     public async Task<ICollection<BillTransactionEntity>> FetchAllBillTransactionsInvolvingUserAsync(string username)
     {
         ICollection<BillTransactionEntity> transactions = await context.BillTransactions
@@ -76,6 +95,11 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
         return transactions;
     }
 
+    /// <summary>
+    /// Fetches all bill transactions on a specific date from the database.
+    /// </summary>
+    /// <param name="date">The date of the bill transactions to fetch.</param>
+    /// <returns>A collection of bill transaction entities.</returns>
     public async Task<ICollection<BillTransactionEntity>> FetchBillTransactionsByDateAsync(string date)
     {
         List<BillTransactionEntity> billTransactionsByDate = await context.BillTransactions
@@ -91,7 +115,11 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
         return billTransactionsByDate;
     }
     
-    
+    /// <summary>
+    /// Deletes a bill transaction from the database.
+    /// </summary>
+    /// <param name="id">The ID of the bill transaction to delete.</param>
+    /// <returns>True if the bill transaction is successfully deleted, otherwise false.</returns>
     public async Task<bool> DeleteBillTransactionAsync(long id)
     {
         BillTransactionEntity? billTransaction = await FetchBillTransactionByIdAsync(id);
@@ -106,5 +134,4 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
 
         return true;
     }
-
 }
