@@ -30,6 +30,13 @@ public class UserServiceImplementation implements IUserService {
         this.authenticationManager = authenticationManager;
     }
 
+    /**
+     * Creates a new user.
+     *
+     * @param user The user entity to create.
+     * @return The created user entity.
+     * @throws RuntimeException If an error occurs during the creation process.
+     */
     @Override
     public UserEntity createUser(UserEntity user) {
         try {
@@ -54,6 +61,13 @@ public class UserServiceImplementation implements IUserService {
                   .token(jwtToken)
                   .build();
       }*/
+
+    /**
+     * Fetches all users.
+     *
+     * @return The list of fetched user entities.
+     * @throws RuntimeException If an error occurs during the fetching process.
+     */
     @Override
     public List<UserEntity> fetchUsers() {
         try {
@@ -65,6 +79,13 @@ public class UserServiceImplementation implements IUserService {
     }
 
 
+    /**
+     * Fetches a user by their ID.
+     *
+     * @param id The ID of the user to fetch.
+     * @return The fetched user entity.
+     * @throws RuntimeException If an error occurs during the fetching process.
+     */
     @Override
     public UserEntity fetchUserById(Long id) {
         try {
@@ -74,6 +95,13 @@ public class UserServiceImplementation implements IUserService {
         }
     }
 
+    /**
+     * Fetches a user by their username.
+     *
+     * @param username The username of the user to fetch.
+     * @return The fetched user entity.
+     * @throws RuntimeException If an error occurs during the fetching process.
+     */
     @Override
     public UserEntity fetchUserByUsername(String username) {
         try {
@@ -85,6 +113,13 @@ public class UserServiceImplementation implements IUserService {
     }
 
 
+    /**
+     * Updates a user.
+     *
+     * @param user The user entity to update.
+     * @return The updated user entity.
+     * @throws RuntimeException If an error occurs during the update process.
+     */
     @Override
     public UserEntity updateUser(UserEntity user) {
         try {
@@ -95,6 +130,13 @@ public class UserServiceImplementation implements IUserService {
         }
     }
 
+    /**
+     * Deletes a user by their ID.
+     *
+     * @param id The ID of the user to delete.
+     * @return True if the deletion is successful, false otherwise.
+     * @throws RuntimeException If an error occurs during the deletion process.
+     */
     @Override
     public boolean deleteUser(Long id) {
         try {
@@ -105,6 +147,13 @@ public class UserServiceImplementation implements IUserService {
     }
 
 
+    /**
+     * Authenticates a user.
+     *
+     * @param request The login credentials.
+     * @return The authentication response containing the JWT token.
+     * @throws RuntimeException If authentication fails or an error occurs during the authentication process.
+     */
     public AuthenticationResponse authenticate(LoginDto request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

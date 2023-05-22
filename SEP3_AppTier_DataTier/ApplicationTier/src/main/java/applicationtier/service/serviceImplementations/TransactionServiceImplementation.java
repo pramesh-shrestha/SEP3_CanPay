@@ -24,6 +24,13 @@ public class TransactionServiceImplementation implements ITransactionService {
         this.userClient = userClient;
     }
 
+    /**
+     * Creates a new transaction.
+     *
+     * @param transaction The transaction entity to create.
+     * @return The created transaction entity.
+     * @throws RuntimeException If an error occurs during the creation process or if the sender has insufficient balance.
+     */
     @Override
     public TransactionEntity createTransaction(TransactionEntity transaction) {
         try {
@@ -52,6 +59,13 @@ public class TransactionServiceImplementation implements ITransactionService {
         }
     }
 
+    /**
+     * Fetches a transaction by its ID.
+     *
+     * @param id The ID of the transaction to fetch.
+     * @return The fetched transaction entity.
+     * @throws RuntimeException If an error occurs during the fetching process.
+     */
     @Override
     public TransactionEntity fetchTransactionById(Long id) {
         try {
@@ -61,6 +75,13 @@ public class TransactionServiceImplementation implements ITransactionService {
         }
     }
 
+    /**
+     * Fetches all transactions sent by a specific sender.
+     *
+     * @param senderUsername The username of the sender.
+     * @return The list of fetched transaction entities.
+     * @throws RuntimeException If an error occurs during the fetching process.
+     */
     @Override
     public List<TransactionEntity> fetchAlLTransactionsBySender(String senderUsername) {
         try {
@@ -70,6 +91,13 @@ public class TransactionServiceImplementation implements ITransactionService {
         }
     }
 
+    /**
+     * Fetches all transactions received by a specific receiver.
+     *
+     * @param receiverUsername The username of the receiver.
+     * @return The list of fetched transaction entities.
+     * @throws RuntimeException If an error occurs during the fetching process.
+     */
     @Override
     public List<TransactionEntity> fetchAllTransactionByReceiver(String receiverUsername) {
         try {
@@ -79,6 +107,13 @@ public class TransactionServiceImplementation implements ITransactionService {
         }
     }
 
+    /**
+     * Fetches all transactions involving a specific user (as sender or receiver).
+     *
+     * @param username The username of the user.
+     * @return The list of fetched transaction entities.
+     * @throws RuntimeException If an error occurs during the fetching process.
+     */
     @Override
     public List<TransactionEntity> fetchAllTransactionInvolvingUser(String username) {
         try {
@@ -88,6 +123,13 @@ public class TransactionServiceImplementation implements ITransactionService {
         }
     }
 
+    /**
+     * Fetches all transactions that occurred on a specific date.
+     *
+     * @param date The date of the transactions.
+     * @return The list of fetched transaction entities.
+     * @throws RuntimeException If an error occurs during the fetching process.
+     */
     @Override
     public List<TransactionEntity> fetchTransactionByDate(String date) {
         try {
@@ -97,6 +139,13 @@ public class TransactionServiceImplementation implements ITransactionService {
         }
     }
 
+    /**
+     * Fetches all transactions that occurred on a specific date and involving a specific user.
+     *
+     * @param filterDto The filter criteria containing the date and username.
+     * @return The list of fetched transaction entities.
+     * @throws RuntimeException If an error occurs during the fetching process.
+     */
     @Override
     public List<TransactionEntity> fetchTransactionByDateAndUsername(FilterDto filterDto) {
         try {
@@ -106,6 +155,14 @@ public class TransactionServiceImplementation implements ITransactionService {
         }
     }
 
+
+    /**
+     * Deletes a transaction by its ID.
+     *
+     * @param id The ID of the transaction to delete.
+     * @return True if the deletion is successful, false otherwise.
+     * @throws RuntimeException If an error occurs during the deletion process.
+     */
     @Override
     public boolean deleteTransaction(Long id) {
         try {
