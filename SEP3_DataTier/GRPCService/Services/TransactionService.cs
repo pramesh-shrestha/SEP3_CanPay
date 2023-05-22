@@ -1,3 +1,4 @@
+namespace GrpcService.Services;
 using EFCDataAccess.DAOInterface;
 using Entity;
 using Entity.Model;
@@ -5,7 +6,6 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using SEP3_DataTier;
 
-namespace GrpcService.Services;
 
 public class TransactionService : TransactionProtoService.TransactionProtoServiceBase
 {

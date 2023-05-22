@@ -11,6 +11,7 @@ public class CanPayDbAccess : DbContext
     public DbSet<NotificationEntity?> Notifications { get; set; }
     
     public DbSet<RequestEntity> Requests { get; set; }
+    public DbSet<BillTransactionEntity> BillTransactions { get; set; }
 
 
     /// <summary>

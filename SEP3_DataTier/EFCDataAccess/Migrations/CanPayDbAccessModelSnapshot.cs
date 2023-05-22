@@ -23,6 +23,46 @@ namespace EFCDataAccess.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Entity.Model.BillTransactionEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AccountNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PayeeUsername")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PayerUsername")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ReferenceNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PayeeUsername");
+
+                    b.HasIndex("PayerUsername");
+
+                    b.ToTable("BillTransactions", "CanPay");
+                });
+
             modelBuilder.Entity("Entity.Model.DebitCardEntity", b =>
                 {
                     b.Property<long>("CardId")
@@ -187,6 +227,25 @@ namespace EFCDataAccess.Migrations
                     b.HasIndex("CardId");
 
                     b.ToTable("Users", "CanPay");
+                });
+
+            modelBuilder.Entity("Entity.Model.BillTransactionEntity", b =>
+                {
+                    b.HasOne("Entity.Model.UserEntity", "Payee")
+                        .WithMany()
+                        .HasForeignKey("PayeeUsername")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Model.UserEntity", "Payer")
+                        .WithMany()
+                        .HasForeignKey("PayerUsername")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Payee");
+
+                    b.Navigation("Payer");
                 });
 
             modelBuilder.Entity("Entity.Model.NotificationEntity", b =>

@@ -19,8 +19,8 @@ message BillPaymentProtoObj {
 service BillPaymentProtoService {
   rpc CreateBillPaymentAsync(BillPaymentProtoObj) returns (BillPaymentProtoObj);
   rpc FetchBillPaymentByIdAsync(google.protobuf.Int64Value) returns (BillPaymentProtoObj);
-  rpc FetchAlLBillPaymentsBySenderAsync(google.protobuf.StringValue) returns (BillPaymentProtoObjList);
-  rpc FetchAllBillPaymentsByReceiverAsync(google.protobuf.StringValue) returns (BillPaymentProtoObjList);
+  rpc FetchAllBillPaymentsBySenderAsync(google.protobuf.StringValue) returns (BillPaymentProtoObjList);
+//  rpc FetchAllBillPaymentsByReceiverAsync(google.protobuf.StringValue) returns (BillPaymentProtoObjList);
   rpc FetchAlLBillPaymentsInvolvingUserAsync(google.protobuf.StringValue) returns (BillPaymentProtoObjList);
   rpc FetchBillPaymentsByDateAsync(google.protobuf.StringValue) returns (BillPaymentProtoObjList);
   rpc DeleteBillPaymentAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
