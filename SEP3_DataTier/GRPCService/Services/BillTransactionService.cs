@@ -126,7 +126,8 @@ public class BillTransactionService : BillPaymentProtoService.BillPaymentProtoSe
             Payee = BillPaymentProtoObj.PayeeName,
             Amount = (int)BillPaymentProtoObj.Amount,
             Date = BillPaymentProtoObj.Date,
-            ReferenceNumber = BillPaymentProtoObj.Reference
+            ReferenceNumber = BillPaymentProtoObj.Reference,
+            AccountNumber = BillPaymentProtoObj.AccountNumber
         };
         if (BillPaymentProtoObj.BillPaymentId != 0)
         {
@@ -143,7 +144,8 @@ public class BillTransactionService : BillPaymentProtoService.BillPaymentProtoSe
             PayeeName = billTransactionEntity.Payee,
             Amount = billTransactionEntity.Amount,
             Date = billTransactionEntity.Date,
-            Reference = billTransactionEntity.ReferenceNumber
+            Reference = billTransactionEntity.ReferenceNumber,
+            AccountNumber = billTransactionEntity.AccountNumber
         };
     }
 

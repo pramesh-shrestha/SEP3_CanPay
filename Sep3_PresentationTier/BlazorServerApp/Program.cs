@@ -23,7 +23,7 @@ builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<IRequestService, RequestService>();
 builder.Services.AddScoped<IBillPaymentService, BillPaymentService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
-
+builder.Services.AddScoped<IBillPaymentService, BillPaymentService>();
 
 //Add authentication with info about JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
