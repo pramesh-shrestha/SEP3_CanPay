@@ -1,14 +1,16 @@
 ﻿@page "/Billpayments"
 @using HTTPClients.ClientInterfaces
 @using Domains.Entity
+@using UIComponents
 
 @inject IBillPaymentService BillPaymentService;
 @inject AuthenticationStateProvider StateProvider;
 @inject NavigationManager NavMgr;
+@inject IUserService UserService;
 
 <AuthorizeView>
     <Authorized>
-        
+
         <div class="container">
             <h3>Bill Payment</h3>
 
@@ -21,8 +23,8 @@
 
 
                     <div class="buttonDiv">
-                        <button class="button">Send</button>
-                        <button class="button">Cancel</button>
+                        <button class="button" @onclick="PayBill">Send</button>
+                        <button class="button" @onclick="cancel">Cancel</button>
                     </div>
                 </div>
 
@@ -84,15 +86,15 @@
                                 <tr>
                                     @*Payee*@
                                     <td>
-                                        <span>@billEntity.Payee</span>
+                                        <span>@billEntity.PayeeName</span>
                                     </td>
                                     @*Amount*@
                                     <td>
-                                        <span>@billEntity.amount</span>
+                                        <span>@billEntity.Amount</span>
                                     </td>
                                     @*Date*@
                                     <td>
-                                        <span>@billEntity.date</span>
+                                        <span>@billEntity.Date</span>
                                     </td>
                                 </tr>
                             }
@@ -119,6 +121,7 @@
             </div>
         </Modal>
 
+
     </Authorized>
     <NotAuthorized>
         <h2>You must be logged in to be able to view this page--</h2>
@@ -133,17 +136,16 @@
     private string? payee = "";
     private string? amount = "";
     private DateTime dateTime = DateTime.Now.Date;
-    private long accountNumber;
+    private string accountNumber;
     private string? Refrence = "";
-    private UserEntity? senderUser;
+    private UserEntity? senderUser = new UserEntity();
 
+    private bool showModal;
     private ICollection<BillPaymentEntity>? billPayment = new List<BillPaymentEntity>();
     private ICollection<TransactionEntity>? transactionEntities = new List<TransactionEntity>();
-    private IEnumerable<UserEntity?> userEntities = new List<UserEntity?>();
 
     private string errorLabel = "";
     private string color = "";
-    private bool showModal;
 
 
     protected override async Task OnInitializedAsync()
@@ -153,8 +155,9 @@
             AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
             sender = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
 
-            IEnumerable<UserEntity?> entities = userEntities.ToList();
-            senderUser = entities.FirstOrDefault(u => u.UserName.Equals(sender));
+            senderUser = await UserService.FetchUserByUsernameAsync(sender);
+
+            showModal = false;
         }
         catch (Exception e)
         {
@@ -163,6 +166,7 @@
         }
     }
 
+
     private async Task PayBill()
     {
         string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
@@ -170,13 +174,14 @@
         try
         {
             if (string.IsNullOrEmpty(payee)) throw new Exception("payee name must be filled in");
+            if (int.Parse(accountNumber)<=0) throw new Exception("Invalid account number");
+            
+            if (accountNumber.Length != 10) throw new Exception("Account number must be of 10 digits");
             if (string.IsNullOrEmpty(amount)) throw new Exception("amount must be filled in");
             if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
-            if (string.IsNullOrEmpty(errorLabel))
-            {
-                await BillPaymentService.CreateAsync(new BillPaymentEntity(date, senderUser, payee, Convert.ToInt32(amount), accountNumber, Refrence));
-                showModal = true;
-            }
+
+            await BillPaymentService.CreateAsync(new BillPaymentEntity(date, senderUser, payee, Convert.ToInt32(amount), accountNumber, Refrence));
+            showModal = true;
         }
         catch (Exception e)
         {
@@ -195,5 +200,12 @@
         showModal = false;
         NavMgr.NavigateTo("/");
     }
+
+    private void cancel()
+    {
+        NavMgr.NavigateTo("/");
+    }
+
+
 
 }

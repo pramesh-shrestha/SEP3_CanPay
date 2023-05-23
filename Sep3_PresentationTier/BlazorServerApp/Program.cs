@@ -19,6 +19,7 @@ builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<IRequestService, RequestService>();
+builder.Services.AddScoped<IBillPaymentService, BillPaymentService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 
 
