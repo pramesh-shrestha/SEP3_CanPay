@@ -237,7 +237,15 @@
         receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
         string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
 
-        TransactionEntity transactionEntity = new TransactionEntity(senderUser, receiverUser, int.Parse(amount), date, comment);
+        TransactionEntity transactionEntity = new TransactionEntity()
+        {
+    // senderUser, receiverUser, int.Parse(amount), date, comment
+            Amount = Convert.ToInt32(amount),
+            Sender = senderUser,
+            Receiver = receiverUser,
+            Date = date,
+            Comment = comment
+        };
         try
         {
             if (string.IsNullOrEmpty(receiver)) throw new Exception("Receiver must be selected.");

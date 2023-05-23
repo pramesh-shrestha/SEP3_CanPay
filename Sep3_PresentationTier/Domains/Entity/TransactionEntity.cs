@@ -9,12 +9,12 @@ public class TransactionEntity
     public string Date { get; set; }
     public string Comment { get; set; }
 
-    public TransactionEntity(UserEntity sender, UserEntity? receiver, int amount, string date, string comment)
+    /*public TransactionEntity(UserEntity sender, UserEntity? receiver, int amount, string date, string comment)
     {
         Sender = sender;
         Receiver = receiver;
         Amount = amount;
         Date = date;
         Comment = comment;
-    }
+    }*/
 }
