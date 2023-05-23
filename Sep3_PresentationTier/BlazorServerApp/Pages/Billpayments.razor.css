@@ -16,6 +16,10 @@
     margin-top: 5px;
 }
 
+.value{
+    display: flex;
+    justify-content: center;
+}
 .container h3 {
     color: white;
     text-align: center;

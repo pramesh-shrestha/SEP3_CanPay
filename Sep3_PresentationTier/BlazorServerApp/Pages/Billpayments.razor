@@ -64,46 +64,50 @@
                 <div class="col-md-3 third-box">
                     <label class="header">Recent bill payments</label>
                     <hr class="hr1"/>
-                </div>
-                @if (billPayment == null)
-                {
-                    errorLabel = "There is no bills payments done!";
-                    color = "red";
-                }
-                else
-                {
-                    <div class="table_box">
-                        <table class="table table-borderless">
-                            <thead>
-                            <tr>
-                                <th>Payee</th>
-                                <th>Amount</th>
-                                <th>Date</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (var billEntity in billPayment)
-                            {
-                                <tr>
-                                    @*Payee*@
-                                    <td>
-                                        <span>@billEntity.Payee</span>
-                                    </td>
-                                    @*Amount*@
-                                    <td>
-                                        <span>@billEntity.Amount</span>
-                                    </td>
-                                    @*Date*@
-                                    <td>
-                                        <span>@billEntity.Date</span>
-                                    </td>
-                                </tr>
-                            }
-                            </tbody>
 
-                        </table>
-                    </div>
-                }
+                    @if (billPayment.Count != 0)
+                    {
+                        <div class="table_box">
+                            <table class="table table-borderless">
+                                <thead>
+                                <tr>
+                                    <th>Payee</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var billEntity in billPayment)
+                                {
+                                    <tr>
+                                        @*Payee*@
+                                        <td>
+                                            <span class="value">@billEntity.Payee</span>
+                                        </td>
+                                        @*Amount*@
+                                        <td>
+                                            <span class="value">@billEntity.Amount</span>
+                                        </td>
+                                        @*Date*@
+                                        <td>
+                                            <span class="value">@billEntity.Date</span>
+                                        </td>
+                                    </tr>
+                                }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="field">
+                            <label style="color: red">
+                                <span>No Transactions Found for @senderUser</span>
+                            </label>
+                        </div>
+                    }
+                </div>
             </div>
 
             <div class="error">
@@ -157,8 +161,9 @@
             sender = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
 
             senderUser = await UserService.FetchUserByUsernameAsync(sender);
-
-            // billPayment = await BillPaymentService.FetchAllTransactionsInvolvingUser(sender);
+            billPayment = await BillPaymentService.FetchAllTransactionsInvolvingUser(sender);
+            
+    // billPayment = await BillPaymentService.FetchAllTransactionsInvolvingUser(sender);
             showModal = false;
         }
         catch (Exception e)
@@ -176,14 +181,14 @@
         try
         {
             if (string.IsNullOrEmpty(payee)) throw new Exception("payee name must be filled in");
-            if (int.Parse(accountNumber)<=0) throw new Exception("Invalid account number");
-            
+            if (int.Parse(accountNumber) <= 0) throw new Exception("Invalid account number");
+
             if (accountNumber.Length != 10) throw new Exception("Account number must be of 10 digits");
             if (string.IsNullOrEmpty(amount)) throw new Exception("amount must be filled in");
             if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
 
             Console.WriteLine("before create method");
-            await BillPaymentService.CreateAsync(new BillPaymentEntity(senderUser,payee,accountNumber,Int32.Parse(amount),date,Refrence));
+            await BillPaymentService.CreateAsync(new BillPaymentEntity(senderUser, payee, accountNumber, Int32.Parse(amount), date, Refrence));
             Console.WriteLine("after create method");
             showModal = true;
         }
@@ -194,10 +199,12 @@
         }
     }
 
-    private async Task DisplayAllBillPayments()
-    {
-        billPayment = await BillPaymentService.FetchAllTransactionsInvolvingUser(sender);
-    }
+    
+    // private async Task DisplayAllBillPayments()
+    // {
+    //     
+    //     billPayment = await BillPaymentService.FetchAllTransactionsInvolvingUser(sender);
+    // }
 
     private void Proceed()
     {

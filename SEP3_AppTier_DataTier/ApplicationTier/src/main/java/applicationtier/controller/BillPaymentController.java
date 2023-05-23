@@ -22,7 +22,7 @@ public class BillPaymentController {
     @PostMapping("/billPayment/create")
     public ResponseEntity<BillPaymentEntity> createBillPayment(@RequestBody BillPaymentEntity billPayment) {
         try {
-
+            System.out.println(billPayment.getAccountNumber()+"controller class");
             BillPaymentEntity billPaymentEntity = billPaymentService.createBillPayment(billPayment);
             return new ResponseEntity<>(billPaymentEntity, HttpStatus.OK);
         } catch (Exception e) {

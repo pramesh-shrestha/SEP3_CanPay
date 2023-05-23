@@ -120,13 +120,14 @@ public class BillTransactionService : BillPaymentProtoService.BillPaymentProtoSe
     
     public static BillTransactionEntity? FromProtoToEntity(BillPaymentProtoObj BillPaymentProtoObj)
     {
-        BillTransactionEntity BillTransactionEntity = new BillTransactionEntity()
+        BillTransactionEntity? BillTransactionEntity = new BillTransactionEntity
         {
             Payer = UserService.FromProtoToEntity(BillPaymentProtoObj.SenderUser),
             Payee = BillPaymentProtoObj.PayeeName,
             Amount = (int)BillPaymentProtoObj.Amount,
             Date = BillPaymentProtoObj.Date,
-            ReferenceNumber = BillPaymentProtoObj.Reference
+            ReferenceNumber = BillPaymentProtoObj.Reference,
+            AccountNumber = BillPaymentProtoObj.AccountNumber
         };
         if (BillPaymentProtoObj.BillPaymentId != 0)
         {
@@ -136,15 +137,17 @@ public class BillTransactionService : BillPaymentProtoService.BillPaymentProtoSe
     }
     public static BillPaymentProtoObj FromEntityToProto(BillTransactionEntity? billTransactionEntity)
     {
-        return new BillPaymentProtoObj()
+        BillPaymentProtoObj protoObj=new BillPaymentProtoObj
         {
             BillPaymentId = billTransactionEntity!.Id,
             SenderUser = UserService.FromEntityToProto(billTransactionEntity!.Payer),
             PayeeName = billTransactionEntity.Payee,
             Amount = billTransactionEntity.Amount,
             Date = billTransactionEntity.Date,
-            Reference = billTransactionEntity.ReferenceNumber
+            Reference = billTransactionEntity.ReferenceNumber,
+            AccountNumber = billTransactionEntity.AccountNumber
         };
+        return protoObj;
     }
 
     private static BillPaymentProtoObjList ConvertToProtoList(ICollection<BillTransactionEntity> billTransactionEntities)

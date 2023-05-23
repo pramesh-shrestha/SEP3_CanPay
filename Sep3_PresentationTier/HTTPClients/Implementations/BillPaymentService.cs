@@ -36,7 +36,7 @@ public class BillPaymentService : IBillPaymentService
 
     public async Task<BillPaymentEntity> FetchBillPaymentsById(long id)
     {
-        HttpResponseMessage response = await client.GetAsync("/billPayment/{id}}");
+        HttpResponseMessage response = await client.GetAsync($"/billPayment/{id}");
         string result = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)
@@ -55,7 +55,7 @@ public class BillPaymentService : IBillPaymentService
     
     public async Task<ICollection<BillPaymentEntity>> FetchAllTransactionsInvolvingUser(string? username)
     {
-        HttpResponseMessage response = await client.GetAsync("/billPayment/user/{username}");
+        HttpResponseMessage response = await client.GetAsync($"/billPayment/user/{username}");
         string result = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)

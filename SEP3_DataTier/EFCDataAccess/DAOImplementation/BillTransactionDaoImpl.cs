@@ -37,9 +37,7 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
 
             EntityEntry<BillTransactionEntity> createdBillTransaction = (await context.BillTransactions.AddAsync(billTransaction))!;
             await context.SaveChangesAsync();
-
-            Console.WriteLine("dao"+billTransaction.Payer);
-            Console.WriteLine("dao"+billTransaction.AccountNumber);
+            
             return createdBillTransaction.Entity;
         }
         catch (Exception e)
@@ -91,7 +89,7 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
         ICollection<BillTransactionEntity> transactions = await context.BillTransactions
             .AsNoTracking()
             .Include(entity => entity.Payer)
-            .Where(entity => entity.Payee.Equals(username) || entity.Payer.Username.Equals(username))
+            .Where(entity => entity.Payer.Username.Equals(username))
             .ToListAsync();
     
         return transactions;
