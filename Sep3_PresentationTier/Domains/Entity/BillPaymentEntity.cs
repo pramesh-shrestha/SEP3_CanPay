@@ -2,22 +2,22 @@
 
 public class BillPaymentEntity
 {
-    
-    public string  date { get; set; }
-    public UserEntity   SenderUser { get; set; }
-    public string  Payee { get; set; }
-    public int  amount { get; set; }
-    public long  accountNumber { get; set; }
-    public string  Reference { get; set; }
+    public long id { get; set; }
+    public UserEntity Payer { get; set; }
+    public string Payee { get; set; }
+    public string AccountNumber { get; set; }
+    public int Amount { get; set; }
+    public string Date { get; set; }
+    public string ReferenceNumber { get; set; }
 
-    
-    public BillPaymentEntity(string date, UserEntity senderUser, string payee, int amount, long accountNumber, string reference)
+
+    public BillPaymentEntity(UserEntity payer, string payee, string accountNumber, int amount, string date, string referenceNumber)
     {
-        this.date = date;
-        SenderUser = senderUser;
+        Payer = payer;
         Payee = payee;
-        this.amount = amount;
-        this.accountNumber = accountNumber;
-        Reference = reference;
+        AccountNumber = accountNumber;
+        Amount = amount;
+        Date = date;
+        ReferenceNumber = referenceNumber;
     }
 }

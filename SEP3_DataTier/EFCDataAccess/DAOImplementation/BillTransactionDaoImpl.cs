@@ -29,7 +29,7 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
     {
         try
         {
-            if (!context.Users.Local.Contains(billTransaction.Payer))
+            if (!context.Users.Local.Contains(billTransaction!.Payer))
             {
                 context.Users.Attach(billTransaction.Payer);
                 context.Cards.Attach(billTransaction.Payer!.Card);
@@ -38,6 +38,8 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
             EntityEntry<BillTransactionEntity> createdBillTransaction = (await context.BillTransactions.AddAsync(billTransaction))!;
             await context.SaveChangesAsync();
 
+            Console.WriteLine("dao"+billTransaction.Payer);
+            Console.WriteLine("dao"+billTransaction.AccountNumber);
             return createdBillTransaction.Entity;
         }
         catch (Exception e)

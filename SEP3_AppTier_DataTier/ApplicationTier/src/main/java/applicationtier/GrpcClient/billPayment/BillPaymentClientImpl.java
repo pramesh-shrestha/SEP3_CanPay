@@ -31,6 +31,7 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
     @Override
     public BillPaymentEntity createBillPayment(BillPaymentEntity billPayment) {
         try {
+            System.out.println(billPayment.getPayee()+"this is client");
             BillTransaction.BillPaymentProtoObj billPaymentProtoObj = fromEntityToProtoObj(billPayment);
 
             BillTransaction.BillPaymentProtoObj protoObj = getBillPaymentBlockingStub().createBillPaymentAsync(billPaymentProtoObj);
@@ -127,13 +128,13 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
     //from proto to entity
     public static BillPaymentEntity fromProtoObjToEntity(BillTransaction.BillPaymentProtoObj billPaymentProtoObj) {
         BillPaymentEntity billPayment = new BillPaymentEntity();
-        billPayment.setPayeeName(billPaymentProtoObj.getPayeeName().getValue());
-        billPayment.setSender(UserClientImpl.fromProtoObjToEntity(billPaymentProtoObj.getSenderUser()));
+        billPayment.setPayee(billPaymentProtoObj.getPayeeName().getValue());
+        billPayment.setPayer(UserClientImpl.fromProtoObjToEntity(billPaymentProtoObj.getSenderUser()));
         billPayment.setAmount(billPaymentProtoObj.getAmount().getValue());
         billPayment.setDate(billPaymentProtoObj.getDate().getValue());
         billPayment.setPaymentId(billPaymentProtoObj.getBillPaymentId().getValue());
         billPayment.setAccountNumber(billPaymentProtoObj.getAccountNumber().getValue());
-        billPayment.setReference(billPaymentProtoObj.getReference().getValue());
+        billPayment.setReferenceNumber(billPaymentProtoObj.getReference().getValue());
 
         return billPayment;
     }
@@ -141,12 +142,12 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
     //from entity to proto
     public static BillTransaction.BillPaymentProtoObj fromEntityToProtoObj(BillPaymentEntity billPayment) {
         BillTransaction.BillPaymentProtoObj.Builder billPaymentBuilder = BillTransaction.BillPaymentProtoObj.newBuilder()
-                .setPayeeName(StringValue.of(billPayment.getPayeeName()))
-                .setSenderUser(UserClientImpl.fromEntityToProtoObj(billPayment.getSender()))
+                .setPayeeName(StringValue.of(billPayment.getPayee()))
+                .setSenderUser(UserClientImpl.fromEntityToProtoObj(billPayment.getPayer()))
                 .setDate(StringValue.of(billPayment.getDate()))
                 .setAmount(Int32Value.of(billPayment.getAmount()))
-                .setAccountNumber(Int64Value.of(billPayment.getAccountNumber()))
-                .setReference(StringValue.of(billPayment.getReference()));
+                .setAccountNumber(StringValue.of(billPayment.getAccountNumber()))
+                .setReference(StringValue.of(billPayment.getReferenceNumber()));
 
 
         if (billPayment.getPaymentId() != null || billPayment.getPaymentId() != 0) {

@@ -25,9 +25,8 @@ public class BillPaymentServiceImplementation implements IBillPaymentService {
     @Override
     public BillPaymentEntity createBillPayment(BillPaymentEntity billPayment) {
         try {
-            String receiver = billPayment.getPayeeName();
-            Long accountNumber = billPayment.getAccountNumber();
-            UserEntity sender = billPayment.getSender();
+
+            UserEntity sender = billPayment.getPayer();
             int amount = billPayment.getAmount();
 
 
@@ -41,6 +40,7 @@ public class BillPaymentServiceImplementation implements IBillPaymentService {
             userClient.updateUser(sender);
 
             //create billPayment
+            System.out.println(billPayment.getAccountNumber()+"this is service");
             return billPaymentClient.createBillPayment(billPayment);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());

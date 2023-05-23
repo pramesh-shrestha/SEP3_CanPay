@@ -13,7 +13,7 @@ message BillPaymentProtoObj {
   UserProtoObj senderUser = 2;
   google.protobuf.StringValue payeeName = 3;
   google.protobuf.Int32Value amount = 4;
-  google.protobuf.Int64Value accountNumber = 5;
+  google.protobuf.StringValue accountNumber = 5;
   google.protobuf.StringValue date = 6;
   google.protobuf.StringValue reference = 7;
 }

@@ -26,29 +26,29 @@ namespace SEP3_DataTier {
           string.Concat(
             "ChxQcm90b3MvYmlsbFRyYW5zYWN0aW9uLnByb3RvGh5nb29nbGUvcHJvdG9i",
             "dWYvd3JhcHBlcnMucHJvdG8aEVByb3Rvcy91c2VyLnByb3RvGhtnb29nbGUv",
-            "cHJvdG9idWYvZW1wdHkucHJvdG8i3AIKE0JpbGxQYXltZW50UHJvdG9PYmoS",
+            "cHJvdG9idWYvZW1wdHkucHJvdG8i3QIKE0JpbGxQYXltZW50UHJvdG9PYmoS",
             "MwoOQmlsbFBheW1lbnRfaWQYASABKAsyGy5nb29nbGUucHJvdG9idWYuSW50",
             "NjRWYWx1ZRIhCgpzZW5kZXJVc2VyGAIgASgLMg0uVXNlclByb3RvT2JqEi8K",
             "CXBheWVlTmFtZRgDIAEoCzIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1",
             "ZRIrCgZhbW91bnQYBCABKAsyGy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1",
-            "ZRIyCg1hY2NvdW50TnVtYmVyGAUgASgLMhsuZ29vZ2xlLnByb3RvYnVmLklu",
-            "dDY0VmFsdWUSKgoEZGF0ZRgGIAEoCzIcLmdvb2dsZS5wcm90b2J1Zi5TdHJp",
-            "bmdWYWx1ZRIvCglyZWZlcmVuY2UYByABKAsyHC5nb29nbGUucHJvdG9idWYu",
-            "U3RyaW5nVmFsdWUiSAoXQmlsbFBheW1lbnRQcm90b09iakxpc3QSLQoPYWxs",
-            "QmlsbFBheW1lbnRzGAEgAygLMhQuQmlsbFBheW1lbnRQcm90b09iajKZBAoX",
-            "QmlsbFBheW1lbnRQcm90b1NlcnZpY2USRAoWQ3JlYXRlQmlsbFBheW1lbnRB",
-            "c3luYxIULkJpbGxQYXltZW50UHJvdG9PYmoaFC5CaWxsUGF5bWVudFByb3Rv",
-            "T2JqEk4KGUZldGNoQmlsbFBheW1lbnRCeUlkQXN5bmMSGy5nb29nbGUucHJv",
-            "dG9idWYuSW50NjRWYWx1ZRoULkJpbGxQYXltZW50UHJvdG9PYmoSWwohRmV0",
-            "Y2hBbGxCaWxsUGF5bWVudHNCeVNlbmRlckFzeW5jEhwuZ29vZ2xlLnByb3Rv",
-            "YnVmLlN0cmluZ1ZhbHVlGhguQmlsbFBheW1lbnRQcm90b09iakxpc3QSYAom",
-            "RmV0Y2hBbExCaWxsUGF5bWVudHNJbnZvbHZpbmdVc2VyQXN5bmMSHC5nb29n",
-            "bGUucHJvdG9idWYuU3RyaW5nVmFsdWUaGC5CaWxsUGF5bWVudFByb3RvT2Jq",
-            "TGlzdBJWChxGZXRjaEJpbGxQYXltZW50c0J5RGF0ZUFzeW5jEhwuZ29vZ2xl",
-            "LnByb3RvYnVmLlN0cmluZ1ZhbHVlGhguQmlsbFBheW1lbnRQcm90b09iakxp",
-            "c3QSUQoWRGVsZXRlQmlsbFBheW1lbnRBc3luYxIbLmdvb2dsZS5wcm90b2J1",
-            "Zi5JbnQ2NFZhbHVlGhouZ29vZ2xlLnByb3RvYnVmLkJvb2xWYWx1ZUIQqgIN",
-            "U0VQM19EYXRhVGllcmIGcHJvdG8z"));
+            "ZRIzCg1hY2NvdW50TnVtYmVyGAUgASgLMhwuZ29vZ2xlLnByb3RvYnVmLlN0",
+            "cmluZ1ZhbHVlEioKBGRhdGUYBiABKAsyHC5nb29nbGUucHJvdG9idWYuU3Ry",
+            "aW5nVmFsdWUSLwoJcmVmZXJlbmNlGAcgASgLMhwuZ29vZ2xlLnByb3RvYnVm",
+            "LlN0cmluZ1ZhbHVlIkgKF0JpbGxQYXltZW50UHJvdG9PYmpMaXN0Ei0KD2Fs",
+            "bEJpbGxQYXltZW50cxgBIAMoCzIULkJpbGxQYXltZW50UHJvdG9PYmoymQQK",
+            "F0JpbGxQYXltZW50UHJvdG9TZXJ2aWNlEkQKFkNyZWF0ZUJpbGxQYXltZW50",
+            "QXN5bmMSFC5CaWxsUGF5bWVudFByb3RvT2JqGhQuQmlsbFBheW1lbnRQcm90",
+            "b09iahJOChlGZXRjaEJpbGxQYXltZW50QnlJZEFzeW5jEhsuZ29vZ2xlLnBy",
+            "b3RvYnVmLkludDY0VmFsdWUaFC5CaWxsUGF5bWVudFByb3RvT2JqElsKIUZl",
+            "dGNoQWxsQmlsbFBheW1lbnRzQnlTZW5kZXJBc3luYxIcLmdvb2dsZS5wcm90",
+            "b2J1Zi5TdHJpbmdWYWx1ZRoYLkJpbGxQYXltZW50UHJvdG9PYmpMaXN0EmAK",
+            "JkZldGNoQWxMQmlsbFBheW1lbnRzSW52b2x2aW5nVXNlckFzeW5jEhwuZ29v",
+            "Z2xlLnByb3RvYnVmLlN0cmluZ1ZhbHVlGhguQmlsbFBheW1lbnRQcm90b09i",
+            "akxpc3QSVgocRmV0Y2hCaWxsUGF5bWVudHNCeURhdGVBc3luYxIcLmdvb2ds",
+            "ZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRoYLkJpbGxQYXltZW50UHJvdG9PYmpM",
+            "aXN0ElEKFkRlbGV0ZUJpbGxQYXltZW50QXN5bmMSGy5nb29nbGUucHJvdG9i",
+            "dWYuSW50NjRWYWx1ZRoaLmdvb2dsZS5wcm90b2J1Zi5Cb29sVmFsdWVCEKoC",
+            "DVNFUDNfRGF0YVRpZXJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::SEP3_DataTier.UserReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -166,11 +166,11 @@ namespace SEP3_DataTier {
 
     /// <summary>Field number for the "accountNumber" field.</summary>
     public const int AccountNumberFieldNumber = 5;
-    private static readonly pb::FieldCodec<long?> _single_accountNumber_codec = pb::FieldCodec.ForStructWrapper<long>(42);
-    private long? accountNumber_;
+    private static readonly pb::FieldCodec<string> _single_accountNumber_codec = pb::FieldCodec.ForClassWrapper<string>(42);
+    private string accountNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long? AccountNumber {
+    public string AccountNumber {
       get { return accountNumber_; }
       set {
         accountNumber_ = value;
@@ -379,7 +379,7 @@ namespace SEP3_DataTier {
         }
       }
       if (other.accountNumber_ != null) {
-        if (accountNumber_ == null || other.AccountNumber != 0L) {
+        if (accountNumber_ == null || other.AccountNumber != "") {
           AccountNumber = other.AccountNumber;
         }
       }
@@ -437,8 +437,8 @@ namespace SEP3_DataTier {
             break;
           }
           case 42: {
-            long? value = _single_accountNumber_codec.Read(input);
-            if (accountNumber_ == null || value != 0L) {
+            string value = _single_accountNumber_codec.Read(input);
+            if (accountNumber_ == null || value != "") {
               AccountNumber = value;
             }
             break;
@@ -501,8 +501,8 @@ namespace SEP3_DataTier {
             break;
           }
           case 42: {
-            long? value = _single_accountNumber_codec.Read(ref input);
-            if (accountNumber_ == null || value != 0L) {
+            string value = _single_accountNumber_codec.Read(ref input);
+            if (accountNumber_ == null || value != "") {
               AccountNumber = value;
             }
             break;

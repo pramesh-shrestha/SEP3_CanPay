@@ -42,7 +42,7 @@ namespace EFCDataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("PayeeUsername")
+                    b.Property<string>("Payee")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -55,8 +55,6 @@ namespace EFCDataAccess.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PayeeUsername");
 
                     b.HasIndex("PayerUsername");
 
@@ -231,19 +229,11 @@ namespace EFCDataAccess.Migrations
 
             modelBuilder.Entity("Entity.Model.BillTransactionEntity", b =>
                 {
-                    b.HasOne("Entity.Model.UserEntity", "Payee")
-                        .WithMany()
-                        .HasForeignKey("PayeeUsername")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Entity.Model.UserEntity", "Payer")
                         .WithMany()
                         .HasForeignKey("PayerUsername")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Payee");
 
                     b.Navigation("Payer");
                 });

@@ -71,17 +71,17 @@ public final class BillTransaction {
     com.google.protobuf.Int32ValueOrBuilder getAmountOrBuilder();
 
     /**
-     * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+     * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
      */
     boolean hasAccountNumber();
     /**
-     * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+     * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
      */
-    com.google.protobuf.Int64Value getAccountNumber();
+    com.google.protobuf.StringValue getAccountNumber();
     /**
-     * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+     * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
      */
-    com.google.protobuf.Int64ValueOrBuilder getAccountNumberOrBuilder();
+    com.google.protobuf.StringValueOrBuilder getAccountNumberOrBuilder();
 
     /**
      * <code>optional .google.protobuf.StringValue date = 6;</code>
@@ -201,11 +201,11 @@ public final class BillTransaction {
               break;
             }
             case 42: {
-              com.google.protobuf.Int64Value.Builder subBuilder = null;
+              com.google.protobuf.StringValue.Builder subBuilder = null;
               if (accountNumber_ != null) {
                 subBuilder = accountNumber_.toBuilder();
               }
-              accountNumber_ = input.readMessage(com.google.protobuf.Int64Value.parser(), extensionRegistry);
+              accountNumber_ = input.readMessage(com.google.protobuf.StringValue.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(accountNumber_);
                 accountNumber_ = subBuilder.buildPartial();
@@ -347,23 +347,23 @@ public final class BillTransaction {
     }
 
     public static final int ACCOUNTNUMBER_FIELD_NUMBER = 5;
-    private com.google.protobuf.Int64Value accountNumber_;
+    private com.google.protobuf.StringValue accountNumber_;
     /**
-     * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+     * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
      */
     public boolean hasAccountNumber() {
       return accountNumber_ != null;
     }
     /**
-     * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+     * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
      */
-    public com.google.protobuf.Int64Value getAccountNumber() {
-      return accountNumber_ == null ? com.google.protobuf.Int64Value.getDefaultInstance() : accountNumber_;
+    public com.google.protobuf.StringValue getAccountNumber() {
+      return accountNumber_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : accountNumber_;
     }
     /**
-     * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+     * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
      */
-    public com.google.protobuf.Int64ValueOrBuilder getAccountNumberOrBuilder() {
+    public com.google.protobuf.StringValueOrBuilder getAccountNumberOrBuilder() {
       return getAccountNumber();
     }
 
@@ -1339,29 +1339,29 @@ public final class BillTransaction {
         return amountBuilder_;
       }
 
-      private com.google.protobuf.Int64Value accountNumber_ = null;
+      private com.google.protobuf.StringValue accountNumber_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Int64Value, com.google.protobuf.Int64Value.Builder, com.google.protobuf.Int64ValueOrBuilder> accountNumberBuilder_;
+          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> accountNumberBuilder_;
       /**
-       * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+       * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
        */
       public boolean hasAccountNumber() {
         return accountNumberBuilder_ != null || accountNumber_ != null;
       }
       /**
-       * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+       * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
        */
-      public com.google.protobuf.Int64Value getAccountNumber() {
+      public com.google.protobuf.StringValue getAccountNumber() {
         if (accountNumberBuilder_ == null) {
-          return accountNumber_ == null ? com.google.protobuf.Int64Value.getDefaultInstance() : accountNumber_;
+          return accountNumber_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : accountNumber_;
         } else {
           return accountNumberBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+       * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
        */
-      public Builder setAccountNumber(com.google.protobuf.Int64Value value) {
+      public Builder setAccountNumber(com.google.protobuf.StringValue value) {
         if (accountNumberBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1375,10 +1375,10 @@ public final class BillTransaction {
         return this;
       }
       /**
-       * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+       * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
        */
       public Builder setAccountNumber(
-          com.google.protobuf.Int64Value.Builder builderForValue) {
+          com.google.protobuf.StringValue.Builder builderForValue) {
         if (accountNumberBuilder_ == null) {
           accountNumber_ = builderForValue.build();
           onChanged();
@@ -1389,13 +1389,13 @@ public final class BillTransaction {
         return this;
       }
       /**
-       * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+       * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
        */
-      public Builder mergeAccountNumber(com.google.protobuf.Int64Value value) {
+      public Builder mergeAccountNumber(com.google.protobuf.StringValue value) {
         if (accountNumberBuilder_ == null) {
           if (accountNumber_ != null) {
             accountNumber_ =
-              com.google.protobuf.Int64Value.newBuilder(accountNumber_).mergeFrom(value).buildPartial();
+              com.google.protobuf.StringValue.newBuilder(accountNumber_).mergeFrom(value).buildPartial();
           } else {
             accountNumber_ = value;
           }
@@ -1407,7 +1407,7 @@ public final class BillTransaction {
         return this;
       }
       /**
-       * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+       * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
        */
       public Builder clearAccountNumber() {
         if (accountNumberBuilder_ == null) {
@@ -1421,33 +1421,33 @@ public final class BillTransaction {
         return this;
       }
       /**
-       * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+       * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
        */
-      public com.google.protobuf.Int64Value.Builder getAccountNumberBuilder() {
+      public com.google.protobuf.StringValue.Builder getAccountNumberBuilder() {
         
         onChanged();
         return getAccountNumberFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+       * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
        */
-      public com.google.protobuf.Int64ValueOrBuilder getAccountNumberOrBuilder() {
+      public com.google.protobuf.StringValueOrBuilder getAccountNumberOrBuilder() {
         if (accountNumberBuilder_ != null) {
           return accountNumberBuilder_.getMessageOrBuilder();
         } else {
           return accountNumber_ == null ?
-              com.google.protobuf.Int64Value.getDefaultInstance() : accountNumber_;
+              com.google.protobuf.StringValue.getDefaultInstance() : accountNumber_;
         }
       }
       /**
-       * <code>optional .google.protobuf.Int64Value accountNumber = 5;</code>
+       * <code>optional .google.protobuf.StringValue accountNumber = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Int64Value, com.google.protobuf.Int64Value.Builder, com.google.protobuf.Int64ValueOrBuilder> 
+          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> 
           getAccountNumberFieldBuilder() {
         if (accountNumberBuilder_ == null) {
           accountNumberBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.google.protobuf.Int64Value, com.google.protobuf.Int64Value.Builder, com.google.protobuf.Int64ValueOrBuilder>(
+              com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder>(
                   getAccountNumber(),
                   getParentForChildren(),
                   isClean());
@@ -2494,34 +2494,34 @@ public final class BillTransaction {
     java.lang.String[] descriptorData = {
       "\n\026bill_transaction.proto\032\036google/protobu" +
       "f/wrappers.proto\032\nuser.proto\032\033google/pro" +
-      "tobuf/empty.proto\"\334\002\n\023BillPaymentProtoOb" +
+      "tobuf/empty.proto\"\335\002\n\023BillPaymentProtoOb" +
       "j\0223\n\016BillPayment_id\030\001 \001(\0132\033.google.proto" +
       "buf.Int64Value\022!\n\nsenderUser\030\002 \001(\0132\r.Use" +
       "rProtoObj\022/\n\tpayeeName\030\003 \001(\0132\034.google.pr" +
       "otobuf.StringValue\022+\n\006amount\030\004 \001(\0132\033.goo" +
-      "gle.protobuf.Int32Value\0222\n\raccountNumber" +
-      "\030\005 \001(\0132\033.google.protobuf.Int64Value\022*\n\004d" +
-      "ate\030\006 \001(\0132\034.google.protobuf.StringValue\022",
-      "/\n\treference\030\007 \001(\0132\034.google.protobuf.Str" +
-      "ingValue\"H\n\027BillPaymentProtoObjList\022-\n\017a" +
-      "llBillPayments\030\001 \003(\0132\024.BillPaymentProtoO" +
-      "bj2\370\004\n\027BillPaymentProtoService\022D\n\026Create" +
-      "BillPaymentAsync\022\024.BillPaymentProtoObj\032\024" +
-      ".BillPaymentProtoObj\022N\n\031FetchBillPayment" +
-      "ByIdAsync\022\033.google.protobuf.Int64Value\032\024" +
-      ".BillPaymentProtoObj\022[\n!FetchAlLBillPaym" +
-      "entsBySenderAsync\022\034.google.protobuf.Stri" +
-      "ngValue\032\030.BillPaymentProtoObjList\022]\n#Fet",
-      "chAllBillPaymentsByReceiverAsync\022\034.googl" +
-      "e.protobuf.StringValue\032\030.BillPaymentProt" +
-      "oObjList\022`\n&FetchAlLBillPaymentsInvolvin" +
-      "gUserAsync\022\034.google.protobuf.StringValue" +
-      "\032\030.BillPaymentProtoObjList\022V\n\034FetchBillP" +
-      "aymentsByDateAsync\022\034.google.protobuf.Str" +
-      "ingValue\032\030.BillPaymentProtoObjList\022Q\n\026De" +
-      "leteBillPaymentAsync\022\033.google.protobuf.I" +
-      "nt64Value\032\032.google.protobuf.BoolValueB\034\n" +
-      "\030applicationtier.protobufP\000b\006proto3"
+      "gle.protobuf.Int32Value\0223\n\raccountNumber" +
+      "\030\005 \001(\0132\034.google.protobuf.StringValue\022*\n\004" +
+      "date\030\006 \001(\0132\034.google.protobuf.StringValue",
+      "\022/\n\treference\030\007 \001(\0132\034.google.protobuf.St" +
+      "ringValue\"H\n\027BillPaymentProtoObjList\022-\n\017" +
+      "allBillPayments\030\001 \003(\0132\024.BillPaymentProto" +
+      "Obj2\370\004\n\027BillPaymentProtoService\022D\n\026Creat" +
+      "eBillPaymentAsync\022\024.BillPaymentProtoObj\032" +
+      "\024.BillPaymentProtoObj\022N\n\031FetchBillPaymen" +
+      "tByIdAsync\022\033.google.protobuf.Int64Value\032" +
+      "\024.BillPaymentProtoObj\022[\n!FetchAlLBillPay" +
+      "mentsBySenderAsync\022\034.google.protobuf.Str" +
+      "ingValue\032\030.BillPaymentProtoObjList\022]\n#Fe",
+      "tchAllBillPaymentsByReceiverAsync\022\034.goog" +
+      "le.protobuf.StringValue\032\030.BillPaymentPro" +
+      "toObjList\022`\n&FetchAlLBillPaymentsInvolvi" +
+      "ngUserAsync\022\034.google.protobuf.StringValu" +
+      "e\032\030.BillPaymentProtoObjList\022V\n\034FetchBill" +
+      "PaymentsByDateAsync\022\034.google.protobuf.St" +
+      "ringValue\032\030.BillPaymentProtoObjList\022Q\n\026D" +
+      "eleteBillPaymentAsync\022\033.google.protobuf." +
+      "Int64Value\032\032.google.protobuf.BoolValueB\034" +
+      "\n\030applicationtier.protobufP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

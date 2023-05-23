@@ -87,7 +87,7 @@
                                 <tr>
                                     @*Payee*@
                                     <td>
-                                        <span>@billEntity.PayeeName</span>
+                                        <span>@billEntity.Payee</span>
                                     </td>
                                     @*Amount*@
                                     <td>
@@ -158,6 +158,7 @@
 
             senderUser = await UserService.FetchUserByUsernameAsync(sender);
 
+            // billPayment = await BillPaymentService.FetchAllTransactionsInvolvingUser(sender);
             showModal = false;
         }
         catch (Exception e)
@@ -181,7 +182,9 @@
             if (string.IsNullOrEmpty(amount)) throw new Exception("amount must be filled in");
             if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
 
-            await BillPaymentService.CreateAsync(new BillPaymentEntity(date, senderUser, payee, Convert.ToInt32(amount), accountNumber, Refrence));
+            Console.WriteLine("before create method");
+            await BillPaymentService.CreateAsync(new BillPaymentEntity(senderUser,payee,accountNumber,Int32.Parse(amount),date,Refrence));
+            Console.WriteLine("after create method");
             showModal = true;
         }
         catch (Exception e)

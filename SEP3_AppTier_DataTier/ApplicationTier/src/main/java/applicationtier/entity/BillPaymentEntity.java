@@ -2,22 +2,22 @@ package applicationtier.entity;
 
 public class BillPaymentEntity {
     private Long paymentId;
-    private UserEntity sender;
+    private UserEntity payer;
 
-    private String payeeName;
-    private long accountNumber;
+    private String payee;
+    private String accountNumber;
     private int amount;
     private String date;
-    private String reference;
+    private String referenceNumber;
 
-    public BillPaymentEntity(Long paymentId, UserEntity sender, String payeeName, long accountNumber, int amount, String date, String reference) {
+    public BillPaymentEntity(Long paymentId, UserEntity payer, String payee, String accountNumber, int amount, String date, String referenceNumber) {
         this.paymentId = paymentId;
-        this.sender = sender;
-        this.payeeName = payeeName;
+        this.payer = payer;
+        this.payee = payee;
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.date = date;
-        this.reference = reference;
+        this.referenceNumber = referenceNumber;
     }
 
     public BillPaymentEntity(){}
@@ -30,27 +30,36 @@ public class BillPaymentEntity {
         this.paymentId = paymentId;
     }
 
-    public UserEntity getSender() {
-        return sender;
+
+    public UserEntity getPayer() {
+        return payer;
     }
 
-    public void setSender(UserEntity sender) {
-        this.sender = sender;
+    public void setPayer(UserEntity payer) {
+        this.payer = payer;
     }
 
-    public String getPayeeName() {
-        return payeeName;
+    public String getPayee() {
+        return payee;
     }
 
-    public void setPayeeName(String payeeName) {
-        this.payeeName = payeeName;
+    public void setPayee(String payee) {
+        this.payee = payee;
     }
 
-    public long getAccountNumber() {
+    public String getReferenceNumber() {
+        return referenceNumber;
+    }
+
+    public void setReferenceNumber(String referenceNumber) {
+        this.referenceNumber = referenceNumber;
+    }
+
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(long accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
@@ -70,13 +79,7 @@ public class BillPaymentEntity {
         this.date = date;
     }
 
-    public String getReference() {
-        return reference;
-    }
 
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
 
 
 }
