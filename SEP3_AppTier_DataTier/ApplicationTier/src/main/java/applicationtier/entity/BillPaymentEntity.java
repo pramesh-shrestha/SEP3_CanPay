@@ -1,7 +1,7 @@
 package applicationtier.entity;
 
 public class BillPaymentEntity {
-    private Long paymentId;
+    private Long Id;
     private UserEntity payer;
 
     private String payee;
@@ -10,8 +10,8 @@ public class BillPaymentEntity {
     private String date;
     private String referenceNumber;
 
-    public BillPaymentEntity(Long paymentId, UserEntity payer, String payee, String accountNumber, int amount, String date, String referenceNumber) {
-        this.paymentId = paymentId;
+    public BillPaymentEntity(Long Id, UserEntity payer, String payee, String accountNumber, int amount, String date, String referenceNumber) {
+        this.Id = Id;
         this.payer = payer;
         this.payee = payee;
         this.accountNumber = accountNumber;
@@ -22,14 +22,13 @@ public class BillPaymentEntity {
 
     public BillPaymentEntity(){}
 
-    public Long getPaymentId() {
-        return paymentId;
+    public Long getId() {
+        return Id;
     }
 
-    public void setPaymentId(Long paymentId) {
-        this.paymentId = paymentId;
+    public void setId(Long id) {
+        Id = id;
     }
-
 
     public UserEntity getPayer() {
         return payer;

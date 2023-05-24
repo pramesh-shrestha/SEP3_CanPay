@@ -37,7 +37,7 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
             BillTransaction.BillPaymentProtoObj protoObj = getBillPaymentBlockingStub().createBillPaymentAsync(billPaymentProtoObj);
             return fromProtoObjToEntity(protoObj);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+                throw new RuntimeException(e);
         }
     }
 
@@ -132,7 +132,7 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
         billPayment.setPayer(UserClientImpl.fromProtoObjToEntity(billPaymentProtoObj.getSenderUser()));
         billPayment.setAmount(billPaymentProtoObj.getAmount().getValue());
         billPayment.setDate(billPaymentProtoObj.getDate().getValue());
-        billPayment.setPaymentId(billPaymentProtoObj.getBillPaymentId().getValue());
+        billPayment.setId(billPaymentProtoObj.getBillPaymentId().getValue());
         billPayment.setAccountNumber(billPaymentProtoObj.getAccountNumber().getValue());
         billPayment.setReferenceNumber(billPaymentProtoObj.getReference().getValue());
 
@@ -150,8 +150,8 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
                 .setReference(StringValue.of(billPayment.getReferenceNumber()));
 
 
-        if (billPayment.getPaymentId() != null || billPayment.getPaymentId() != 0) {
-            billPaymentBuilder.setBillPaymentId(Int64Value.of(billPayment.getPaymentId()));
+        if (billPayment.getId() != null || billPayment.getId() != 0) {
+            billPaymentBuilder.setBillPaymentId(Int64Value.of(billPayment.getId()));
         }
 
         return billPaymentBuilder.build();
