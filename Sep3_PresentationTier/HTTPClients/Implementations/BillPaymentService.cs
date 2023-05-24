@@ -18,7 +18,6 @@ public class BillPaymentService : IBillPaymentService
     
     public async Task<BillPaymentEntity> CreateAsync(BillPaymentEntity billPaymentEntity)
     {
-        Console.WriteLine("this is service class"+billPaymentEntity.AccountNumber);
         HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/billPayment/create", billPaymentEntity);
         string result = await responseMessage.Content.ReadAsStringAsync();
 

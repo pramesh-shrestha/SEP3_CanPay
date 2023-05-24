@@ -42,14 +42,8 @@ public class BillTransactionService : BillPaymentProtoService.BillPaymentProtoSe
         }
     }
 
-    /// <summary>
-    /// Fetches a bill payment by ID asynchronously.
-    /// </summary>
-    /// <param name="request">The <see cref="Int64Value"/> object containing the ID of the bill payment to fetch.</param>
-    /// <param name="context">The server call context.</param>
-    /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous operation. The task result contains the fetched <see cref="BillPaymentProtoObj"/>.</returns>
-    /// <exception cref="RpcException">Thrown when an error occurs while fetching the bill payment.</exception>
-    public override async Task<BillPaymentProtoObj> FetchBillPaymentByIdAsync(Int64Value request, ServerCallContext context)
+
+    /*public override async Task<BillPaymentProtoObj> FetchBillPaymentByIdAsync(Int64Value request, ServerCallContext context)
     {
         try
         {
@@ -62,16 +56,9 @@ public class BillTransactionService : BillPaymentProtoService.BillPaymentProtoSe
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
-    }
+    }*/
 
-    /// <summary>
-    /// Fetches all bill payments by sender asynchronously.
-    /// </summary>
-    /// <param name="request">The <see cref="StringValue"/> object containing the sender's name.</param>
-    /// <param name="context">The server call context.</param>
-    /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous operation. The task result contains a list of fetched <see cref="BillPaymentProtoObj"/>.</returns>
-    /// <exception cref="RpcException">Thrown when an error occurs while fetching the bill payments.</exception>
-    public override async Task<BillPaymentProtoObjList> FetchAllBillPaymentsBySenderAsync(StringValue request,
+    /*public override async Task<BillPaymentProtoObjList> FetchAllBillPaymentsBySenderAsync(StringValue request,
         ServerCallContext context)
     {
         try
@@ -87,7 +74,7 @@ public class BillTransactionService : BillPaymentProtoService.BillPaymentProtoSe
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
-    }
+    }*/
 
     /// <summary>
     /// Fetches all bill payments involving a user asynchronously.
@@ -113,14 +100,7 @@ public class BillTransactionService : BillPaymentProtoService.BillPaymentProtoSe
         }
     }
 
-    /// <summary>
-    /// Fetches bill payments by date asynchronously.
-    /// </summary>
-    /// <param name="request">The <see cref="StringValue"/> object containing the date for filtering the bill payments.</param>
-    /// <param name="context">The server call context.</param>
-    /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous operation. The task result contains a list of fetched <see cref="BillPaymentProtoObj"/>.</returns>
-    /// <exception cref="RpcException">Thrown when an error occurs while fetching the bill payments.</exception>
-    public override async Task<BillPaymentProtoObjList> FetchBillPaymentsByDateAsync(StringValue request,
+    /*public override async Task<BillPaymentProtoObjList> FetchBillPaymentsByDateAsync(StringValue request,
         ServerCallContext context)
     {
         try
@@ -136,16 +116,9 @@ public class BillTransactionService : BillPaymentProtoService.BillPaymentProtoSe
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
-    }
+    }*/
     
-    /// <summary>
-    /// Deletes a bill payment asynchronously.
-    /// </summary>
-    /// <param name="request">The <see cref="Int64Value"/> object containing the ID of the bill payment to delete.</param>
-    /// <param name="context">The server call context.</param>
-    /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous operation. The task result contains a <see cref="BoolValue"/> indicating whether the deletion was successful.</returns>
-    /// <exception cref="RpcException">Thrown when an error occurs while deleting the bill payment.</exception>
-    public override async Task<BoolValue> DeleteBillPaymentAsync(Int64Value request, ServerCallContext context)
+    /*public override async Task<BoolValue> DeleteBillPaymentAsync(Int64Value request, ServerCallContext context)
     {
         try
         {
@@ -157,7 +130,7 @@ public class BillTransactionService : BillPaymentProtoService.BillPaymentProtoSe
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.Aborted, e.Message));
         }
-    }
+    }*/
     
     /// <summary>
     /// Converts a <see cref="BillPaymentProtoObj"/> to a <see cref="BillTransactionEntity"/>.

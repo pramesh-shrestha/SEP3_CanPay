@@ -47,7 +47,7 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
         }
     }
     
-    /// <summary>
+    /*/// <summary>
     /// Fetches a bill transaction by its ID from the database.
     /// </summary>
     /// <param name="id">The ID of the bill transaction to fetch.</param>
@@ -64,9 +64,9 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
             Console.WriteLine(e);
             throw new Exception($"Bill transaction with id {id} not found!");
         }
-    }
+    }*/
     
-    /// <summary>
+    /*/// <summary>
     /// Fetches all bill transactions associated with a specific payer from the database.
     /// </summary>
     /// <param name="payerUsername">The username of the payer.</param>
@@ -77,7 +77,7 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
             .Include(entity => entity.Payee)
             .Where(bt => bt.Payer.Username.Equals(payerUsername)).ToListAsync();
         return billTransactions;
-    }
+    }*/
     
     /// <summary>
     /// Fetches all bill transactions involving a specific user from the database.
@@ -95,7 +95,7 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
         return transactions;
     }
 
-    /// <summary>
+    /*/// <summary>
     /// Fetches all bill transactions on a specific date from the database.
     /// </summary>
     /// <param name="date">The date of the bill transactions to fetch.</param>
@@ -113,9 +113,9 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
             throw new Exception($"No bill transactions made on {date}");
         }
         return billTransactionsByDate;
-    }
+    }*/
     
-    /// <summary>
+    /*/// <summary>
     /// Deletes a bill transaction from the database.
     /// </summary>
     /// <param name="id">The ID of the bill transaction to delete.</param>
@@ -133,5 +133,5 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
         await context.SaveChangesAsync();
 
         return true;
-    }
+    }*/
 }

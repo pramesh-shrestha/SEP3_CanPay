@@ -25,7 +25,7 @@
 
                     <div class="buttonDiv">
                         <button class="button" @onclick="PayBill">Send</button>
-                        <button class="button" @onclick="cancel">Cancel</button>
+                        <button class="button" @onclick="Cancel">Cancel</button>
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
 
                         <label>Reference</label>
                         <div class="inputFields">
-                            <input type="text" class="fieldLength" @bind="Refrence">
+                            <input type="text" class="fieldLength" @bind="reference">
                         </div>
 
                     </div>
@@ -141,13 +141,12 @@
     private string? payee = "";
     private string? amount = "";
     private DateTime dateTime = DateTime.Now.Date;
-    private string accountNumber;
-    private string? Refrence = "";
+    private string? accountNumber;
+    private string? reference = "";
     private UserEntity? senderUser = new UserEntity();
 
     private bool showModal;
     private ICollection<BillPaymentEntity>? billPayment = new List<BillPaymentEntity>();
-    private ICollection<TransactionEntity>? transactionEntities = new List<TransactionEntity>();
 
     private string errorLabel = "";
     private string color = "";
@@ -162,7 +161,7 @@
 
             senderUser = await UserService.FetchUserByUsernameAsync(sender);
             billPayment = await BillPaymentService.FetchAllTransactionsInvolvingUser(sender);
-            
+
     // billPayment = await BillPaymentService.FetchAllTransactionsInvolvingUser(sender);
             showModal = false;
         }
@@ -188,7 +187,7 @@
             if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
 
             Console.WriteLine("before create method");
-            await BillPaymentService.CreateAsync(new BillPaymentEntity(senderUser, payee, accountNumber, Int32.Parse(amount), date, Refrence));
+            await BillPaymentService.CreateAsync(new BillPaymentEntity(senderUser, payee, accountNumber, Int32.Parse(amount), date, reference));
             Console.WriteLine("after create method");
             showModal = true;
         }
@@ -200,11 +199,6 @@
     }
 
     
-    // private async Task DisplayAllBillPayments()
-    // {
-    //     
-    //     billPayment = await BillPaymentService.FetchAllTransactionsInvolvingUser(sender);
-    // }
 
     private void Proceed()
     {
@@ -212,7 +206,7 @@
         NavMgr.NavigateTo("/");
     }
 
-    private void cancel()
+    private void Cancel()
     {
         NavMgr.NavigateTo("/");
     }
