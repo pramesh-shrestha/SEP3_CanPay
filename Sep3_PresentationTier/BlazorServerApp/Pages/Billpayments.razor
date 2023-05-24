@@ -151,7 +151,10 @@
     private string errorLabel = "";
     private string color = "";
 
-
+    /// <summary>
+    /// Initializes the component asynchronously.
+    /// </summary>
+    /// <returns>A task representing the asynchronous operation.</returns>
     protected override async Task OnInitializedAsync()
     {
         try
@@ -162,7 +165,6 @@
             senderUser = await UserService.FetchUserByUsernameAsync(sender);
             billPayment = await BillPaymentService.FetchAllTransactionsInvolvingUser(sender);
 
-    // billPayment = await BillPaymentService.FetchAllTransactionsInvolvingUser(sender);
             showModal = false;
         }
         catch (Exception e)
@@ -173,6 +175,10 @@
     }
 
 
+    /// <summary>
+    /// Performs the bill payment operation.
+    /// </summary>
+    /// <returns>A task representing the asynchronous operation.</returns>
     private async Task PayBill()
     {
         string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
@@ -198,19 +204,21 @@
         }
     }
 
-    
-
+    /// <summary>
+    /// Proceeds with the payment.
+    /// </summary>
     private void Proceed()
     {
         showModal = false;
         NavMgr.NavigateTo("/");
     }
 
+    /// <summary>
+    /// Cancels the payment.
+    /// </summary>
     private void Cancel()
     {
         NavMgr.NavigateTo("/");
     }
-
-
 
 }
