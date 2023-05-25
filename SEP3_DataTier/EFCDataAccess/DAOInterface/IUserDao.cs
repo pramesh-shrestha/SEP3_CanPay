@@ -9,10 +9,6 @@ public interface IUserDao {
     Task<ICollection<UserEntity?>> FetchUsersAsync();
     Task<UserEntity?> UpdateUserAsync(UserEntity? userEntity);
     Task DeleteUserAsync(long id);
-    // Task<bool> UpdateBalanceAsync(string username, string receiver, int amount);
-   Task<bool> UpdateBalanceAsync(string username, int newBalance);
-   
-
     Task<int> FetchBalanceByUsername(string username);
 
 }

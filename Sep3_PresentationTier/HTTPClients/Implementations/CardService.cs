@@ -9,13 +9,21 @@ public class CardService : ICardService
 {
     private readonly HttpClient client;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CardService"/> class with the specified <see cref="HttpClient"/>.
+    /// </summary>
+    /// <param name="client">The HTTP client used to make requests.</param>
     public CardService(HttpClient client)
     {
         this.client = client;
     }
-    
-    
 
+
+    /// <summary>
+    /// Creates a new debit card asynchronously.
+    /// </summary>
+    /// <param name="toCreateCardEntity">The debit card entity to create.</param>
+    /// <returns>The created debit card entity.</returns>
     public async Task<DebitCardEntity> CreateAsync(DebitCardEntity toCreateCardEntity)
     {
         HttpResponseMessage responseMessage = await client.PostAsJsonAsync("card/create", toCreateCardEntity);
@@ -31,20 +39,5 @@ public class CardService : ICardService
             PropertyNameCaseInsensitive = true
         })!;
         return debitCardEntity;
-    }
-
-    public Task<DebitCardEntity> FetchCardByUsernameAsync(string username)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<DebitCardEntity> UpdateCardAsync(long id, UserEntity userEntity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Boolean> DeleteCardAsync(long id)
-    {
-        throw new NotImplementedException();
     }
 }

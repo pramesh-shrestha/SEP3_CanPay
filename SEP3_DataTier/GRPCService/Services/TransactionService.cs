@@ -42,78 +42,6 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
     }
 
     /// <summary>
-    /// Fetches a transaction by its ID.
-    /// </summary>
-    /// <param name="request">The ID of the transaction to fetch.</param>
-    /// <param name="context">The ServerCallContext.</param>
-    /// <returns>The TransactionProtoObj representing the fetched transaction.</returns>
-    public override async Task<TransactionProtoObj> FetchTransactionByIdAsync(Int64Value request,
-        ServerCallContext context)
-    {
-        try
-        {
-            TransactionEntity? entity = await transactionDao.FetchTransactionByIdAsync(request.Value);
-            TransactionProtoObj protoObj = FromEntityToProto(entity);
-            // protoObj.TransactionId = entity.Id;
-
-            return protoObj;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
-        }
-    }
-
-    /// <summary>
-    /// Fetches all transactions by the sender's username.
-    /// </summary>
-    /// <param name="request">The username of the sender.</param>
-    /// <param name="context">The ServerCallContext.</param>
-    /// <returns>The TransactionProtoObjList representing the fetched transactions.</returns>
-    public override async Task<TransactionProtoObjList> FetchAlLTransactionsBySenderAsync(StringValue request,
-        ServerCallContext context)
-    {
-        try
-        {
-            ICollection<TransactionEntity> bySender =
-                await transactionDao.FetchAlLTransactionsBySenderAsync(request.Value);
-
-            TransactionProtoObjList transactionsBySenderProtoList = ConvertToProtoList(bySender);
-            return transactionsBySenderProtoList;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
-        }
-    }
-
-    /// <summary>
-    /// Fetches all transactions by the receiver's username.
-    /// </summary>
-    /// <param name="request">The username of the receiver.</param>
-    /// <param name="context">The ServerCallContext.</param>
-    /// <returns>The TransactionProtoObjList representing the fetched transactions.</returns>
-    public override async Task<TransactionProtoObjList> FetchAllTransactionsByReceiverAsync(StringValue request,
-        ServerCallContext context)
-    {
-        try
-        {
-            ICollection<TransactionEntity> byReceiver =
-                await transactionDao.FetchAllTransactionsByReceiverAsync(request.Value);
-
-            TransactionProtoObjList transactionsByReceiverProtoList = ConvertToProtoList(byReceiver);
-            return transactionsByReceiverProtoList;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
-        }
-    }
-
-    /// <summary>
     /// Fetches all transactions involving a user.
     /// </summary>
     /// <param name="request">The username of the user.</param>
@@ -134,72 +62,6 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
         {
             Console.WriteLine(e);
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
-        }
-    }
-
-    /// <summary>
-    /// Fetches transactions by date.
-    /// </summary>
-    /// <param name="request">The date of the transactions.</param>
-    /// <param name="context">The ServerCallContext.</param>
-    /// <returns>The TransactionProtoObjList representing the fetched transactions.</returns>
-    public override async Task<TransactionProtoObjList> FetchTransactionsByDateAsync(StringValue request,
-        ServerCallContext context)
-    {
-        try
-        {
-            ICollection<TransactionEntity?> byDate = await transactionDao.FetchTransactionsByDateAsync(request.Value);
-
-            TransactionProtoObjList byDateProtoList = ConvertToProtoList(byDate);
-            return byDateProtoList;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
-        }
-    }
-
-    /// <summary>
-    /// Fetches transactions by username and date.
-    /// </summary>
-    /// <param name="request">The filter criteria containing the username and date.</param>
-    /// <param name="context">The ServerCallContext.</param>
-    /// <returns>The TransactionProtoObjList representing the fetched transactions.</returns>
-    public override async Task<TransactionProtoObjList> FetchTransactionsByUsernameAndDate(
-        FilterByUserAndDateProtoObj request, ServerCallContext context)
-    {
-        try
-        {
-            ICollection<TransactionEntity?> byDateAndUsername =
-                await transactionDao.fetchTransactionByUsernameAndDate(ConvertToFilterDto(request));
-            TransactionProtoObjList byDateAndReceiveProtoObjList = ConvertToProtoList(byDateAndUsername);
-            return byDateAndReceiveProtoObjList;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
-        }
-    }
-
-    /// <summary>
-    /// Deletes a transaction by ID.
-    /// </summary>
-    /// <param name="request">The ID of the transaction to delete.</param>
-    /// <param name="context">The ServerCallContext.</param>
-    /// <returns>A BoolValue indicating whether the transaction was deleted successfully.</returns>
-    public override async Task<BoolValue> DeleteTransactionAsync(Int64Value request, ServerCallContext context)
-    {
-        try
-        {
-            bool isTransactionDeleted = await transactionDao.DeleteTransactionAsync(request.Value);
-            return new BoolValue { Value = isTransactionDeleted };
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.Aborted, e.Message));
         }
     }
 
@@ -244,26 +106,13 @@ public class TransactionService : TransactionProtoService.TransactionProtoServic
             Comment = transactionEntity.Comment
         };
     }
-
-    /// <summary>
-    /// Converts a FilterByUserAndDateProtoObj to a FilterDto.
-    /// </summary>
-    /// <param name="protoObj">The FilterByUserAndDateProtoObj to convert.</param>
-    /// <returns>The converted FilterDto.</returns>
-    public static FilterDto ConvertToFilterDto(FilterByUserAndDateProtoObj protoObj)
-    {
-        return new FilterDto()
-        {
-            Username = protoObj.Username,
-            Date = protoObj.Date
-        };
-    }
     
     /// <summary>
     /// Converts a collection of TransactionEntity objects to a TransactionProtoObjList.
     /// </summary>
     /// <param name="transactionEntities">The collection of TransactionEntity objects to convert.</param>
     /// <returns>The converted TransactionProtoObjList.</returns>
+
     private static TransactionProtoObjList ConvertToProtoList(ICollection<TransactionEntity> transactionEntities)
     {
         TransactionProtoObjList transactionProtoObjList = new TransactionProtoObjList

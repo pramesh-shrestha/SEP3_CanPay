@@ -14,11 +14,17 @@ public class ManagedChannelProvider {
   private ManagedChannelProvider() {
   }
 
+  /**
+   * Retrieves the managed channel instance.
+   *
+   * @return The ManagedChannel instance.
+   */
   public static ManagedChannel getChannel(){
     if(channel == null){
       synchronized (lock){
         if (channel == null){
-          channel = ManagedChannelBuilder.forAddress("localhost", 5000)
+          channel = ManagedChannelBuilder.forAddress("localhost",
+                  5000)
               .usePlaintext()
               .build();
         }

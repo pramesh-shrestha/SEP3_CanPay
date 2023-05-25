@@ -22,17 +22,14 @@ service UserProtoService {
   rpc CreateUser(UserProtoObj) returns (UserProtoObj) {}
   rpc FetchAllUser(google.protobuf.Empty) returns (UserListResponse) {}
   rpc FetchUserByUsername(google.protobuf.StringValue) returns (UserProtoObj) {}
-  rpc FetchUserById(google.protobuf.Int64Value) returns (UserProtoObj) {}
+//  rpc FetchUserById(google.protobuf.Int64Value) returns (UserProtoObj) {}
   rpc UpdateUser(UserProtoObj) returns (UserProtoObj) {}
-  rpc DeleteUser(google.protobuf.Int64Value) returns (google.protobuf.BoolValue) {}
+//  rpc DeleteUser(google.protobuf.Int64Value) returns (google.protobuf.BoolValue) {}
 //  rpc UpdateBalance(google.protobuf.Int32Value) returns(google.protobuf.BoolValue);
-  rpc FetchBalanceByUsername(google.protobuf.StringValue) returns(google.protobuf.Int32Value);
+//  rpc FetchBalanceByUsername(google.protobuf.StringValue) returns(google.protobuf.Int32Value);
 }
 
-//message UpdateUserRequest {
-//  string username = 1;
-//  UserProtoObj toUpdateUser = 2;
-//}
+
 
 message UserListResponse {
   repeated UserProtoObj allUsers = 1;

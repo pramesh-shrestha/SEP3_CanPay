@@ -25,13 +25,13 @@ message FilterByUserAndDateProtoObj {
 
 service TransactionProtoService {
   rpc CreateTransactionAsync(TransactionProtoObj) returns (TransactionProtoObj);
-  rpc FetchTransactionByIdAsync(google.protobuf.Int64Value) returns (TransactionProtoObj);
-  rpc FetchAlLTransactionsBySenderAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
-  rpc FetchAllTransactionsByReceiverAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+//  rpc FetchTransactionByIdAsync(google.protobuf.Int64Value) returns (TransactionProtoObj);
+//  rpc FetchAlLTransactionsBySenderAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+//  rpc FetchAllTransactionsByReceiverAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
   rpc FetchAlLTransactionsInvolvingUserAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
-  rpc FetchTransactionsByDateAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
-  rpc FetchTransactionsByRecipientAndDate(FilterByUserAndDateProtoObj) returns (TransactionProtoObjList);
-  rpc DeleteTransactionAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
+//  rpc FetchTransactionsByDateAsync(google.protobuf.StringValue) returns (TransactionProtoObjList);
+//  rpc FetchTransactionsByRecipientAndDate(FilterByUserAndDateProtoObj) returns (TransactionProtoObjList);
+//  rpc DeleteTransactionAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
 }
 
 message  TransactionProtoObjList {

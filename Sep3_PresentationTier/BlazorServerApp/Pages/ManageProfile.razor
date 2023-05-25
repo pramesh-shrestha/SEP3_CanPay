@@ -13,7 +13,6 @@
 {
     <div class="container mt-6">
         <div class="card">
-
             <div class="card-header">
                 <h4 class="card-title">Manage Profile</h4>
             </div>
@@ -69,6 +68,12 @@
                         <button class="buttonCard align-right" @onclick="() => showModal = true" @onclick:preventDefault disabled="@IsDisabled" style="color: @(IsDisabled ? "grey" : "white")">Change Password</button>
                     </div>
                 </div>
+
+            @* ok and cancel buttons *@
+            <div>
+                <button class="button" @onclick="@CheckPassword">OK</button>
+                <button class="button" @onclick="() => editProfile = false">Cancel</button>
+            </div>
 
 
                 <div class="mt-2">
@@ -158,12 +163,16 @@ else
 
     private bool isAuthorized;
 
-
+    /// <summary>
+    /// Initializes the component and fetches the user information from the UserService.
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
+    // Get the current authenticated user's information
         AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
         username = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
         isAuthorized = state.User.Identity!.IsAuthenticated;
+
 
         User = await UserService.FetchUserByUsernameAsync(username);
         password = User.Password!;
@@ -174,16 +183,17 @@ else
         fullName = User.FullName!;
     }
 
-    //when edit profile button is clieked
+
+    /// <summary>
+    /// Checks if the current password is correct to enable profile editing.
+    /// </summary>
     private void CheckPassword()
     {
         errorLabel = "";
         try
         {
             if (string.IsNullOrEmpty(currentPassword))
-            {
                 throw new Exception("You must enter your current password.");
-            }
 
             bool isPasswordValid = BCrypt.Verify(currentPassword, password);
 
@@ -207,39 +217,28 @@ else
     }
 
 
-    public void Proceed()
+    /// <summary>
+    /// Proceeds with changing the password after validating the new password and confirmation.
+    /// </summary>
+    private void Proceed()
     {
         string passwordRegex = @"^(?=.*\S).{6,}$";
         errorLabel = "";
 
-    // string hashedCurrentPassword = HashedCurrentPassword();
-
         try
         {
             if ((string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmNewPassword)))
-            {
                 throw new Exception("All fields required!");
-            }
-
-    // if (!hashedCurrentPassword.Equals(password)) {
-    //     throw new Exception("Wrong current password!");
-    // }
 
             if (!newPassword.Equals(confirmNewPassword))
-            {
                 throw new Exception("New password mismatch!");
-            }
 
             if (!Regex.IsMatch(newPassword, passwordRegex))
-            {
-                throw new Exception("Password Must Be " +
-                                    " 6 Characters Long.");
-            }
+                throw new Exception("Password Must Be More Than 6 Characters Long.");
 
             if (newPassword.Equals(currentPassword))
-            {
                 throw new Exception("You must enter new password different from your current password.");
-            }
+
 
             if (string.IsNullOrEmpty(errorLabel))
             {
@@ -256,17 +255,9 @@ else
         }
     }
 
-    // Extract the salt from the Java hashed password
-    // private string HashedCurrentPassword() {
-    //     string salt = password.Substring(0, 29);
-    //     int rounds = 10;
-    //     return BCrypt.HashPassword(currentPassword, salt + rounds);
-    // }
-
-    // private void ChangePassword() {
-    //     showModal = true;
-    // }
-
+    /// <summary>
+    /// Resets the password change modal and its inputs.
+    /// </summary>
     private void GoBack()
     {
         newPassword = string.Empty;
@@ -290,9 +281,12 @@ else
         return null;
     }
 
+
+    /// <summary>
+    /// Saves the changes made to the user's profile.
+    /// </summary>
     private async Task SaveChanges()
     {
-    // bool success = DateTime.TryParseExact(expiryDate, "MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime);
         string pattern = @"^[0-9/]*$";
         bool isMatch = Regex.IsMatch(expiryDate, pattern);
 
@@ -317,6 +311,7 @@ else
             {
                 CardId = User.Card.CardId
             };
+
             UserEntity userEntity = new()
             {
                 UserName = username,
@@ -325,6 +320,7 @@ else
                 Card = cardEntity,
                 FullName = fullName
             };
+
             await UserService.UpdateUserAsync(userEntity);
             confirmation = true;
             IsDisabled = true;

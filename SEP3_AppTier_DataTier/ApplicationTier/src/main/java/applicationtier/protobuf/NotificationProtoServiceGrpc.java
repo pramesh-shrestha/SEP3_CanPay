@@ -72,15 +72,6 @@ public class NotificationProtoServiceGrpc {
               "NotificationProtoService", "MarkAllAsRead"),
           io.grpc.protobuf.ProtoUtils.marshaller(applicationtier.protobuf.Notification.NotificationProtoObjList.getDefaultInstance()),
           io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Empty.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.google.protobuf.Int64Value,
-      com.google.protobuf.BoolValue> METHOD_DELETE_NOTIFICATION_ASYNC =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "NotificationProtoService", "DeleteNotificationAsync"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.Int64Value.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.google.protobuf.BoolValue.getDefaultInstance()));
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -138,17 +129,13 @@ public class NotificationProtoServiceGrpc {
     }
 
     /**
+     * <pre>
+     *  rpc DeleteNotificationAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
+     * </pre>
      */
     public void markAllAsRead(applicationtier.protobuf.Notification.NotificationProtoObjList request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_MARK_ALL_AS_READ, responseObserver);
-    }
-
-    /**
-     */
-    public void deleteNotificationAsync(com.google.protobuf.Int64Value request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_DELETE_NOTIFICATION_ASYNC, responseObserver);
     }
 
     @java.lang.Override public io.grpc.ServerServiceDefinition bindService() {
@@ -188,13 +175,6 @@ public class NotificationProtoServiceGrpc {
                 applicationtier.protobuf.Notification.NotificationProtoObjList,
                 com.google.protobuf.Empty>(
                   this, METHODID_MARK_ALL_AS_READ)))
-          .addMethod(
-            METHOD_DELETE_NOTIFICATION_ASYNC,
-            asyncUnaryCall(
-              new MethodHandlers<
-                com.google.protobuf.Int64Value,
-                com.google.protobuf.BoolValue>(
-                  this, METHODID_DELETE_NOTIFICATION_ASYNC)))
           .build();
     }
   }
@@ -250,19 +230,14 @@ public class NotificationProtoServiceGrpc {
     }
 
     /**
+     * <pre>
+     *  rpc DeleteNotificationAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
+     * </pre>
      */
     public void markAllAsRead(applicationtier.protobuf.Notification.NotificationProtoObjList request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_MARK_ALL_AS_READ, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void deleteNotificationAsync(com.google.protobuf.Int64Value request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_DELETE_NOTIFICATION_ASYNC, getCallOptions()), request, responseObserver);
     }
   }
 
@@ -313,17 +288,13 @@ public class NotificationProtoServiceGrpc {
     }
 
     /**
+     * <pre>
+     *  rpc DeleteNotificationAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
+     * </pre>
      */
     public com.google.protobuf.Empty markAllAsRead(applicationtier.protobuf.Notification.NotificationProtoObjList request) {
       return blockingUnaryCall(
           getChannel(), METHOD_MARK_ALL_AS_READ, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public com.google.protobuf.BoolValue deleteNotificationAsync(com.google.protobuf.Int64Value request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_DELETE_NOTIFICATION_ASYNC, getCallOptions(), request);
     }
   }
 
@@ -378,19 +349,14 @@ public class NotificationProtoServiceGrpc {
     }
 
     /**
+     * <pre>
+     *  rpc DeleteNotificationAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> markAllAsRead(
         applicationtier.protobuf.Notification.NotificationProtoObjList request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_MARK_ALL_AS_READ, getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.BoolValue> deleteNotificationAsync(
-        com.google.protobuf.Int64Value request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_DELETE_NOTIFICATION_ASYNC, getCallOptions()), request);
     }
   }
 
@@ -399,7 +365,6 @@ public class NotificationProtoServiceGrpc {
   private static final int METHODID_FETCH_ALL_NOTIFICATIONS_BY_RECEIVER_ASYNC = 2;
   private static final int METHODID_MARK_AS_READ = 3;
   private static final int METHODID_MARK_ALL_AS_READ = 4;
-  private static final int METHODID_DELETE_NOTIFICATION_ASYNC = 5;
 
   private static class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -438,10 +403,6 @@ public class NotificationProtoServiceGrpc {
           serviceImpl.markAllAsRead((applicationtier.protobuf.Notification.NotificationProtoObjList) request,
               (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
           break;
-        case METHODID_DELETE_NOTIFICATION_ASYNC:
-          serviceImpl.deleteNotificationAsync((com.google.protobuf.Int64Value) request,
-              (io.grpc.stub.StreamObserver<com.google.protobuf.BoolValue>) responseObserver);
-          break;
         default:
           throw new AssertionError();
       }
@@ -464,8 +425,7 @@ public class NotificationProtoServiceGrpc {
         METHOD_FETCH_NOTIFICATION_BY_ID_ASYNC,
         METHOD_FETCH_ALL_NOTIFICATIONS_BY_RECEIVER_ASYNC,
         METHOD_MARK_AS_READ,
-        METHOD_MARK_ALL_AS_READ,
-        METHOD_DELETE_NOTIFICATION_ASYNC);
+        METHOD_MARK_ALL_AS_READ);
   }
 
 }

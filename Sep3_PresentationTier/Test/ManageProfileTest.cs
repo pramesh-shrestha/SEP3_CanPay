@@ -1,5 +1,6 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 using BlazorServerApp.Pages;
+
 using Bunit;
 using Bunit.TestDoubles;
 using HTTPClients.ClientInterfaces;

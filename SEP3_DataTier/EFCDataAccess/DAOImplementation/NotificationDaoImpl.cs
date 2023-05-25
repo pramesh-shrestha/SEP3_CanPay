@@ -60,6 +60,8 @@ public class NotificationDaoImpl : INotificationDao
         {
             NotificationEntity? notificationEntity =
                 await context.Notifications.Include(entity => entity.Sender)
+                    .Include(entity => entity.Sender.Card)
+                    .Include(entity => entity.Receiver.Card)
                     .Include(entity => entity.Receiver)
                     .FirstOrDefaultAsync(entity => entity.Id == requestValue);
             return notificationEntity;
@@ -95,16 +97,18 @@ public class NotificationDaoImpl : INotificationDao
 
     public async Task MarkNotificationAsReadAsync(NotificationEntity? notificationEntity)
     {
-        /*try
+        try
         {
-            context.Notifications.Update(notificationEntity);
+            var existingEntities = await context.Notifications
+                .FirstOrDefaultAsync(entity => entity.Id == notificationEntity.Id);
+            existingEntities.IsRead = true;
             await context.SaveChangesAsync();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw new Exception(e.Message);
-        }*/
+        }
     }
 
     /// <summary>
@@ -137,12 +141,9 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
-    /// <summary>
-    /// Deletes a notification asynchronously.
-    /// </summary>
-    /// <param name="notificationId">The ID of the notification to delete.</param>
-    /// <returns>True if the notification was successfully deleted; otherwise, false.</returns>
-    public async Task<bool> DeleteNotificationAsync(long notificationId)
+
+    /*public async Task<bool> DeleteNotificationAsync(long notificationId)
+
     {
         try
         {
@@ -156,5 +157,5 @@ public class NotificationDaoImpl : INotificationDao
             Console.WriteLine(e);
             throw new Exception(e.Message);
         }
-    }
+    }*/
 }

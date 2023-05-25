@@ -26,8 +26,8 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
     {
         try
         {
-            RequestEntity requestEntity = FromProtoToRequestEntity(request);
-            RequestEntity addedRequest = await requestDao.CreateRequestAsync(requestEntity);
+            RequestEntity? requestEntity = FromProtoToRequestEntity(request);
+            RequestEntity? addedRequest = await requestDao.CreateRequestAsync(requestEntity);
             RequestProtoObj requestProtoObj = FromRequestEntityToProto(addedRequest);
 
             return requestProtoObj;
@@ -39,34 +39,6 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
         }
     }
 
-    /// <summary>
-    /// Fetches all requests.
-    /// </summary>
-    /// <param name="request">The request data.</param>
-    /// <param name="context">The server call context.</param>
-    /// <returns>A list of all requests as a RequestProtoObjList.</returns>
-    /// <exception cref="RpcException">Thrown when an error occurs while fetching the requests.</exception>
-    public override async Task<RequestProtoObjList> FetchAllRequestsAsync(Empty request, ServerCallContext context)
-    {
-        try
-        {
-            ICollection<RequestEntity> allRequests = await requestDao.FetchAllRequestsAsync();
-            RequestProtoObjList requestProtoObjList = new RequestProtoObjList();
-
-            foreach (RequestEntity requestEntity in allRequests)
-            {
-                RequestProtoObj requestProtoObj = FromRequestEntityToProto(requestEntity);
-                requestProtoObjList.Requests.Add(requestProtoObj);
-            }
-
-            return requestProtoObjList;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.AlreadyExists, e.Message));
-        }
-    }
 
     /// <summary>
     /// Fetches a request by its ID.
@@ -79,7 +51,7 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
     {
         try
         {
-            RequestEntity requestEntity = await requestDao.FetchRequestByIdAsync(request.Value);
+            RequestEntity? requestEntity = await requestDao.FetchRequestByIdAsync(request.Value);
             RequestProtoObj requestProtoObj = FromRequestEntityToProto(requestEntity);
             return requestProtoObj;
         }
@@ -90,26 +62,7 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
         }
     }
 
-    /// Fetches a request by username.
-    /// </summary>
-    /// <param name="request">The username associated with the request.</param>
-    /// <param name="context">The server call context.</param>
-    /// <returns>The requested request as a RequestProtoObj.</returns>
-    /// <exception cref="RpcException">Thrown when the requested request is not found.</exception>
-    public override async Task<RequestProtoObj> FetchRequestByUsername(StringValue request, ServerCallContext context)
-    {
-        try
-        {
-            RequestEntity requestEntity = await requestDao.FetchRequestByUsernameAsync(request.Value);
-            RequestProtoObj requestProtoObj = FromRequestEntityToProto(requestEntity);
-            return requestProtoObj;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
-        }
-    }
+
 
     /// <summary>
     /// Updates a request.
@@ -119,31 +72,11 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
     /// <returns>The updated request as a RequestProtoObj.</returns>
     public override async Task<RequestProtoObj> UpdateRequestAsync(RequestProtoObj request, ServerCallContext context)
     {
-        RequestEntity requestEntity = FromProtoToRequestEntity(request);
-        RequestEntity toUpdateRequest = await requestDao.UpdateRequest(requestEntity);
+        RequestEntity? requestEntity = FromProtoToRequestEntity(request);
+        RequestEntity? toUpdateRequest = await requestDao.UpdateRequest(requestEntity);
         RequestProtoObj requestProtoObj = FromRequestEntityToProto(toUpdateRequest);
         requestProtoObj.RequestId = toUpdateRequest.Id;
         return requestProtoObj;
-    }
-
-    /// <summary>
-    /// Deletes a request by its ID.
-    /// </summary>
-    /// <param name="request">The ID of the request to be deleted.</param>
-    /// <param name="context">The server call context.</param>
-    /// <returns>A BoolValue indicating whether the deletion was successful.</returns>
-    public override async Task<BoolValue> DeleteRequestAsync(Int64Value request, ServerCallContext context)
-    {
-        try
-        {
-            await requestDao.DeleteRequest(request.Value);
-            return new BoolValue { Value = true };
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
-        }
     }
 
     /// <summary>
@@ -178,6 +111,7 @@ public class RequestService : RequestProtoService.RequestProtoServiceBase
     /// <param name="requestEntity">The RequestEntity to be converted.</param>
     /// <returns>The converted RequestProtoObj.</returns>
     public static RequestProtoObj FromRequestEntityToProto(RequestEntity requestEntity)
+
     {
         RequestProtoObj protoObj = new RequestProtoObj()
         {

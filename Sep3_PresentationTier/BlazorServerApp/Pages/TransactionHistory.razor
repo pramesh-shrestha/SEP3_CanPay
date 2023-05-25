@@ -1,4 +1,4 @@
-﻿@page "/TransactionHistory"
+@page "/TransactionHistory"
 @using Domains.Entity
 @using HTTPClients.ClientInterfaces
 @using Microsoft.IdentityModel.Tokens
@@ -7,6 +7,7 @@
 @inject AuthenticationStateProvider StateProvider;
 @inject NavigationManager NavMgr;
 
+<AuthorizeView>
 
 @if (isAuthorized)
 {
@@ -55,24 +56,31 @@
                         <span class="span">Received Transactions</span>
                     </div>
                 </div>
-            </div>
 
 
-            @* Code for setting up date picker with checkbox  *@
-            <div class="@(isHistoryLoaded ? "wrapper_loaded" : "wrapper_disabled") w-25 mx-5">
-                <div class="content">
-                    <label class="checkBox">
-                        <input id="ch1" type="checkbox" @onchange="ToggleCheckboxValue"/>
-                        <div></div>
-                    </label>
+
+                @* Code for setting up date picker with checkbox  *@
+                <div class="@(isHistoryLoaded ? "wrapper_loaded" : "wrapper_disabled") w-25 mx-5">
+                    <div class="content">
+                        <label class="checkBox">
+                            <input id="ch1" type="checkbox" @onchange="ToggleCheckboxValue"/>
+                            <div></div>
+                        </label>
+                    </div>
+
+                    <div class="form-group mx-3 my-1 w-75">
+                        <input type="date" class="form-control"
+                               disabled="@(!isCheckBoxSelected)" @onchange="@ChangeSelectedDate">
+                    </div>
                 </div>
 
-                <div class="form-group mx-3 my-1 w-75">
-                    <input type="date" class="form-control"
-                           disabled="@(!isCheckBoxSelected)" @onchange="@ChangeSelectedDate">
+
+            @* Code for search bar and a "New Transaction" button. *@
+            <div class="d-flex justify-content-between mt-3">
+                <div class="search_bar">
+                    <img src="images/search.png" class="icon" alt="">
+                    <input placeholder="Type Username You Want To Filter By" type="search" @bind="searchUsername" @bind:event="oninput" class="search_input">
                 </div>
-            </div>
-        </div>
 
         @* Code for search bar and a "New Transaction" button. *@
         <div class="d-flex justify-content-between mt-3">
@@ -170,14 +178,18 @@ else
     <h2>You must be logged in to be able to view this page--</h2>
 }
 
+
 @code {
-    private string currentUser;
-    private string selectedDate;
-    private string selectedTransactionType = "all";
+    private string? currentUser;
+
+    // filter properties
+    private string? selectedDate;
+    private string? selectedTransactionType = "all";
     private ICollection<TransactionEntity> filteredTransaction = new List<TransactionEntity>();
     private ICollection<TransactionEntity> transactionList = new List<TransactionEntity>();
-    private string filterDate;
+    private string? filterDate;
 
+    // checkbox
     private bool isHistoryLoaded;
     private bool isCheckBoxSelected = false;
 
@@ -188,6 +200,10 @@ else
     private bool isAuthorized;
 
 
+
+    /// <summary>
+    /// Initializes the component asynchronously.
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
         try
@@ -205,6 +221,9 @@ else
         }
     }
 
+    /// <summary>
+    /// Loads all transactions involving the current user.
+    /// </summary>
     private async Task LoadAllTransactions()
     {
         isHistoryLoaded = true;
@@ -212,6 +231,9 @@ else
         ApplyFilter();
     }
 
+    /// <summary>
+    /// Applies the selected filter to the transaction list.
+    /// </summary>
     private void ApplyFilter()
     {
         switch (selectedTransactionType!)
@@ -224,11 +246,10 @@ else
                 break;
             case "received":
             {
-                filteredTransaction = transactionList.Where(entity => entity.Receiver.UserName!.Equals(currentUser)).ToList();
+                filteredTransaction = transactionList.Where(entity => entity.Receiver!.UserName!.Equals(currentUser)).ToList();
                 break;
             }
         }
-
 
     // filter based on selected date
         if (isCheckBoxSelected && !filterDate.IsNullOrEmpty())
@@ -237,27 +258,34 @@ else
         }
     }
 
-
-    private async Task ChangeTransactionTypeValue(ChangeEventArgs obj)
+    /// <summary>
+    /// Handles the change event of the transaction type dropdown.
+    /// </summary>
+    private void ChangeTransactionTypeValue(ChangeEventArgs obj)
     {
-        selectedTransactionType = obj.Value.ToString();
+
+        selectedTransactionType = obj.Value!.ToString();
         ApplyFilter();
     }
 
-    private async Task ChangeSelectedDate(ChangeEventArgs arg)
+    /// <summary>
+    /// Handles the change event of the selected date.
+    /// </summary>
+    private void ChangeSelectedDate(ChangeEventArgs arg)
     {
-        selectedDate = arg.Value.ToString();
-        DateTime parsedDate = DateTime.ParseExact(selectedDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+        selectedDate = arg.Value!.ToString();
+        DateTime parsedDate = DateTime.ParseExact(selectedDate!, "yyyy-MM-dd", CultureInfo.InvariantCulture);
         filterDate = parsedDate.ToString("dd/M/yyyy");
         ApplyFilter();
     }
 
-
+    /// <summary>
+    /// Toggles the value of the checkbox.
+    /// </summary>
     private void ToggleCheckboxValue(ChangeEventArgs e)
     {
         isCheckBoxSelected = (bool)e.Value!;
     }
-    
 
 
 }

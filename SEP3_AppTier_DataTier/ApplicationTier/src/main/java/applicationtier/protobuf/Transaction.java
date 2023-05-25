@@ -3071,26 +3071,13 @@ public final class Transaction {
       "obuf.StringValue\022*\n\004date\030\002 \001(\0132\034.google." +
       "protobuf.StringValue\"H\n\027TransactionProto" +
       "ObjList\022-\n\017allTransactions\030\001 \003(\0132\024.Trans" +
-      "actionProtoObj2\327\005\n\027TransactionProtoServi" +
+      "actionProtoObj2\301\001\n\027TransactionProtoServi" +
       "ce\022D\n\026CreateTransactionAsync\022\024.Transacti" +
-      "onProtoObj\032\024.TransactionProtoObj\022N\n\031Fetc" +
-      "hTransactionByIdAsync\022\033.google.protobuf." +
-      "Int64Value\032\024.TransactionProtoObj\022[\n!Fetc" +
-      "hAlLTransactionsBySenderAsync\022\034.google.p",
-      "rotobuf.StringValue\032\030.TransactionProtoOb" +
-      "jList\022]\n#FetchAllTransactionsByReceiverA" +
-      "sync\022\034.google.protobuf.StringValue\032\030.Tra" +
-      "nsactionProtoObjList\022`\n&FetchAlLTransact" +
-      "ionsInvolvingUserAsync\022\034.google.protobuf" +
-      ".StringValue\032\030.TransactionProtoObjList\022V" +
-      "\n\034FetchTransactionsByDateAsync\022\034.google." +
-      "protobuf.StringValue\032\030.TransactionProtoO" +
-      "bjList\022]\n#FetchTransactionsByRecipientAn" +
-      "dDate\022\034.FilterByUserAndDateProtoObj\032\030.Tr",
-      "ansactionProtoObjList\022Q\n\026DeleteTransacti" +
-      "onAsync\022\033.google.protobuf.Int64Value\032\032.g" +
-      "oogle.protobuf.BoolValueB\034\n\030applicationt" +
-      "ier.protobufP\000b\006proto3"
+      "onProtoObj\032\024.TransactionProtoObj\022`\n&Fetc" +
+      "hAlLTransactionsInvolvingUserAsync\022\034.goo" +
+      "gle.protobuf.StringValue\032\030.TransactionPr" +
+      "otoObjListB\034\n\030applicationtier.protobufP\000",
+      "b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

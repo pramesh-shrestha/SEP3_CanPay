@@ -94,7 +94,8 @@
     right: 1px;
 }
 
-.noti-body {
+/*Notification List Styling*/
+.notification_container {
     position: absolute;
     top: 40px;
     right: 60px;
@@ -104,45 +105,101 @@
     padding: 5px;
     margin: 5px;
     text-align: center;
-    height: 300px;
+    height: 340px;
     width: 300px;
     background-color: white;
+    max-height: 340px;
+    overflow-y: auto;
 }
 
-.header {
+.notification_heading {
+    margin-bottom: 12px;
     display: flex;
-    justify-content: space-evenly;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.notification_heading span {
+    margin: 0;
     font-size: 20px;
-    color: #172B48;
-    margin-top: 5px;
+    font-weight: 700;
+    color: rgba(59, 59, 59, 0.92);
 }
 
-.hr1 {
-    border-top: 2px solid #a9d6e5;
-}
-
-.notification-table {
+.mark_as_read_btn {
     display: flex;
-    justify-content: flex-start;
-    color: #344563;
-    font-size: 15px;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px 8px 16px;
+    height: 40px;
+    width: 128px;
+    border: none;
+    background: #056bfa27;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #056DFA;
 }
 
-.date {
+.mark_as_read_btn:hover {
+    background: #056bfa49;
+}
+
+.notification_body {
     display: flex;
-    justify-content: flex-start;
-    font-size: 15px;
+    align-items: center;
+    margin-top: 10px;
+    background-color: rgb(232, 231, 231, 0.4);
+    border-radius: 5px;
 }
 
-.card {
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    border-bottom: 1px solid #dad7cd;
+
+.notification_type_icon {
+    /* width: 60px;
+     height: 40px;
+     border-radius: 50%;
+     overflow: hidden;
+     position: relative;
+     left: -2px;
+     top: -12px;
+     border: 2px solid black;*/
+    /*    width: 30px;
+        height: 50px;
+        width: auto;
+        height: auto;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 10px;
+        border: 2px solid black;*/
 }
 
-.card-body:hover {
-    background-color: #edede9;
+.notification_body img {
+    height: 50px;
+    width: 50px;
+    margin: 4px;
+    position: relative;
+    left: -1px;
+}
+
+
+.message {
+    /*background: #ffe271;
+    padding: 2px;
+    border-radius: 0 50px 50px 0;
+    font-size: 14px;*/
+    text-align: left;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+.sender {
+    text-align: left;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 12px;
+    background: #fff;
+    color: rgba(0, 184, 231, 0.5);
+    font-weight: 650;
 }
 
 /*Pop up styling*/
@@ -159,7 +216,7 @@
     display: inline-block;
     position: relative;
     width: auto;
-    max-width: 100px;
+    max-width: 130px;
     font-size: 16px;
     font-weight: bold;
     text-shadow: 0 1px 1px rgba(0, 0, 0, .6);
@@ -207,7 +264,7 @@
 .popUp-button:hover .check-icon {
     opacity: 1;
     background: rgba(0, 0, 0, .25);
-    color: lightgreen;
+    color: lime;
 }
 
 .popUp-button:hover .cross-icon {
@@ -232,9 +289,17 @@
     width: 100%;
 }
 
+.notificationInputField textarea {
+    font-size: 100%;
+    padding: 8px;
+    outline: none;
+    border: 2px solid rgb(200, 200, 200);
+    background-color: transparent;
+    border-radius: 20px;
+}
+
 .notificationInputField label {
     margin-left: 10px;
-    /*padding: 8px;*/
     background-color: #ffffff;
     position: relative;
     top: -55px;
@@ -242,3 +307,37 @@
     font-size: 15px;
     color: #656363;
 }
+
+.notificationLabelMessage {
+    margin-left: 10px;
+    background-color: #ffffff;
+    position: relative;
+    top: -130px !important;
+    left: 10px !important;
+    font-size: 15px;
+    /*color: #656363;*/
+}
+
+.ok_button {
+
+    display: inline-block;
+    outline: 0;
+    text-align: center;
+    cursor: pointer;
+    padding: 0px 16px;
+    border-radius: 2px;
+    min-width: 80px;
+    height: 32px;
+    background-color: rgb(0, 120, 212);
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: 400;
+    box-sizing: border-box;
+    border: 1px solid rgb(0, 120, 212);
+}
+
+.ok_button:hover {
+    background-color: rgb(16, 110, 190);
+    border: 1px solid rgb(16, 110, 190);
+}
+

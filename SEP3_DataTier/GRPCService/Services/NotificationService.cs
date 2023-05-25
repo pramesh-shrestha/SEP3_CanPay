@@ -126,25 +126,7 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
         return new Empty();
     }
 
-    /// <summary>
-    /// Deletes a notification with the specified ID.
-    /// </summary>
-    /// <param name="request">The Int64Value containing the ID of the notification to delete.</param>
-    /// <param name="context">The server call context.</param>
-    /// <returns>A BoolValue indicating whether the notification was successfully deleted.</returns>
-    public override async Task<BoolValue> DeleteNotificationAsync(Int64Value request, ServerCallContext context)
-    {
-        try
-        {
-            bool deleteNotificationAsync = await notificationDao.DeleteNotificationAsync(request.Value);
-            return new BoolValue { Value = deleteNotificationAsync };
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.Aborted, e.Message));
-        }
-    }
+
 
     /// <summary>
     /// Converts a NotificationProtoObj to a NotificationEntity.

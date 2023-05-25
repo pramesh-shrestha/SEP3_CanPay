@@ -11,7 +11,7 @@ public interface INotificationService {
 
     void markAllAsRead(List<NotificationEntity> notifications);
 
-    boolean deleteNotification(Long id);
+//    boolean deleteNotification(Long id);
 
     NotificationEntity fetchNotificationById(long id);
 
