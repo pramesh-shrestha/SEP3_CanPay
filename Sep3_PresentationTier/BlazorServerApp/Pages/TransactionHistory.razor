@@ -1,4 +1,4 @@
-@page "/TransactionHistory"
+﻿@page "/TransactionHistory"
 @using Domains.Entity
 @using HTTPClients.ClientInterfaces
 @using Microsoft.IdentityModel.Tokens
@@ -7,7 +7,7 @@
 @inject AuthenticationStateProvider StateProvider;
 @inject NavigationManager NavMgr;
 
-<AuthorizeView>
+
 
 @if (isAuthorized)
 {
@@ -58,7 +58,6 @@
                 </div>
 
 
-
                 @* Code for setting up date picker with checkbox  *@
                 <div class="@(isHistoryLoaded ? "wrapper_loaded" : "wrapper_disabled") w-25 mx-5">
                     <div class="content">
@@ -75,109 +74,111 @@
                 </div>
 
 
-            @* Code for search bar and a "New Transaction" button. *@
-            <div class="d-flex justify-content-between mt-3">
-                <div class="search_bar">
-                    <img src="images/search.png" class="icon" alt="">
-                    <input placeholder="Type Username You Want To Filter By" type="search" @bind="searchUsername" @bind:event="oninput" class="search_input">
-                </div>
+                @* Code for search bar and a "New Transaction" button. *@
+                <div class="d-flex justify-content-between mt-3">
+                    <div class="search_bar">
+                        <img src="images/search.png" class="icon" alt="">
+                        <input placeholder="Type Username You Want To Filter By" type="search" @bind="searchUsername" @bind:event="oninput" class="search_input">
+                    </div>
 
-        @* Code for search bar and a "New Transaction" button. *@
-        <div class="d-flex justify-content-between mt-3">
-            <div class="search_bar">
-                <img src="images/search.png" class="icon" alt="">
-                <input placeholder="Type Username You Want To Filter By" type="search" @bind="searchUsername" @bind:event="oninput" class="search_input">
-            </div>
+                    @* Code for search bar and a "New Transaction" button. *@
+                    <div class="d-flex justify-content-between mt-3">
+                        <div class="search_bar">
+                            <img src="images/search.png" class="icon" alt="">
+                            <input placeholder="Type Username You Want To Filter By" type="search" @bind="searchUsername" @bind:event="oninput" class="search_input">
+                        </div>
 
-            <div>
-                <button class="load_history_button" disabled="@isHistoryLoaded"
-                        @onclick="LoadAllTransactions">
-                    Load History
-                </button>
-            </div>
+                        <div>
+                            <button class="load_history_button" disabled="@isHistoryLoaded"
+                                    @onclick="LoadAllTransactions">
+                                Load History
+                            </button>
+                        </div>
 
-        </div>
+                    </div>
 
-        @if (filteredTransaction.Count != 0 && isHistoryLoaded)
-        {
-            <div class="table_box">
-                <table class="table table-borderless mt-4 ">
-                    <thead>
-                    <tr>
-                        <th>Sender</th>
-                        <th>Receiver</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Comments</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-
-                    @foreach (var transactionEntity in filteredTransaction)
+                    @if (filteredTransaction.Count != 0 && isHistoryLoaded)
                     {
-                        if (searchUsername.IsNullOrEmpty() ||
-                            transactionEntity.Sender.UserName!.Contains(searchUsername, StringComparison.OrdinalIgnoreCase) ||
-                            transactionEntity.Receiver!.UserName!.Contains(searchUsername, StringComparison.OrdinalIgnoreCase))
-                        {
-                            <tr>
-                                <td>
-                                    <div class="user_info">
-                                        <span>@transactionEntity.Sender.FullName</span>
-                                        <span class="text-muted">@transactionEntity.Sender.UserName</span>
-                                    </div>
-                                </td>
+                        <div class="table_box">
+                            <table class="table table-borderless mt-4 ">
+                                <thead>
+                                <tr>
+                                    <th>Sender</th>
+                                    <th>Receiver</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Comments</th>
+                                </tr>
+                                </thead>
 
-                                <td>
-                                    <div class="user_info">
-                                        <span>@transactionEntity.Receiver!.FullName</span>
-                                        <span class="text-muted">@transactionEntity.Receiver.UserName</span>
-                                    </div>
-                                </td>
+                                <tbody>
 
-                                <td>
-                                    <span>@transactionEntity.Date</span>
-                                </td>
-                                <td>
-
-                                    @if (transactionEntity.Sender.UserName!.Equals(currentUser))
+                                @foreach (var transactionEntity in filteredTransaction)
+                                {
+                                    if (searchUsername.IsNullOrEmpty() ||
+                                        transactionEntity.Sender.UserName!.Contains(searchUsername, StringComparison.OrdinalIgnoreCase) ||
+                                        transactionEntity.Receiver!.UserName!.Contains(searchUsername, StringComparison.OrdinalIgnoreCase))
                                     {
-                                        <img class="amount_icon" src="images/minus.png"/>
-                                        <span class="amount" style="color: red">@transactionEntity.Amount</span>
-                                    }
-                                    else
-                                    {
-                                        <img class="amount_icon" src="images/plus.png"/>
-                                        <span class="amount" style="color: #00ff00">@transactionEntity.Amount</span>
-                                    }
+                                        <tr>
+                                            <td>
+                                                <div class="user_info">
+                                                    <span>@transactionEntity.Sender.FullName</span>
+                                                    <span class="text-muted">@transactionEntity.Sender.UserName</span>
+                                                </div>
+                                            </td>
 
-                                </td>
+                                            <td>
+                                                <div class="user_info">
+                                                    <span>@transactionEntity.Receiver!.FullName</span>
+                                                    <span class="text-muted">@transactionEntity.Receiver.UserName</span>
+                                                </div>
+                                            </td>
 
-                                <td>
-                                    @transactionEntity.Comment
-                                </td>
-                            </tr>
-                        }
+                                            <td>
+                                                <span>@transactionEntity.Date</span>
+                                            </td>
+                                            <td>
+
+                                                @if (transactionEntity.Sender.UserName!.Equals(currentUser))
+                                                {
+                                                    <img class="amount_icon" src="images/minus.png"/>
+                                                    <span class="amount" style="color: red">@transactionEntity.Amount</span>
+                                                }
+                                                else
+                                                {
+                                                    <img class="amount_icon" src="images/plus.png"/>
+                                                    <span class="amount" style="color: #00ff00">@transactionEntity.Amount</span>
+                                                }
+
+                                            </td>
+
+                                            <td>
+                                                @transactionEntity.Comment
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                </tbody>
+                            </table>
+                        </div>
                     }
-                    </tbody>
-                </table>
+                    else
+                    {
+                        <div class="field">
+                            <label style="color: white">
+                                <span>No Transactions Found for @currentUser</span>
+                            </label>
+                        </div>
+                    }
+                </div>
             </div>
-        }
-        else
-        {
-            <div class="field">
-                <label style="color: white">
-                    <span>No Transactions Found for @currentUser</span>
-                </label>
-            </div>
-        }
+        </div>
     </div>
 }
 else
 {
     <h2>You must be logged in to be able to view this page--</h2>
 }
-
 
 @code {
     private string? currentUser;
@@ -198,7 +199,6 @@ else
     private string errorLabel;
     private string color;
     private bool isAuthorized;
-
 
 
     /// <summary>
@@ -263,7 +263,6 @@ else
     /// </summary>
     private void ChangeTransactionTypeValue(ChangeEventArgs obj)
     {
-
         selectedTransactionType = obj.Value!.ToString();
         ApplyFilter();
     }
@@ -286,6 +285,5 @@ else
     {
         isCheckBoxSelected = (bool)e.Value!;
     }
-
 
 }
