@@ -170,8 +170,7 @@
             if (string.IsNullOrEmpty(Password)) throw new Exception("Password Cannot Be Empty");
             if (string.IsNullOrEmpty(RepeatPassword)) throw new Exception("Repeat Password Cannot Be Empty");
             if (!Regex.IsMatch(Password, passwordRegex))
-                throw new Exception("Password Must Be More Than " +
-                                    " 6 Characters Long.");
+                throw new Exception("Password Must Be More Than 6 Characters Long.");
             if (!Password.Equals(RepeatPassword)) throw new Exception("Password and Repeat Password doesn't match!!");
             step = 2;
         }
@@ -211,7 +210,7 @@
     /// <summary>
     /// Create a new user asynchronously.
     /// </summary>
-    private async Task CreateAsync()
+    public async Task CreateAsync()
     {
         try
         {

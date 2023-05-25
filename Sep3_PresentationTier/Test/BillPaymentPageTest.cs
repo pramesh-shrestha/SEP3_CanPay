@@ -23,9 +23,7 @@ public class BillPaymentPageTest : TestContext
         Mock<IUserService> userServiceMock = new();
         Mock<AuthenticationStateProvider> stateProvider = new();
         var context = new TestContext();
-
-        var authorizationContext = this.AddTestAuthorization();
-        authorizationContext.SetAuthorized("test");
+   
 
         // creating sample authentication state with user claim
         List<Claim> claims = new List<Claim>
@@ -117,7 +115,7 @@ public class BillPaymentPageTest : TestContext
 
         //Assert
         Assert.False(instance.showModal);
-        Assert.Equal("Invalid account number", instance.errorLabel);
+        Assert.Equal("Account number must be of 10 digits", instance.errorLabel);
         billPaymentServiceMock.Verify(service => service.CreateAsync(expectedBillPayment), Times.Never);
     }
 
