@@ -9,147 +9,143 @@
 @inject IUserService UserService;
 
 
-<AuthorizeView>
-    <Authorized>
+@if (isAuthorized)
+{
+    <div class="container">
+        <h3>Bill Payment</h3>
 
-        <div class="container">
-            <h3>Bill Payment</h3>
-
-            <div class="row">
-                @*This is the first box to display the image and send/Cancel button*@
-                <div class="col-md-3 first-box">
-                    <div class="icon-image">
-                        <img src="images/KANPAY logo.png" alt="">
-                    </div>
-
-
-                    <div class="buttonDiv">
-                        <button class="button" @onclick="PayBill">Send</button>
-                        <button class="button" @onclick="Cancel">Cancel</button>
-                    </div>
+        <div class="row">
+            @*This is the first box to display the image and send/Cancel button*@
+            <div class="col-md-3 first-box">
+                <div class="icon-image">
+                    <img src="images/KANPAY logo.png" alt="">
                 </div>
 
-                @*This is the second box to display the fields*@
-                <div class="col-md-6 second-box">
-                    <div class="form-group">
 
-                        <label>Payee</label>
-                        <div class="inputFields">
-                            <input type="text" class="fieldLength" @bind="payee">
-                        </div>
-
-                        <label>Account number</label>
-                        <div class="inputFields">
-                            <input type="number" class="fieldLength" @bind="accountNumber">
-                        </div>
-
-                        <label>Amount</label>
-                        <div class="inputFields">
-                            <input type="number" class="fieldLength" @bind="amount">
-                        </div>
-
-                        <label>Date</label>
-                        <div class="inputFields">
-                            <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
-                        </div>
-
-                        <label>Reference</label>
-                        <div class="inputFields">
-                            <input type="text" class="fieldLength" @bind="reference">
-                        </div>
-
-                    </div>
-                </div>
-                @*This is third box to display the bill payments history*@
-                <div class="col-md-3 third-box">
-                    <label class="header">Recent bill payments</label>
-                    <hr class="hr1"/>
-
-                    @if (billPayment.Count != 0)
-                    {
-                        <div class="table_box">
-                            <table class="table table-borderless">
-                                <thead>
-                                <tr>
-                                    <th>Payee</th>
-                                    <th>Amount</th>
-                                    <th>Date</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach (var billEntity in billPayment)
-                                {
-                                    <tr>
-                                        @*Payee*@
-                                        <td>
-                                            <span class="value">@billEntity.Payee</span>
-                                        </td>
-                                        @*Amount*@
-                                        <td>
-                                            <span class="value">@billEntity.Amount</span>
-                                        </td>
-                                        @*Date*@
-                                        <td>
-                                            <span class="value">@billEntity.Date</span>
-                                        </td>
-                                    </tr>
-                                }
-                                </tbody>
-
-                            </table>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="field">
-                            <label style="color: red">
-                                <span>No Transactions Found for @senderUser</span>
-                            </label>
-                        </div>
-                    }
+                <div class="buttonDiv">
+                    <button class="button" @onclick="PayBill">Send</button>
+                    <button class="button" @onclick="Cancel">Cancel</button>
                 </div>
             </div>
 
-            <div class="error">
-                @if (!string.IsNullOrEmpty(errorLabel))
+            @*This is the second box to display the fields*@
+            <div class="col-md-6 second-box">
+                <div class="form-group">
+
+                    <label>Payee</label>
+                    <div class="inputFields">
+                        <input type="text" class="fieldLength" @bind="payee">
+                    </div>
+
+                    <label>Account number</label>
+                    <div class="inputFields">
+                        <input type="number" class="fieldLength" maxlength="10" @bind="accountNumber">
+                    </div>
+
+                    <label>Amount</label>
+                    <div class="inputFields">
+                        <input type="number" class="fieldLength" @bind="amount" > 
+                    </div>
+
+                    <label>Date</label>
+                    <div class="inputFields">
+                        <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
+                    </div>
+
+                    <label>Reference</label>
+                    <div class="inputFields">
+                        <input type="text" class="fieldLength" @bind="reference">
+                    </div>
+
+                </div>
+            </div>
+            @*This is third box to display the bill payments history*@
+            <div class="col-md-3 third-box">
+                <label class="header">Recent bill payments</label>
+                <hr class="hr1"/>
+
+                @if (billPayment.Count != 0)
                 {
-                    <label style="color: @color">@errorLabel</label>
+                    <div class="table_box">
+                        <table class="table table-borderless">
+                            <thead>
+                            <tr>
+                                <th>Payee</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var billEntity in billPayment)
+                            {
+                                <tr>
+                                    @*Payee*@
+                                    <td>
+                                        <span class="value">@billEntity.Payee</span>
+                                    </td>
+                                    @*Amount*@
+                                    <td>
+                                        <span class="value">@billEntity.Amount</span>
+                                    </td>
+                                    @*Date*@
+                                    <td>
+                                        <span class="value">@billEntity.Date</span>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="field">
+                        <label style="color: red">
+                            <span>No Transactions Found for @senderUser</span>
+                        </label>
+                    </div>
                 }
             </div>
-
         </div>
 
-        <Modal ShowModal="showModal">
-            <p >You have successfully transferred the amount!</p>
-            <div>
-                <button class="button" @onclick="@Proceed">OK</button>
-            </div>
-        </Modal>
+        <div class="error">
+            @if (!string.IsNullOrEmpty(errorLabel))
+            {
+                <label style="color: @color">@errorLabel</label>
+            }
+        </div>
 
+    </div>
 
-    </Authorized>
-    <NotAuthorized>
-        <h2>You must be logged in to be able to view this page--</h2>
-    </NotAuthorized>
-
-</AuthorizeView>
-
+    <Modal ShowModal="showModal">
+        <p >You have successfully transferred the amount!</p>
+        <div>
+            <button class="button" @onclick="@Proceed">OK</button>
+        </div>
+    </Modal>
+}
+else
+{
+    <h2>You must be logged in to be able to view this page--</h2>
+}
 
 @code {
 
-    private string? sender;
-    private string? payee = "";
-    private string? amount = "";
-    private DateTime dateTime = DateTime.Now.Date;
-    private string? accountNumber;
-    private string? reference = "";
-    private UserEntity? senderUser = new UserEntity();
+    public string? sender;
+    public string? payee = "";
+    public string? amount = "";
+    public DateTime dateTime = DateTime.Now.Date;
+    public string? accountNumber;
+    public string? reference = "";
+    public UserEntity? senderUser = new UserEntity();
 
-    private bool showModal;
-    private ICollection<BillPaymentEntity>? billPayment = new List<BillPaymentEntity>();
+    public bool showModal;
+    public ICollection<BillPaymentEntity>? billPayment = new List<BillPaymentEntity>();
 
-    private string errorLabel = "";
-    private string color = "";
+    public string errorLabel = "";
+    public string color = "";
+    public bool isAuthorized;
 
     /// <summary>
     /// Initializes the component asynchronously.
@@ -165,6 +161,7 @@
             senderUser = await UserService.FetchUserByUsernameAsync(sender);
             billPayment = await BillPaymentService.FetchAllTransactionsInvolvingUser(sender);
 
+            isAuthorized = state.User.Identity!.IsAuthenticated;
             showModal = false;
         }
         catch (Exception e)
@@ -179,7 +176,7 @@
     /// Performs the bill payment operation.
     /// </summary>
     /// <returns>A task representing the asynchronous operation.</returns>
-    private async Task PayBill()
+    public async Task PayBill()
     {
         string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
 
@@ -192,9 +189,8 @@
             if (string.IsNullOrEmpty(amount)) throw new Exception("amount must be filled in");
             if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
 
-            Console.WriteLine("before create method");
             await BillPaymentService.CreateAsync(new BillPaymentEntity(senderUser, payee, accountNumber, Int32.Parse(amount), date, reference));
-            Console.WriteLine("after create method");
+            errorLabel = "Bill Payment Successfully Made!";
             showModal = true;
         }
         catch (Exception e)

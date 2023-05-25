@@ -26,7 +26,7 @@ public class BillPaymentService : IBillPaymentService
     /// </summary>
     /// <param name="billPaymentEntity">The bill payment entity to create.</param>
     /// <returns>The created bill payment entity.</returns>
-    public async Task<BillPaymentEntity> CreateAsync(BillPaymentEntity billPaymentEntity)
+    public async Task<BillPaymentEntity> CreateAsync(BillPaymentEntity? billPaymentEntity)
     {
         HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/billPayment/create", billPaymentEntity);
         string result = await responseMessage.Content.ReadAsStringAsync();

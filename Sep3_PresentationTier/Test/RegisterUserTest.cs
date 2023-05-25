@@ -22,6 +22,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
         context = new TestContext();
         context.Services.AddSingleton<IUserService>(new UserService(client));
         context.Services.AddSingleton<ICardService>(new CardService(client));
+        context.Services.AddAuthorization();
         renderedComponent = context.RenderComponent<RegisterUser>();
     }
 
@@ -35,7 +36,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
     
     private void SetInstancesValueForDebitCard() {
         renderedComponent.Instance.CardNumber = 1234567890123456;
-        renderedComponent.Instance.ExpiryFullDate = DateTime.Parse("22/12/2026");
+        renderedComponent.Instance.ExpiryFullDate = DateTime.Today;
         renderedComponent.Instance.CVV = 741;
        
     }
@@ -100,7 +101,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
         renderedComponent.Instance.GoToStep2();
 
         Assert.Equal(
-            "Error: Password Must Be Between 8 and 30 Characters Long. Must Have 1 symbol and 1 capital letter",
+            "Error: Password Must Be  6 Characters Long.",
             renderedComponent.Instance.ErrorLabel);
     }
 
@@ -225,7 +226,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
         var password = renderedComponent.Instance.Password = "Test@123";
         var repeatPassword = renderedComponent.Instance.RepeatPassword = "Test@123";
         var cardNumber = renderedComponent.Instance.CardNumber = 1234567890123456;
-        var expiryFullDate = renderedComponent.Instance.ExpiryFullDate = DateTime.Parse("22/12/2026");
+        var expiryFullDate = renderedComponent.Instance.ExpiryFullDate = DateTime.Today;
         string expiryDate = $"{expiryFullDate.Date.Month}/{expiryFullDate.Date.Year}";
         var cvv = renderedComponent.Instance.CVV = 741;
         

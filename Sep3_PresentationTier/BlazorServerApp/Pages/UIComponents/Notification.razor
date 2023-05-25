@@ -41,13 +41,9 @@
             </div>
         }
 
-
-
-
         @if (clickedNotificationType!.Equals(TypesOfTransaction.RequestMoney.ToString()))
         {
             <Modal ShowModal="@showModal">
-                @* <p>La bhai yeha chai receiver le yeti request garecha bhana</p> *@
                 <div class="notificationInputField">
                     <input @bind="clickedNotificationSender" type="text" disabled=""/>
                     <label class="notificationLabel">Sent By</label>
