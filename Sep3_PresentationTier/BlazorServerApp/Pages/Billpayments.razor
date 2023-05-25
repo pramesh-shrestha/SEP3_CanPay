@@ -32,25 +32,25 @@
             <div class="col-md-6 second-box">
                 <div class="form-group">
 
-                    <label>Payee</label>
-                    <div class="inputFields">
-                        <input type="text" class="fieldLength" @bind="payee">
-                    </div>
+                        <label>Account number (Enter 10 Digit account number)</label>
+                        <div class="inputFields">
+                            <input type="number" class="fieldLength" @bind="accountNumber">
+                        </div>
+                        
+                        <label>Amount (CAD)</label>
+                        <div class="inputFields amount-field">
+                            <span class="currency">$</span>
+                            <input type="number" class="fieldLength-Amount" @bind="amount">
+                        </div>
+                        
 
-                    <label>Account number</label>
-                    <div class="inputFields">
-                        <input type="number" class="fieldLength" maxlength="10" @bind="accountNumber">
-                    </div>
+                        <label>Date</label>
+                        <div class="inputFields">
+                            <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")" disabled="">
+                        </div>
 
-                    <label>Amount</label>
-                    <div class="inputFields">
-                        <input type="number" class="fieldLength" @bind="amount" > 
-                    </div>
 
-                    <label>Date</label>
-                    <div class="inputFields">
-                        <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
-                    </div>
+             
 
                     <label>Reference</label>
                     <div class="inputFields">

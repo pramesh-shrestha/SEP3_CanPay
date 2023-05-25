@@ -199,3 +199,23 @@
 .radio_option:checked + .filter_btn .span {
     color: #FFF;
 }
+
+.amount-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.currency {
+    position: absolute;
+    left: 10px;
+}
+
+.fieldLength-Amount {
+    width: 80%;
+    padding-left: 25px; /* Add left padding to make space for the currency sign */
+    -moz-appearance: textfield; /* Remove increment and decrement buttons in Firefox */
+}
+    
+
+

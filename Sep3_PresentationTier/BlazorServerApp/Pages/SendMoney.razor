@@ -106,14 +106,15 @@
                                 <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
                             </div>
 
-                            <label>Amount</label>
-                            <div class="inputFields">
-                                <input type="number" class="fieldLength" @bind="amount">
+                            <label>Amount (CAD)</label>
+                            <div class="inputFields amount-field">
+                                <span class="currency">$</span>
+                                <input type="number" class="fieldLength-Amount" @bind="amount">
                             </div>
-
+                            
                             <label>Date</label>
                             <div class="inputFields">
-                                <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
+                                <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")" disabled="">
                             </div>
 
                             @* <label>To</label> *@
@@ -123,7 +124,35 @@
 
                             <label>Comment</label>
                             <div class="inputFields">
-                                <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment">
+                                <input type="text" class="fieldLength" @bind="cardNumber" disabled="">
+                            </div>*@
+                                <label>To</label>
+                                <div class="inputFields">
+                                    <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
+                                </div>
+                                
+                                <label>Amount (CAD)</label>
+                                <div class="inputFields amount-field">
+                                    <span class="currency">$</span>
+                                    <input type="number" class="fieldLength-Amount" @bind="amount">
+                                </div>
+                                
+                                
+                                <label>Date</label>
+                                <div class="inputFields">
+                                    <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")" disabled="">
+                                </div>
+
+                                @* <label>To</label> *@
+                                @* <div class="inputFields"> *@
+                                @*     <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment"> *@
+                                @* </div> *@
+                                
+                                <label>Comment</label>
+                                <div class="inputFields">
+                                    <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment">
+                                </div>
+                               
                             </div>
 
                         </div>

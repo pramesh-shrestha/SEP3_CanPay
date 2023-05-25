@@ -2,3 +2,21 @@
     width: 30px;
     cursor: pointer;
 }
+
+a{
+    color: white;
+    transition: all 0.3s ease-in-out;
+   
+}
+
+a:hover {
+    border: 1px solid #000;
+    padding: 7px;
+    transform: translateY(-5%);
+    background-color: #23C0BE;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 15px;
+    
+}
