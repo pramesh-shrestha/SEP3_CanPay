@@ -16,6 +16,7 @@ builder.Services.AddScoped<ICardDao, CardDaoImpl>();
 builder.Services.AddScoped<ITransactionDao, TransactionDaoImpl>();
 builder.Services.AddScoped<INotificationDao, NotificationDaoImpl>();
 builder.Services.AddScoped<IRequestDao, RequestDaoImpl>();
+builder.Services.AddScoped<IBillTransactionDao, BillTransactionDaoImpl>();
 
 var app = builder.Build();
 
@@ -25,7 +26,7 @@ app.MapGrpcService<UserService>();
 app.MapGrpcService<TransactionService>();
 app.MapGrpcService<NotificationService>();
 app.MapGrpcService<RequestService>();
-
+app.MapGrpcService<BillTransactionService>();
 app.MapGet("/",
     () =>
         "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");

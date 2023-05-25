@@ -9,10 +9,16 @@ public class CanPayDbAccess : DbContext
     public DbSet<DebitCardEntity> Cards { get; set; }
     public DbSet<TransactionEntity?> Transactions { get; set; }
     public DbSet<NotificationEntity?> Notifications { get; set; }
-    
-    public DbSet<RequestEntity?> Requests { get; set; }
+ 
+    public DbSet<RequestEntity> Requests { get; set; }
+    public DbSet<BillTransactionEntity> BillTransactions { get; set; }
 
 
+
+    /// <summary>
+    /// Configures the database context options.
+    /// </summary>
+    /// <param name="optionsBuilder">The options builder.</param>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseNpgsql(
@@ -21,6 +27,10 @@ public class CanPayDbAccess : DbContext
         optionsBuilder.EnableSensitiveDataLogging();
     }
 
+    /// <summary>
+    /// Configures the model for the database context.
+    /// </summary>
+    /// <param name="modelBuilder">The model builder instance to use for configuration.</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("CanPay");

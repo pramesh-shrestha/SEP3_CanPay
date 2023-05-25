@@ -15,6 +15,11 @@ public class NotificationDaoImpl : INotificationDao
         this.context = context;
     }
 
+    /// <summary>
+    /// Creates a notification asynchronously.
+    /// </summary>
+    /// <param name="notificationEntity">The notification entity to create.</param>
+    /// <returns>The created notification entity.</returns>
     public async Task<NotificationEntity?> CreateNotificationAsync(NotificationEntity? notificationEntity)
     {
         try
@@ -44,6 +49,11 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
+    /// <summary>
+    /// Fetches a notification by its ID asynchronously.
+    /// </summary>
+    /// <param name="requestValue">The ID of the notification to fetch.</param>
+    /// <returns>The fetched notification entity.</returns>
     public async Task<NotificationEntity?> FetchNotificationByIdAsync(long requestValue)
     {
         try
@@ -63,6 +73,11 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
+    /// <summary>
+    /// Fetches all notifications by receiver username asynchronously.
+    /// </summary>
+    /// <param name="username">The username of the receiver.</param>
+    /// <returns>A collection of notification entities.</returns>
     public async Task<ICollection<NotificationEntity?>> FetchAllNotificationsByReceiverAsync(string username)
     {
         try
@@ -96,6 +111,11 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
+    /// <summary>
+    /// Marks all notifications as read asynchronously.
+    /// </summary>
+    /// <param name="notificationEntities">The list of notification entities to mark as read.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public async Task MarkAllNotificationsAsReadAsync(List<NotificationEntity> notificationEntities)
     {
         try
@@ -121,7 +141,9 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
+
     /*public async Task<bool> DeleteNotificationAsync(long notificationId)
+
     {
         try
         {

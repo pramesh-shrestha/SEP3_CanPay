@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
@@ -20,8 +22,9 @@ builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<IRequestService, RequestService>();
+builder.Services.AddScoped<IBillPaymentService, BillPaymentService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
-
+builder.Services.AddScoped<IBillPaymentService, BillPaymentService>();
 
 builder.Services.AddSingleton<TransferValues>();
 //Add authentication with info about JWT

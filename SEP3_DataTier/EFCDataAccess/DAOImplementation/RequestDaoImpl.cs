@@ -14,7 +14,13 @@ public class RequestDaoImpl : IRequestDao
         this.context = context;
     }
 
-    public async Task<RequestEntity?> CreateRequestAsync(RequestEntity? requestEntity)
+    /// <summary>
+    /// Creates a request asynchronously.
+    /// </summary>
+    /// <param name="requestEntity">The request entity to create.</param>
+    /// <returns>The created request entity.</returns>
+    public async Task<RequestEntity> CreateRequestAsync(RequestEntity requestEntity)
+
     {
         try
         {
@@ -42,22 +48,13 @@ public class RequestDaoImpl : IRequestDao
         }
     }
 
-    /*public async Task<ICollection<RequestEntity?>> FetchAllRequestsAsync()
-    {
-        try
-        {
-            ICollection<RequestEntity?> requestEntities =
-                await context.Requests.Include(e => e.RequestReceiver).ToListAsync();
-            return requestEntities;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new Exception("No request made.");
-        }
-    }*/
+    /// <summary>
+    /// Fetches a request by its ID asynchronously.
+    /// </summary>
+    /// <param name="id">The ID of the request to fetch.</param>
+    /// <returns>The fetched request entity.</returns>
+    public async Task<RequestEntity> FetchRequestByIdAsync(long id)
 
-    public async Task<RequestEntity?> FetchRequestByIdAsync(long id)
     {
         try
         {
@@ -74,22 +71,14 @@ public class RequestDaoImpl : IRequestDao
         }
     }
 
-    /*public async Task<RequestEntity?> FetchRequestByUsernameAsync(string username)
-    {
-        try
-        {
-            RequestEntity? requestEntity =
-                await context.Requests.FirstOrDefaultAsync(e => e.RequestReceiver!.Username.Equals(username));
-            return requestEntity;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new Exception($"No request with username: {username} found.");
-        }
-    }*/
+   
+    /// <summary>
+    /// Updates a request asynchronously.
+    /// </summary>
+    /// <param name="requestEntity">The request entity to update.</param>
+    /// <returns>The updated request entity.</returns>
+    public async Task<RequestEntity> UpdateRequest(RequestEntity requestEntity)
 
-    public async Task<RequestEntity?> UpdateRequest(RequestEntity? requestEntity)
     {
         long currentId = await context.Requests.Where(e => e.Id == requestEntity.Id).Select(e => e.Id)
             .FirstOrDefaultAsync();
@@ -112,16 +101,4 @@ public class RequestDaoImpl : IRequestDao
         await context.SaveChangesAsync();
         return requestEntity;
     }
-
-    /*public async Task<bool> DeleteRequest(long id)
-    {
-        RequestEntity? requestEntity = await context.Requests.FindAsync(id);
-        if (requestEntity == null)
-        {
-            throw new Exception($"No request with id {id} found.");
-        }
-
-        context.Requests.Remove(requestEntity);
-        return true;
-    }*/
 }

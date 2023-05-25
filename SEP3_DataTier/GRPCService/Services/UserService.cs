@@ -16,6 +16,12 @@ public class UserService : UserProtoService.UserProtoServiceBase
         this.userDao = userDao;
     }
 
+    /// <summary>
+    /// Creates a new user.
+    /// </summary>
+    /// <param name="request">The UserProtoObj containing the user data.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>The created UserProtoObj.</returns>
     public override async Task<UserProtoObj> CreateUser(UserProtoObj request, ServerCallContext context)
     {
         try
@@ -34,6 +40,12 @@ public class UserService : UserProtoService.UserProtoServiceBase
         }
     }
 
+    /// <summary>
+    /// Fetches all users.
+    /// </summary>
+    /// <param name="request">The Empty request.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>A UserListResponse containing all the users.</returns>
     public override async Task<UserListResponse> FetchAllUser(Empty request, ServerCallContext context)
     {
         try
@@ -57,6 +69,12 @@ public class UserService : UserProtoService.UserProtoServiceBase
         }
     }
 
+    /// <summary>
+    /// Fetches a user by their username.
+    /// </summary>
+    /// <param name="request">The username request.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>The UserProtoObj representing the user.</returns>
     public override async Task<UserProtoObj> FetchUserByUsername(StringValue request, ServerCallContext context)
     {
         try
@@ -73,6 +91,12 @@ public class UserService : UserProtoService.UserProtoServiceBase
         }
     }
 
+    /// <summary>
+    /// Fetches a user by their ID.
+    /// </summary>
+    /// <param name="request">The user ID request.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>The UserProtoObj representing the user.</returns>
     public override async Task<UserProtoObj> FetchUserById(Int32Value request, ServerCallContext context)
     {
         try
@@ -88,7 +112,12 @@ public class UserService : UserProtoService.UserProtoServiceBase
         }
     }
 
-
+    /// <summary>
+    /// Updates a user.
+    /// </summary>
+    /// <param name="request">The UserProtoObj representing the updated user.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>The UserProtoObj representing the updated user.</returns>
     public override async Task<UserProtoObj> UpdateUser(UserProtoObj request, ServerCallContext context)
     {
         try
@@ -126,6 +155,12 @@ public class UserService : UserProtoService.UserProtoServiceBase
         }
     }*/
 
+    /// <summary>
+    /// Deletes a user.
+    /// </summary>
+    /// <param name="request">The Int64Value representing the ID of the user to delete.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>A BoolValue indicating the success of the deletion operation.</returns>
     public override async Task<BoolValue> DeleteUser(Int64Value request, ServerCallContext context)
     {
         try
@@ -140,6 +175,12 @@ public class UserService : UserProtoService.UserProtoServiceBase
         }
     }
 
+    /// <summary>
+    /// Fetches the balance of a user by their username.
+    /// </summary>
+    /// <param name="request">The StringValue representing the username of the user.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>An Int32Value containing the balance of the user.</returns>
     public override async Task<Int32Value> FetchBalanceByUsername(StringValue request, ServerCallContext context)
     {
         try
@@ -154,7 +195,11 @@ public class UserService : UserProtoService.UserProtoServiceBase
         }
     }
     
-
+    /// <summary>
+    /// Converts a UserProtoObj to a UserEntity.
+    /// </summary>
+    /// <param name="userProtoObj">The UserProtoObj to convert.</param>
+    /// <returns>A UserEntity object.</returns>
     public static UserEntity? FromProtoToEntity(UserProtoObj userProtoObj)
     {
         UserEntity? userEntity = new UserEntity()
@@ -173,7 +218,11 @@ public class UserService : UserProtoService.UserProtoServiceBase
 
         return userEntity;
     }
-
+    /// <summary>
+    /// Converts a UserEntity to a UserProtoObj.
+    /// </summary>
+    /// <param name="userEntity">The UserEntity to convert.</param>
+    /// <returns>A UserProtoObj object.</returns>
     public static UserProtoObj FromEntityToProto(UserEntity? userEntity)
     {
         UserProtoObj protoObj = new UserProtoObj()

@@ -1,6 +1,6 @@
-﻿using Entity.Model;
+﻿namespace HTTPClients.ClientInterfaces;
+using Entity.Model;
 
-namespace HTTPClients.ClientInterfaces;
 
 public interface IRequestService
 {

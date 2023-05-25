@@ -15,7 +15,11 @@ public class UserDaoImpl : IUserDao
         this.context = context;
     }
 
-    //create usernjqattew
+    /// <summary>
+    /// Creates a user asynchronously.
+    /// </summary>
+    /// <param name="userEntity">The user entity to create.</param>
+    /// <returns>The created user entity.</returns>
     public async Task<UserEntity?> CreateUserAsync(UserEntity? userEntity)
     {
         try
@@ -30,7 +34,11 @@ public class UserDaoImpl : IUserDao
         }
     }
 
-    //get user by username
+    /// <summary>
+    /// Fetches a user by username asynchronously.
+    /// </summary>
+    /// <param name="username">The username of the user to fetch.</param>
+    /// <returns>The fetched user entity.</returns>
     public async Task<UserEntity?> FetchUserByUsernameAsync(string username)
     {
         //username is a primary key so we can use FindAsync
@@ -46,7 +54,11 @@ public class UserDaoImpl : IUserDao
         return user;
     }
 
-    //get user by id
+    /// <summary>
+    /// Fetches a user by ID asynchronously.
+    /// </summary>
+    /// <param name="id">The ID of the user to fetch.</param>
+    /// <returns>The fetched user entity.</returns>
     public async Task<UserEntity?> FetchUserByIdAsync(long id)
     {
         UserEntity? user = await context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
@@ -58,7 +70,10 @@ public class UserDaoImpl : IUserDao
         return user;
     }
 
-    //get all users
+    /// <summary>
+    /// Fetches all users asynchronously.
+    /// </summary>
+    /// <returns>A collection of user entities.</returns>
     public async Task<ICollection<UserEntity?>> FetchUsersAsync()
     {
         if (!context.Users.Any()) throw new Exception("No users found");
@@ -67,20 +82,13 @@ public class UserDaoImpl : IUserDao
         return users;
     }
 
-    //update user
+    /// <summary>
+    /// Updates a user asynchronously.
+    /// </summary>
+    /// <param name="userEntity">The user entity to update.</param>
+    /// <returns>The updated user entity.</returns>
     public async Task<UserEntity?> UpdateUserAsync(UserEntity? userEntity)
     {
-        // DebitCardEntity? entities =
-        //     await context.Cards.FirstOrDefaultAsync(entity => entity.CardId.Equals(userEntity.Card.CardId));
-        // entities.CardNumber = userEntity.Card.CardNumber;
-        // entities.ExpiryDate = userEntity.Card.ExpiryDate;
-        // entities.CVV = userEntity.Card.CVV;
-        //
-        // UserEntity? exisitingUser = await FetchUserByUsernameAsync(userEntity.Username);
-        // exisitingUser.Password = userEntity.Password;
-        // exisitingUser.Fullname = userEntity.Fullname;
-        // exisitingUser.Card = entities;
-        
         long currentId = await context.Users.Where(u => u.Username.Equals(userEntity.Username)).Select(u => u.Id).FirstOrDefaultAsync();
         
         if (currentId != 0) {
@@ -100,7 +108,11 @@ public class UserDaoImpl : IUserDao
         return userEntity;
     }
 
-    //delete user
+    /// <summary>
+    /// Deletes a user asynchronously by their ID.
+    /// </summary>
+    /// <param name="id">The ID of the user to delete.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public async Task DeleteUserAsync(long id)
     {
         UserEntity? existingUserEntity = await FetchUserByIdAsync(id);
@@ -113,41 +125,25 @@ public class UserDaoImpl : IUserDao
         await context.SaveChangesAsync();
     }
 
-    //update balance
+    /// <summary>
+    /// Updates the balance of a user asynchronously.
+    /// </summary>
+    /// <param name="username">The username of the user.</param>
+    /// <param name="newBalance">The new balance to set for the user.</param>
+    /// <returns>A boolean indicating whether the balance update was successful.</returns>
     public async Task<bool> UpdateBalanceAsync(string username, int newBalance)
     {
         UserEntity? user = await FetchUserByUsernameAsync(username);
         user.Balance = newBalance;
         await context.SaveChangesAsync();
         return true;
-
-        /*try
-        {
-            int senderAmount = await FetchBalanceByUsername(sender);
-            //sender side
-            if (senderAmount > 0 && senderAmount >= amount)
-            {
-                senderAmount -= amount;
-                UserEntity senderEntity = await FetchUserByUsernameAsync(sender);
-                senderEntity.Balance = senderAmount;
-
-                //receiver side
-                UserEntity receiverUser = await FetchUserByUsernameAsync(receiver);
-                receiverUser.Balance += amount;
-
-                await context.SaveChangesAsync();
-                return true;
-            }
-        }
-        catch (Exception e)
-        {
-            throw new Exception(e.Message);
-        }
-
-        return false;*/
     }
 
-    //get balance by username
+    /// <summary>
+    /// Fetches the balance of a user by their username asynchronously.
+    /// </summary>
+    /// <param name="username">The username of the user.</param>
+    /// <returns>The balance of the user.</returns>
     public async Task<int> FetchBalanceByUsername(string username)
     {
         UserEntity? userEntity = await context.Users.FindAsync(username);

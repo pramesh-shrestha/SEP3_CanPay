@@ -13,13 +13,35 @@
 @inject IRequestService RequestService;
 @inject TransferValues TransferValues;
 
-<AuthorizeView>
-    <Authorized>
+@if (isAuthorized)
+{
+    <div class="container">
+        <h3>Send Money</h3>
 
-        <div class="container">
-            <h3>Send Money</h3>
+        <div class="wrapper_loaded">
 
-            <div class="wrapper_loaded">
+            @* all transactions radio *@
+            <div class="radio_container">
+                <input class="radio_option" type="radio" name="btn" checked="" value="@TypesOfTransaction.SendMoney"
+                       @onchange="ChangeTransactionType"/>
+                <div class="filter_btn">
+                    <span class="span">Send Money</span>
+                </div>
+            </div>
+
+            @* sent transactions radio *@
+            <div class="radio_container">
+                <input class="radio_option" type="radio" name="btn"
+                       value="@TypesOfTransaction.RequestMoney" @onchange="ChangeTransactionType"/>
+                <div class="filter_btn">
+                    <span class="span">Request Money</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 first-box">
+
 
                 @* all transactions radio *@
                 <div class="radio_container">
@@ -45,14 +67,16 @@
                     <div class="icon-image">
                         <img src="images/KANPAY logo.png" alt="">
                     </div>
+                        <label>From</label>
 
-                    <div class="buttonDiv">
-                        <button class="button" @onclick="HandleSendButtonClick">Send</button>
-                        <button class="button" @onclick="BackToHome">Cancel</button>
-                    </div>
-                </div>
+                        <div class="inputFields">
+                            <input type="text" class="fieldLength" @bind="cardNumber" disabled="">
+                        </div>
+                        <label>To</label>
+                        <div class="inputFields">
+                            <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
+                        </div>
 
-                <div class="col-md-6">
 
                     <!-- 8 Columns -->
                     @if (transactionType!.Equals(TypesOfNotification.SEND_MONEY.ToString()))
@@ -62,24 +86,43 @@
                                 <span>@sender.ToUpper()</span>
                             </div>
 
-                            <label>From</label>
-
-                            <div class="inputFields">
-                                <input type="text" class="fieldLength" @bind="cardNumber" disabled="">
-                            </div>
                             <label>To</label>
                             <div class="inputFields">
                                 <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
                             </div>
 
-                            <label>Amount</label>
-                            <div class="inputFields">
-                                <input type="number" class="fieldLength" @bind="amount">
+                            <label>Amount (CAD)</label>
+                            <div class="inputFields amount-field">
+                                <span class="currency">$</span>
+                                <input type="number" class="fieldLength-Amount" @bind="amount">
                             </div>
 
                             <label>Date</label>
                             <div class="inputFields">
-                                <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
+                                <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")" disabled="">
+                            </div>
+
+
+                            <label>Comment</label>
+                            <div class="inputFields">
+                                <input type="text" class="fieldLength" @bind="cardNumber" disabled="">
+                            </div>
+
+                            <label>To</label>
+                            <div class="inputFields">
+                                <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
+                            </div>
+
+                            <label>Amount (CAD)</label>
+                            <div class="inputFields amount-field">
+                                <span class="currency">$</span>
+                                <input type="number" class="fieldLength-Amount" @bind="amount">
+                            </div>
+
+
+                            <label>Date</label>
+                            <div class="inputFields">
+                                <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")" disabled="">
                             </div>
 
                             <label>Comment</label>
@@ -116,36 +159,29 @@
                                 <div class="inputFields">
                                     <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment">
                                 </div>
-
                             </div>
+
                         </div>
-                    }
 
-                </div >
+                    </div>
+                }
 
-                @* html for username list *@
-                <div class="col-md-3 third-box usernameList">
-                    <h4>List of usernames</h4>
-                    @foreach (var item in usernames)
-                    {
-                        if (item.ToLower().Contains(receiver.ToLower()))
-                        {
-                            <ul>
-                                <li @onclick="() => receiver = item">@item</li>
-                            </ul>
-                        }
-                    }
-                </div>
+            </div >
 
-            </div>
-
-            @* html code for error label *@
-            <div class="error">
-                @if (!string.IsNullOrEmpty(errorLabel))
+            @* html for username list *@
+            <div class="col-md-3 third-box usernameList">
+                <h4>List of usernames</h4>
+                @foreach (var item in usernames)
                 {
-                    <label style="color: @color">@errorLabel</label>
+                    if (item.ToLower().Contains(receiver.ToLower()))
+                    {
+                        <ul>
+                            <li @onclick="() => receiver = item">@item</li>
+                        </ul>
+                    }
                 }
             </div>
+
         </div>
 
         <Modal ShowModal="showModal">
@@ -162,16 +198,31 @@
             </div>
         </Modal>
 
+        </div>
 
-    </Authorized>
+        @* html code for error label *@
+        <div class="error">
+            @if (!string.IsNullOrEmpty(errorLabel))
+            {
+                <label style="color: @color">@errorLabel</label>
+            }
+        </div>
+    </div>
 
-    <NotAuthorized>
-        <h3>We are sorry, you must be logged in to access this page.</h3>
-    </NotAuthorized>
-</AuthorizeView>
+    <Modal ShowModal="showModal">
+        <p >You have successfully transferred the amount!</p>
+        <div>
+            <button class="button" @onclick="@Proceed">OK</button>
+        </div>
+    </Modal>
+}
+else
+{
+    <h2>You must be logged in to be able to view this page--</h2>
+}
 
-
-@code {
+@code
+{
 
     // send money and request money
     public string? sender = "";
@@ -196,6 +247,7 @@
     public string? errorLabel = "";
     private string? color = "";
     private bool showModal;
+    private bool isAuthorized;
 
 
     protected override async Task OnInitializedAsync()
@@ -206,6 +258,7 @@
 
             AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
             sender = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
+            isAuthorized = state.User.Identity!.IsAuthenticated;
 
             IEnumerable<UserEntity?> entities = userEntities.ToList();
             senderUser = entities.FirstOrDefault(u => u.UserName.Equals(sender));
@@ -237,15 +290,16 @@
         receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
         string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
 
+
         TransactionEntity transactionEntity = new TransactionEntity()
         {
-    // senderUser, receiverUser, int.Parse(amount), date, comment
             Amount = Convert.ToInt32(amount),
             Sender = senderUser,
             Receiver = receiverUser,
             Date = date,
             Comment = comment
         };
+      
         try
         {
             if (string.IsNullOrEmpty(receiver)) throw new Exception("Receiver must be selected.");
@@ -404,5 +458,4 @@
 
         return null;
     }
-
 }

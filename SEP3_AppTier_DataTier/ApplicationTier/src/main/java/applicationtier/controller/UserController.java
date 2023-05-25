@@ -137,6 +137,7 @@ public class UserController {
     @PostMapping("/user/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody LoginDto request) {
+        System.out.println("Reached here");
         ResponseEntity<AuthenticationResponse> response = ResponseEntity.ok(service.authenticate(request));
         return response;
     }

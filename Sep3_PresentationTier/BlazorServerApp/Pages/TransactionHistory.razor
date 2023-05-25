@@ -1,4 +1,4 @@
-﻿@page "/TransactionHistory"
+@page "/TransactionHistory"
 @using Domains.Entity
 @using HTTPClients.ClientInterfaces
 @using Microsoft.IdentityModel.Tokens
@@ -9,53 +9,54 @@
 
 <AuthorizeView>
 
-    <Authorized>
-        <div class="main_container rounded ">
+@if (isAuthorized)
+{
+    <div class="main_container rounded ">
 
-            @* top bar *@
-            <div class="top_bar">
-                <div class="text">
-                    <span class="title"> Transactions </span>
-                    <p class="subtitle text"> Welcome to your transactions </p>
-                </div>
-
-                <button class="w-auto new_transaction_button" @onclick="@(() => NavMgr.NavigateTo("/SendMoney"))">
-                    New Transaction
-                </button>
-
+        @* top bar *@
+        <div class="top_bar">
+            <div class="text">
+                <span class="title"> Transactions </span>
+                <p class="subtitle text"> Welcome to your transactions </p>
             </div>
 
-            <div class="filter_chips d-flex">
-                @* Code for setting up a group of radio buttons for filtering history according to transaction types *@
-                <div class="@(isHistoryLoaded ? "wrapper_loaded" : "wrapper_disabled")">
+            <button class="w-auto new_transaction_button" @onclick="@(() => NavMgr.NavigateTo("/SendMoney"))">
+                New Transaction
+            </button>
 
-                    @* all transactions radio *@
-                    <div class="radio_container">
-                        <input class="radio_option" type="radio" name="btn" checked="" value="all"
-                               @onchange="@ChangeTransactionTypeValue"/>
-                        <div class="filter_btn">
-                            <span class="span">All Transactions</span>
-                        </div>
-                    </div>
+        </div>
 
-                    @* sent transactions radio *@
-                    <div class="radio_container">
-                        <input class="radio_option" type="radio" name="btn"
-                               value="sent" @onchange="@ChangeTransactionTypeValue"/>
-                        <div class="filter_btn">
-                            <span class="span">Sent Transactions</span>
-                        </div>
-                    </div>
+        <div class="filter_chips d-flex">
+            @* Code for setting up a group of radio buttons for filtering history according to transaction types *@
+            <div class="@(isHistoryLoaded ? "wrapper_loaded" : "wrapper_disabled")">
 
-                    @* received transactions radio *@
-                    <div class="radio_container">
-                        <input class="radio_option" type="radio" name="btn"
-                               value="received" @onchange="@ChangeTransactionTypeValue"/>
-                        <div class="filter_btn">
-                            <span class="span">Received Transactions</span>
-                        </div>
+                @* all transactions radio *@
+                <div class="radio_container">
+                    <input class="radio_option" type="radio" name="btn" checked="" value="all"
+                           @onchange="@ChangeTransactionTypeValue"/>
+                    <div class="filter_btn">
+                        <span class="span">All Transactions</span>
                     </div>
                 </div>
+
+                @* sent transactions radio *@
+                <div class="radio_container">
+                    <input class="radio_option" type="radio" name="btn"
+                           value="sent" @onchange="@ChangeTransactionTypeValue"/>
+                    <div class="filter_btn">
+                        <span class="span">Sent Transactions</span>
+                    </div>
+                </div>
+
+                @* received transactions radio *@
+                <div class="radio_container">
+                    <input class="radio_option" type="radio" name="btn"
+                           value="received" @onchange="@ChangeTransactionTypeValue"/>
+                    <div class="filter_btn">
+                        <span class="span">Received Transactions</span>
+                    </div>
+                </div>
+
 
 
                 @* Code for setting up date picker with checkbox  *@
@@ -72,7 +73,7 @@
                                disabled="@(!isCheckBoxSelected)" @onchange="@ChangeSelectedDate">
                     </div>
                 </div>
-            </div>
+
 
             @* Code for search bar and a "New Transaction" button. *@
             <div class="d-flex justify-content-between mt-3">
@@ -81,99 +82,101 @@
                     <input placeholder="Type Username You Want To Filter By" type="search" @bind="searchUsername" @bind:event="oninput" class="search_input">
                 </div>
 
-                <div>
-                    <button class="load_history_button" disabled="@isHistoryLoaded"
-                            @onclick="LoadAllTransactions">
-                        Load History
-                    </button>
-                </div>
-
+        @* Code for search bar and a "New Transaction" button. *@
+        <div class="d-flex justify-content-between mt-3">
+            <div class="search_bar">
+                <img src="images/search.png" class="icon" alt="">
+                <input placeholder="Type Username You Want To Filter By" type="search" @bind="searchUsername" @bind:event="oninput" class="search_input">
             </div>
 
-            @if (filteredTransaction.Count != 0 && isHistoryLoaded)
-            {
-                <div class="table_box">
-                    <table class="table table-borderless mt-4 ">
-                        <thead>
-                        <tr>
-                            <th>Sender</th>
-                            <th>Receiver</th>
-                            <th>Date</th>
-                            <th>Amount</th>
-                            <th>Comments</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-
-                        @foreach (var transactionEntity in filteredTransaction)
-                        {
-                            if (searchUsername.IsNullOrEmpty() ||
-                                transactionEntity.Sender.UserName!.Contains(searchUsername, StringComparison.OrdinalIgnoreCase) ||
-                                transactionEntity.Receiver!.UserName!.Contains(searchUsername, StringComparison.OrdinalIgnoreCase))
-                            {
-                                <tr>
-                                    <td>
-                                        <div class="user_info">
-                                            <span>@transactionEntity.Sender.FullName</span>
-                                            <span class="text-muted">@transactionEntity.Sender.UserName</span>
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <div class="user_info">
-                                            <span>@transactionEntity.Receiver!.FullName</span>
-                                            <span class="text-muted">@transactionEntity.Receiver.UserName</span>
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <span>@transactionEntity.Date</span>
-                                    </td>
-                                    <td>
-
-                                        @if (transactionEntity.Sender.UserName!.Equals(currentUser))
-                                        {
-                                            <img class="amount_icon" src="images/minus.png" alt=""/>
-                                            <span class="amount" style="color: red">@transactionEntity.Amount</span>
-                                        }
-                                        else
-                                        {
-                                            <img class="amount_icon" src="images/plus.png" alt=""/>
-                                            <span class="amount" style="color: #00ff00">@transactionEntity.Amount</span>
-                                        }
-
-                                    </td>
-
-                                    <td>
-                                        @transactionEntity.Comment
-                                    </td>
-                                </tr>
-                            }
-                        }
-                        </tbody>
-                    </table>
-                </div>
-            }
-            else
-            {
-                <div class="field">
-                    <label style="color: white">
-                        <span>No Transactions Found for @currentUser</span>
-                    </label>
-                </div>
-            }
-
-
+            <div>
+                <button class="load_history_button" disabled="@isHistoryLoaded"
+                        @onclick="LoadAllTransactions">
+                    Load History
+                </button>
+            </div>
 
         </div>
-    </Authorized>
 
-    <NotAuthorized>
-        <h3>We are sorry, you must be logged in to access this page.</h3>
-    </NotAuthorized>
+        @if (filteredTransaction.Count != 0 && isHistoryLoaded)
+        {
+            <div class="table_box">
+                <table class="table table-borderless mt-4 ">
+                    <thead>
+                    <tr>
+                        <th>Sender</th>
+                        <th>Receiver</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Comments</th>
+                    </tr>
+                    </thead>
 
-</AuthorizeView>
+                    <tbody>
+
+                    @foreach (var transactionEntity in filteredTransaction)
+                    {
+                        if (searchUsername.IsNullOrEmpty() ||
+                            transactionEntity.Sender.UserName!.Contains(searchUsername, StringComparison.OrdinalIgnoreCase) ||
+                            transactionEntity.Receiver!.UserName!.Contains(searchUsername, StringComparison.OrdinalIgnoreCase))
+                        {
+                            <tr>
+                                <td>
+                                    <div class="user_info">
+                                        <span>@transactionEntity.Sender.FullName</span>
+                                        <span class="text-muted">@transactionEntity.Sender.UserName</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="user_info">
+                                        <span>@transactionEntity.Receiver!.FullName</span>
+                                        <span class="text-muted">@transactionEntity.Receiver.UserName</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <span>@transactionEntity.Date</span>
+                                </td>
+                                <td>
+
+                                    @if (transactionEntity.Sender.UserName!.Equals(currentUser))
+                                    {
+                                        <img class="amount_icon" src="images/minus.png"/>
+                                        <span class="amount" style="color: red">@transactionEntity.Amount</span>
+                                    }
+                                    else
+                                    {
+                                        <img class="amount_icon" src="images/plus.png"/>
+                                        <span class="amount" style="color: #00ff00">@transactionEntity.Amount</span>
+                                    }
+
+                                </td>
+
+                                <td>
+                                    @transactionEntity.Comment
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="field">
+                <label style="color: white">
+                    <span>No Transactions Found for @currentUser</span>
+                </label>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h2>You must be logged in to be able to view this page--</h2>
+}
 
 
 @code {
@@ -192,9 +195,11 @@
 
     private string searchUsername = "";
 
-    // error styling
-    private string? errorLabel;
-    private string? color;
+    private string errorLabel;
+    private string color;
+    private bool isAuthorized;
+
+
 
     /// <summary>
     /// Initializes the component asynchronously.
@@ -205,6 +210,8 @@
         {
             AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
             currentUser = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
+
+            isAuthorized = state.User.Identity!.IsAuthenticated;
             isHistoryLoaded = false;
         }
         catch (Exception e)
@@ -256,6 +263,7 @@
     /// </summary>
     private void ChangeTransactionTypeValue(ChangeEventArgs obj)
     {
+
         selectedTransactionType = obj.Value!.ToString();
         ApplyFilter();
     }
@@ -278,5 +286,6 @@
     {
         isCheckBoxSelected = (bool)e.Value!;
     }
+
 
 }

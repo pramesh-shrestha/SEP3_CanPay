@@ -1,6 +1,8 @@
 package applicationtier.service.serviceImplementations;
 
+import applicationtier.GrpcClient.notification.INotificationClient;
 import applicationtier.GrpcClient.request.IRequestClient;
+import applicationtier.entity.NotificationEntity;
 import applicationtier.entity.RequestEntity;
 import applicationtier.service.serviceInterfaces.IRequestService;
 import org.springframework.stereotype.Service;
@@ -9,9 +11,11 @@ import org.springframework.stereotype.Service;
 public class RequestServiceImplementation implements IRequestService {
 
     private IRequestClient requestClient;
+    private INotificationClient notificationClient;
 
-    public RequestServiceImplementation(IRequestClient requestClient) {
+    public RequestServiceImplementation(IRequestClient requestClient, INotificationClient notificationClient) {
         this.requestClient = requestClient;
+        this.notificationClient = notificationClient;
     }
 
     /**
@@ -55,9 +59,7 @@ public class RequestServiceImplementation implements IRequestService {
     @Override
     public RequestEntity fetchRequestById(Long id) {
         try {
-            RequestEntity entity = requestClient.FetchRequestById(id);
-            return entity;
-
+            return requestClient.FetchRequestById(id);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -110,7 +112,7 @@ public class RequestServiceImplementation implements IRequestService {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
-    }
-*/
+    }*/
+
 
 }

@@ -4,11 +4,30 @@
 
 .top-row {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: #625FFC
 }
 
 .navbar-brand {
     font-size: 1.1rem;
+    font-weight: bold;
+    animation: revolve 13s linear infinite;
+    transform-origin: center center;
+    white-space: nowrap; /* Prevent line breaks */
+}
+
+@keyframes revolve {
+    0% {
+        transform: rotateY(0deg);
+    }
+    15.38% {
+        transform: rotateY(360deg);
+    }
+    15.39% {
+        transform: rotateY(360deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
 }
 
 .oi {
@@ -46,8 +65,10 @@
 }
 
 .nav-item ::deep a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
+    background-color: rgba(255,255,255,0.9);
+    color: black;
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-8%);
 }
 
 @media (min-width: 641px) {

@@ -50,6 +50,7 @@
         {
             <div class="notification_container">
 
+
                 <div class="notification_heading">
                     <span>Notifications</span>
                     <button class="mark_as_read_btn" @onclick="HandleMarkRead">Mark Read</button>
@@ -99,7 +100,7 @@
                 <input @bind="clickedNotificationEntity!.Sender!.FullName" type="text" disabled=""/>
                 <label class="notificationLabel">Sent By</label>
             </div>
-
+          
             @* Condition for REQUEST_MONEY notification type *@
             @if (clickedNotificationType!.Equals(TypesOfNotification.REQUEST_MONEY.ToString()))
             {

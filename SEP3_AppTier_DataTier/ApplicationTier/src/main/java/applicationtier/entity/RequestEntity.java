@@ -13,15 +13,6 @@ public class RequestEntity {
 
 
 
-//    public RequestEntity(boolean isApproved, String status, int amount, String comment, UserEntity requestSender, UserEntity requestReceiver, String requestedDate) {
-//        this.isApproved = isApproved;
-//        this.status = status;
-//        this.amount = amount;
-//        this.comment = comment;
-//        this.requestSender = requestSender;
-//        this.requestReceiver = requestReceiver;
-//        this.requestedDate = requestedDate;
-//    }
 
     public RequestEntity() {
     }
