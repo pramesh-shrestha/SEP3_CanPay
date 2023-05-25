@@ -10,7 +10,6 @@ namespace Test;
 
 public class RegisterUserTest : IClassFixture<TestContext>
 {
-    
     private TestContext context;
     private IRenderedComponent<RegisterUser> renderedComponent;
     private Mock<IUserService> userService;
