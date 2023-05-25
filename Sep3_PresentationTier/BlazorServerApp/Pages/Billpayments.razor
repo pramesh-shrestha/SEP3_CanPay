@@ -31,26 +31,28 @@
             @*This is the second box to display the fields*@
             <div class="col-md-6 second-box">
                 <div class="form-group">
+                    <label>To</label>
+                    <div class="inputFields">
+                        <input type="text" class="fieldLength" @bind="payee" @bind:event="oninput">
+                    </div>
 
-                        <label>Account number (Enter 10 Digit account number)</label>
-                        <div class="inputFields">
-                            <input type="number" class="fieldLength" @bind="accountNumber">
-                        </div>
-                        
-                        <label>Amount (CAD)</label>
-                        <div class="inputFields amount-field">
-                            <span class="currency">$</span>
-                            <input type="number" class="fieldLength-Amount" @bind="amount">
-                        </div>
-                        
+                    <label>Account number (Enter 10 Digit account number)</label>
+                    <div class="inputFields">
+                        <input type="number" class="fieldLength" @bind="accountNumber">
+                    </div>
 
-                        <label>Date</label>
-                        <div class="inputFields">
-                            <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")" disabled="">
-                        </div>
+                    <label>Amount (CAD)</label>
+                    <div class="inputFields amount-field">
+                        <span class="currency">$</span>
+                        <input type="number" class="fieldLength-Amount" @bind="amount">
+                    </div>
 
 
-             
+                    <label>Date</label>
+                    <div class="inputFields">
+                        <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")" disabled="">
+                    </div>
+
 
                     <label>Reference</label>
                     <div class="inputFields">
