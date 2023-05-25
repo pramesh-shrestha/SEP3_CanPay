@@ -220,7 +220,7 @@ else
     /// <summary>
     /// Proceeds with changing the password after validating the new password and confirmation.
     /// </summary>
-    private void Proceed()
+    public void Proceed()
     {
         string passwordRegex = @"^(?=.*\S).{6,}$";
         errorLabel = "";
