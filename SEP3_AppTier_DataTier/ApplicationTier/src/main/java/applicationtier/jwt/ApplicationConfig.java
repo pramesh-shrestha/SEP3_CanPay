@@ -8,9 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -19,12 +17,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ApplicationConfig {
     private final IUserClient iUserClient;
 
+    /**
+     * Configures the UserDetailsService bean.
+     * @return The configured UserDetailsService.
+     */
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> iUserClient.findByUsername(username);
 
     }
 
+    /**
+     * Configures the AuthenticationProvider bean.
+     * @return The configured AuthenticationProvider.
+     */
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -33,11 +39,21 @@ public class ApplicationConfig {
         return authProvider;
     }
 
+    /**
+     * Configures the PasswordEncoder bean.
+     * @return The configured PasswordEncoder.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Configures the AuthenticationManager bean.
+     * @param config The AuthenticationConfiguration.
+     * @return The configured AuthenticationManager.
+     * @throws Exception If an error occurs while configuring the AuthenticationManager.
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();

@@ -15,7 +15,12 @@ public class NotificationDaoImpl : INotificationDao
         this.context = context;
     }
 
-    public async Task<NotificationEntity> CreateNotificationAsync(NotificationEntity notificationEntity)
+    /// <summary>
+    /// Creates a notification asynchronously.
+    /// </summary>
+    /// <param name="notificationEntity">The notification entity to create.</param>
+    /// <returns>The created notification entity.</returns>
+    public async Task<NotificationEntity?> CreateNotificationAsync(NotificationEntity? notificationEntity)
     {
         try
         {
@@ -33,7 +38,7 @@ public class NotificationDaoImpl : INotificationDao
             }
 
 
-            EntityEntry<NotificationEntity> createdNotification =
+            EntityEntry<NotificationEntity?> createdNotification =
                 await context.Notifications.AddAsync(notificationEntity);
             await context.SaveChangesAsync();
             return createdNotification.Entity;
@@ -44,24 +49,42 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
-    public async Task<ICollection<NotificationEntity>> FetchAllNotificationsByReceiverAsync(string username)
+    /// <summary>
+    /// Fetches a notification by its ID asynchronously.
+    /// </summary>
+    /// <param name="requestValue">The ID of the notification to fetch.</param>
+    /// <returns>The fetched notification entity.</returns>
+    public async Task<NotificationEntity?> FetchNotificationByIdAsync(long requestValue)
     {
         try
         {
-            ICollection<NotificationEntity> notificationEntities = await context.Notifications
+            NotificationEntity? notificationEntity =
+                await context.Notifications.Include(entity => entity.Sender)
+                    .Include(entity => entity.Sender.Card)
+                    .Include(entity => entity.Receiver.Card)
+                    .Include(entity => entity.Receiver)
+                    .FirstOrDefaultAsync(entity => entity.Id == requestValue);
+            return notificationEntity;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new Exception(e.Message);
+        }
+    }
+
+    /// <summary>
+    /// Fetches all notifications by receiver username asynchronously.
+    /// </summary>
+    /// <param name="username">The username of the receiver.</param>
+    /// <returns>A collection of notification entities.</returns>
+    public async Task<ICollection<NotificationEntity?>> FetchAllNotificationsByReceiverAsync(string username)
+    {
+        try
+        {
+            ICollection<NotificationEntity?> notificationEntities = await context.Notifications
                 .Include(entity => entity.Sender).Include(entity => entity.Receiver)
                 .Where(e => e.Receiver!.Username!.Equals(username)).Where(entity => !entity.IsRead).ToListAsync();
-
-
-            /*if (notificationEntities.Count != 0)
-            {
-                foreach (NotificationEntity notificationEntity in notificationEntities)
-                {
-                    notificationEntity.IsRead = true;
-                }
-
-                await context.SaveChangesAsync();
-            }*/
 
             return notificationEntities;
         }
@@ -72,33 +95,31 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
-    public async Task MarkNotificationAsReadAsync(NotificationEntity notificationEntity)
+    public async Task MarkNotificationAsReadAsync(NotificationEntity? notificationEntity)
     {
-        /*try
+        try
         {
-            context.Notifications.Update(notificationEntity);
+            var existingEntities = await context.Notifications
+                .FirstOrDefaultAsync(entity => entity.Id == notificationEntity.Id);
+            existingEntities.IsRead = true;
             await context.SaveChangesAsync();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw new Exception(e.Message);
-        }*/
+        }
     }
 
+    /// <summary>
+    /// Marks all notifications as read asynchronously.
+    /// </summary>
+    /// <param name="notificationEntities">The list of notification entities to mark as read.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public async Task MarkAllNotificationsAsReadAsync(List<NotificationEntity> notificationEntities)
     {
         try
         {
-            /*if (notificationEntities.Count != 0)
-            {
-                foreach (NotificationEntity notificationEntity in notificationEntities)
-                {
-                    notificationEntity.IsRead = true;
-                    context.Notifications.Update(notificationEntity);
-                    
-                }
-            }*/
             if (notificationEntities.Count != 0)
             {
                 var existingEntities = await context.Notifications
@@ -120,7 +141,9 @@ public class NotificationDaoImpl : INotificationDao
         }
     }
 
-    public async Task<bool> DeleteNotificationAsync(long notificationId)
+
+    /*public async Task<bool> DeleteNotificationAsync(long notificationId)
+
     {
         try
         {
@@ -134,5 +157,5 @@ public class NotificationDaoImpl : INotificationDao
             Console.WriteLine(e);
             throw new Exception(e.Message);
         }
-    }
+    }*/
 }

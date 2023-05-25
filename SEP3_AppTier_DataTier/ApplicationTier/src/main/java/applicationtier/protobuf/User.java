@@ -1873,19 +1873,14 @@ public final class User {
       "(\t\022\020\n\010password\030\004 \001(\t\022 \n\004card\030\005 \001(\0132\022.Deb" +
       "itCardProtoObj\022\017\n\007balance\030\006 \001(\005\"3\n\020UserL" +
       "istResponse\022\037\n\010allUsers\030\001 \003(\0132\r.UserProt" +
-      "oObj2\316\003\n\020UserProtoService\022,\n\nCreateUser\022" +
+      "oObj2\361\001\n\020UserProtoService\022,\n\nCreateUser\022" +
       "\r.UserProtoObj\032\r.UserProtoObj\"\000\022;\n\014Fetch" +
       "AllUser\022\026.google.protobuf.Empty\032\021.UserLi",
       "stResponse\"\000\022D\n\023FetchUserByUsername\022\034.go" +
       "ogle.protobuf.StringValue\032\r.UserProtoObj" +
-      "\"\000\022=\n\rFetchUserById\022\033.google.protobuf.In" +
-      "t64Value\032\r.UserProtoObj\"\000\022,\n\nUpdateUser\022" +
-      "\r.UserProtoObj\032\r.UserProtoObj\"\000\022G\n\nDelet" +
-      "eUser\022\033.google.protobuf.Int64Value\032\032.goo" +
-      "gle.protobuf.BoolValue\"\000\022S\n\026FetchBalance" +
-      "ByUsername\022\034.google.protobuf.StringValue" +
-      "\032\033.google.protobuf.Int32ValueB\034\n\030applica" +
-      "tiontier.protobufP\000b\006proto3"
+      "\"\000\022,\n\nUpdateUser\022\r.UserProtoObj\032\r.UserPr" +
+      "otoObj\"\000B\034\n\030applicationtier.protobufP\000b\006" +
+      "proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

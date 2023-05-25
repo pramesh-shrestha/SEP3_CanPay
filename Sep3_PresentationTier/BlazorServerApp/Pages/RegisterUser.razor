@@ -157,6 +157,9 @@
     private Timer? timer;
     private readonly int messageDisplayTime = 2000; // in millisecond
 
+    /// <summary>
+    /// Proceed to step 2 of the registration process.
+    /// </summary>
     public void GoToStep2()
     {
         try
@@ -167,7 +170,7 @@
             if (string.IsNullOrEmpty(Password)) throw new Exception("Password Cannot Be Empty");
             if (string.IsNullOrEmpty(RepeatPassword)) throw new Exception("Repeat Password Cannot Be Empty");
             if (!Regex.IsMatch(Password, passwordRegex))
-                throw new Exception("Password Must Be " +
+                throw new Exception("Password Must Be More Than " +
                                     " 6 Characters Long.");
             if (!Password.Equals(RepeatPassword)) throw new Exception("Password and Repeat Password doesn't match!!");
             step = 2;
@@ -179,12 +182,18 @@
         }
     }
 
+    /// <summary>
+    /// Go back to step 1 of the registration process.
+    /// </summary>
     private void GoToStep1()
     {
         step = 1;
     }
 
-    //For testing purpose only
+    /// <summary>
+    /// Get the error message for testing purposes.
+    /// </summary>
+    /// <returns>The error message or null if no error occurred.</returns>
     public async Task<String> GetErrorMessage()
     {
         try
@@ -199,6 +208,9 @@
         return null;
     }
 
+    /// <summary>
+    /// Create a new user asynchronously.
+    /// </summary>
     private async Task CreateAsync()
     {
         try
@@ -225,6 +237,10 @@
         }
     }
 
+    /// <summary>
+    /// Display an error message and start a timer to clear it after a certain duration.
+    /// </summary>
+    /// <param name="errorMessage">The error message to display.</param>
     private void DisplayMessage(string errorMessage)
     {
         ErrorLabel = $"Error: {errorMessage}";
@@ -232,6 +248,11 @@
         timer = new Timer(OnTimerElapsed, null, messageDisplayTime, Timeout.Infinite);
     }
 
+    /// <summary>
+    /// Callback method called when the timer has elapsed.
+    /// Clears the error message and updates the UI.
+    /// </summary>
+    /// <param name="state">The state object (not used in this case).</param>
     private void OnTimerElapsed(object state)
     {
         timer?.DisposeAsync();

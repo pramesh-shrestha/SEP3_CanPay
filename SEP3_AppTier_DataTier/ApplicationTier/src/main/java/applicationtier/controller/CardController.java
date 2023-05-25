@@ -7,6 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import applicationtier.service.serviceInterfaces.ICardService;
 
+/**
+ *
+ */
 @RestController
 public class CardController {
 
@@ -17,7 +20,13 @@ public class CardController {
         this.cardService = cardService;
     }
 
-    //Create Card--
+    /**
+     * Create a new card.
+     *
+     * @param card The debit card entity to be created.
+     * @return ResponseEntity containing the created debit card entity in the response body with HTTP status 200 (OK),
+     *         or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @PostMapping("/card/create")
     public ResponseEntity<DebitCardEntity> CreateCard(@RequestBody
                                                       DebitCardEntity card) {
@@ -28,7 +37,13 @@ public class CardController {
         }
     }
 
-    //Get Card by username--
+    /**
+     * Fetch a card by username.
+     *
+     * @param username The username associated with the card.
+     * @return ResponseEntity containing the debit card entity with the specified username in the response body
+     *         with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @GetMapping("/card/{username}")
     public ResponseEntity<DebitCardEntity> FetchCardByUsername(@PathVariable("username") String username) {
         try {
@@ -38,7 +53,14 @@ public class CardController {
         }
     }
 
-    //update card--
+    /**
+     * Update a card by ID.
+     *
+     * @param id    The ID of the card to be updated.
+     * @param card  The updated debit card entity.
+     * @return ResponseEntity containing the updated debit card entity in the response body with HTTP status 200 (OK),
+     *         or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @PutMapping("/card/{id}")
     public ResponseEntity<DebitCardEntity> UpdateCard(@PathVariable long id, @RequestBody
     DebitCardEntity card) {
@@ -49,7 +71,13 @@ public class CardController {
         }
     }
 
-    //delete card--
+    /**
+     * Delete a card by ID.
+     *
+     * @param id The ID of the card to be deleted.
+     * @return ResponseEntity with a success message in the response body with HTTP status 200 (OK),
+     *         or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @DeleteMapping("/card/delete/{id}")
     public ResponseEntity<String> DeleteCard(@PathVariable("id") long id) {
         try {

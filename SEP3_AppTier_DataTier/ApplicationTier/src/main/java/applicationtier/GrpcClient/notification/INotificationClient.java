@@ -10,6 +10,7 @@ public interface INotificationClient {
     List<NotificationEntity> fetchAllNotificationsByReceiver(String receiverUsername);
     void markAsRead(NotificationEntity notification);
     void markAllAsRead(List<NotificationEntity> notifications);
-    boolean deleteNotification(Long id);
+//    boolean deleteNotification(Long id);
 
+    NotificationEntity fetchNotificationById(long id);
 }

@@ -23,6 +23,44 @@ namespace EFCDataAccess.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Entity.Model.BillTransactionEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AccountNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Payee")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PayerUsername")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ReferenceNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PayerUsername");
+
+                    b.ToTable("BillTransactions", "CanPay");
+                });
+
             modelBuilder.Entity("Entity.Model.DebitCardEntity", b =>
                 {
                     b.Property<long>("CardId")
@@ -71,11 +109,9 @@ namespace EFCDataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ReceiverUsername")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("SenderUsername")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -85,6 +121,44 @@ namespace EFCDataAccess.Migrations
                     b.HasIndex("SenderUsername");
 
                     b.ToTable("Notifications", "CanPay");
+                });
+
+            modelBuilder.Entity("Entity.Model.RequestEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("RequestReceiverUsername")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RequestSenderUsername")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RequestedDate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RequestReceiverUsername");
+
+                    b.HasIndex("RequestSenderUsername");
+
+                    b.ToTable("Requests", "CanPay");
                 });
 
             modelBuilder.Entity("Entity.Model.TransactionEntity", b =>
@@ -98,6 +172,9 @@ namespace EFCDataAccess.Migrations
                     b.Property<int?>("Amount")
                         .IsRequired()
                         .HasColumnType("integer");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("text");
 
                     b.Property<string>("Date")
                         .IsRequired()
@@ -150,23 +227,45 @@ namespace EFCDataAccess.Migrations
                     b.ToTable("Users", "CanPay");
                 });
 
+            modelBuilder.Entity("Entity.Model.BillTransactionEntity", b =>
+                {
+                    b.HasOne("Entity.Model.UserEntity", "Payer")
+                        .WithMany()
+                        .HasForeignKey("PayerUsername")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Payer");
+                });
+
             modelBuilder.Entity("Entity.Model.NotificationEntity", b =>
                 {
                     b.HasOne("Entity.Model.UserEntity", "Receiver")
                         .WithMany()
-                        .HasForeignKey("ReceiverUsername")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ReceiverUsername");
 
                     b.HasOne("Entity.Model.UserEntity", "Sender")
                         .WithMany()
-                        .HasForeignKey("SenderUsername")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SenderUsername");
 
                     b.Navigation("Receiver");
 
                     b.Navigation("Sender");
+                });
+
+            modelBuilder.Entity("Entity.Model.RequestEntity", b =>
+                {
+                    b.HasOne("Entity.Model.UserEntity", "RequestReceiver")
+                        .WithMany()
+                        .HasForeignKey("RequestReceiverUsername");
+
+                    b.HasOne("Entity.Model.UserEntity", "RequestSender")
+                        .WithMany()
+                        .HasForeignKey("RequestSenderUsername");
+
+                    b.Navigation("RequestReceiver");
+
+                    b.Navigation("RequestSender");
                 });
 
             modelBuilder.Entity("Entity.Model.TransactionEntity", b =>

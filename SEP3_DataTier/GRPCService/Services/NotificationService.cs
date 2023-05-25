@@ -16,12 +16,18 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
         this.notificationDao = notificationDao;
     }
 
+    /// <summary>
+    /// Creates a new notification.
+    /// </summary>
+    /// <param name="request">The NotificationProtoObj containing the notification data.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>The created NotificationProtoObj.</returns>
     public override async Task<NotificationProtoObj> CreateNotificationAsync(NotificationProtoObj request,
         ServerCallContext context)
     {
         try
         {
-            NotificationEntity createdNotification =
+            NotificationEntity? createdNotification =
                 await notificationDao.CreateNotificationAsync(FromProtoToEntity(request));
 
             NotificationProtoObj notificationProtoObj = FromEntityToProto(createdNotification);
@@ -35,18 +41,41 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
         }
     }
 
+    /// <summary>
+    /// Fetches a notification by its ID.
+    /// </summary>
+    /// <param name="request">The Int64Value containing the ID of the notification to fetch.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>The fetched NotificationProtoObj.</returns>
+    public override async Task<NotificationProtoObj> FetchNotificationByIdAsync(Int64Value request,
+        ServerCallContext context)
+    {
+        try
+        {
+            NotificationEntity? notificationById
+                = await notificationDao.FetchNotificationByIdAsync(request.Value);
+            return FromEntityToProto(notificationById);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new RpcException(new Status(StatusCode.Internal, e.Message));
+        }
+    }
+
+    /// <summary>
+    /// Fetches all notifications by the receiver's username.
+    /// </summary>
+    /// <param name="request">The StringValue containing the username of the receiver.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>The list of fetched NotificationProtoObj objects.</returns>
     public override async Task<NotificationProtoObjList> FetchAllNotificationsByReceiverAsync(StringValue request,
         ServerCallContext context)
     {
         try
         {
-            ICollection<NotificationEntity> notificationEntities =
+            ICollection<NotificationEntity?> notificationEntities =
                 await notificationDao.FetchAllNotificationsByReceiverAsync(request.Value);
-
-            /*if (notificationEntities.Count == 0)
-            {
-                throw new Exception("No Notifications for Receiver!!!");
-            }*/
 
             NotificationProtoObjList protoObjList = new NotificationProtoObjList
             {
@@ -69,12 +98,24 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
         }
     }
 
+    /// <summary>
+    /// Marks a notification as read.
+    /// </summary>
+    /// <param name="request">The NotificationProtoObj representing the notification to mark as read.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>An Empty response.</returns>
     public override async Task<Empty> MarkAsRead(NotificationProtoObj request, ServerCallContext context)
     {
         await notificationDao.MarkNotificationAsReadAsync(FromProtoToEntity(request));
         return new Empty();
     }
 
+    /// <summary>
+    /// Marks all notifications in the list as read.
+    /// </summary>
+    /// <param name="request">The NotificationProtoObjList containing the notifications to mark as read.</param>
+    /// <param name="context">The server call context.</param>
+    /// <returns>An Empty response.</returns>
     public override async Task<Empty> MarkAllAsRead(NotificationProtoObjList request, ServerCallContext context)
     {
         List<NotificationProtoObj> protoObjs = request.AllNotifications.ToList();
@@ -85,23 +126,16 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
         return new Empty();
     }
 
-    public override async Task<BoolValue> DeleteNotificationAsync(Int64Value request, ServerCallContext context)
-    {
-        try
-        {
-            bool deleteNotificationAsync = await notificationDao.DeleteNotificationAsync(request.Value);
-            return new BoolValue { Value = deleteNotificationAsync };
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.Aborted, e.Message));
-        }
-    }
 
-    public static NotificationEntity FromProtoToEntity(NotificationProtoObj notificationProtoObj)
+
+    /// <summary>
+    /// Converts a NotificationProtoObj to a NotificationEntity.
+    /// </summary>
+    /// <param name="notificationProtoObj">The NotificationProtoObj to convert.</param>
+    /// <returns>The converted NotificationEntity.</returns>
+    public static NotificationEntity? FromProtoToEntity(NotificationProtoObj notificationProtoObj)
     {
-        NotificationEntity entity = new NotificationEntity
+        NotificationEntity? entity = new NotificationEntity
         {
             Date = notificationProtoObj.Date,
             IsRead = (bool)notificationProtoObj.IsRead!,
@@ -119,7 +153,12 @@ public class NotificationService : NotificationProtoService.NotificationProtoSer
         return entity;
     }
 
-    public static NotificationProtoObj FromEntityToProto(NotificationEntity entity)
+    /// <summary>
+    /// Converts a NotificationEntity to a NotificationProtoObj.
+    /// </summary>
+    /// <param name="entity">The NotificationEntity to convert.</param>
+    /// <returns>The converted NotificationProtoObj.</returns>
+    public static NotificationProtoObj FromEntityToProto(NotificationEntity? entity)
     {
         NotificationProtoObj protoObj = new NotificationProtoObj
         {

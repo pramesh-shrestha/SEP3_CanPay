@@ -1,15 +1,24 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=02bed20d_002Dfb9a_002D4c32_002Db2f7_002De7165dcd65ad/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ErrorMessageWhenFullNameIsNull" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ad5507f5_002Df025_002D4bfc_002D99f5_002Db21f9cc564eb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="PayBill_ValidInput_CreatesBillPaymentAndSetsShowModalToTrue #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.RegisterUserTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.LoginTest.ErrorMessageWhenUsernameIsEmpty&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.LoginTest.ErrorMessageWhenBothFieldsAreEmpty&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.BillPaymentPageTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.RequestMoneyTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.LoginTest.LoginAsync_ShouldNotThrowAnErrorMessage_WhnAllFieldsAreEnteredCorrectly&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.LoginTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.RegisterUserTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.ManageProfileTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=53251a67_002Da557_002D4702_002D8745_002D6536efbe248a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CreateAccount_ShouldThrowAnError_WhenCardNumberIsZero" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=bbb34842_002D2a1c_002D4b8f_002D9f05_002Dac41eef07a3f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="PayBill_ValidInput_CreatesBillPaymentAndSetsShowModalToTrue #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.RegisterUserTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.BillPaymentPageTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.RequestMoneyTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	
+	
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ca967dc8_002D1d14_002D44c8_002D80e6_002D2f26e9793589/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="PayBill_ValidInput_CreatesBillPaymentAndSetsShowModalToTrue" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::F6511AF5-ED26-440A-8801-288F51716DFC::net7.0::Test.BillPaymentPageTest.PayBill_ValidInput_CreatesBillPaymentAndSetsShowModalToTrue&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

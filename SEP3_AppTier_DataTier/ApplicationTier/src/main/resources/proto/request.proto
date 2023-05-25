@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+
+import "google/protobuf/wrappers.proto";
+import "user.proto";
+import "google/protobuf/empty.proto";
+
+option java_multiple_files = false;
+option java_package = "applicationtier.protobuf";
+
+message RequestProtoObj {
+  int64 requestId = 1;
+  bool isApproved = 2;
+  string status = 3;
+  int32 amount = 4;
+  string comment = 5;
+  UserProtoObj requestSender = 6;
+  UserProtoObj requestReceiver = 7;
+  string requestedDate = 8;
+}
+
+message RequestProtoObjList{
+  repeated RequestProtoObj requests= 1;
+}
+
+service RequestProtoService{
+  rpc createRequestAsync(RequestProtoObj) returns (RequestProtoObj);
+//  rpc fetchAllRequestsAsync(google.protobuf.Empty) returns (RequestProtoObjList);
+  rpc fetchRequestByIdAsync(google.protobuf.Int64Value) returns (RequestProtoObj);
+//  rpc fetchRequestByUsername(google.protobuf.StringValue) returns (RequestProtoObj);
+  rpc updateRequestAsync(RequestProtoObj) returns (RequestProtoObj);
+//  rpc deleteRequestAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
+}

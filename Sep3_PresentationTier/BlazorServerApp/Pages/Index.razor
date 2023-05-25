@@ -1,24 +1,59 @@
 ﻿@page "/"
 @using HTTPClients.ClientInterfaces
 @using Domains.Entity
-@inject IUserService UserService;
+
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+  <section class="hero">
+    <div class="container">
+      <h2>Welcome to our Kanpay Payment System</h2>
+      <p>Make secure and convenient payments online.</p>
+      <a href="RegisterUser" class="btn">Get Started</a>
+    </div>
+  </section>
 
-Welcome to your new app.
+  <section class="features">
+    <div class="container">
+      <div class="keyFeature"><h2>Key Features</h2></div>
+      
+      <div class="feature-slider">
+        <div class="feature-item">
+          <img src="images/secure-icon.png" alt="Secure Transactions">
+          <h3>Secure Transactions</h3>
+          <p>Your payments are encrypted and secured to protect your financial information.</p>
+        </div>
+        <div class="feature-item">
+          <img src="images/easy-payments-icon.png" alt="Easy Payments">
+          <h3>Easy Payments</h3>
+          <p>Make payments with just a few clicks, without the hassle of carrying cash or cards.</p>
+        </div>
+        <div class="feature-item">
+          <img src="images/fast-processing-icon.png" alt="Fast Processing">
+          <h3>Fast Processing</h3>
+          <p>Enjoy quick and efficient payment processing, saving you time and effort.</p>
+        </div>
+        <div class="feature-item">
+          <img src="images/mobile-payments-icon.png" alt="Mobile Payments">
+          <h3>Mobile Payments</h3>
+          <p>Conveniently make payments using your mobile device anytime, anywhere.</p>
+        </div>
+        <div class="feature-item">
+          <img src="images/rewards-program-icon.png" alt="Rewards Program">
+          <h3>Rewards Program</h3>
+          <p>Earn rewards and cashback on your payments with our loyalty program.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<SurveyPrompt Title="How is Blazor working for you?"/>
+  <footer>
+    <p>&copy; 2023 Kanpay Payment System. All rights reserved.</p>
+  </footer>
+
 
 @code {
-    private IEnumerable<UserEntity?> userEntities = new List<UserEntity?>();
 
-
-    private async void
-        GetAllUsers()
-    {
-        userEntities = await UserService.FetchAllUsersAsync();
-    }
 
 }
+

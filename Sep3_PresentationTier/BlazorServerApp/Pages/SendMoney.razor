@@ -1,5 +1,7 @@
 @page "/SendMoney"
 @using Domains.Entity
+@using Domains.Enums
+@using Entity.Model
 @using HTTPClients.ClientInterfaces
 @using UIComponents
 
@@ -8,26 +10,52 @@
 @inject AuthenticationStateProvider StateProvider;
 @inject NavigationManager NavMgr;
 @inject INotificationService NotificationService;
-<AuthorizeView>
-    <Authorized>
+@inject IRequestService RequestService;
+@inject TransferValues TransferValues;
 
-<div class="container">
-    <h3>Send Money</h3>
-    <div class="row">
-        <div class="col-md-3 first-box">
+@if (isAuthorized)
+{
+    <div class="container">
+        <h3>Send Money</h3>
 
-            <div class="icon-image">
-                <img src="images/KANPAY logo.png" alt="">
+        <div class="wrapper_loaded">
+            @* send money radio *@
+            <div class="radio_container">
+                <input class="radio_option" type="radio" name="btn" checked="" value="@TypesOfNotification.SEND_MONEY"
+                       @onchange="ChangeTransactionType"/>
+                <div class="filter_btn">
+                    <span class="span">Send Money</span>
+                </div>
             </div>
 
-            <div class="buttonDiv">
-                <button class="button" @onclick="SendMoneyToReceiver">Send</button>
-                <button class="button" @onclick="BackToHome">Cancel</button>
+            @* request money radio *@
+            <div class="radio_container">
+                <input class="radio_option" type="radio" name="btn"
+                       value="@TypesOfNotification.REQUEST_MONEY" @onchange="ChangeTransactionType"/>
+                <div class="filter_btn">
+                    <span class="span">Request Money</span>
+                </div>
             </div>
         </div>
 
-        <!-- 8 Columns -->
-                <div class="col-md-6">
+        <div class="row">
+
+            <div class="col-md-3 first-box">
+
+                <div class="icon-image">
+                    <img src="images/KANPAY logo.png" alt="">
+                </div>
+
+                <div class="buttonDiv">
+                    <button class="button" @onclick="HandleSendButtonClick">Send</button>
+                    <button class="button" @onclick="BackToHome">Cancel</button>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- 8 Columns -->
+                @if (transactionType!.Equals(TypesOfNotification.SEND_MONEY.ToString()))
+                {
                     <div class="form-group">
                         <div>
                             <span>@sender.ToUpper()</span>
@@ -43,71 +71,131 @@
                             <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
                         </div>
 
-                        <label>Amount</label>
-                        <div class="inputFields">
-                            <input type="number" class="fieldLength" @bind="amount">
+                        <label>Amount (CAD)</label>
+                        <div class="inputFields amount-field">
+                            <span class="currency">$</span>
+                            <input type="number" class="fieldLength-Amount" @bind="amount">
                         </div>
+
 
                         <label>Date</label>
                         <div class="inputFields">
-                            <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
+                            <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")" disabled="">
                         </div>
 
-                        <div class="error">
-                            @if (!string.IsNullOrEmpty(errorLabel))
-                            {
-                                <label style="color: @color">@errorLabel</label>
-                            }
+                        <label>Comment</label>
+                        <div class="inputFields">
+                            <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment">
                         </div>
+
                     </div>
-                </div>
-                <div class="col-md-3 third-box usernameList">
-                    <h4>List of usernames</h4>
-                    @foreach (var item in usernames)
-                    {
-                        if (item.ToLower().Contains(receiver.ToLower()))
-                        {
-                            <ul>
-                                <li @onclick="() => receiver = item">@item</li>
-                            </ul>
-                        }
-                    }
-                </div>
+                }
+                else if (transactionType.Equals(TypesOfNotification.REQUEST_MONEY.ToString()))
+                {
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div>
+                                <span>@sender.ToUpper()</span>
+                            </div>
 
+                            <label>To</label>
+                            <div class="inputFields">
+                                <input type="text" class="fieldLength" @bind="receiver" @bind:event="oninput" placeholder="Search username...">
+                            </div>
+
+                            <label>Amount (CAD)</label>
+                            <div class="inputFields amount-field">
+                                <span class="currency">$</span>
+                                <input type="number" class="fieldLength-Amount" @bind="amount">
+                            </div>
+
+                            <label>Date</label>
+                            <div class="inputFields">
+                                <input type="date" @bind="dateTime" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")" disabled="">
+                            </div>
+
+                            <label>Comment</label>
+                            <div class="inputFields">
+                                <input type="text" class="fieldLength" @bind="comment" placeholder="Add comment">
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div >
+
+            @* html for username list *@
+            <div class="col-md-3 third-box usernameList">
+                <h4>List of usernames</h4>
+                @foreach (var item in usernames)
+                {
+                    if (item.ToLower().Contains(receiver.ToLower()))
+                    {
+                        <ul>
+                            <li @onclick="() => receiver = item">@item</li>
+                        </ul>
+                    }
+                }
             </div>
+
         </div>
 
-        <Modal ShowModal="showModal">
-            <p >You have successfully transferred the amount!</p>
-            <div>
-                <button class="button" @onclick="@Proceed">OK</button>
-            </div>
-        </Modal>
-    
-    
-    </Authorized>
+        @* html code for error label *@
+        <div class="error">
+            @if (!string.IsNullOrEmpty(errorLabel))
+            {
+                <label style="color: @color">@errorLabel</label>
+            }
+        </div>
+    </div>
+    <Modal ShowModal="showModal">
+        @if (transactionType.Equals(TypesOfNotification.SEND_MONEY.ToString()))
+        {
+            <p>You have successfully transferred the amount!</p>
+        }
+        else if (transactionType.Equals(TypesOfNotification.REQUEST_MONEY.ToString()))
+        {
+            <p >You have successfully requested the amount!</p>
+        }
+        <div>
+            <button class="button" @onclick="@Proceed">OK</button>
+        </div>
+    </Modal>
+}
+else
+{
+    <h2>You must be logged in to be able to view this page--</h2>
+}
 
-    <NotAuthorized>
-        <h3>We are sorry, you must be logged in to access this page.</h3>
-    </NotAuthorized>
-</AuthorizeView>
+@code
+{
 
-
-@code {
+    // send money and request money
     public string? sender = "";
     public string? receiver = "";
     public string? amount = "";
     private DateTime dateTime = DateTime.Now.Date;
-
     private long cardNumber;
+    private string? comment = "";
+    private long createdTransactionId = 0;
+    private long createdRequestId = 0;
+
+    // list of username
     private IEnumerable<UserEntity?> userEntities = new List<UserEntity?>();
     private List<string?> usernames = new List<string?>();
     private UserEntity? senderUser = new UserEntity();
     private UserEntity? receiverUser = new UserEntity();
 
+    // radio buttons properties
+    private string? transactionType = TypesOfNotification.SEND_MONEY.ToString();
+
+    // extras
     public string? errorLabel = "";
     private string? color = "";
     private bool showModal;
+    private bool isAuthorized;
 
 
     protected override async Task OnInitializedAsync()
@@ -118,6 +206,7 @@
 
             AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
             sender = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
+            isAuthorized = state.User.Identity!.IsAuthenticated;
 
             IEnumerable<UserEntity?> entities = userEntities.ToList();
             senderUser = entities.FirstOrDefault(u => u.UserName.Equals(sender));
@@ -125,15 +214,186 @@
 
             usernames = entities.Select(u => u.UserName).ToList();
             usernames.Remove(senderUser.UserName);
+
+            if (TransferValues.RequestSender != null)
+            {
+                receiver = TransferValues.RequestSender.UserName;
+                amount = TransferValues.RequestedAmount.ToString();
+            }
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
             errorLabel = e.Message;
             color = "red";
         }
     }
 
+
+    /// <summary>
+    /// Send money to the receiver.
+    /// </summary>
+    private async Task SendMoneyToReceiver()
+    {
+        receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
+        string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
+
+
+        TransactionEntity transactionEntity = new TransactionEntity()
+        {
+            Amount = Convert.ToInt32(amount),
+            Sender = senderUser,
+            Receiver = receiverUser,
+            Date = date,
+            Comment = comment
+        };
+
+        try
+        {
+            if (string.IsNullOrEmpty(receiver)) throw new Exception("Receiver must be selected.");
+            if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
+
+            if (string.IsNullOrEmpty(errorLabel))
+            {
+                TransactionEntity transactionAsync = await TransactionService.CreateTransactionAsync(transactionEntity);
+                createdTransactionId = transactionAsync.TransactionId;
+                await CreateNotification();
+                showModal = true;
+            }
+        }
+        catch (Exception e)
+        {
+            errorLabel = e.Message;
+            color = "red";
+        }
+    }
+
+    /// <summary>
+    /// Send a money request.
+    /// </summary>
+    private async Task SendMoneyRequest()
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(receiver)) throw new Exception("Receiver must be selected.");
+            if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
+
+            receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
+            string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
+
+            RequestEntity entity = new RequestEntity()
+            {
+                Amount = Convert.ToInt32(amount),
+                Comment = comment,
+                RequestReceiver = receiverUser,
+                RequestSender = senderUser,
+                Status = RequestStatus.PENDING.ToString(),
+                IsApproved = false,
+                RequestedDate = date
+            };
+
+            if (string.IsNullOrEmpty(errorLabel))
+            {
+                RequestEntity? requestEntity = await RequestService.CreateRequestAsync(entity);
+                createdRequestId = requestEntity.Id;
+
+                await CreateNotification();
+                showModal = true;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new Exception(e.Message);
+        }
+    }
+
+    /// <summary>
+    /// Create a notification.
+    /// </summary>
+    private async Task CreateNotification()
+    {
+        try
+        {
+            string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
+            NotificationEntity notificationEntity = new NotificationEntity
+            {
+                Date = date,
+                Sender = senderUser,
+                Receiver = receiverUser, IsRead = false
+            };
+
+            switch (transactionType)
+            {
+                case nameof(TypesOfNotification.SEND_MONEY):
+                    notificationEntity.NotificationType = TypesOfNotification.SEND_MONEY.ToString();
+                    notificationEntity.Message = $"Transaction {createdTransactionId} Received: You received ${amount} CAD  from {senderUser.FullName}.";
+                    break;
+                case nameof(TypesOfNotification.REQUEST_MONEY):
+                    notificationEntity.NotificationType = TypesOfNotification.REQUEST_MONEY.ToString();
+                    notificationEntity.Message = $"Request {createdRequestId} Received: {senderUser.FullName} asked you for ${amount} CAD.";
+                    break;
+            }
+
+            await NotificationService.CreateNotificationAsync(notificationEntity);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    /// <summary>
+    /// Handle the send button click based on the transaction type.
+    /// </summary>
+    private async Task HandleSendButtonClick()
+    {
+        switch (transactionType)
+        {
+            case nameof(TypesOfNotification.SEND_MONEY):
+                await SendMoneyToReceiver();
+                break;
+            case nameof(TypesOfNotification.REQUEST_MONEY):
+                await SendMoneyRequest();
+                break;
+        }
+    }
+
+
+    /// <summary>
+    /// Navigate back to the home page.
+    /// </summary>
+    private void BackToHome()
+    {
+        NavMgr.NavigateTo("/");
+    }
+
+    /// <summary>
+    /// Proceed with the operation after closing the modal.
+    /// </summary>
+    private void Proceed()
+    {
+        showModal = false;
+        NavMgr.NavigateTo("/");
+    }
+
+    /// <summary>
+    /// Change the transaction type based on the selected value.
+    /// </summary>
+    /// <param name="arg">The selected transaction type.</param>
+    private void ChangeTransactionType(ChangeEventArgs arg)
+    {
+        transactionType = arg.Value!.ToString();
+        InvokeAsync(StateHasChanged);
+    }
+
+    /// <summary>
+    /// Get the error message for testing purposes.
+    /// </summary>
+    /// <returns>The error message, or null if no error occurred.</returns>
     //For testing purpose only
-    public async Task<String> GetErrorMessage()
+        public async Task<String> GetErrorMessage()
     {
         try
         {
@@ -146,74 +406,4 @@
 
         return null;
     }
-
-    //send money to receiver
-    private async Task SendMoneyToReceiver()
-    {
-        receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
-        string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
-
-        TransactionEntity transactionEntity = new TransactionEntity(senderUser, receiverUser, int.Parse(amount), date);
-
-        try
-        {
-            if (string.IsNullOrEmpty(receiver))
-            {
-                throw new Exception("Receiver must be selected.");
-                
-            }
-            if (int.Parse(amount) <= 0)
-            {
-                throw new Exception("Amount must be more than 0.");
-                
-            }
-            if (string.IsNullOrEmpty(errorLabel))
-            {
-                await TransactionService.CreateTransactionAsync(transactionEntity);
-                await CreateNotification();
-                showModal = true;
-            }
-        }
-        catch (Exception e)
-        {
-            errorLabel = e.Message;
-            color = "red";
-        }
-    }
-
-    //navigate back to home page
-    private void BackToHome()
-    {
-        NavMgr.NavigateTo("/");
-    }
-
-    private void Proceed()
-    {
-        showModal = false;
-        NavMgr.NavigateTo("/");
-    }
-
-    private async Task CreateNotification()
-    {
-        try
-        {
-            string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
-            NotificationEntity notificationEntity = new NotificationEntity
-            {
-                Message = $"{senderUser.FullName} has sent you {amount} dollar",
-                Date = date,
-                Sender = senderUser,
-                Receiver = receiverUser,
-                NotificationType = "Transaction",
-                IsRead = false
-            };
-            await NotificationService.CreateNotificationAsync(notificationEntity);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }
-
 }

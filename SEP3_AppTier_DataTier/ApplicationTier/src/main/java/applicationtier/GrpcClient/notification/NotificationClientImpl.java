@@ -15,11 +15,23 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of the INotificationClient interface that communicates with the Notification Proto Service.
+ * Manages notifications by converting between entity and proto objects, and invoking corresponding methods
+ * of the Notification Proto Service blocking stub.
+ */
 @Service
 public class NotificationClientImpl implements INotificationClient {
 
     private NotificationProtoServiceGrpc.NotificationProtoServiceBlockingStub notificationBlockingStub;
 
+
+    /**
+     * Retrieves the blocking stub for the Notification Proto Service.
+     * If the stub is not initialized, it creates a new instance using the managed channel.
+     *
+     * @return The Notification Proto Service blocking stub.
+     */
     private NotificationProtoServiceGrpc.NotificationProtoServiceBlockingStub getNotificationBlockingStub() {
         if (notificationBlockingStub == null) {
             ManagedChannel channel = ManagedChannelProvider.getChannel();
@@ -28,6 +40,15 @@ public class NotificationClientImpl implements INotificationClient {
         return notificationBlockingStub;
     }
 
+    /**
+     * Creates a new notification by converting the given NotificationEntity object to a NotificationProtoObj,
+     * invoking the createNotificationAsync method of the Notification Proto Service blocking stub,
+     * and converting the returned NotificationProtoObj back to a NotificationEntity.
+     *
+     * @param notification The NotificationEntity object representing the notification to create.
+     * @return The created NotificationEntity object.
+     * @throws RuntimeException if an exception occurs during the creation process.
+     */
     @Override
     public NotificationEntity createNotification(NotificationEntity notification) {
         try {
@@ -42,6 +63,33 @@ public class NotificationClientImpl implements INotificationClient {
         }
     }
 
+    /**
+     * Retrieves a notification by its ID by invoking the fetchNotificationByIdAsync method
+     * of the Notification Proto Service blocking stub, and converting the returned
+     * NotificationProtoObj to a NotificationEntity.
+     *
+     * @param id The ID of the notification to fetch.
+     * @return The fetched NotificationEntity object.
+     * @throws RuntimeException if an exception occurs during the retrieval process.
+     */
+    @Override
+    public NotificationEntity fetchNotificationById(long id) {
+        try {
+            Notification.NotificationProtoObj notificationProtoObj = getNotificationBlockingStub().
+                    fetchNotificationByIdAsync(Int64Value.of(id));
+            return fromProtoObjToEntity(notificationProtoObj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Marks a notification as read by converting the given NotificationEntity object to a NotificationProtoObj
+     * and invoking the markAsRead method of the Notification Proto Service blocking stub.
+     *
+     * @param notification The NotificationEntity object to mark as read.
+     * @throws RuntimeException if an exception occurs during the marking process.
+     */
     @Override
     public void markAsRead(NotificationEntity notification) {
         try {
@@ -51,6 +99,15 @@ public class NotificationClientImpl implements INotificationClient {
         }
     }
 
+
+    /**
+     * Marks multiple notifications as read by converting the list of NotificationEntity objects to a
+     * NotificationProtoObjList, invoking the markAllAsRead method of the Notification Proto Service blocking stub,
+     * and discarding the returned Empty object.
+     *
+     * @param notifications The list of NotificationEntity objects to mark as read.
+     * @throws RuntimeException if an exception occurs during the marking process.
+     */
     @Override
     public void markAllAsRead(List<NotificationEntity> notifications) {
         try {
@@ -66,6 +123,15 @@ public class NotificationClientImpl implements INotificationClient {
     }
 
 
+    /**
+     * Fetches all notifications for a given receiver username by invoking the fetchAllNotificationsByReceiverAsync
+     * method of the Notification Proto Service blocking stub, and converting the returned list of
+     * NotificationProtoObj objects to a list of NotificationEntity objects.
+     *
+     * @param receiverUsername The username of the receiver to fetch notifications for.
+     * @return The list of fetched NotificationEntity objects.
+     * @throws RuntimeException if an exception occurs during the retrieval process.
+     */
     @Override
     public List<NotificationEntity> fetchAllNotificationsByReceiver(String receiverUsername) {
         try {
@@ -81,7 +147,15 @@ public class NotificationClientImpl implements INotificationClient {
     }
 
 
-    @Override
+    /**
+     * Deletes a notification by its ID by invoking the deleteNotificationAsync method
+     * of the Notification Proto Service blocking stub.
+     *
+     * @param id The ID of the notification to delete.
+     * @return true if the deletion is successful, false otherwise.
+     * @throws RuntimeException if an exception occurs during the deletion process.
+     */
+    /*@Override
     public boolean deleteNotification(Long id) {
         try {
             BoolValue notificationProtoObj = getNotificationBlockingStub().deleteNotificationAsync(Int64Value.of(id));
@@ -89,9 +163,15 @@ public class NotificationClientImpl implements INotificationClient {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
-    //from proto to entity
+
+    /**
+     * Converts a Notification.NotificationProtoObj to a NotificationEntity object.
+     *
+     * @param notificationProtoObj The Notification.NotificationProtoObj to convert.
+     * @return The converted NotificationEntity object.
+     */
     public static NotificationEntity fromProtoObjToEntity(Notification.NotificationProtoObj notificationProtoObj) {
         NotificationEntity notification = new NotificationEntity();
         notification.setReceiver(UserClientImpl.fromProtoObjToEntity(notificationProtoObj.getReceiverUser()));
@@ -105,7 +185,12 @@ public class NotificationClientImpl implements INotificationClient {
         return notification;
     }
 
-    //from entity to proto
+    /**
+     * Converts a NotificationEntity object to a Notification.NotificationProtoObj.
+     *
+     * @param notification The NotificationEntity object to convert.
+     * @return The converted Notification.NotificationProtoObj.
+     */
     public static Notification.NotificationProtoObj fromEntityToProtoObj(NotificationEntity notification) {
         Notification.NotificationProtoObj.Builder notificationBuilder = Notification.NotificationProtoObj.newBuilder()
                 .setReceiverUser(UserClientImpl.fromEntityToProtoObj(notification.getReceiver()))

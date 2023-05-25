@@ -5,22 +5,25 @@
     padding: 25px;
     margin: 50px auto auto;
     border-radius: 15px;
-    
+
 }
 
 .container h3 {
     color: white;
     text-align: center;
 }
+
 .form-group {
     background-color: white;
+    width: 550px;
+    height: 400px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     padding: 25px;
     margin-top: 50px;
     margin-bottom: 10px;
     border-radius: 15px;
-  
+
 }
 
 .fieldLength {
@@ -37,7 +40,7 @@
     width: 100%;
     height: 100%;
     border-radius: 15px;
- 
+
 }
 
 .third-box {
@@ -63,7 +66,7 @@
     margin-bottom: 2px;
     border-radius: 15px;
     height: 330px;
-    
+
 }
 
 .icon-image {
@@ -109,13 +112,13 @@
 }
 
 /*username list box styling*/
-.usernameList{
+.usernameList {
     background-color: #FFFFFF;
     height: 330px;
     overflow-y: auto;
 }
 
-.usernameList h4,ul li {
+.usernameList h4, ul li {
     font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji", NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
     font-weight: bolder;
 }
@@ -131,12 +134,88 @@
     top: 0;
 }
 
-.usernameList ul li{
+.usernameList ul li {
     cursor: pointer;
 }
 
 .usernameList ul:hover {
     transform: translateY(-5px);
-    background-color:  #5E5DF0;
+    background-color: #5E5DF0;
     color: #FFFFFF;
 }
+
+/*styling for radio button*/
+.wrapper_loaded {
+    position: relative;
+    width: 410px;
+    height: 50px;
+    background-color: #fff;
+    border: 2px solid #323232;
+    border-radius: 34px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 4px 4px #323232;
+}
+
+.radio_container {
+    width: 200px;
+    height: 28px;
+    position: relative;
+    top: 2px;
+    left: 2px;
+}
+
+
+.radio_option {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    appearance: none;
+    cursor: pointer;
+}
+
+
+.filter_btn {
+    width: auto;
+    height: 43px;
+    background-color: #fff;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.span {
+    color: #323232;
+    font-size: 18px;
+}
+
+.radio_option:checked + .filter_btn {
+    background-color: #12bbd4;
+}
+
+.radio_option:checked + .filter_btn .span {
+    color: #FFF;
+}
+
+.amount-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.currency {
+    position: absolute;
+    left: 10px;
+}
+
+.fieldLength-Amount {
+    width: 80%;
+    padding-left: 25px; /* Add left padding to make space for the currency sign */
+    -moz-appearance: textfield; /* Remove increment and decrement buttons in Firefox */
+}
+    
+
+

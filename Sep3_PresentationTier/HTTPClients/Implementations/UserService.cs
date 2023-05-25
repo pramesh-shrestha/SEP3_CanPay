@@ -10,18 +10,32 @@ namespace HTTPClients.Implementations;
 
 using Domains;
 
+/// <summary>
+/// Service implementation for managing user-related operations.
+/// </summary>
 public class UserService : IUserService
 {
     private readonly HttpClient client;
+
+    // Action to be invoked when the authentication state changes.
     public Action<ClaimsPrincipal> OnAuthStateChanged { get; set; } = null!;
     public static string? Jwt { get; private set; } = "";
 
-
+    /// <summary>
+    /// Creates a new instance of the UserService class.
+    /// </summary>
+    /// <param name="client">The HttpClient instance.</param>
     public UserService(HttpClient client)
     {
         this.client = client;
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Jwt);
     }
 
+    /// <summary>
+    /// Creates a new user asynchronously.
+    /// </summary>
+    /// <param name="toCreateUserEntity">The user entity to create.</param>
+    /// <returns>The created user entity.</returns>
     public async Task<UserEntity> CreateAsync(UserEntity toCreateUserEntity)
     {
         HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/user/create", toCreateUserEntity);
@@ -39,9 +53,12 @@ public class UserService : IUserService
         return userEntity;
     }
 
+    /// <summary>
+    /// Fetches all users asynchronously.
+    /// </summary>
+    /// <returns>A collection of user entities.</returns>
     public async Task<IEnumerable<UserEntity?>> FetchAllUsersAsync()
     {
-        LoadClientWithToken();
         HttpResponseMessage responseMessage = await client.GetAsync("/user");
         string result = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode)
@@ -58,15 +75,13 @@ public class UserService : IUserService
         return userEntities.ToList();
     }
 
-
-    public Task<UserEntity> FetchUserByIdAsync(long id)
+    /// <summary>
+    /// Fetches a user by username asynchronously.
+    /// </summary>
+    /// <param name="username">The username of the user.</param>
+    /// <returns>The user entity.</returns>
+    public async Task<UserEntity> FetchUserByUsernameAsync(string? username)
     {
-        throw new NotImplementedException();
-    }
-
-    public async Task<UserEntity> FetchUserByUsernameAsync(string username)
-    {
-        LoadClientWithToken();
         HttpResponseMessage responseMessage = await client.GetAsync($"/user/username/{username}");
         string result = await responseMessage.Content.ReadAsStringAsync();
 
@@ -79,18 +94,19 @@ public class UserService : IUserService
         {
             PropertyNameCaseInsensitive = true
         })!;
-        
+
 
         return userEntity;
     }
-    
-    public Task<Boolean> DeleteUserAsync(long id)
+
+
+    /// <summary>
+    /// Updates a user asynchronously.
+    /// </summary>
+    /// <param name="userEntity">The updated user entity.</param>
+    /// <returns>The updated user entity.</returns>
+    public async Task<UserEntity> UpdateUserAsync(UserEntity userEntity)
     {
-        throw new NotImplementedException();
-    }
-    
-    public async Task<UserEntity> UpdateUserAsync(UserEntity userEntity) {
-        LoadClientWithToken();
         HttpResponseMessage response = await client.PostAsJsonAsync("/user/update", userEntity);
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
@@ -107,7 +123,12 @@ public class UserService : IUserService
     }
 
 
-    //Send user credentials to the Application tier for validation
+    /// <summary>
+    /// Validates a user's credentials.
+    /// </summary>
+    /// <param name="username">The username of the user.</param>
+    /// <param name="password">The password of the user.</param>
+    /// <returns>The authentication response.</returns>
     public async Task<AuthenticationResponse> ValidateUser(string username, string password)
     {
         LoginDto loginDto = new LoginDto
@@ -151,20 +172,22 @@ public class UserService : IUserService
         return principal;
     }
 
+    /// <summary>
+    /// Gets the authentication principal.
+    /// </summary>
+    /// <returns>The authentication principal.</returns>
     public Task<ClaimsPrincipal> GetAuthAsync()
     {
         ClaimsPrincipal principal = CreateClaimsPrincipal();
         return Task.FromResult(principal);
     }
 
-    //updating the balance
 
-
-    public static async Task<string?> GetJwtToken()
-    {
-        return await Task.FromResult(Jwt);
-    }
-
+    /// <summary>
+    /// Parses the claims from a JWT token's payload.
+    /// </summary>
+    /// <param name="jwt">The JWT token.</param>
+    /// <returns>An enumerable collection of claims.</returns>
     private static IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
     {
         string payload = jwt.Split('.')[1];
@@ -173,6 +196,11 @@ public class UserService : IUserService
         return keyValuePairs!.Select(kvp => new Claim(kvp.Key, kvp.Value.ToString()!));
     }
 
+    /// <summary>
+    /// Parses a Base64 string without padding into a byte array.
+    /// </summary>
+    /// <param name="base64">The Base64 string.</param>
+    /// <returns>The byte array representation of the Base64 string.</returns>
     private static byte[] ParseBase64WithoutPadding(string base64)
     {
         switch (base64.Length % 4)
@@ -188,6 +216,10 @@ public class UserService : IUserService
         return Convert.FromBase64String(base64);
     }
 
+    /// <summary>
+    /// Logs out the user.
+    /// </summary>
+    /// <returns>A task representing the logout operation.</returns>
     public Task LogoutAsync()
     {
         Jwt = null;
@@ -195,12 +227,4 @@ public class UserService : IUserService
         OnAuthStateChanged.Invoke(claimsPrincipal);
         return Task.CompletedTask;
     }
-
-
-
-    public void LoadClientWithToken()
-    {
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Jwt);
-    }
-    
 }

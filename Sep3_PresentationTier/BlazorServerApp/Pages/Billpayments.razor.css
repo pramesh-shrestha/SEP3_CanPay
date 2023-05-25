@@ -1,0 +1,201 @@
+.container {
+    background-color: #0C2263;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    padding: 25px;
+    margin: 50px auto auto;
+    border-radius: 15px;
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 20px;
+    color: #172B48;
+    margin-top: 5px;
+}
+
+.value{
+    display: flex;
+    justify-content: center;
+}
+.container h3 {
+    color: white;
+    text-align: center;
+}
+
+.inputFields {
+    padding: 2px 0 10px 0;
+}
+
+.fieldLength{
+    width: 80%;
+}
+
+
+.third-box {
+    background-color: #f6fff8;
+    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+
+}
+
+.form-group {
+    background-color: white;
+    width: 550px;
+    height: 350px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    padding: 25px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+
+}
+.first-box {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    padding: 25px;
+    margin-top: 50px;
+    margin-bottom: 2px;
+    border-radius: 15px;
+    height: 350px;
+    
+
+}
+
+
+
+.icon-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-image img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+/*buttons styling*/
+.buttonDiv {
+    /*margin-bottom: 2px;*/
+    margin-top: 50px;
+}
+
+.button {
+    background: #5E5DF0;
+    width: 100px;
+    border-radius: 999px;
+    color: white;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji", NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    margin-right: 10px;
+    border: 0;
+}
+
+.button:hover,
+.button:focus {
+    background-color: #403fa3;
+}
+
+/*username list box styling*/
+.usernameList {
+    background-color: #FFFFFF;
+    height: 330px;
+    overflow-y: auto;
+}
+
+.usernameList h4, ul li {
+    font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji", NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
+    font-weight: bolder;
+}
+
+.usernameList h4 {
+    background-color: #5E5DF0;
+    color: #FFFFFF;
+    border-radius: 999px;
+    text-align: center;
+    margin-top: 5px;
+    padding: 3px 0 3px 0;
+    position: sticky;
+    top: 0;
+}
+
+.usernameList ul li {
+    cursor: pointer;
+}
+
+.usernameList ul:hover {
+    transform: translateY(-5px);
+    background-color: #5E5DF0;
+    color: #FFFFFF;
+}
+
+/*styling for radio button*/
+.wrapper_loaded {
+    position: relative;
+    width: 410px;
+    height: 50px;
+    background-color: #fff;
+    border: 2px solid #323232;
+    border-radius: 34px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 4px 4px #323232;
+}
+
+
+
+
+.filter_btn {
+    width: auto;
+    height: 43px;
+    background-color: #fff;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.span {
+    color: #323232;
+    font-size: 18px;
+}
+
+
+.amount-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.currency {
+    position: absolute;
+    left: 10px;
+}
+
+.fieldLength-Amount {
+    width: 80%;
+    padding-left: 25px; /* Add left padding to make space for the currency sign */
+    -moz-appearance: textfield; /* Remove increment and decrement buttons in Firefox */
+}
+    

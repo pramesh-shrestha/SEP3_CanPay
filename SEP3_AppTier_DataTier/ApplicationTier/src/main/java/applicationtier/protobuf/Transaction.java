@@ -82,6 +82,19 @@ public final class Transaction {
      * <code>optional .google.protobuf.StringValue date = 5;</code>
      */
     com.google.protobuf.StringValueOrBuilder getDateOrBuilder();
+
+    /**
+     * <code>optional .google.protobuf.StringValue comment = 6;</code>
+     */
+    boolean hasComment();
+    /**
+     * <code>optional .google.protobuf.StringValue comment = 6;</code>
+     */
+    com.google.protobuf.StringValue getComment();
+    /**
+     * <code>optional .google.protobuf.StringValue comment = 6;</code>
+     */
+    com.google.protobuf.StringValueOrBuilder getCommentOrBuilder();
   }
   /**
    * Protobuf type {@code TransactionProtoObj}
@@ -183,6 +196,19 @@ public final class Transaction {
               if (subBuilder != null) {
                 subBuilder.mergeFrom(date_);
                 date_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 50: {
+              com.google.protobuf.StringValue.Builder subBuilder = null;
+              if (comment_ != null) {
+                subBuilder = comment_.toBuilder();
+              }
+              comment_ = input.readMessage(com.google.protobuf.StringValue.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(comment_);
+                comment_ = subBuilder.buildPartial();
               }
 
               break;
@@ -315,6 +341,27 @@ public final class Transaction {
       return getDate();
     }
 
+    public static final int COMMENT_FIELD_NUMBER = 6;
+    private com.google.protobuf.StringValue comment_;
+    /**
+     * <code>optional .google.protobuf.StringValue comment = 6;</code>
+     */
+    public boolean hasComment() {
+      return comment_ != null;
+    }
+    /**
+     * <code>optional .google.protobuf.StringValue comment = 6;</code>
+     */
+    public com.google.protobuf.StringValue getComment() {
+      return comment_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : comment_;
+    }
+    /**
+     * <code>optional .google.protobuf.StringValue comment = 6;</code>
+     */
+    public com.google.protobuf.StringValueOrBuilder getCommentOrBuilder() {
+      return getComment();
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -342,6 +389,9 @@ public final class Transaction {
       if (date_ != null) {
         output.writeMessage(5, getDate());
       }
+      if (comment_ != null) {
+        output.writeMessage(6, getComment());
+      }
     }
 
     public int getSerializedSize() {
@@ -368,6 +418,10 @@ public final class Transaction {
       if (date_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, getDate());
+      }
+      if (comment_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, getComment());
       }
       memoizedSize = size;
       return size;
@@ -410,6 +464,11 @@ public final class Transaction {
         result = result && getDate()
             .equals(other.getDate());
       }
+      result = result && (hasComment() == other.hasComment());
+      if (hasComment()) {
+        result = result && getComment()
+            .equals(other.getComment());
+      }
       return result;
     }
 
@@ -439,6 +498,10 @@ public final class Transaction {
       if (hasDate()) {
         hash = (37 * hash) + DATE_FIELD_NUMBER;
         hash = (53 * hash) + getDate().hashCode();
+      }
+      if (hasComment()) {
+        hash = (37 * hash) + COMMENT_FIELD_NUMBER;
+        hash = (53 * hash) + getComment().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -588,6 +651,12 @@ public final class Transaction {
           date_ = null;
           dateBuilder_ = null;
         }
+        if (commentBuilder_ == null) {
+          comment_ = null;
+        } else {
+          comment_ = null;
+          commentBuilder_ = null;
+        }
         return this;
       }
 
@@ -634,6 +703,11 @@ public final class Transaction {
           result.date_ = date_;
         } else {
           result.date_ = dateBuilder_.build();
+        }
+        if (commentBuilder_ == null) {
+          result.comment_ = comment_;
+        } else {
+          result.comment_ = commentBuilder_.build();
         }
         onBuilt();
         return result;
@@ -690,6 +764,9 @@ public final class Transaction {
         }
         if (other.hasDate()) {
           mergeDate(other.getDate());
+        }
+        if (other.hasComment()) {
+          mergeComment(other.getComment());
         }
         onChanged();
         return this;
@@ -1300,6 +1377,123 @@ public final class Transaction {
           date_ = null;
         }
         return dateBuilder_;
+      }
+
+      private com.google.protobuf.StringValue comment_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> commentBuilder_;
+      /**
+       * <code>optional .google.protobuf.StringValue comment = 6;</code>
+       */
+      public boolean hasComment() {
+        return commentBuilder_ != null || comment_ != null;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue comment = 6;</code>
+       */
+      public com.google.protobuf.StringValue getComment() {
+        if (commentBuilder_ == null) {
+          return comment_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : comment_;
+        } else {
+          return commentBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue comment = 6;</code>
+       */
+      public Builder setComment(com.google.protobuf.StringValue value) {
+        if (commentBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          comment_ = value;
+          onChanged();
+        } else {
+          commentBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue comment = 6;</code>
+       */
+      public Builder setComment(
+          com.google.protobuf.StringValue.Builder builderForValue) {
+        if (commentBuilder_ == null) {
+          comment_ = builderForValue.build();
+          onChanged();
+        } else {
+          commentBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue comment = 6;</code>
+       */
+      public Builder mergeComment(com.google.protobuf.StringValue value) {
+        if (commentBuilder_ == null) {
+          if (comment_ != null) {
+            comment_ =
+              com.google.protobuf.StringValue.newBuilder(comment_).mergeFrom(value).buildPartial();
+          } else {
+            comment_ = value;
+          }
+          onChanged();
+        } else {
+          commentBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue comment = 6;</code>
+       */
+      public Builder clearComment() {
+        if (commentBuilder_ == null) {
+          comment_ = null;
+          onChanged();
+        } else {
+          comment_ = null;
+          commentBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue comment = 6;</code>
+       */
+      public com.google.protobuf.StringValue.Builder getCommentBuilder() {
+        
+        onChanged();
+        return getCommentFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue comment = 6;</code>
+       */
+      public com.google.protobuf.StringValueOrBuilder getCommentOrBuilder() {
+        if (commentBuilder_ != null) {
+          return commentBuilder_.getMessageOrBuilder();
+        } else {
+          return comment_ == null ?
+              com.google.protobuf.StringValue.getDefaultInstance() : comment_;
+        }
+      }
+      /**
+       * <code>optional .google.protobuf.StringValue comment = 6;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> 
+          getCommentFieldBuilder() {
+        if (commentBuilder_ == null) {
+          commentBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder>(
+                  getComment(),
+                  getParentForChildren(),
+                  isClean());
+          comment_ = null;
+        }
+        return commentBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2865,37 +3059,25 @@ public final class Transaction {
     java.lang.String[] descriptorData = {
       "\n\021transaction.proto\032\036google/protobuf/wra" +
       "ppers.proto\032\nuser.proto\032\033google/protobuf" +
-      "/empty.proto\"\353\001\n\023TransactionProtoObj\0223\n\016" +
+      "/empty.proto\"\232\002\n\023TransactionProtoObj\0223\n\016" +
       "transaction_id\030\001 \001(\0132\033.google.protobuf.I" +
       "nt64Value\022!\n\nsenderUser\030\002 \001(\0132\r.UserProt" +
       "oObj\022#\n\014receiverUser\030\003 \001(\0132\r.UserProtoOb" +
       "j\022+\n\006amount\030\004 \001(\0132\033.google.protobuf.Int3" +
       "2Value\022*\n\004date\030\005 \001(\0132\034.google.protobuf.S" +
-      "tringValue\"y\n\033FilterByUserAndDateProtoOb" +
-      "j\022.\n\010username\030\001 \001(\0132\034.google.protobuf.St",
-      "ringValue\022*\n\004date\030\002 \001(\0132\034.google.protobu" +
-      "f.StringValue\"H\n\027TransactionProtoObjList" +
-      "\022-\n\017allTransactions\030\001 \003(\0132\024.TransactionP" +
-      "rotoObj2\327\005\n\027TransactionProtoService\022D\n\026C" +
-      "reateTransactionAsync\022\024.TransactionProto" +
-      "Obj\032\024.TransactionProtoObj\022N\n\031FetchTransa" +
-      "ctionByIdAsync\022\033.google.protobuf.Int64Va" +
-      "lue\032\024.TransactionProtoObj\022[\n!FetchAlLTra" +
-      "nsactionsBySenderAsync\022\034.google.protobuf" +
-      ".StringValue\032\030.TransactionProtoObjList\022]",
-      "\n#FetchAllTransactionsByReceiverAsync\022\034." +
-      "google.protobuf.StringValue\032\030.Transactio" +
-      "nProtoObjList\022`\n&FetchAlLTransactionsInv" +
-      "olvingUserAsync\022\034.google.protobuf.String" +
-      "Value\032\030.TransactionProtoObjList\022V\n\034Fetch" +
-      "TransactionsByDateAsync\022\034.google.protobu" +
-      "f.StringValue\032\030.TransactionProtoObjList\022" +
-      "]\n#FetchTransactionsByRecipientAndDate\022\034" +
-      ".FilterByUserAndDateProtoObj\032\030.Transacti" +
-      "onProtoObjList\022Q\n\026DeleteTransactionAsync",
-      "\022\033.google.protobuf.Int64Value\032\032.google.p" +
-      "rotobuf.BoolValueB\034\n\030applicationtier.pro" +
-      "tobufP\000b\006proto3"
+      "tringValue\022-\n\007comment\030\006 \001(\0132\034.google.pro" +
+      "tobuf.StringValue\"y\n\033FilterByUserAndDate",
+      "ProtoObj\022.\n\010username\030\001 \001(\0132\034.google.prot" +
+      "obuf.StringValue\022*\n\004date\030\002 \001(\0132\034.google." +
+      "protobuf.StringValue\"H\n\027TransactionProto" +
+      "ObjList\022-\n\017allTransactions\030\001 \003(\0132\024.Trans" +
+      "actionProtoObj2\301\001\n\027TransactionProtoServi" +
+      "ce\022D\n\026CreateTransactionAsync\022\024.Transacti" +
+      "onProtoObj\032\024.TransactionProtoObj\022`\n&Fetc" +
+      "hAlLTransactionsInvolvingUserAsync\022\034.goo" +
+      "gle.protobuf.StringValue\032\030.TransactionPr" +
+      "otoObjListB\034\n\030applicationtier.protobufP\000",
+      "b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2917,7 +3099,7 @@ public final class Transaction {
     internal_static_TransactionProtoObj_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_TransactionProtoObj_descriptor,
-        new java.lang.String[] { "TransactionId", "SenderUser", "ReceiverUser", "Amount", "Date", });
+        new java.lang.String[] { "TransactionId", "SenderUser", "ReceiverUser", "Amount", "Date", "Comment", });
     internal_static_FilterByUserAndDateProtoObj_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_FilterByUserAndDateProtoObj_fieldAccessorTable = new

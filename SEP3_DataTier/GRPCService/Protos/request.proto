@@ -1,0 +1,30 @@
+syntax = "proto3";
+option csharp_namespace = "SEP3_DataTier";
+
+import "google/protobuf/wrappers.proto";
+import "Protos/user.proto";
+import "google/protobuf/empty.proto";
+
+message RequestProtoObj {
+  int64 requestId = 1;
+  bool isApproved = 2;
+  string status = 3;
+  int32 amount = 4;
+  string comment = 5;
+  UserProtoObj requestSender = 6;
+  UserProtoObj requestReceiver = 7;
+  string requestedDate = 8;
+}
+
+message RequestProtoObjList{
+  repeated RequestProtoObj requests= 1;
+}
+
+service RequestProtoService{
+  rpc CreateRequestAsync(RequestProtoObj) returns (RequestProtoObj);
+//  rpc FetchAllRequestsAsync(google.protobuf.Empty) returns (RequestProtoObjList);
+  rpc FetchRequestByIdAsync(google.protobuf.Int64Value) returns (RequestProtoObj);
+//  rpc FetchRequestByUsername(google.protobuf.StringValue) returns (RequestProtoObjList);
+  rpc UpdateRequestAsync(RequestProtoObj) returns (RequestProtoObj);
+//  rpc DeleteRequestAsync(google.protobuf.Int64Value) returns (google.protobuf.BoolValue);
+}

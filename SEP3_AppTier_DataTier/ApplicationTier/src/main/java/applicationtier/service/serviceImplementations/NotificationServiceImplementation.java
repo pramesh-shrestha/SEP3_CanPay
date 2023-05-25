@@ -2,10 +2,7 @@ package applicationtier.service.serviceImplementations;
 
 import applicationtier.GrpcClient.notification.INotificationClient;
 
-import applicationtier.GrpcClient.transaction.ITransactionClient;
 import applicationtier.entity.NotificationEntity;
-import applicationtier.entity.TransactionEntity;
-import applicationtier.entity.UserEntity;
 import applicationtier.service.serviceInterfaces.INotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,34 +12,24 @@ import java.util.List;
 @Service
 public class NotificationServiceImplementation implements INotificationService {
 
-    private INotificationClient notificationClient;
-    private ITransactionClient transactionClient;
+    private final INotificationClient notificationClient;
 
     @Autowired
-    public NotificationServiceImplementation(INotificationClient notificationClient, ITransactionClient transactionClient) {
+    public NotificationServiceImplementation(INotificationClient notificationClient) {
         this.notificationClient = notificationClient;
-        this.transactionClient = transactionClient;
     }
 
+    /**
+     * Creates a new notification.
+     *
+     * @param notification The notification entity to create.
+     * @return The created notification entity.
+     * @throws RuntimeException If an error occurs during the creation process.
+     */
     @Override
     public NotificationEntity createNotification(NotificationEntity notification) {
 
         try {
-            /*TransactionEntity transaction = transactionClient.fetchTransactionById(notification.getId());
-
-            if (transaction == null) {
-                throw new Exception("Transaction not found");
-            }
-
-            UserEntity receiver = transaction.getReceiver();
-
-            NotificationEntity newNotification = new NotificationEntity();
-            newNotification.setReceiver(receiver);
-            newNotification.setId(transaction.getId());
-            newNotification.setDate(transaction.getDate());
-            newNotification.setMessage("You received a payment from " + transaction.getSender().getUsername());
-            newNotification.setType(NotificationTypes.TRANSACTION.name());
-            newNotification.setRead(false);*/
             return notificationClient.createNotification(notification);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -50,6 +37,30 @@ public class NotificationServiceImplementation implements INotificationService {
     }
 
 
+    /**
+     * Fetches a notification by its ID.
+     *
+     * @param id The ID of the notification to fetch.
+     * @return The fetched notification entity.
+     * @throws RuntimeException If an error occurs during the fetching process.
+     */
+    @Override
+    public NotificationEntity fetchNotificationById(long id) {
+        try {
+            return notificationClient.fetchNotificationById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
+     * Fetches all notifications for a given receiver.
+     *
+     * @param receiverUsername The username of the receiver.
+     * @return The list of fetched notification entities.
+     * @throws RuntimeException If an error occurs during the fetching process.
+     */
     @Override
     public List<NotificationEntity> fetchAllNotificationsByReceiver(String receiverUsername) {
         try {
@@ -60,6 +71,12 @@ public class NotificationServiceImplementation implements INotificationService {
         }
     }
 
+    /**
+     * Marks a notification as read.
+     *
+     * @param notification The notification entity to mark as read.
+     * @throws RuntimeException If an error occurs during the marking process.
+     */
     @Override
     public void markAsRead(NotificationEntity notification) {
         try {
@@ -71,6 +88,12 @@ public class NotificationServiceImplementation implements INotificationService {
     }
 
 
+    /**
+     * Marks multiple notifications as read.
+     *
+     * @param notificationList The list of notification entities to mark as read.
+     * @throws RuntimeException If an error occurs during the marking process.
+     */
     @Override
     public void markAllAsRead(List<NotificationEntity> notificationList) {
         try {
@@ -82,7 +105,14 @@ public class NotificationServiceImplementation implements INotificationService {
     }
 
 
-    @Override
+    /**
+     * Deletes a notification by its ID.
+     *
+     * @param id The ID of the notification to delete.
+     * @return True if the deletion is successful, false otherwise.
+     * @throws RuntimeException If an error occurs during the deletion process.
+     */
+    /*@Override
     public boolean deleteNotification(Long id) {
         try {
             return notificationClient.deleteNotification(id);
@@ -90,4 +120,6 @@ public class NotificationServiceImplementation implements INotificationService {
             throw new RuntimeException(e.getMessage());
         }
     }
+*/
+
 }

@@ -1,66 +1,195 @@
-﻿@using Domains.Entity
-@using HTTPClients.ClientInterfaces
+﻿@using HTTPClients.ClientInterfaces
+@using UIComponents
+@using Domains.Entity
+@using Domains.Enums
 @using System.Timers
+@using System.Text.RegularExpressions
+@using Entity.Model
 @namespace BlazorServerApp.Pages
+
 @inject INotificationService NotificationService;
 @inject NavigationManager NavMgr;
 @inject AuthenticationStateProvider StateProvider;
+@inject IRequestService RequestService;
+@inject IUserService UserService;
 
 
 <AuthorizeView>
     <Authorized>
         <div class="container-text">
-            <span class="text">Welcome to Kanpay, @receiver</span>
+            <span class="text">
+                Welcome to Kanpay, @currentUser.FullName<!doctype html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                    <title>Document</title>
+                </head>
+                <body>
+
+                </body>
+                </html>.FullName
+            </span>
         </div>
+
+        @* Notification bell  *@
         <div class="container">
-            <img src="images/notification-bell.png" class="notification-icon" @onclick="@(HandleNotificationClick)" alt="notification" style="cursor: pointer"/>
+            <img src="images/notification-bell.png" class="notification-icon"
+                 @onclick="@(() => showNotification = !showNotification)"
+                 alt="notification" style="cursor: pointer"/>
             <div class="number-div">
                 <button class="number">
                     <span class="noti_count">@notificationCount</span>
                 </button>
             </div>
-
-
         </div>
+
+        @* Notification container  *@
         @if (showNotification)
         {
-            <div class="noti-body ">
-                <label class="header">Notifications</label>
-                <hr class="hr1"/>
-                <div class="card">
-                    @foreach (var items in notifications)
-                    {
-                        <div class="card-body">
-                            <label class="date text-muted">@items.Date</label>
-                            <label class="notification-table">@items.Message</label>
-                        </div>
-                    }
+            <div class="notification_container">
+
+
+                <div class="notification_heading">
+                    <span>Notifications</span>
+                    <button class="mark_as_read_btn" @onclick="HandleMarkRead">Mark Read</button>
                 </div>
+
+                <!-- Notification items -->
+                @foreach (var items in notifications!)
+                {
+                    <div class="notification_body" @onclick="() => OnNotificationClicked(items.Id, items.NotificationType)">
+                        <div class="notification_type_icon">
+
+                            @* Showing different image for notification based on notification type  *@
+                            @if (items.NotificationType!.Equals(TypesOfNotification.REQUEST_MONEY.ToString()))
+                            {
+                                <img src="images/request_money.png" alt=""/>
+                            }
+                            else if (items.NotificationType!.Equals(TypesOfNotification.SEND_MONEY.ToString()))
+                            {
+                                <img src="images/receive-amount.png" alt=""/>
+                            }
+                            else if (items.NotificationType!.Equals(TypesOfNotification.REQUEST_REJECT.ToString()))
+                            {
+                                <img src="images/declined.png" alt=""/>
+                            }
+                        </div>
+
+                        <div class="notification_details">
+                            <div class="message">
+                                <div class="sender">
+                                    @items.Date | @items.NotificationType
+                                </div>
+                                @if (items.Message!.Contains(":"))
+                                {
+                                    // Removing ids from message so only the message content is displayed 
+                                    <p>@items.Message.Substring(@items.Message.IndexOf(":", StringComparison.Ordinal) + 1).Trim()</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         }
+
+        @* Modal for notification details  *@
+        <Modal ShowModal="@showModal">
+            <div class="notificationInputField">
+                <input @bind="clickedNotificationEntity!.Sender!.FullName" type="text" disabled=""/>
+                <label class="notificationLabel">Sent By</label>
+            </div>
+          
+            @* Condition for REQUEST_MONEY notification type *@
+            @if (clickedNotificationType!.Equals(TypesOfNotification.REQUEST_MONEY.ToString()))
+            {
+                <div class="notificationInputField">
+                    <input type="text" @bind="clickedNotificationAmount" disabled=""/>
+                    <label class="notificationLabel">Amount</label>
+                </div>
+
+                <div class="notificationInputField">
+                    <input @bind="clickedNotificationEntity!.Date" type="text" disabled=""/>
+                    <label class="notificationLabel">Sent Date</label>
+                </div>
+
+                <div class="wrapper_loaded">
+                    <!-- Accept button -->
+                    <div class="container-button">
+                        <a href="#" class="popUp-button" @onclick="HandleAccept">
+                            <span class="icon check-icon">&#10004;</span>
+                            <span>Accept</span>
+                        </a>
+                    </div>
+
+                    @* Reject button  *@
+                    <div class="container-button">
+                        <a href="#" class="popUp-button" @onclick="HandleReject">
+                            <span class="icon cross-icon">&#10007;</span>
+                            <span>Reject</span>
+                        </a>
+                    </div>
+                </div>
+            } 
+             @* Condition for SEND_MONEY and REQUEST_REJECT notification types   *@
+            else if (clickedNotificationType!.Equals(TypesOfNotification.SEND_MONEY.ToString())
+                     || clickedNotificationType.Equals(TypesOfNotification.REQUEST_REJECT.ToString()))
+            {
+                <div class="notificationInputField">
+                    <textarea rows="2" cols="50" @bind="clickedNotificationEntity.Message" disabled=""></textarea>
+                    <label class="notificationLabelMessage">Message</label>
+                </div>
+
+                <div class="notificationInputField">
+                    <input @bind="clickedNotificationEntity!.Date" type="text" disabled=""/>
+                    <label class="notificationLabel">Sent Date</label>
+                </div>
+
+                <div class="wrapper_loaded">
+                    @* OK button  *@
+                    <button class="ok_button" @onclick="HandleOk">
+                        OK
+                    </button>
+                </div>
+            }
+        </Modal>
+
     </Authorized>
+
+    <NotAuthorized>
+        <h3>We are sorry, you must be logged in to access this page.</h3>
+    </NotAuthorized>
+
 </AuthorizeView>
 
 @code {
-    private UserEntity? senderUser;
-    private string? receiver;
+    // Properties for user and notifications
+    private UserEntity? currentUser = new UserEntity();
     private ICollection<NotificationEntity>? notifications = new List<NotificationEntity>();
     private bool showNotification = false;
     private int notificationCount;
+    private Timer? timer;
 
-    private Timer timer;
+    // Properties for clicked notification details
+    private long clickedNotificationId;
+    private bool showModal = false;
+    private string? clickedNotificationType = "";
+    private int clickedNotificationAmount;
+    private long clickedNotificationRequestId;
+    private RequestEntity? requestById = new RequestEntity();
+    private NotificationEntity? clickedNotificationEntity = new NotificationEntity();
 
-    // private UserEntity? receiverUser = new UserEntity();
-    // private string? notificationType;
-    // public string? Message = "";
-    // private DateTime dateTime = DateTime.Now.Date;
-    // public bool IsRead;
 
+    /// Initializes the component asynchronously.
     protected override async Task OnInitializedAsync()
     {
         await UpdateNotifications();
 
+    // Fetch current user from authentication state
         AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
+        string? username = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
+        currentUser = await UserService.FetchUserByUsernameAsync(username);
 
     // Start the timer to update notifications every 5 seconds
         if (state.User.Identity!.IsAuthenticated)
@@ -71,25 +200,22 @@
         }
     }
 
-    // Method called when the timer's elapsed event is triggered
-
+    /// <summary>
+    /// Event handler for the timer's elapsed event.
+    /// </summary>
     private async void TimerElapsedAsync(object? sender, ElapsedEventArgs e)
     {
         await UpdateNotifications();
     }
 
+    /// Updates the notifications asynchronously.
     private async Task UpdateNotifications()
     {
         try
         {
-            AuthenticationState state = await StateProvider.GetAuthenticationStateAsync();
-            receiver = state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
-
-            notifications = await NotificationService.FetchAllNotificationsByReceiverAsync(receiver);
+            notifications = await NotificationService.FetchAllNotificationsByReceiverAsync(currentUser!.UserName);
             notificationCount = notifications.Count;
 
-
-    // Trigger UI Refresh
             await InvokeAsync(StateHasChanged);
         }
         catch (Exception e)
@@ -98,33 +224,134 @@
         }
     }
 
-    private async void HandleNotificationClick()
-    {
-        showNotification = !showNotification;
 
-        if (notifications.Count != 0)
-        {
-            await NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
-            await InvokeAsync(StateHasChanged);
-        }
+    /// <summary>
+    /// Handles the click event when a notification is clicked.
+    /// </summary>
+    /// <param name="itemsId">The ID of the clicked notification</param>
+    /// <param name="itemsNotificationType">The type of the clicked notification</param>
+    private async Task OnNotificationClicked(long itemsId, string? itemsNotificationType)
+    {
+        clickedNotificationId = itemsId;
+        clickedNotificationType = itemsNotificationType;
+
+        clickedNotificationEntity = await NotificationService.FetchNotificationById(clickedNotificationId);
+        clickedNotificationAmount = ExtractAmountFromMessage(clickedNotificationEntity.Message);
+        clickedNotificationRequestId = ExtractIdFromMessage(clickedNotificationEntity.Message);
+        showModal = true;
     }
 
-
-    /*public async Task CreateNotification()
+    /// <summary>
+    /// Extracts the amount from the notification message.
+    /// </summary>
+    /// <param name="byIdMessage">The notification message</param>
+    /// <returns>The extracted amount</returns>
+    private int ExtractAmountFromMessage(string? byIdMessage)
     {
-        try
+    // Extract amount between '$' and space character
+        int dollarIndex = byIdMessage!.IndexOf("$", StringComparison.Ordinal);
+        int spaceIndex = byIdMessage.IndexOf(" ", dollarIndex + 1, StringComparison.Ordinal);
+
+        if (dollarIndex != -1 && spaceIndex != -1)
         {
-            Message = "someone has sent you money bororo";
-            string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
-            NotificationEntity notificationEntity = new NotificationEntity
-                (notificationId, senderUser, receiverUser, Message, notificationType, date, IsRead);
+            string amountString = byIdMessage.Substring(dollarIndex + 1, spaceIndex - dollarIndex - 1);
+
+            if (!string.IsNullOrWhiteSpace(amountString))
+            {
+                return Convert.ToInt32(amountString);
+            }
         }
-        catch (Exception e)
+
+        return 0;
+    }
+
+    /// <summary>
+    /// Extracts the ID from the notification message.
+    /// </summary>
+    /// <param name="byIdMessage">The notification message</param>
+    /// <returns>The extracted ID</returns>
+    private int ExtractIdFromMessage(string? byIdMessage)
+    {
+    // Extract ID between first and second space characters
+        int startIndex = byIdMessage!.IndexOf(" ", StringComparison.Ordinal) + 1;
+        int endIndex = byIdMessage.IndexOf(" ", startIndex, StringComparison.Ordinal);
+
+        if (startIndex != -1 && endIndex != -1)
         {
-            Console.WriteLine(e);
-            throw;
+            string numberString = byIdMessage.Substring(startIndex, endIndex - startIndex);
+            return Convert.ToInt32(numberString);
         }
-    }*/
+        return 0;
+    }
+
+    /// <summary>
+    /// Handles the accept action for a notification.
+    /// </summary>
+    private async Task HandleAccept()
+    {
+        TransferValues.RequestSender = clickedNotificationEntity!.Sender;
+        TransferValues.RequestedAmount = clickedNotificationAmount;
+        showModal = false;
+
+        await UpdateRequestStatus(clickedNotificationRequestId, RequestStatus.APPROVED.ToString(), true);
+        await NotificationService.MarkNotificationAsReadAsync(clickedNotificationEntity);
+        NavMgr.NavigateTo("/SendMoney");
+    }
+
+    /// <summary>
+    /// Handles the reject action for a notification.
+    /// </summary>
+    private async Task HandleReject()
+    {
+    // Create a new notification for rejection
+        NotificationEntity notificationEntity = new NotificationEntity()
+        {
+            Sender = currentUser,
+            Receiver = clickedNotificationEntity!.Sender!,
+            Date = DateOnly.FromDateTime(DateTime.Now).ToString(),
+            Message = $"Request {clickedNotificationRequestId} : {currentUser!.FullName} rejected your money request for ${clickedNotificationAmount} CAD.",
+            IsRead = false,
+            NotificationType = TypesOfNotification.REQUEST_REJECT.ToString()
+        };
+
+        await NotificationService.CreateNotificationAsync(notificationEntity);
+        await NotificationService.MarkNotificationAsReadAsync(clickedNotificationEntity);
+        await UpdateRequestStatus(clickedNotificationRequestId, RequestStatus.DECLINED.ToString(), false);
+        showModal = false;
+    }
+
+    /// <summary>
+    /// Handles the OK action for a notification.
+    /// </summary>
+    private async Task HandleOk()
+    {
+        showModal = false;
+        await NotificationService.MarkNotificationAsReadAsync(clickedNotificationEntity);
+    }
+
+    /// <summary>
+    /// Updates the status of a request.
+    /// </summary>
+    /// <param name="requestId">The ID of the request</param>
+    /// <param name="status">The new status</param>
+    /// <param name="isApproved">Indicates if the request is approved</param>
+    private async Task UpdateRequestStatus(long requestId, string? status, bool isApproved)
+    {
+        RequestEntity requestEntity = await RequestService.FetchRequestById(requestId);
+        requestEntity.Status = status;
+        requestEntity.IsApproved = isApproved;
+        await RequestService.UpdateRequestAsync(requestEntity);
+    }
+
+    /// <summary>
+    /// Handles the click on the "Mark as Read" button.
+    /// </summary>
+    private async Task HandleMarkRead()
+    {
+        await NotificationService.MarkAllNotificationsAsReadAsync((List<NotificationEntity>)notifications!);
+        await InvokeAsync(StateHasChanged);
+    }
+
 
 
 }

@@ -26,7 +26,13 @@ public class UserController {
         this.service = service;
     }
 
-    //create user
+    /**
+     * Create a new user.
+     *
+     * @param user The user entity to be created.
+     * @return ResponseEntity containing the created user entity in the response body with HTTP status 200 (OK),
+     * or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @PostMapping("/user/create")
     public ResponseEntity<UserEntity> createUser(@RequestBody
                                                  UserEntity user) {
@@ -37,7 +43,12 @@ public class UserController {
         }
     }
 
-    //get all users
+    /**
+     * Fetch all users.
+     *
+     * @return ResponseEntity containing a list of user entities in the response body with HTTP status 200 (OK),
+     * or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @GetMapping("/user")
     public ResponseEntity<List<UserEntity>> fetchUsers() {
         try {
@@ -48,17 +59,29 @@ public class UserController {
         }
     }
 
-    //get user by id
-    @GetMapping("/user/id/{id}")
+    /**
+     * Fetch a user by ID.
+     *
+     * @param id The ID of the user to be fetched.
+     * @return ResponseEntity containing the user entity with the specified ID in the response body
+     * with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
+     */
+    /*@GetMapping("/user/id/{id}")
     public ResponseEntity<UserEntity> fetchUserById(@PathVariable("id") Long id) {
         try {
             return new ResponseEntity<>(userService.fetchUserById(id), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
+    }*/
 
-    //get user by username
+    /**
+     * Fetch a user by username.
+     *
+     * @param username The username of the user to be fetched.
+     * @return ResponseEntity containing the user entity with the specified username in the response body
+     * with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @GetMapping("/user/username/{username}")
     public ResponseEntity<UserEntity> fetchUserByUsername(@PathVariable("username") String username) {
         try {
@@ -69,7 +92,13 @@ public class UserController {
         }
     }
 
-    //update user
+    /**
+     * Update a user.
+     *
+     * @param updatedUser The updated user entity.
+     * @return ResponseEntity containing the updated user entity in the response body with HTTP status 200 (OK),
+     * or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @PostMapping("/user/update")
     public ResponseEntity<UserEntity> updateUser(@RequestBody
                                                  UserEntity updatedUser) {
@@ -80,8 +109,14 @@ public class UserController {
         }
     }
 
-    //delete user
-    @DeleteMapping("/user/delete/{id}")
+    /**
+     * Delete a user by ID.
+     *
+     * @param id The ID of the user to be deleted.
+     * @return ResponseEntity with a success message in the response body with HTTP status 200 (OK),
+     * or HTTP status 400 (Bad Request) if an exception occurs.
+     */
+    /*@DeleteMapping("/user/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long id) {
         try {
             userService.deleteUser(id);
@@ -89,20 +124,20 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
-
-
-   /* @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request
-    ){
-        return ResponseEntity.ok(service.register(request));
     }*/
 
-    //login
+
+    /**
+     * Authenticate a user.
+     *
+     * @param request The login request containing the user's credentials.
+     * @return ResponseEntity containing the authentication response with a JWT token in the response body
+     * with HTTP status 200 (OK), or HTTP status 400 (Bad Request) if an exception occurs.
+     */
     @PostMapping("/user/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody LoginDto request) {
+        System.out.println("Reached here");
         ResponseEntity<AuthenticationResponse> response = ResponseEntity.ok(service.authenticate(request));
         return response;
     }
