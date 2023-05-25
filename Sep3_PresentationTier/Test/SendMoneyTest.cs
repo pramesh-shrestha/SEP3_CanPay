@@ -5,10 +5,10 @@ using HTTPClients.Implementations;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
-namespace Test {
-
-    public class TransactionTest : IClassFixture<TestContext> {
-
+namespace Test
+{
+    public class TransactionTest : IClassFixture<TestContext>
+    {
         private TestContext context;
         private IRenderedComponent<SendMoney> renderedComponent;
         private Mock<ITransactionService> transactionService;
@@ -33,8 +33,9 @@ namespace Test {
             renderedComponent.Instance.amount = "100";
         }
 
-        
-        [Fact] public async Task SendMoneyAsync_ShouldThrowAnErrorMessage_WhenRecipientNameFieldIsEmpty()
+
+        [Fact]
+        public async Task SendMoneyAsync_ShouldThrowAnErrorMessage_WhenRecipientNameFieldIsEmpty()
         {
             //Arrange   
             Setup();
@@ -48,7 +49,8 @@ namespace Test {
             Assert.Equal("Receiver must be selected.", renderedComponent.Instance.errorLabel);
         }
 
-        [Fact] public async Task SendMoneyAsync_ShouldThrowAnErrorMessage_WhenAmountFieldIsZero()
+        [Fact]
+        public async Task SendMoneyAsync_ShouldThrowAnErrorMessage_WhenAmountFieldIsZero()
         {
             //Arrange   
             Setup();
@@ -61,9 +63,10 @@ namespace Test {
             //Assert
             Assert.Equal("Amount must be more than 0.", renderedComponent.Instance.errorLabel);
         }
-        
 
-        [Fact] public async Task SendMoneyAsync_ShouldThrowAnErrorMessage_WhenAmountIsNegative()
+
+        [Fact]
+        public async Task SendMoneyAsync_ShouldThrowAnErrorMessage_WhenAmountIsNegative()
         {
             //Arrange   
             Setup();

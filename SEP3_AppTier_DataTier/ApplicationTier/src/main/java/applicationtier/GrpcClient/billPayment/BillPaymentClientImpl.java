@@ -20,6 +20,11 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
 
     private BillPaymentProtoServiceGrpc.BillPaymentProtoServiceBlockingStub billPaymentBlockingStub;
 
+    /**
+     * Retrieves the blocking stub for the BillPaymentProtoService.
+     *
+     * @return The blocking stub for the BillPaymentProtoService.
+     */
     private BillPaymentProtoServiceGrpc.BillPaymentProtoServiceBlockingStub getBillPaymentBlockingStub() {
         if (billPaymentBlockingStub == null) {
             ManagedChannel channel = ManagedChannelProvider.getChannel();
@@ -28,6 +33,13 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
         return billPaymentBlockingStub;
     }
 
+    /**
+     * Creates a new bill payment.
+     *
+     * @param billPayment The {@link BillPaymentEntity} object containing the details of the bill payment.
+     * @return The created {@link BillPaymentEntity} object.
+     * @throws RuntimeException if an exception occurs during the creation of the bill payment.
+     */
     @Override
     public BillPaymentEntity createBillPayment(BillPaymentEntity billPayment) {
         try {
@@ -41,6 +53,13 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
         }
     }
 
+    /**
+     * Fetches a bill payment by its ID.
+     *
+     * @param id The ID of the bill payment to fetch.
+     * @return The {@link BillPaymentEntity} object representing the fetched bill payment.
+     * @throws RuntimeException if an exception occurs during the fetching of the bill payment.
+     */
     @Override
     public BillPaymentEntity fetchBillPaymentById(Long id) {
         try {
@@ -51,6 +70,13 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
         }
     }
 
+    /**
+     * Fetches all bill payments by the sender's username.
+     *
+     * @param senderUsername The username of the sender.
+     * @return A list of {@link BillPaymentEntity} objects representing the fetched bill payments.
+     * @throws RuntimeException if an exception occurs during the fetching of the bill payments.
+     */
     @Override
     public List<BillPaymentEntity> fetchAlLBillPaymentsBySender(String senderUsername) {
         try {
@@ -67,6 +93,13 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
     }
 
 
+    /**
+     * Fetches all bill payments by the receiver's payee name.
+     *
+     * @param payeeName The payee name of the receiver.
+     * @return A list of {@link BillPaymentEntity} objects representing the fetched bill payments.
+     * @throws RuntimeException if an exception occurs during the fetching of the bill payments.
+     */
     @Override
     public List<BillPaymentEntity> fetchAllBillPaymentByReceiver(String payeeName) {
         try {
@@ -81,7 +114,13 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
         }
     }
 
-
+    /**
+     * Fetches all bill payments involving a specific user.
+     *
+     * @param username The username of the user.
+     * @return A list of {@link BillPaymentEntity} objects representing the fetched bill payments.
+     * @throws RuntimeException if an exception occurs during the fetching of the bill payments.
+     */
     @Override
     public List<BillPaymentEntity> fetchAllBillPaymentInvolvingUser(String username) {
         try {
@@ -96,6 +135,13 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
         }
     }
 
+    /**
+     * Fetches all bill payments by a specific date.
+     *
+     * @param date The date in string format.
+     * @return A list of {@link BillPaymentEntity} objects representing the fetched bill payments.
+     * @throws RuntimeException if an exception occurs during the fetching of the bill payments.
+     */
     @Override
     public List<BillPaymentEntity> fetchBillPaymentByDate(String date) {
         try {
@@ -112,8 +158,13 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
     }
 
 
-
-
+    /**
+     * Deletes a bill payment by its ID.
+     *
+     * @param id The ID of the bill payment to delete.
+     * @return true if the bill payment is successfully deleted, false otherwise.
+     * @throws RuntimeException if an exception occurs during the deletion of the bill payment.
+     */
     @Override
     public boolean deleteBillPayment(Long id) {
         try {
@@ -125,7 +176,12 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
     }
 
 
-    //from proto to entity
+    /**
+     * Converts a {@link BillTransaction.BillPaymentProtoObj} object to a {@link BillPaymentEntity} object.
+     *
+     * @param billPaymentProtoObj The {@link BillTransaction.BillPaymentProtoObj} object to convert.
+     * @return The converted {@link BillPaymentEntity} object.
+     */
     public static BillPaymentEntity fromProtoObjToEntity(BillTransaction.BillPaymentProtoObj billPaymentProtoObj) {
         BillPaymentEntity billPayment = new BillPaymentEntity();
         billPayment.setPayee(billPaymentProtoObj.getPayeeName().getValue());
@@ -139,7 +195,12 @@ public class BillPaymentClientImpl implements IBillPaymentClient {
         return billPayment;
     }
 
-    //from entity to proto
+    /**
+     * Converts a {@link BillPaymentEntity} object to a {@link BillTransaction.BillPaymentProtoObj} object.
+     *
+     * @param billPayment The {@link BillPaymentEntity} object to convert.
+     * @return The converted {@link BillTransaction.BillPaymentProtoObj} object.
+     */
     public static BillTransaction.BillPaymentProtoObj fromEntityToProtoObj(BillPaymentEntity billPayment) {
         BillTransaction.BillPaymentProtoObj.Builder billPaymentBuilder = BillTransaction.BillPaymentProtoObj.newBuilder()
                 .setPayeeName(StringValue.of(billPayment.getPayee()))

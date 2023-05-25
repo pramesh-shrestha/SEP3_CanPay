@@ -13,4 +13,8 @@ public class DebitCardEntity
         ExpiryDate = expiryDate;
         Cvv = cvv;
     }
+
+    public DebitCardEntity()
+    {
+    }
 }

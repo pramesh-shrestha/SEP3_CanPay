@@ -18,7 +18,13 @@ public class BillPaymentController {
         this.billPaymentService = billPaymentService;
     }
 
-    //Create billPayment
+    /**
+     * Creates a new bill payment.
+     *
+     * @param billPayment The {@link BillPaymentEntity} object containing the details of the bill payment.
+     * @return A {@link ResponseEntity} containing the created {@link BillPaymentEntity} if successful, or
+     *         a {@link ResponseEntity} with a {@link HttpStatus#BAD_REQUEST} status code if an exception occurs.
+     */
     @PostMapping("/billPayment/create")
     public ResponseEntity<BillPaymentEntity> createBillPayment(@RequestBody BillPaymentEntity billPayment) {
         try {
@@ -30,6 +36,13 @@ public class BillPaymentController {
         }
     }
 
+    /**
+     * Fetches a bill payment by its ID.
+     *
+     * @param id The ID of the bill payment to fetch.
+     * @return A {@link ResponseEntity} containing the fetched {@link BillPaymentEntity} if found, or
+     *         a {@link ResponseEntity} with a {@link HttpStatus#BAD_REQUEST} status code if an exception occurs.
+     */
     @GetMapping("/billPayment/{id}")
     public ResponseEntity<BillPaymentEntity> fetchBillPaymentById(@PathVariable("id") Long id) {
         try {
@@ -39,6 +52,13 @@ public class BillPaymentController {
         }
     }
 
+    /**
+     * Fetches all bill payments by the sender's username.
+     *
+     * @param senderUsername The username of the sender.
+     * @return A {@link ResponseEntity} containing a list of {@link BillPaymentEntity} objects if successful,
+     *         or a {@link ResponseEntity} with a {@link HttpStatus#BAD_REQUEST} status code if an exception occurs.
+     */
     @GetMapping("/billPayment/sender/{senderUsername}")
     public ResponseEntity<List<BillPaymentEntity>> fetchAllBillPaymentBySender(@PathVariable("senderUsername") String senderUsername) {
         try {
@@ -48,6 +68,13 @@ public class BillPaymentController {
         }
     }
 
+    /**
+     * Fetches all bill payments by the receiver's payee name.
+     *
+     * @param payeeName The name of the payee (receiver).
+     * @return A {@link ResponseEntity} containing a list of {@link BillPaymentEntity} objects if successful,
+     *         or a {@link ResponseEntity} with a {@link HttpStatus#BAD_REQUEST} status code if an exception occurs.
+     */
     @GetMapping("/billPayment/receiver/{payeeName}")
     public ResponseEntity<List<BillPaymentEntity>> fetchAllBillPaymentByReceiver(@PathVariable("payeeName") String payeeName) {
 
@@ -58,6 +85,13 @@ public class BillPaymentController {
         }
     }
 
+    /**
+     * Fetches all bill payments involving a specific user.
+     *
+     * @param username The username of the user involved in the bill payments.
+     * @return A {@link ResponseEntity} containing a list of {@link BillPaymentEntity} objects if successful,
+     *         or a {@link ResponseEntity} with a {@link HttpStatus#BAD_REQUEST} status code if an exception occurs.
+     */
     @GetMapping("/billPayment/user/{username}")
     public ResponseEntity<List<BillPaymentEntity>> fetchAllBillPaymentInvolvingUser(@PathVariable("username") String username) {
 
@@ -68,6 +102,13 @@ public class BillPaymentController {
         }
     }
 
+    /**
+     * Fetches all bill payments by a specific date.
+     *
+     * @param date The date of the bill payments in the format "YYYY-MM-DD".
+     * @return A {@link ResponseEntity} containing a list of {@link BillPaymentEntity} objects if successful,
+     *         or a {@link ResponseEntity} with a {@link HttpStatus#BAD_REQUEST} status code if an exception occurs.
+     */
     @GetMapping("/billPayment/date/{date}")
     public ResponseEntity<List<BillPaymentEntity>> fetchBillPaymentByDate(@PathVariable("date") String date) {
 
@@ -79,7 +120,13 @@ public class BillPaymentController {
     }
 
 
-
+    /**
+     * Deletes a bill payment by its ID.
+     *
+     * @param id The ID of the bill payment to delete.
+     * @return A {@link ResponseEntity} with a success message if the deletion is successful,
+     *         or a {@link ResponseEntity} with a {@link HttpStatus#BAD_REQUEST} status code if an exception occurs.
+     */
     @DeleteMapping("/billPayment/delete/{id}")
     public ResponseEntity<String> deleterBillPayment(@PathVariable("id") Long id) {
 

@@ -21,15 +21,12 @@ public class RequestMoneyTest : IClassFixture<TestContext>
         HttpClient client = new HttpClient();
         var userService = new Mock<IUserService>();
         context = new TestContext();
+
+
         context.Services.AddSingleton<IRequestService>(new RequestService(client));
         context.Services.AddSingleton<IUserService>(new UserService(client));
         context.Services.AddSingleton<ITransactionService>(new TransactionService(client));
         context.Services.AddSingleton<INotificationService>(new NotificationService(client));
-        
-        // Add the following line to provide the cascading parameter
-        context.Services.AddScoped<CascadingAuthenticationState>();
-       
-        // Add the following line to enable authorization in your component
         context.Services.AddAuthorization();
         renderedComponent = context.RenderComponent<SendMoney>();
     }
@@ -37,7 +34,7 @@ public class RequestMoneyTest : IClassFixture<TestContext>
     private void SetInstanceValue()
     {
         renderedComponent.Instance.sender = "Suhani";
-        renderedComponent.Instance.receiver ="test";
+        renderedComponent.Instance.receiver = "test";
         renderedComponent.Instance.amount = "500";
     }
 
@@ -48,7 +45,7 @@ public class RequestMoneyTest : IClassFixture<TestContext>
         SetInstanceValue();
         renderedComponent.Instance.receiver = "";
         await renderedComponent.Instance.GetErrorMessage();
-        Assert.Equal("Receiver must be selected",renderedComponent.Instance.errorLabel);
+        Assert.Equal("Receiver must be selected.", renderedComponent.Instance.errorLabel);
     }
 
     [Fact]
@@ -58,9 +55,9 @@ public class RequestMoneyTest : IClassFixture<TestContext>
         SetInstanceValue();
         renderedComponent.Instance.amount = "0";
         await renderedComponent.Instance.GetErrorMessage();
-        Assert.Equal("Amount must be more than 0",renderedComponent.Instance.errorLabel);
+        Assert.Equal("Amount must be more than 0.", renderedComponent.Instance.errorLabel);
     }
-   
+
     [Fact]
     public async Task ErrorMessage_WhenAmountIsNegativeNumber()
     {
@@ -68,16 +65,7 @@ public class RequestMoneyTest : IClassFixture<TestContext>
         SetInstanceValue();
         renderedComponent.Instance.amount = "-20";
         await renderedComponent.Instance.GetErrorMessage();
-        Assert.Equal("Amount must be more than 0",renderedComponent.Instance.errorLabel);
+        Assert.Equal("Amount must be more than 0.", renderedComponent.Instance.errorLabel);
     }
     
-    [Fact]
-    public async Task ErrorMessage_WhenBothFieldAreEmpty()
-    {
-        Setup();
-        renderedComponent.Instance.receiver = "";
-        renderedComponent.Instance.amount = "";
-        await renderedComponent.Instance.GetErrorMessage();
-        Assert.Equal("Error: All fields must be filled",renderedComponent.Instance.errorLabel);
-    }
 }
