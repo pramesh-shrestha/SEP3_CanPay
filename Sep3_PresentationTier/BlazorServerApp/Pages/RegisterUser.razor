@@ -165,8 +165,8 @@
         try
         {
             string? passwordRegex = @"^(?=.*\S).{6,}$";
-            if (string.IsNullOrEmpty(Name)) throw new Exception("Full name Cannot Be Empty");
             if (string.IsNullOrEmpty(Username)) throw new Exception("Username Cannot Be Empty");
+            if (string.IsNullOrEmpty(Name)) throw new Exception("Full name Cannot Be Empty");
             if (string.IsNullOrEmpty(Password)) throw new Exception("Password Cannot Be Empty");
             if (string.IsNullOrEmpty(RepeatPassword)) throw new Exception("Repeat Password Cannot Be Empty");
             if (!Regex.IsMatch(Password, passwordRegex))

@@ -235,23 +235,23 @@ else
     /// </summary>
     private async Task SendMoneyToReceiver()
     {
-        receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
-        string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
-
-
-        TransactionEntity transactionEntity = new TransactionEntity()
-        {
-            Amount = Convert.ToInt32(amount),
-            Sender = senderUser,
-            Receiver = receiverUser,
-            Date = date,
-            Comment = comment
-        };
-
         try
         {
             if (string.IsNullOrEmpty(receiver)) throw new Exception("Receiver must be selected.");
             if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
+
+            receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
+            string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
+
+
+            TransactionEntity transactionEntity = new TransactionEntity()
+            {
+                Amount = Convert.ToInt32(amount),
+                Sender = senderUser,
+                Receiver = receiverUser,
+                Date = date,
+                Comment = comment
+            };
 
             if (string.IsNullOrEmpty(errorLabel))
             {
@@ -273,13 +273,14 @@ else
     /// </summary>
     private async Task SendMoneyRequest()
     {
+        receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
+        string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
+
         try
         {
             if (string.IsNullOrEmpty(receiver)) throw new Exception("Receiver must be selected.");
-            if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
+            if (string.IsNullOrEmpty(amount)) throw new Exception("Amount must be more than 0.");
 
-            receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
-            string date = $"{dateTime.Date.Day}/{dateTime.Date.Month}/{dateTime.Date.Year}";
 
             RequestEntity entity = new RequestEntity()
             {

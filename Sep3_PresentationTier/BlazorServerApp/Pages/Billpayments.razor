@@ -104,7 +104,7 @@
                 {
                     <div class="field">
                         <label style="color: red">
-                            <span>No Transactions Found for @senderUser</span>
+                            <span>No bill payments Found for @senderUser.UserName</span>
                         </label>
                     </div>
                 }
@@ -185,8 +185,7 @@ else
         try
         {
             if (string.IsNullOrEmpty(payee)) throw new Exception("payee name must be filled in");
-            if (int.Parse(accountNumber) <= 0) throw new Exception("Invalid account number");
-
+            if ( string.IsNullOrEmpty(accountNumber)) throw new Exception("account number must be filled in");
             if (accountNumber.Length != 10) throw new Exception("Account number must be of 10 digits");
             if (string.IsNullOrEmpty(amount)) throw new Exception("amount must be filled in");
             if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
