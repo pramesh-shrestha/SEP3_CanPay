@@ -14,14 +14,27 @@ namespace Test
     {
         private TestContext context;
         private IRenderedComponent<SendMoney> renderedComponent;
-        private Mock<ITransactionService> transactionService;
-        private Mock<TransferValues> transferValues;
-        private Mock<IRequestService> requestService;
-        private Mock<INotificationService> notificationService;
-        private Mock<AuthenticationStateProvider> stateProvider = new();
+        private Mock<ITransactionService> transactionServiceMock;
+        private Mock<TransferValues> transferValuesMock;
+        private Mock<IRequestService> requestServiceMock;
+        private Mock<INotificationService> notificationServiceMock;
+        private Mock<AuthenticationStateProvider> stateProviderMock;
+        private Mock<IUserService> userServiceMock;
+        private UserEntity currentUser = new UserEntity();
+        private UserEntity receiverUser = new UserEntity();
+
 
         private void Setup()
         {
+            transactionServiceMock = new Mock<ITransactionService>();
+            notificationServiceMock = new Mock<INotificationService>();
+            requestServiceMock = new Mock<IRequestService>();
+            notificationServiceMock = new Mock<INotificationService>();
+            Mock<AuthenticationStateProvider> stateProviderMock = new();
+            userServiceMock = new Mock<IUserService>();
+            transferValuesMock = new Mock<TransferValues>();
+            context = new TestContext();
+
             // creating sample authentication state with user claim
             List<Claim> claims = new List<Claim>
             {
@@ -29,25 +42,37 @@ namespace Test
             };
 
             var authenticationState = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(claims)));
-            stateProvider.Setup(provider => provider.GetAuthenticationStateAsync()).ReturnsAsync(authenticationState);
-            
-            transactionService = new Mock<ITransactionService>();
-            notificationService = new Mock<INotificationService>();
-            requestService = new Mock<IRequestService>();
-            notificationService = new Mock<INotificationService>();
-            var client = new HttpClient();
-            var userService = new Mock<IUserService>();
-            transferValues = new Mock<TransferValues>();
-            context = new TestContext();
-            context.Services.AddSingleton(transactionService.Object);
-            context.Services.AddSingleton(userService.Object);
-            context.Services.AddSingleton<ICardService>(new CardService(client));
-            context.Services.AddSingleton(notificationService.Object);
-            context.Services.AddSingleton(transferValues.Object);
-            context.Services.AddSingleton(requestService.Object);
-            context.Services.AddAuthorization();
-            
-            // renderedComponent = context.RenderComponent<SendMoney>(parameters => parameters.AddSingleton<ITransactionService>(transactionService.Object));
+            stateProviderMock.Setup(provider => provider.GetAuthenticationStateAsync())
+                .ReturnsAsync(authenticationState);
+
+            context.Services.AddSingleton(transferValuesMock.Object);
+            context.Services.AddSingleton(transactionServiceMock.Object);
+            context.Services.AddSingleton(notificationServiceMock.Object);
+            context.Services.AddSingleton(requestServiceMock.Object);
+            context.Services.AddSingleton(userServiceMock.Object);
+
+            // creating sample user
+            currentUser = new UserEntity
+            {
+                UserId = 1,
+                FullName = "Test User",
+                UserName = "test",
+                Password = "password",
+                Balance = 1000,
+                Card = new DebitCardEntity()
+            };
+
+            receiverUser = new UserEntity
+            {
+                UserId = 2,
+                FullName = "Test User 2",
+                UserName = "test2",
+                Password = "password",
+                Balance = 1000,
+                Card = new DebitCardEntity()
+            };
+
+
             renderedComponent = context.RenderComponent<SendMoney>();
         }
 
@@ -58,20 +83,29 @@ namespace Test
             renderedComponent.Instance.amount = "100";
             renderedComponent.Instance.dateTime = DateTime.Today;
             renderedComponent.Instance.comment = "test";
+
+            NotificationEntity notificationEntity = new NotificationEntity
+            {
+                Date = DateTime.Today.ToString(),
+                Sender = currentUser,
+                Receiver = receiverUser,
+                IsRead = false,
+                Message = $"Transaction 1 Received: You received $100 CAD  from {currentUser.FullName}."
+            };
         }
 
 
         [Fact]
-        public async Task SendMoneyAsync_ValidInput_SetsShowModalToTrue() 
+        public async Task SendMoneyAsync_ValidInput_SetsShowModalToTrue()
         {
             Setup();
             SetInstancesValue();
 
             await renderedComponent.Instance.SendMoneyToReceiver();
-            
+
             Assert.True(renderedComponent.Instance.showModal);
         }
-        
+
         [Fact]
         public async Task SendMoneyAsync_ShouldThrowAnErrorMessage_WhenRecipientNameFieldIsEmpty()
         {

@@ -196,6 +196,8 @@ else
     private string? color = "";
     public bool showModal;
     private bool isAuthorized;
+    private Timer? timer;
+    private readonly int messageDisplayTime = 2000; // in millisecond
 
 
     protected override async Task OnInitializedAsync()
@@ -224,8 +226,7 @@ else
         catch (Exception e)
         {
             Console.WriteLine(e);
-            errorLabel = e.Message;
-            color = "red";
+            DisplayMessage(e.Message);
         }
     }
 
@@ -238,6 +239,7 @@ else
         try
         {
             if (string.IsNullOrEmpty(receiver)) throw new Exception("Receiver must be selected.");
+            if (string.IsNullOrEmpty(amount)) throw new Exception("Amount must be entered.");
             if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
 
             receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
@@ -263,8 +265,8 @@ else
         }
         catch (Exception e)
         {
-            errorLabel = e.Message;
-            color = "red";
+            Console.WriteLine(e.Message);
+            DisplayMessage(e.Message);
         }
     }
 
@@ -305,7 +307,7 @@ else
         catch (Exception e)
         {
             Console.WriteLine(e);
-            throw new Exception(e.Message);
+            DisplayMessage(e.Message);
         }
     }
 
@@ -341,7 +343,8 @@ else
         catch (Exception e)
         {
             Console.WriteLine(e);
-            throw;
+            errorLabel = e.Message;
+            color = "red";
         }
     }
 
@@ -386,6 +389,32 @@ else
     private void ChangeTransactionType(ChangeEventArgs arg)
     {
         transactionType = arg.Value!.ToString();
+        receiverUser = new UserEntity();
+        receiver = "";
+        InvokeAsync(StateHasChanged);
+    }
+
+    /// <summary>
+    /// Display an error message and start a timer to clear it after a certain duration.
+    /// </summary>
+    /// <param name="errorMessage">The error message to display.</param>
+    private void DisplayMessage(string errorMessage)
+    {
+        errorLabel = errorMessage;
+        color = "red";
+        timer = new Timer(OnTimerElapsed, null, messageDisplayTime, Timeout.Infinite);
+    }
+
+    /// <summary>
+    /// Callback method called when the timer has elapsed.
+    /// Clears the error message and updates the UI.
+    /// </summary>
+    /// <param name="state">The state object (not used in this case).</param>
+    private void OnTimerElapsed(object state)
+    {
+        timer?.DisposeAsync();
+    // Clear the error message here
+        errorLabel = "";
         InvokeAsync(StateHasChanged);
     }
 
