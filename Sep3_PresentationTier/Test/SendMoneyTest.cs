@@ -83,6 +83,7 @@ namespace Test
             renderedComponent.Instance.amount = "100";
             renderedComponent.Instance.dateTime = DateTime.Today;
             renderedComponent.Instance.comment = "test";
+            
 
             NotificationEntity notificationEntity = new NotificationEntity
             {
