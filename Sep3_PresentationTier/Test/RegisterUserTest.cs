@@ -21,6 +21,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
         context = new TestContext();
         context.Services.AddSingleton<IUserService>(new UserService(client));
         context.Services.AddSingleton<ICardService>(new CardService(client));
+        context.Services.AddSingleton(userService.Object);
         context.Services.AddAuthorization();
         renderedComponent = context.RenderComponent<RegisterUser>();
     }
@@ -100,7 +101,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
         renderedComponent.Instance.GoToStep2();
 
         Assert.Equal(
-            "Error: Password Must Be  6 Characters Long.",
+            "Error: Password Must Be More Than 6 Characters Long.",
             renderedComponent.Instance.ErrorLabel);
     }
 
@@ -125,7 +126,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
         renderedComponent.Instance.CardNumber = 0;
         
         //Act
-        await renderedComponent.Instance.GetErrorMessage();
+        await renderedComponent.Instance.CreateAsync();
 
         //Assert
         Assert.Equal("Error: Card Number Cannot Be Empty", renderedComponent.Instance.ErrorLabel);
@@ -139,7 +140,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
         renderedComponent.Instance.CardNumber = 1234567890;
         
         //Act
-        await renderedComponent.Instance.GetErrorMessage();
+        await renderedComponent.Instance.CreateAsync();
         
         //Assert
         Assert.Equal("Error: Card Number Must Be 16 Digits Long", renderedComponent.Instance.ErrorLabel);
@@ -153,7 +154,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
         renderedComponent.Instance.CardNumber = 123456789012345;
         
         //Act
-        await renderedComponent.Instance.GetErrorMessage();
+        await renderedComponent.Instance.CreateAsync();
         
         //Assert
         Assert.Equal("Error: Card Number Must Be 16 Digits Long", renderedComponent.Instance.ErrorLabel);
@@ -167,7 +168,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
         renderedComponent.Instance.CardNumber = 12345678901234567;
         
         //Act
-        await renderedComponent.Instance.GetErrorMessage();
+        await renderedComponent.Instance.CreateAsync();
         
         //Assert
         Assert.Equal("Error: Card Number Must Be 16 Digits Long", renderedComponent.Instance.ErrorLabel);
@@ -181,7 +182,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
         renderedComponent.Instance.CVV = 0;
         
         //Act
-        await renderedComponent.Instance.GetErrorMessage();
+        await renderedComponent.Instance.CreateAsync();
         
         //Assert
         Assert.Equal("Error: CVV Cannot Be Empty", renderedComponent.Instance.ErrorLabel);
@@ -195,7 +196,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
         renderedComponent.Instance.CVV = 12;
         
         //Act
-        await renderedComponent.Instance.GetErrorMessage();
+        await renderedComponent.Instance.CreateAsync();
         
         //Assert
         Assert.Equal("Error: CVV must be 3 digits long", renderedComponent.Instance.ErrorLabel);
@@ -210,7 +211,7 @@ public class RegisterUserTest : IClassFixture<TestContext>
         renderedComponent.Instance.CVV = 12;
 
         //Act
-        await renderedComponent.Instance.GetErrorMessage();
+        await renderedComponent.Instance.CreateAsync();
 
         //Assert
         Assert.Equal("Error: CVV must be 3 digits long", renderedComponent.Instance.ErrorLabel);
@@ -220,30 +221,33 @@ public class RegisterUserTest : IClassFixture<TestContext>
     public async Task CreateAccount_ShouldNotThrowAnError_WhenAllFieldsAreEnteredCorrectly() {
         //Arrange
         Setup();
-        var name = renderedComponent.Instance.Name = "test";
-        var username = renderedComponent.Instance.Username = "test12";
-        var password = renderedComponent.Instance.Password = "Test@123";
-        var repeatPassword = renderedComponent.Instance.RepeatPassword = "Test@123";
-        var cardNumber = renderedComponent.Instance.CardNumber = 1234567890123456;
-        var expiryFullDate = renderedComponent.Instance.ExpiryFullDate = DateTime.Today;
-        string expiryDate = $"{expiryFullDate.Date.Month}/{expiryFullDate.Date.Year}";
-        var cvv = renderedComponent.Instance.CVV = 741;
+        // var name = renderedComponent.Instance.Name = "test";
+        // var username = renderedComponent.Instance.Username = "test12";
+        // var password = renderedComponent.Instance.Password = "Test@123";
+        // var repeatPassword = renderedComponent.Instance.RepeatPassword = "Test@123";
+        // var cardNumber = renderedComponent.Instance.CardNumber = 1234567890123456;
+        // var expiryFullDate = renderedComponent.Instance.ExpiryFullDate = DateTime.Today;
+        // string expiryDate = $"{expiryFullDate.Date.Month}/{expiryFullDate.Date.Year}";
+        // var cvv = renderedComponent.Instance.CVV = 741;
+        SetInstancesValueForUser();
         
         renderedComponent.Instance.GoToStep2();
+        SetInstancesValueForDebitCard();
         
-        if (cardNumber == 0) throw new Exception("Card Number Cannot Be Empty");
-        if (cardNumber.ToString().Length != 16) throw new Exception("Card Number Must Be 16 Digits Long");
-        if (string.IsNullOrEmpty(expiryDate)) throw new Exception("ExpiryDate Cannot Be Empty");
-        if (cvv == 0) throw new Exception("CVV Cannot Be Empty");
-        if (cvv.ToString().Length != 3) throw new Exception("CVV must be 3 digits long");
-        DebitCardEntity cardEntity = new DebitCardEntity(cardNumber, expiryDate, cvv);
-        UserEntity userEntity = new UserEntity(name, username, password, cardEntity,1000);
+        // if (cardNumber == 0) throw new Exception("Card Number Cannot Be Empty");
+        // if (cardNumber.ToString().Length != 16) throw new Exception("Card Number Must Be 16 Digits Long");
+        // if (string.IsNullOrEmpty(expiryDate)) throw new Exception("ExpiryDate Cannot Be Empty");
+        // if (cvv == 0) throw new Exception("CVV Cannot Be Empty");
+        // if (cvv.ToString().Length != 3) throw new Exception("CVV must be 3 digits long");
+        // DebitCardEntity cardEntity = new DebitCardEntity(cardNumber, expiryDate, cvv);
+        // UserEntity userEntity = new UserEntity(name, username, password, cardEntity,1000);
         
         //Act
-        await userService.Object.CreateAsync(userEntity);
-        
+        // await userService.Object.CreateAsync(userEntity);
+        await renderedComponent.Instance.CreateAsync();
         //Assert
-        Assert.Null(renderedComponent.Instance.ErrorLabel);
+        // Assert.Null(renderedComponent.Instance.ErrorLabel);
+        Assert.Equal("User test12 successfully created", renderedComponent.Instance.ErrorLabel);
     }
 
 }
