@@ -176,9 +176,9 @@ else
     public string? sender = "";
     public string? receiver = "";
     public string? amount = "";
-    private DateTime dateTime = DateTime.Now.Date;
+    public DateTime dateTime = DateTime.Now.Date;
     private long cardNumber;
-    private string? comment = "";
+    public string? comment = "";
     private long createdTransactionId = 0;
     private long createdRequestId = 0;
 
@@ -194,7 +194,7 @@ else
     // extras
     public string? errorLabel = "";
     private string? color = "";
-    private bool showModal;
+    public bool showModal;
     private bool isAuthorized;
 
 
@@ -233,7 +233,7 @@ else
     /// <summary>
     /// Send money to the receiver.
     /// </summary>
-    private async Task SendMoneyToReceiver()
+    public async Task SendMoneyToReceiver()
     {
         try
         {
