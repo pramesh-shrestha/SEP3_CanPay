@@ -42,40 +42,6 @@ public class BillTransactionService : BillPaymentProtoService.BillPaymentProtoSe
         }
     }
 
-
-    /*public override async Task<BillPaymentProtoObj> FetchBillPaymentByIdAsync(Int64Value request, ServerCallContext context)
-    {
-        try
-        {
-            BillTransactionEntity? entity = await billTransactionDao.FetchBillTransactionByIdAsync(request.Value);
-            BillPaymentProtoObj protoObj = FromEntityToProto(entity);
-            return protoObj;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
-        }
-    }*/
-
-    /*public override async Task<BillPaymentProtoObjList> FetchAllBillPaymentsBySenderAsync(StringValue request,
-        ServerCallContext context)
-    {
-        try
-        {
-            ICollection<BillTransactionEntity> byPayer =
-                await billTransactionDao.FetchAllBillTransactionsByPayerAsync(request.Value);
-
-            BillPaymentProtoObjList transactionsByPayerProtoList = ConvertToProtoList(byPayer);
-            return transactionsByPayerProtoList;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
-        }
-    }*/
-
     /// <summary>
     /// Fetches all bill payments involving a user asynchronously.
     /// </summary>
@@ -99,38 +65,7 @@ public class BillTransactionService : BillPaymentProtoService.BillPaymentProtoSe
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
     }
-
-    /*public override async Task<BillPaymentProtoObjList> FetchBillPaymentsByDateAsync(StringValue request,
-        ServerCallContext context)
-    {
-        try
-        {
-            ICollection<BillTransactionEntity> byDate =
-                await billTransactionDao.FetchBillTransactionsByDateAsync(request.Value);
-
-            BillPaymentProtoObjList byDateProtoList = ConvertToProtoList(byDate);
-            return byDateProtoList;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.NotFound, e.Message));
-        }
-    }*/
     
-    /*public override async Task<BoolValue> DeleteBillPaymentAsync(Int64Value request, ServerCallContext context)
-    {
-        try
-        {
-            bool isTransactionDeleted = await billTransactionDao.DeleteBillTransactionAsync(request.Value);
-            return new BoolValue { Value = isTransactionDeleted };
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.Aborted, e.Message));
-        }
-    }*/
     
     /// <summary>
     /// Converts a <see cref="BillPaymentProtoObj"/> to a <see cref="BillTransactionEntity"/>.

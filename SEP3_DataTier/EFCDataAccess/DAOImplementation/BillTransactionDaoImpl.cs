@@ -47,37 +47,6 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
         }
     }
     
-    /*/// <summary>
-    /// Fetches a bill transaction by its ID from the database.
-    /// </summary>
-    /// <param name="id">The ID of the bill transaction to fetch.</param>
-    /// <returns>The bill transaction entity, or null if not found.</returns>
-    public async Task<BillTransactionEntity?> FetchBillTransactionByIdAsync(long id)
-    {
-        try
-        {
-            BillTransactionEntity? billTransaction = await context.BillTransactions.FirstOrDefaultAsync(bt => bt.Id == id);
-            return billTransaction;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new Exception($"Bill transaction with id {id} not found!");
-        }
-    }*/
-    
-    /*/// <summary>
-    /// Fetches all bill transactions associated with a specific payer from the database.
-    /// </summary>
-    /// <param name="payerUsername">The username of the payer.</param>
-    /// <returns>A collection of bill transaction entities.</returns>
-    public async Task<ICollection<BillTransactionEntity>> FetchAllBillTransactionsByPayerAsync(string payerUsername)
-    {
-        ICollection<BillTransactionEntity> billTransactions = await context.BillTransactions.Include(bt => bt.Payer)
-            .Include(entity => entity.Payee)
-            .Where(bt => bt.Payer.Username.Equals(payerUsername)).ToListAsync();
-        return billTransactions;
-    }*/
     
     /// <summary>
     /// Fetches all bill transactions involving a specific user from the database.
@@ -94,44 +63,5 @@ public class BillTransactionDaoImpl : IBillTransactionDao {
     
         return transactions;
     }
-
-    /*/// <summary>
-    /// Fetches all bill transactions on a specific date from the database.
-    /// </summary>
-    /// <param name="date">The date of the bill transactions to fetch.</param>
-    /// <returns>A collection of bill transaction entities.</returns>
-    public async Task<ICollection<BillTransactionEntity>> FetchBillTransactionsByDateAsync(string date)
-    {
-        List<BillTransactionEntity> billTransactionsByDate = await context.BillTransactions
-            // .Where(bt => bt.Date.Equals(date))
-            // .ToListAsync();
-            .Where(entity => entity.Date.Equals(date))
-            .ToListAsync();
-        
-        if (billTransactionsByDate.Count == 0)
-        {
-            throw new Exception($"No bill transactions made on {date}");
-        }
-        return billTransactionsByDate;
-    }*/
     
-    /*/// <summary>
-    /// Deletes a bill transaction from the database.
-    /// </summary>
-    /// <param name="id">The ID of the bill transaction to delete.</param>
-    /// <returns>True if the bill transaction is successfully deleted, otherwise false.</returns>
-    public async Task<bool> DeleteBillTransactionAsync(long id)
-    {
-        BillTransactionEntity? billTransaction = await FetchBillTransactionByIdAsync(id);
-
-        if (billTransaction == null)
-        {
-            throw new Exception($"No bill transaction with id {id} found");
-        }
-
-        context.BillTransactions.Remove(billTransaction);
-        await context.SaveChangesAsync();
-
-        return true;
-    }*/
 }

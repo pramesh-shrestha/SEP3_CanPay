@@ -30,7 +30,6 @@ public class UserService : UserProtoService.UserProtoServiceBase
             UserEntity? addedUser = await userDao.CreateUserAsync(toAddUser);
 
             UserProtoObj userProtoObj = FromEntityToProto(addedUser);
-            // userProtoObj.UserId = addedUser.Id;
             return userProtoObj;
         }
         catch (Exception e)
@@ -56,7 +55,6 @@ public class UserService : UserProtoService.UserProtoServiceBase
             foreach (UserEntity? userEntity in allUsers)
             {
                 UserProtoObj protoObj = FromEntityToProto(userEntity);
-                // protoObj.UserId = userEntity.Id;
                 userProtoObjs.Add(protoObj);
             }
 
@@ -81,7 +79,6 @@ public class UserService : UserProtoService.UserProtoServiceBase
         {
             UserEntity? userByUsername = await userDao.FetchUserByUsernameAsync(request.Value);
             UserProtoObj userProtoObj = FromEntityToProto(userByUsername);
-            // Console.WriteLine($"UserService: {userProtoObj.UserId}");
             return userProtoObj;
         }
         catch (Exception e)
@@ -137,23 +134,7 @@ public class UserService : UserProtoService.UserProtoServiceBase
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
     }
-
-    /*public override async Task<UserProtoObj> UpdateUser(UpdateUserRequest request, ServerCallContext context)
-    {
-        try
-        {
-            UserEntity userUpdate = FromProtoToEntity(request.ToUpdateUser);
-            UserEntity updatedUser = await userDao.UpdateUserAsync(userUpdate);
-
-            UserProtoObj userProtoObj = FromEntityToProto(updatedUser);
-            return userProtoObj;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new RpcException(new Status(StatusCode.InvalidArgument, e.Message));
-        }
-    }*/
+    
 
     /// <summary>
     /// Deletes a user.

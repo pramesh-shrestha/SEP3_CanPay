@@ -56,11 +56,7 @@ public class DebitCardService : DebitCardProtoService.DebitCardProtoServiceBase
             throw new RpcException(new Status(StatusCode.NotFound, e.Message));
         }
     }
-
-    public override Task<DebitCardProtoObj> UpdateCardDetails(UpdateCard request, ServerCallContext context)
-    {
-        return base.UpdateCardDetails(request, context);
-    }
+    
 
     /// <summary>
     /// Deletes a debit card by ID.

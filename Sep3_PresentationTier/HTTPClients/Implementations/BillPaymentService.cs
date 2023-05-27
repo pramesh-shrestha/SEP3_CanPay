@@ -42,24 +42,7 @@ public class BillPaymentService : IBillPaymentService
         })!;
         return billPayment;
     }
-
-    /*public async Task<BillPaymentEntity> FetchBillPaymentsById(long id)
-    {
-        HttpResponseMessage response = await client.GetAsync($"/billPayment/{id}");
-        string result = await response.Content.ReadAsStringAsync();
-
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new Exception(result);
-        }
-
-        BillPaymentEntity billPaymentEntity = JsonSerializer.Deserialize<BillPaymentEntity>(result,
-            new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            })!;
-        return billPaymentEntity;
-    }*/
+    
 
 
     /// <summary>

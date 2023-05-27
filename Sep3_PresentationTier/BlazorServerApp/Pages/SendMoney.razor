@@ -238,6 +238,8 @@ else
         try
         {
             if (string.IsNullOrEmpty(receiver)) throw new Exception("Receiver must be selected.");
+            if (string.IsNullOrEmpty(amount)) throw new Exception("Amount is empty");
+            if (int.Parse(amount)>senderUser!.Balance) throw new Exception("Insufficient balance");
             if (int.Parse(amount) <= 0) throw new Exception("Amount must be more than 0.");
 
             receiverUser = userEntities.FirstOrDefault(u => u.UserName.ToLower().Equals(receiver.ToLower()));
@@ -279,9 +281,9 @@ else
         try
         {
             if (string.IsNullOrEmpty(receiver)) throw new Exception("Receiver must be selected.");
+            if (string.IsNullOrEmpty(amount)) throw new Exception("Amount is empty");
             if (string.IsNullOrEmpty(amount)) throw new Exception("Amount must be more than 0.");
-
-
+            
             RequestEntity entity = new RequestEntity()
             {
                 Amount = Convert.ToInt32(amount),

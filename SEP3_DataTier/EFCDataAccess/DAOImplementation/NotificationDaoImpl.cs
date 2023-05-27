@@ -140,22 +140,5 @@ public class NotificationDaoImpl : INotificationDao
             throw new Exception(e.Message);
         }
     }
-
-
-    /*public async Task<bool> DeleteNotificationAsync(long notificationId)
-
-    {
-        try
-        {
-            NotificationEntity? notificationEntity =
-                await context.Notifications.FirstOrDefaultAsync(entity => entity.Id == notificationId);
-            context.Notifications.Remove(notificationEntity!);
-            return true;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new Exception(e.Message);
-        }
-    }*/
+    
 }
