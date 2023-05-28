@@ -26,7 +26,7 @@ public class CardService : ICardService
     /// <returns>The created debit card entity.</returns>
     public async Task<DebitCardEntity> CreateAsync(DebitCardEntity toCreateCardEntity)
     {
-        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("card/create", toCreateCardEntity);
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("cards", toCreateCardEntity);
         string result = await responseMessage.Content.ReadAsStringAsync();
 
         if (!responseMessage.IsSuccessStatusCode)

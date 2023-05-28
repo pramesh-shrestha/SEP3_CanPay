@@ -27,7 +27,7 @@ public class TransactionService : ITransactionService
     /// <returns>The created transaction entity.</returns>
     public async Task<TransactionEntity> CreateTransactionAsync(TransactionEntity transactionEntity)
     {
-        HttpResponseMessage response = await client.PostAsJsonAsync("/transaction/create", transactionEntity);
+        HttpResponseMessage response = await client.PostAsJsonAsync("/transactions", transactionEntity);
         string result = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)
@@ -53,7 +53,7 @@ public class TransactionService : ITransactionService
     /// <returns>A collection of transaction entities.</returns>
     public async Task<ICollection<TransactionEntity>> FetchAllTransactionInvolvingUserAsync(string? username)
     {
-        HttpResponseMessage response = await client.GetAsync($"/transaction/user/{username}");
+        HttpResponseMessage response = await client.GetAsync($"/transactions/{username}");
         string result = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)

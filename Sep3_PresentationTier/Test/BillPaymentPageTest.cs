@@ -21,7 +21,7 @@ public class BillPaymentPageTest : TestContext
     {
         billPaymentServiceMock = new Mock<IBillPaymentService>();
         Mock<IUserService> userServiceMock = new();
-        Mock<AuthenticationStateProvider> stateProvider = new();
+        Mock<AuthenticationStateProvider> stateProviderMock = new();
         var context = new TestContext();
    
 
@@ -32,7 +32,7 @@ public class BillPaymentPageTest : TestContext
         };
 
         var authenticationState = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(claims)));
-        stateProvider.Setup(provider => provider.GetAuthenticationStateAsync()).ReturnsAsync(authenticationState);
+        stateProviderMock.Setup(provider => provider.GetAuthenticationStateAsync()).ReturnsAsync(authenticationState);
 
         // creating sample user
         currentUser = new UserEntity
@@ -49,7 +49,7 @@ public class BillPaymentPageTest : TestContext
         // registering the mock services
         context.Services.AddSingleton(billPaymentServiceMock.Object);
         context.Services.AddSingleton(userServiceMock.Object);
-        context.Services.AddSingleton(stateProvider.Object);
+        context.Services.AddSingleton(stateProviderMock.Object);
         context.Services.AddAuthorization();
 
         IRenderedComponent<Billpayments> renderedComponent = context.RenderComponent<Billpayments>();

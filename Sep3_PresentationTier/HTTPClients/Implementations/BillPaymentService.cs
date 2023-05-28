@@ -28,7 +28,7 @@ public class BillPaymentService : IBillPaymentService
     /// <returns>The created bill payment entity.</returns>
     public async Task<BillPaymentEntity> CreateAsync(BillPaymentEntity? billPaymentEntity)
     {
-        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/billPayment/create", billPaymentEntity);
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/billPayments", billPaymentEntity);
         string result = await responseMessage.Content.ReadAsStringAsync();
 
         if (!responseMessage.IsSuccessStatusCode)
@@ -42,7 +42,6 @@ public class BillPaymentService : IBillPaymentService
         })!;
         return billPayment;
     }
-    
 
 
     /// <summary>
@@ -52,7 +51,7 @@ public class BillPaymentService : IBillPaymentService
     /// <returns>A collection of bill payment entities involving the user.</returns>
     public async Task<ICollection<BillPaymentEntity>> FetchAllTransactionsInvolvingUser(string? username)
     {
-        HttpResponseMessage response = await client.GetAsync($"/billPayment/user/{username}");
+        HttpResponseMessage response = await client.GetAsync($"/billPayments/{username}");
         string result = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)

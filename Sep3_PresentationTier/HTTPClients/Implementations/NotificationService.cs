@@ -30,7 +30,7 @@ public class NotificationService : INotificationService
     /// <returns>The created notification entity.</returns>
     public async Task<NotificationEntity> CreateNotificationAsync(NotificationEntity notificationEntity)
     {
-        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/notification/create", notificationEntity);
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/notifications", notificationEntity);
         string result = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode)
         {
@@ -47,11 +47,11 @@ public class NotificationService : INotificationService
     /// <summary>
     /// Fetches all notifications for a receiver asynchronously.
     /// </summary>
-    /// <param name="receiverUsername">The username of the receiver.</param>
+    /// <param name="username">The username of the receiver.</param>
     /// <returns>A collection of notification entities.</returns>
-    public async Task<ICollection<NotificationEntity>> FetchAllNotificationsByReceiverAsync(string? receiverUsername)
+    public async Task<ICollection<NotificationEntity>> FetchAllNotificationsByReceiverAsync(string? username)
     {
-        HttpResponseMessage responseMessage = await client.GetAsync($"/notification/receiver/{receiverUsername}");
+        HttpResponseMessage responseMessage = await client.GetAsync($"/notifications/username/{username}");
         string result = await responseMessage.Content.ReadAsStringAsync();
 
         if (!responseMessage.IsSuccessStatusCode)
@@ -76,7 +76,7 @@ public class NotificationService : INotificationService
     /// <returns>The notification entity.</returns>
     public async Task<NotificationEntity> FetchNotificationById(long id)
     {
-        HttpResponseMessage responseMessage = await client.GetAsync($"/notification/id/{id}");
+        HttpResponseMessage responseMessage = await client.GetAsync($"/notifications/{id}");
         string result = await responseMessage.Content.ReadAsStringAsync();
 
         if (!responseMessage.IsSuccessStatusCode)
@@ -101,7 +101,7 @@ public class NotificationService : INotificationService
     public async Task MarkNotificationAsReadAsync(NotificationEntity? notificationEntity)
     {
         HttpResponseMessage responseMessage =
-            await client.PostAsJsonAsync($"/notifications/markAsRead", notificationEntity);
+            await client.PostAsJsonAsync($"/notifications/read", notificationEntity);
         string result = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode)
         {
@@ -117,7 +117,7 @@ public class NotificationService : INotificationService
         List<NotificationEntity>? notificationEntities)
     {
         HttpResponseMessage responseMessage =
-            await client.PostAsJsonAsync($"/notifications/markAllAsRead", notificationEntities);
+            await client.PostAsJsonAsync($"/notifications/read-all", notificationEntities);
 
         if (!responseMessage.IsSuccessStatusCode)
         {

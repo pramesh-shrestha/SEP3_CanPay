@@ -1,7 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
-
 using HTTPClients.ClientInterfaces;
 
 namespace HTTPClients.Implementations;
@@ -30,7 +29,7 @@ public class RequestService : IRequestService
     /// <returns>The created request entity.</returns>
     public async Task<RequestEntity?> CreateRequestAsync(RequestEntity requestEntity)
     {
-        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/request/create", requestEntity);
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/requests", requestEntity);
         string result = await responseMessage.Content.ReadAsStringAsync();
 
         if (!responseMessage.IsSuccessStatusCode)
@@ -54,7 +53,7 @@ public class RequestService : IRequestService
     /// <returns>The updated request entity.</returns>
     public async Task<RequestEntity?> UpdateRequestAsync(RequestEntity requestEntity)
     {
-        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/request/update", requestEntity);
+        HttpResponseMessage responseMessage = await client.PutAsJsonAsync("/requests", requestEntity);
         string result = await responseMessage.Content.ReadAsStringAsync();
 
         if (!responseMessage.IsSuccessStatusCode)
@@ -78,7 +77,7 @@ public class RequestService : IRequestService
     /// <returns>The request entity.</returns>
     public async Task<RequestEntity> FetchRequestById(long id)
     {
-        HttpResponseMessage responseMessage = await client.GetAsync($"/request/id/{id}");
+        HttpResponseMessage responseMessage = await client.GetAsync($"/requests/{id}");
         string result = await responseMessage.Content.ReadAsStringAsync();
 
         if (!responseMessage.IsSuccessStatusCode)

@@ -100,7 +100,7 @@
                 <input @bind="clickedNotificationEntity!.Sender!.FullName" type="text" disabled=""/>
                 <label class="notificationLabel">Sent By</label>
             </div>
-          
+
             @* Condition for REQUEST_MONEY notification type *@
             @if (clickedNotificationType!.Equals(TypesOfNotification.REQUEST_MONEY.ToString()))
             {
@@ -291,9 +291,10 @@
     {
         TransferValues.RequestSender = clickedNotificationEntity!.Sender;
         TransferValues.RequestedAmount = clickedNotificationAmount;
+        TransferValues.RequestId = clickedNotificationRequestId;
         showModal = false;
 
-        await UpdateRequestStatus(clickedNotificationRequestId, RequestStatus.APPROVED.ToString(), true);
+    // await UpdateRequestStatus(clickedNotificationRequestId, RequestStatus.APPROVED.ToString(), true);
         await NotificationService.MarkNotificationAsReadAsync(clickedNotificationEntity);
         NavMgr.NavigateTo("/SendMoney");
     }

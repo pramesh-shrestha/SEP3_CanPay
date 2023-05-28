@@ -38,7 +38,7 @@ public class UserService : IUserService
     /// <returns>The created user entity.</returns>
     public async Task<UserEntity> CreateAsync(UserEntity toCreateUserEntity)
     {
-        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/user/create", toCreateUserEntity);
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/users", toCreateUserEntity);
         string result = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode)
         {
@@ -59,7 +59,7 @@ public class UserService : IUserService
     /// <returns>A collection of user entities.</returns>
     public async Task<IEnumerable<UserEntity?>> FetchAllUsersAsync()
     {
-        HttpResponseMessage responseMessage = await client.GetAsync("/user");
+        HttpResponseMessage responseMessage = await client.GetAsync("/users");
         string result = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode)
         {
@@ -82,7 +82,7 @@ public class UserService : IUserService
     /// <returns>The user entity.</returns>
     public async Task<UserEntity> FetchUserByUsernameAsync(string? username)
     {
-        HttpResponseMessage responseMessage = await client.GetAsync($"/user/username/{username}");
+        HttpResponseMessage responseMessage = await client.GetAsync($"/users/{username}");
         string result = await responseMessage.Content.ReadAsStringAsync();
 
         if (!responseMessage.IsSuccessStatusCode)
@@ -107,7 +107,7 @@ public class UserService : IUserService
     /// <returns>The updated user entity.</returns>
     public async Task<UserEntity> UpdateUserAsync(UserEntity userEntity)
     {
-        HttpResponseMessage response = await client.PostAsJsonAsync("/user/update", userEntity);
+        HttpResponseMessage response = await client.PutAsJsonAsync("/users", userEntity);
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
@@ -137,7 +137,7 @@ public class UserService : IUserService
             Password = password
         };
 
-        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/user/authenticate", loginDto);
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/users/authenticate", loginDto);
         string result = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode)
         {
