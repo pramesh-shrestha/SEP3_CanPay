@@ -47,20 +47,7 @@ public class UserServiceImplementation implements IUserService {
         }
     }
 
-    /* public AuthenticationResponse register(RegisterRequest request) {
-          UserEntity user = User.builder()
-                  .firstname(request.getFirstname())
-                  .lastname(request.getLastname())
-                  .username(request.getUsername())
-                  .password(passwordEncoder.encode(request.getPassword()))
-                  //.role(Role.USER)
-                  .build();
-          iUserClient.save(user);
-          var jwtToken = jwtService.generateToken(user);
-          return AuthenticationResponse.builder()
-                  .token(jwtToken)
-                  .build();
-      }*/
+
 
     /**
      * Fetches all users.
@@ -79,21 +66,7 @@ public class UserServiceImplementation implements IUserService {
     }
 
 
-    /**
-     * Fetches a user by their ID.
-     *
-     * @param id The ID of the user to fetch.
-     * @return The fetched user entity.
-     * @throws RuntimeException If an error occurs during the fetching process.
-     */
-    /*@Override
-    public UserEntity fetchUserById(Long id) {
-        try {
-            return userClient.FetchUserById(id);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }*/
+
 
     /**
      * Fetches a user by their username.
@@ -130,21 +103,6 @@ public class UserServiceImplementation implements IUserService {
         }
     }
 
-    /**
-     * Deletes a user by their ID.
-     *
-     * @param id The ID of the user to delete.
-     * @return True if the deletion is successful, false otherwise.
-     * @throws RuntimeException If an error occurs during the deletion process.
-     */
-    /*@Override
-    public boolean deleteUser(Long id) {
-        try {
-            return userClient.deleteUser(id);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }*/
 
 
     /**

@@ -196,6 +196,8 @@ else
     private string? color = "";
     public bool showModal;
     private bool isAuthorized;
+    private Timer timer;
+    private readonly int messageDisplayTime = 2000; // in millisecond
 
 
     protected override async Task OnInitializedAsync()
@@ -274,8 +276,7 @@ else
         }
         catch (Exception e)
         {
-            errorLabel = e.Message;
-            color = "red";
+            DisplayMessage(e.Message);
         }
     }
 
@@ -315,8 +316,7 @@ else
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw new Exception(e.Message);
+            DisplayMessage(e.Message);
         }
     }
 
@@ -351,8 +351,7 @@ else
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+            DisplayMessage(e.Message);
         }
     }
 
@@ -417,5 +416,29 @@ else
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Display an error message and start a timer to clear it after a certain duration.
+    /// </summary>
+    /// <param name="errorMessage">The error message to display.</param>
+    private void DisplayMessage(string errorMessage)
+    {
+        errorLabel = $"Error: {errorMessage}";
+        color = "red";
+        timer = new Timer(OnTimerElapsed, null, messageDisplayTime, Timeout.Infinite);
+    }
+
+    /// <summary>
+    /// Callback method called when the timer has elapsed.
+    /// Clears the error message and updates the UI.
+    /// </summary>
+    /// <param name="state">The state object (not used in this case).</param>
+    private void OnTimerElapsed(object state)
+    {
+        timer?.DisposeAsync();
+        errorLabel = "";
+    // Clear the error message here
+        InvokeAsync(StateHasChanged);
     }
 }

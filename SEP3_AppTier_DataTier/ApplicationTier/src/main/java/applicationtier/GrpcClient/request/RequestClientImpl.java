@@ -46,27 +46,6 @@ public class RequestClientImpl implements IRequestClient {
         }
     }
 
-    /**
-     * Fetches all requests.
-     *
-     * @return A list of RequestEntity objects representing all the requests.
-     * @throws RuntimeException If an exception occurs during the fetch process.
-     */
-    /*@Override
-    public List<RequestEntity> FetchAllRequest() {
-        try {
-            Request.RequestProtoObjList allRequest = getRequestBlockingStub().fetchAllRequestsAsync(Empty.newBuilder().build());
-            List<RequestEntity> requestEntities = new ArrayList<>();
-
-            for (Request.RequestProtoObj requestProtoObj : allRequest.getRequestsList()) {
-                RequestEntity request = fromProtoObjToEntity(requestProtoObj);
-                requestEntities.add(request);
-            }
-            return requestEntities;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 
     /**
      * Fetches a request by its ID.
@@ -86,22 +65,6 @@ public class RequestClientImpl implements IRequestClient {
         }
     }
 
-    /**
-     * Fetches a request by username.
-     *
-     * @param username The username of the request to fetch.
-     * @return The RequestEntity object representing the fetched request.
-     * @throws RuntimeException If an exception occurs during the fetch process.
-     */
-   /* @Override
-    public RequestEntity FetchRequestByUsername(String username) {
-        try {
-            Request.RequestProtoObj requestProtoObj = getRequestBlockingStub().fetchRequestByUsername(StringValue.of(username));
-            return fromProtoObjToEntity(requestProtoObj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 
     /**
      * Updates a request.
@@ -120,22 +83,6 @@ public class RequestClientImpl implements IRequestClient {
         }
     }
 
-    /**
-     * Deletes a request by its ID.
-     *
-     * @param id The ID of the request to delete.
-     * @return true if the request was successfully deleted, false otherwise.
-     * @throws RuntimeException If an exception occurs during the delete process.
-     */
-    /*@Override
-    public boolean DeleteRequest(Long id) {
-        try {
-            BoolValue requestProtoObj = getRequestBlockingStub().deleteRequestAsync(Int64Value.of(id));
-            return requestProtoObj.toBuilder().getValue();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 
     /**
      * Converts a Request.RequestProtoObj object to a RequestEntity object.

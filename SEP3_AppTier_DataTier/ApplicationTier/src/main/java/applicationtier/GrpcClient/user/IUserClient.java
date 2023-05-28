@@ -9,9 +9,6 @@ public interface IUserClient {
 
     UserEntity findByUsername(String username);
 
- /*   UserEntity FetchUserById(Long id);
-
-    boolean deleteUser(Long id);*/
 
     List<UserEntity> fetchUsers();
 

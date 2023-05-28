@@ -103,23 +103,4 @@ public class NotificationServiceImplementation implements INotificationService {
             throw new RuntimeException(e);
         }
     }
-
-
-    /**
-     * Deletes a notification by its ID.
-     *
-     * @param id The ID of the notification to delete.
-     * @return True if the deletion is successful, false otherwise.
-     * @throws RuntimeException If an error occurs during the deletion process.
-     */
-    /*@Override
-    public boolean deleteNotification(Long id) {
-        try {
-            return notificationClient.deleteNotification(id);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-*/
-
 }

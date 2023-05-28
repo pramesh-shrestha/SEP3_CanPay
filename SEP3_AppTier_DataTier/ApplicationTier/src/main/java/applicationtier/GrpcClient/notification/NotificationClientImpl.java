@@ -148,25 +148,6 @@ public class NotificationClientImpl implements INotificationClient {
 
 
     /**
-     * Deletes a notification by its ID by invoking the deleteNotificationAsync method
-     * of the Notification Proto Service blocking stub.
-     *
-     * @param id The ID of the notification to delete.
-     * @return true if the deletion is successful, false otherwise.
-     * @throws RuntimeException if an exception occurs during the deletion process.
-     */
-    /*@Override
-    public boolean deleteNotification(Long id) {
-        try {
-            BoolValue notificationProtoObj = getNotificationBlockingStub().deleteNotificationAsync(Int64Value.of(id));
-            return notificationProtoObj.toBuilder().getValue();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }*/
-
-
-    /**
      * Converts a Notification.NotificationProtoObj to a NotificationEntity object.
      *
      * @param notificationProtoObj The Notification.NotificationProtoObj to convert.

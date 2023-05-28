@@ -41,7 +41,6 @@ public class TransactionService : ITransactionService
                 PropertyNameCaseInsensitive = true
             })!;
 
-
         return entity;
     }
 

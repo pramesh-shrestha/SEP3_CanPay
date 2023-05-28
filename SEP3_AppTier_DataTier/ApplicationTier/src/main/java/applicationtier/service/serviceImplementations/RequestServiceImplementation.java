@@ -2,7 +2,6 @@ package applicationtier.service.serviceImplementations;
 
 import applicationtier.GrpcClient.notification.INotificationClient;
 import applicationtier.GrpcClient.request.IRequestClient;
-import applicationtier.entity.NotificationEntity;
 import applicationtier.entity.RequestEntity;
 import applicationtier.service.serviceInterfaces.IRequestService;
 import org.springframework.stereotype.Service;
@@ -11,11 +10,9 @@ import org.springframework.stereotype.Service;
 public class RequestServiceImplementation implements IRequestService {
 
     private IRequestClient requestClient;
-    private INotificationClient notificationClient;
 
-    public RequestServiceImplementation(IRequestClient requestClient, INotificationClient notificationClient) {
+    public RequestServiceImplementation(IRequestClient requestClient) {
         this.requestClient = requestClient;
-        this.notificationClient = notificationClient;
     }
 
     /**
@@ -35,21 +32,6 @@ public class RequestServiceImplementation implements IRequestService {
     }
 
     /**
-     * Fetches all requests.
-     *
-     * @return The list of fetched request entities.
-     * @throws RuntimeException If an error occurs during the fetching process.
-     */
-    /*@Override
-    public List<RequestEntity> fetchAllRequest() {
-        try {
-            return requestClient.FetchAllRequest();
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }*/
-
-    /**
      * Fetches a request by its ID.
      *
      * @param id The ID of the request to fetch.
@@ -66,21 +48,7 @@ public class RequestServiceImplementation implements IRequestService {
     }
 
 
-    /**
-     * Fetches a request by the username associated with it.
-     *
-     * @param username The username associated with the request.
-     * @return The fetched request entity.
-     * @throws RuntimeException If an error occurs during the fetching process.
-     */
-   /* @Override
-    public RequestEntity fetchRequestByUsername(String username) {
-        try {
-            return requestClient.FetchRequestByUsername(username);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }*/
+
 
     /**
      * Updates a request.
@@ -98,21 +66,6 @@ public class RequestServiceImplementation implements IRequestService {
         }
     }
 
-    /**
-     * Deletes a request by its ID.
-     *
-     * @param id The ID of the request to delete.
-     * @return True if the deletion is successful, false otherwise.
-     * @throws RuntimeException If an error occurs during the deletion process.
-     */
-    /*@Override
-    public boolean deleteRequest(Long id) {
-        try {
-            return requestClient.DeleteRequest(id);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }*/
 
 
 }
